@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "instagram_dms": {
+      "command": "/Users/antoinechabrat/.local/bin/uv",
+      "args": ["run", "--directory", "/Users/antoinechabrat/Documents/SmallProject/Instagram/instagram_dm_mcp", "python", "src/mcp_server.py"],
+      "env": {
+        "INSTAGRAM_USERNAME": "impulse_nutrition_fr",
+        "INSTAGRAM_PASSWORD": "2025Impulse!"
+      }
+    },
+    "google_sheets": {
+      "command": "/Users/antoinechabrat/.local/bin/uvx",
+      "args": ["mcp-google-sheets@latest"],
+      "env": {
+        "SERVICE_ACCOUNT_PATH": "/Users/antoinechabrat/.config/google-service-account.json"
+      }
+    }
+  }
+}
