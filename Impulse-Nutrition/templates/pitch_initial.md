@@ -1,0 +1,12 @@
+# Pitch Initial — Premier contact ambassadeur
+
+Hello {prenom} ! 😊
+
+Je suis Antoine d'Impulse Nutrition, une marque de nutrition sportive française. On développe des compléments alimentaires pensés pour les sportifs comme toi, et ton profil nous a vraiment tapé dans l'œil !
+
+On aimerait te proposer un partenariat : on t'envoie des produits gratuitement pour que tu les testes, et si ça te plaît, tu partages ton expérience avec ta communauté. Pas de prise de tête, on veut juste que ce soit authentique 💪
+
+Est-ce que ça te parlerait ? N'hésite pas si tu as des questions !
+
+Sportivement,
+Antoine
