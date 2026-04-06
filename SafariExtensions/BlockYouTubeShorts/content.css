@@ -1,0 +1,34 @@
+/* === Hide Shorts shelves on homepage and search === */
+
+/* Shorts shelf on homepage */
+ytd-rich-shelf-renderer[is-shorts],
+ytd-reel-shelf-renderer {
+  display: none !important;
+}
+
+/* Shorts tab on channel pages */
+yt-tab-shape[tab-title="Shorts"],
+tp-yt-paper-tab:has(> div[tab-title="Shorts"]) {
+  display: none !important;
+}
+
+/* Shorts in sidebar navigation */
+ytd-mini-guide-entry-renderer:has(a[title="Shorts"]),
+ytd-guide-entry-renderer:has(a[title="Shorts"]) {
+  display: none !important;
+}
+
+/* Shorts badges and overlays in search results */
+ytd-video-renderer:has(a[href^="/shorts/"]) {
+  display: none !important;
+}
+
+/* Shorts in notification menu */
+ytd-notification-renderer:has(a[href*="/shorts/"]) {
+  display: none !important;
+}
+
+/* "Shorts remixing this video" shelf */
+ytd-reel-shelf-renderer[is-shorts-from-video] {
+  display: none !important;
+}

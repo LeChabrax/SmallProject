@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Block YouTube Shorts",
+  "version": "1.0",
+  "description": "Blocks YouTube Shorts everywhere: hides Shorts sections and redirects Shorts URLs to the normal player.",
+  "permissions": ["declarativeNetRequest"],
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "css": ["content.css"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "redirect_shorts",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  }
+}
