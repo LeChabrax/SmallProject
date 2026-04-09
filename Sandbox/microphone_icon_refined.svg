@@ -1,0 +1,11 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="256" r="235" fill="#76C28F"/>
+  <g transform="rotate(-45 256 256)">
+    <!-- Microphone Head (Rounded Top) -->
+    <path d="M256 125C225 125 200 150 200 180V215H312V180C312 150 287 125 256 125Z" fill="white"/>
+    <!-- Band (Rounded Rectangle) -->
+    <rect x="180" y="225" width="152" height="40" rx="10" fill="white"/>
+    <!-- Tapered Handle (Rounded Bottom) -->
+    <path d="M225 275L235 390C236 400 245 408 256 408C267 408 276 400 277 390L287 275H225Z" fill="white"/>
+  </g>
+</svg>

@@ -20,6 +20,39 @@ This server is used to send messages to a user on Instagram.
 
 client = Client()
 
+# ── Compact helpers ───────────────────────────────────────────
+
+def _compact_message(msg: dict) -> dict:
+    """Strip a message dict down to the fields that matter for conversation tracking."""
+    item_type = msg.get("item_type", "text")
+    compact = {
+        "id": msg.get("id"),
+        "user_id": msg.get("user_id"),
+        "timestamp": msg.get("timestamp"),
+        "text": msg.get("text"),
+        "item_type": item_type,
+        "is_sent_by_viewer": msg.get("is_sent_by_viewer"),
+    }
+    # Keep shared post URL if present, drop the full object
+    if msg.get("shared_post_url"):
+        compact["shared_post_url"] = msg["shared_post_url"]
+    if msg.get("shared_post_code"):
+        compact["shared_post_code"] = msg["shared_post_code"]
+    # For voice/raven media, flag it
+    if item_type in ("voice_media", "raven_media"):
+        compact["media_note"] = f"{item_type} - contenu inaccessible via API"
+    return compact
+
+
+def _compact_user(user: dict) -> dict:
+    """Strip a user dict to username, full_name, pk."""
+    return {
+        "username": user.get("username"),
+        "full_name": user.get("full_name"),
+        "pk": user.get("pk"),
+    }
+
+
 mcp = FastMCP(
    name="Instagram DMs",
    instructions=INSTRUCTIONS
@@ -119,6 +152,7 @@ def list_chats(
     thread_message_limit: Optional[int] = None,
     full: bool = False,
     fields: Optional[List[str]] = None,
+    compact: bool = True,
 ) -> Dict[str, Any]:
     """Get Instagram Direct Message threads (chats) from the user's account, with optional filters and limits.
 
@@ -128,26 +162,23 @@ def list_chats(
         thread_message_limit: Limit for messages per thread.
         full: If True, return the full thread object for each chat (default False).
         fields: If provided, return only these fields for each thread.
+        compact: If True (default), strip messages and users to essential fields only. Saves ~10x context tokens.
     Returns:
         A dictionary with success status and the list of threads or error message.
     """
     def thread_summary(thread):
         t = thread if isinstance(thread, dict) else thread.dict()
         users = t.get("users", [])
-        user_summaries = [
-            {
-                "username": u.get("username"),
-                "full_name": u.get("full_name"),
-                "pk": u.get("pk")
-            }
-            for u in users
-        ]
+        user_summaries = [_compact_user(u) for u in users]
+        last_msg = t.get("messages", [None])[-1] if t.get("messages") else None
+        if last_msg and compact:
+            last_msg = _compact_message(last_msg if isinstance(last_msg, dict) else last_msg)
         return {
             "thread_id": t.get("id"),
             "thread_title": t.get("thread_title"),
             "users": user_summaries,
             "last_activity_at": t.get("last_activity_at"),
-            "last_message": t.get("messages", [{}])[-1] if t.get("messages") else None
+            "last_message": last_msg
         }
 
     def filter_fields(thread, fields):
@@ -156,8 +187,19 @@ def list_chats(
 
     try:
         threads = client.direct_threads(amount=amount, selected_filter=selected_filter, thread_message_limit=thread_message_limit)
-        if full:
+        if full and not compact:
             return {"success": True, "threads": [t.dict() if hasattr(t, 'dict') else str(t) for t in threads]}
+        elif full and compact:
+            result = []
+            for t in threads:
+                td = t.dict() if hasattr(t, 'dict') else t
+                td["users"] = [_compact_user(u) for u in td.get("users", [])]
+                td["messages"] = [_compact_message(m) for m in td.get("messages", [])]
+                # Remove heavy fields
+                for key in ["inviter", "items", "last_permanent_item", "direct_story"]:
+                    td.pop(key, None)
+                result.append(td)
+            return {"success": True, "threads": result}
         elif fields:
             return {"success": True, "threads": [filter_fields(t, fields) for t in threads]}
         else:
@@ -167,12 +209,13 @@ def list_chats(
 
 
 @mcp.tool()
-def list_messages(thread_id: str, amount: int = 20) -> Dict[str, Any]:
+def list_messages(thread_id: str, amount: int = 20, compact: bool = True) -> Dict[str, Any]:
     """Get messages from a specific Instagram Direct Message thread by thread ID, with an optional limit.
 
     Args:
         thread_id: The thread ID to fetch messages from.
         amount: Number of messages to fetch (default 20).
+        compact: If True (default), return only essential fields (id, user_id, timestamp, text, item_type, is_sent_by_viewer, shared_post_url). Saves ~10-15x context tokens.
     Returns:
         A dictionary with success status and the list of messages or error message.
     """
@@ -189,12 +232,10 @@ def list_messages(thread_id: str, amount: int = 20) -> Dict[str, Any]:
             shared_url = None
             shared_code = None
             if item_type in ["clip", "media_share", "reel_share", "xma_media_share", "post_share", "story_share"]:
-                # Try to extract code/url from known attributes
                 clip = getattr(m, 'clip', None) or msg.get('clip')
                 media_share = getattr(m, 'media_share', None) or msg.get('media_share')
                 xma = getattr(m, 'xma_media_share', None) or msg.get('xma_media_share')
                 post_share = getattr(m, 'post_share', None) or msg.get('post_share')
-                # Try to get code/url from any of these
                 for obj in [clip, media_share, xma, post_share]:
                     if obj:
                         shared_code = obj.get('code') or obj.get('pk')
@@ -205,7 +246,11 @@ def list_messages(thread_id: str, amount: int = 20) -> Dict[str, Any]:
             msg['shared_post_info'] = shared_info
             msg['shared_post_url'] = shared_url
             msg['shared_post_code'] = shared_code
-            result_msgs.append(msg)
+
+            if compact:
+                result_msgs.append(_compact_message(msg))
+            else:
+                result_msgs.append(msg)
         return {"success": True, "messages": result_msgs}
     except Exception as e:
         return {"success": False, "message": str(e)}
@@ -245,7 +290,16 @@ def list_pending_chats(amount: int = 20) -> Dict[str, Any]:
     """
     try:
         threads = client.direct_pending_inbox(amount)
-        return {"success": True, "threads": [t.dict() if hasattr(t, 'dict') else str(t) for t in threads]}
+        result = []
+        for t in threads:
+            td = t.dict() if hasattr(t, 'dict') else t
+            if isinstance(td, dict):
+                td["users"] = [_compact_user(u) for u in td.get("users", [])]
+                td["messages"] = [_compact_message(m) for m in td.get("messages", [])]
+                for key in ["inviter", "items", "last_permanent_item", "direct_story"]:
+                    td.pop(key, None)
+            result.append(td)
+        return {"success": True, "threads": result}
     except Exception as e:
         return {"success": False, "message": str(e)}
 
@@ -281,18 +335,25 @@ def get_thread_by_participants(user_ids: List[int]) -> Dict[str, Any]:
         return {"success": False, "message": "user_ids must be a non-empty list of user IDs."}
     try:
         thread = client.direct_thread_by_participants(user_ids)
-        return {"success": True, "thread": thread.dict() if hasattr(thread, 'dict') else str(thread)}
+        td = thread.dict() if hasattr(thread, 'dict') else (thread if isinstance(thread, dict) else str(thread))
+        if isinstance(td, dict):
+            td["users"] = [_compact_user(u) for u in td.get("users", [])]
+            td["messages"] = [_compact_message(m) for m in td.get("messages", [])]
+            for key in ["inviter", "items", "last_permanent_item", "direct_story"]:
+                td.pop(key, None)
+        return {"success": True, "thread": td}
     except Exception as e:
         return {"success": False, "message": str(e)}
 
 
 @mcp.tool()
-def get_thread_details(thread_id: str, amount: int = 20) -> Dict[str, Any]:
+def get_thread_details(thread_id: str, amount: int = 20, compact: bool = True) -> Dict[str, Any]:
     """Get details and messages for a specific Instagram Direct Message thread by thread ID, with an optional message limit.
 
     Args:
         thread_id: The thread ID to fetch details for.
         amount: Number of messages to fetch (default 20).
+        compact: If True (default), strip messages and users to essential fields. Saves ~10-15x context tokens.
     Returns:
         A dictionary with success status and the thread details or error message.
     """
@@ -300,7 +361,13 @@ def get_thread_details(thread_id: str, amount: int = 20) -> Dict[str, Any]:
         return {"success": False, "message": "Thread ID must be provided."}
     try:
         thread = client.direct_thread(thread_id, amount)
-        return {"success": True, "thread": thread.dict() if hasattr(thread, 'dict') else str(thread)}
+        td = thread.dict() if hasattr(thread, 'dict') else (thread if isinstance(thread, dict) else str(thread))
+        if compact and isinstance(td, dict):
+            td["users"] = [_compact_user(u) for u in td.get("users", [])]
+            td["messages"] = [_compact_message(m) for m in td.get("messages", [])]
+            for key in ["inviter", "items", "last_permanent_item", "direct_story"]:
+                td.pop(key, None)
+        return {"success": True, "thread": td}
     except Exception as e:
         return {"success": False, "message": str(e)}
 

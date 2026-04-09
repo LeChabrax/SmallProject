@@ -1,2 +1,10 @@
 .DS_Store
+.env
 Instagram/instagram_dm_mcp/
+node_modules/
+__pycache__/
+*.pyc
+firebase-debug.log
+Impulse-Nutrition/shaker-450ml-gratuit/
+LMP_Commando/
+Tiktok/MCP-TikTokShop/

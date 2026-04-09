@@ -107,6 +107,13 @@ class ContractData:
         return f"https://impulse-nutrition.fr/discount/{self.affiliate_code}"
 
     @property
+    def effective_dotation_code(self) -> str:
+        """Return dotation code: explicit or auto-generated from first name."""
+        if self.dotation_code:
+            return self.dotation_code
+        return self.athlete_first_name.upper().replace(" ", "").replace("-", "") + "DOTATION"
+
+    @property
     def deliverables_list(self) -> list:
         """Parse custom_deliverables string into a list."""
         if not self.custom_deliverables:
@@ -291,36 +298,18 @@ def article_3(d: ContractData) -> str:
     base = (
         "En contrepartie de l'exécution de ses engagements contractuels, HCS s'engage à "
     )
-    if d.contract_type == "dotation":
-        order_method = (
-            f"La commande sera à passer par {d.term_article} via le code "
-            f"{d.dotation_code}, une fois par mois."
-            if d.dotation_code else
-            f"La commande sera à passer par {d.term_article} par email à pgautier@havea.com."
-        )
-        return (
-            base +
-            f"fournir à {d.term_article} les compléments alimentaires nécessaires à sa consommation "
-            f"personnelle. A cet effet, {d.term_article} se verra attribuer une dotation mensuelle "
-            f"composée de compléments alimentaires pour une valeur totale de "
-            f"{int(d.dotation_amount)}€TTC/mois pendant la durée du présent contrat. "
-            + order_method
-        )
-    else:  # paid
-        order_method = (
-            f"La commande sera à passer par {d.term_article} via le code "
-            f"{d.dotation_code}, une fois par mois."
-            if d.dotation_code else
-            f"La commande sera à passer par {d.term_article} par email à pgautier@havea.com."
-        )
-        return (
-            base +
-            f"fournir à {d.term_article} les compléments alimentaires nécessaires à sa consommation "
-            f"personnelle. A cet effet, {d.term_article} se verra attribuer une dotation mensuelle "
-            f"composée de compléments alimentaires pour une valeur totale de "
-            f"{int(d.dotation_amount)}€TTC/mois pendant la durée du présent contrat. "
-            + order_method
-        )
+    order_method = (
+        f"La commande sera à passer directement par {d.term_article} "
+        f"via le code {d.effective_dotation_code}, une fois par mois."
+    )
+    return (
+        base +
+        f"fournir à {d.term_article} les compléments alimentaires nécessaires à sa consommation "
+        f"personnelle. A cet effet, {d.term_article} se verra attribuer une dotation mensuelle "
+        f"composée de compléments alimentaires pour une valeur totale de "
+        f"{int(d.dotation_amount)}€TTC/mois pendant la durée du présent contrat. "
+        + order_method
+    )
 
 
 def article_5(d: ContractData) -> str:

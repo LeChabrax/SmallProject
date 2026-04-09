@@ -210,8 +210,9 @@ def main():
 
     print(f"\nUpdating {len(updates)} priorities in sheet...")
     # Batch update col L
-    for row, prio in updates:
-        ws.update_acell(f"L{row}", prio)
+    if updates:
+        cells_to_update = [{'range': f'L{row}', 'values': [[prio]]} for row, prio in updates]
+        ws.batch_update(cells_to_update)
 
     print("Done!")
 

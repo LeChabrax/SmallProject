@@ -1,0 +1,637 @@
+- application [ref=e1]:
+  - generic [ref=e4]:
+    - link "Ignorer le contenu principal" [ref=e5] [cursor=pointer]
+    - banner [ref=e9]:
+      - button "Lanceur d’applications" [ref=e12] [cursor=pointer]: 
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - link "HAVEA GROUP" [ref=e23] [cursor=pointer]:
+              - /url: https://havea.com
+              - img "HAVEA GROUP" [ref=e24]
+            - link "Accéder à Outlook" [ref=e28] [cursor=pointer]:
+              - /url: https://outlook.office.com/mail/?realm=havea.com&login_hint=achabrat@havea.com
+              - generic [ref=e29]: Outlook
+          - search [ref=e38]:
+            - generic [ref=e39]:
+              - status
+              - generic [ref=e44]: 
+              - combobox "Recherchez des e-mails, des réunions, des fichiers et plus encore." [ref=e47]
+        - generic [ref=e48]:
+          - button "Discuter" [ref=e51] [cursor=pointer]:
+            - generic [ref=e52]: 
+          - button "Flux OneNote" [ref=e55] [cursor=pointer]:
+            - img [ref=e56]
+          - button "Ma journée" [ref=e60] [cursor=pointer]:
+            - img [ref=e61]
+          - 'button "Nouvelles notifications : 3" [ref=e65] [cursor=pointer]':
+            - generic [ref=e66]: 
+            - generic [ref=e67]: "3"
+          - button "Paramètres" [ref=e70] [cursor=pointer]:
+            - generic [ref=e71]: 
+      - generic [ref=e72]:
+        - button "Responsable de compte pour Antoine Chabrat" [ref=e74] [cursor=pointer]:
+          - generic [ref=e75]:
+            - generic [ref=e76]: Antoine Chabrat
+            - generic [ref=e83]: AC
+        - generic: 
+    - generic [ref=e86]:
+      - generic [ref=e89]:
+        - navigation "left-rail-appbar" [ref=e91]:
+          - generic "Courrier" [ref=e93]:
+            - button "Courrier" [pressed] [ref=e94]:
+              - generic [ref=e95]:
+                - generic:
+                  - generic:
+                    - img "Courrier"
+          - generic "Calendrier" [ref=e97]:
+            - button "Calendrier" [ref=e98]:
+              - generic [ref=e99]:
+                - generic:
+                  - generic:
+                    - img "Calendrier"
+          - generic "Contacts" [ref=e101]:
+            - button "Contacts" [ref=e102]:
+              - generic [ref=e103]:
+                - generic:
+                  - generic:
+                    - img "Contacts"
+          - generic "To Do" [ref=e105]:
+            - button "To Do" [ref=e106]:
+              - generic [ref=e107]:
+                - generic:
+                  - generic:
+                    - img "To Do"
+          - generic "Bulletins d’informations" [ref=e109]:
+            - button "Bulletins d’informations" [ref=e110]:
+              - generic [ref=e111]:
+                - generic:
+                  - generic:
+                    - img "Bulletins d’informations"
+          - generic "Org Explorer" [ref=e113]:
+            - button "Org Explorer" [ref=e114]:
+              - generic [ref=e115]:
+                - generic:
+                  - generic:
+                    - img "Org Explorer"
+          - generic "OneDrive" [ref=e117]:
+            - button "OneDrive" [ref=e118]:
+              - generic [ref=e119]:
+                - generic:
+                  - generic:
+                    - img "OneDrive"
+          - status [ref=e120]
+        - button [ref=e123]:
+          - generic [ref=e124]:
+            - generic:
+              - generic:
+                - generic: 
+      - generic [ref=e127]:
+        - region "Ruban" [ref=e128]:
+          - generic [ref=e129]:
+            - generic [ref=e130]:
+              - button "Masquer le volet de navigation" [ref=e132]:
+                - generic [ref=e134]: 
+              - button "Fichier" [ref=e135]
+              - generic "Onglets du ruban" [ref=e143]:
+                - tablist [ref=e144]:
+                  - tab "Accueil" [selected] [ref=e145]:
+                    - generic [ref=e148]: Accueil
+                  - tab "Afficher" [ref=e149]:
+                    - generic [ref=e152]: Afficher
+                  - tab "Aide" [ref=e153]:
+                    - generic [ref=e156]: Aide
+              - menuitem "Vitavea Running Club, 12:00 à 14:00, Jeudi 09 avril 2026, Réunion Microsoft Teams, Par Chloé Fauqueux, Tentative, Exception à un événement périodique" [ref=e158] [cursor=pointer]:
+                - generic [ref=e161]:
+                  - generic [ref=e164]: 
+                  - generic [ref=e165]:
+                    - generic [ref=e166]: Vitavea Running Club
+                    - generic [ref=e167]:
+                      - generic [ref=e168]: Demain 12:00
+                      - generic [ref=e169]: Réunion Microsoft Teams
+            - tabpanel "Accueil" [ref=e174]:
+              - generic [ref=e176]:
+                - generic [ref=e181]:
+                  - group "Nouveau" [ref=e185]:
+                    - generic [ref=e186]:
+                      - group [ref=e191]:
+                        - button "Nouveau" [ref=e192]:
+                          - generic [ref=e195]: 
+                          - generic [ref=e196]: Créer un courrier. (N)
+                        - button "Développer pour afficher d’autres options" [ref=e197]:
+                          - generic [ref=e198]:
+                            - text: Nouveau
+                            - generic [ref=e202]: 
+                          - generic [ref=e203]: Nouveau
+                      - generic [ref=e206]: Nouveau
+                  - group "Supprimer" [ref=e212]:
+                    - generic [ref=e213]:
+                      - generic [ref=e215]:
+                        - generic [ref=e218]:
+                          - button "Ignorer" [ref=e864]:
+                            - generic [ref=e868]: 
+                            - generic [ref=e869]: Ignorer
+                            - generic [ref=e870]: Ignorez ou arrêtez d’ignorer cette conversation. (⌘+Suppr / ⌘+Retour arrière)
+                          - group [ref=e219]:
+                            - button "Bloquer" [ref=e871]:
+                              - generic [ref=e875]: 
+                              - generic [ref=e876]: Bloquer
+                              - generic [ref=e877]: Bloquer l’expéditeur.
+                            - button "Développer pour afficher d’autres options de bloc" [ref=e878]:
+                              - generic [ref=e879]: Bloquer
+                              - generic [ref=e883]: 
+                        - button "Supprimer" [ref=e884]:
+                          - generic [ref=e887]: 
+                          - generic [ref=e888]: Supprimer
+                          - generic [ref=e889]: Supprimez ce message. (Suppr / Retour arrière)
+                        - button "Archiver" [ref=e890]:
+                          - generic [ref=e893]: 
+                          - generic [ref=e894]: Archiver
+                          - generic [ref=e895]: Déplacer message dans votre dossier d’archivage. (E)
+                      - generic [ref=e225]: Supprimer
+                  - group "Réponse" [ref=e231]:
+                    - generic [ref=e232]:
+                      - generic [ref=e236]:
+                        - generic [ref=e237]:
+                          - button "Répondre" [ref=e896]:
+                            - generic [ref=e900]: 
+                            - generic [ref=e901]: Répondre
+                            - generic [ref=e902]: Répondez à ce message. (R / ⌘+R)
+                          - button "Répondre à tous" [ref=e903]:
+                            - generic [ref=e907]: 
+                            - generic [ref=e908]: Répondre à tous
+                            - generic [ref=e909]: Répondez à ce message. (⇧+R / ⌘+⇧+R)
+                          - group [ref=e238]:
+                            - button "Transférer" [ref=e910]:
+                              - generic [ref=e914]: 
+                              - generic [ref=e915]: Transférer
+                              - generic [ref=e916]: Transférez ce message. (⇧+F / ⌘+⇧+F)
+                            - button "Développer pour voir les options d’avancement" [ref=e917]:
+                              - generic [ref=e918]: Transférer
+                              - generic [ref=e922]: 
+                        - button "Réunion" [ref=e923]:
+                          - generic [ref=e926]: 
+                          - generic [ref=e927]: Réunion
+                          - generic [ref=e928]: Créez une demande de réunion à partir de ce message.
+                      - generic [ref=e241]: Réponse
+                  - group "Teams" [ref=e247]:
+                    - generic [ref=e248]:
+                      - button "Partager dans Teams" [ref=e929]:
+                        - generic [ref=e932]: 
+                        - generic [ref=e933]: Partager dans Teams
+                        - generic [ref=e934]: Partagez des e-mails à l’aide de Teams.
+                      - generic [ref=e254]: Teams
+                  - group "Déplacer" [ref=e260]:
+                    - generic [ref=e261]:
+                      - generic [ref=e263]:
+                        - button "Déplacer" [ref=e935]:
+                          - generic [ref=e938]: 
+                          - generic [ref=e939]:
+                            - text: Déplacer
+                            - generic [ref=e943]: 
+                          - generic [ref=e944]: Déplacer vers un dossier. (V)
+                        - generic [ref=e269]:
+                          - button "Ranger" [ref=e946]:
+                            - generic [ref=e950]: 
+                            - generic [ref=e951]: Ranger
+                            - generic [ref=e952]: Définissez une règle concernant les auteurs d’e-mails sélectionnés.
+                          - button "Règles" [ref=e271]:
+                            - generic [ref=e275]: 
+                            - generic [ref=e276]: Règles
+                            - generic [ref=e277]: Créer une règle basée sur l’expéditeur ou les destinataires de ce message afin de déplacer tous les messages vers un dossier spécifié.
+                            - generic [ref=e281]: 
+                      - generic [ref=e283]: Déplacer
+                  - group "Actions rapides" [ref=e289]:
+                    - generic [ref=e290]:
+                      - generic "Actions rapides" [ref=e295]:
+                        - radio "Grâce aux étapes rapides, vous pouvez effectuer plusieurs actions sur un message en un seul clic. Par exemple, vous pouvez définir le déplacement d’un message vers un dossier spécifique, l’ajouter à un indicateur et le marquer comme lu." [ref=e298]:
+                          - generic [ref=e299]:
+                            - generic [ref=e302]: 
+                            - generic [ref=e303]: Actions rapides
+                        - button "Autres étapes rapides" [ref=e304]:
+                          - generic [ref=e308]: 
+                      - generic [ref=e310]: Actions rapides
+                  - group "Balises" [ref=e316]:
+                    - generic [ref=e317]:
+                      - generic [ref=e321]:
+                        - button "Lu / non lu" [ref=e953]:
+                          - generic [ref=e325]: 
+                          - generic [ref=e326]: Lu / non lu
+                          - generic [ref=e327]: Marquez ce message comme lu ou non lu. (Q / U)
+                        - generic [ref=e329]:
+                          - button "Catégoriser" [ref=e954]:
+                            - generic [ref=e958]: 
+                            - generic [ref=e959]: Catégoriser
+                            - generic [ref=e960]: Classer cet élément. Les catégories appliquées à une conversation seront appliquées à tous les éléments actuels et futurs de la conversation. (C)
+                            - generic [ref=e964]: 
+                          - group [ref=e331]:
+                            - button "Drapeau" [ref=e965]:
+                              - generic [ref=e969]: 
+                              - generic [ref=e970]: Drapeau
+                              - generic [ref=e971]: Marquez ou annulez l’indicateur de ce message.
+                            - button "Développer pour afficher les options d’indicateur" [ref=e972]:
+                              - generic [ref=e973]: Drapeau
+                              - generic [ref=e977]: 
+                          - button "Épingler" [ref=e978]:
+                            - generic [ref=e982]: 
+                            - generic [ref=e983]: Épingler
+                            - generic [ref=e984]: Épingler ou détacher ce message.
+                        - button "Répéter" [ref=e985]:
+                          - generic [ref=e988]: 
+                          - generic [ref=e989]:
+                            - text: Répéter
+                            - generic [ref=e993]: 
+                          - generic [ref=e994]: Masquez ce message jusqu’à une date ultérieure. (B)
+                        - button "Stratégie" [ref=e996]:
+                          - generic [ref=e999]: 
+                          - generic [ref=e1000]:
+                            - text: Stratégie
+                            - generic [ref=e1004]: 
+                          - generic [ref=e1005]: Attribuer une stratégie d’archivage ou de rétention pour archiver ou supprimer automatiquement les éléments sélectionnés.
+                      - generic [ref=e336]: Balises
+                  - group "Imprimer" [ref=e342]:
+                    - generic [ref=e343]:
+                      - button "Imprimer" [ref=e1007]:
+                        - generic [ref=e1010]: 
+                        - generic [ref=e1011]: Imprimer
+                        - generic [ref=e1012]: Imprimer cet e-mail.
+                      - generic [ref=e349]: Imprimer
+                  - group "Compléments" [ref=e355]:
+                    - generic [ref=e356]:
+                      - generic [ref=e360]:
+                        - button "Plus d’applications" [ref=e1013]:
+                          - generic [ref=e1016]: 
+                          - generic [ref=e1017]: Plus d’applications
+                          - generic [ref=e1018]: Améliorez Outlook avec les applications.
+                        - button "Signaler à Sophos" [ref=e1019]:
+                          - generic [ref=e1024]: Signaler à Sophos
+                          - generic [ref=e1025]: Signaler à Sophos Allows users to report suspicious emails
+                        - button "Viva Insights" [ref=e1026]:
+                          - generic [ref=e1031]: Viva Insights
+                          - generic [ref=e1032]: Viva Insights Viva Insights
+                      - generic [ref=e364]: Compléments
+                  - group "Rechercher" [ref=e370]:
+                    - generic [ref=e371]:
+                      - button "Découvrez des groupes" [ref=e376]:
+                        - generic [ref=e379]: 
+                        - generic [ref=e380]: Découvrez des groupes
+                        - generic [ref=e381]: Rechercher un groupe existant. Un groupe est un espace de travail permettant de consulter les courriers, les documents et les événements de calendrier partagés.
+                      - generic [ref=e383]: Rechercher
+                  - group "Annuler" [ref=e389]:
+                    - generic [ref=e390]:
+                      - generic [ref=e394]:
+                        - button "Annuler" [disabled]:
+                          - generic:
+                            - generic:
+                              - generic: 
+                          - generic: Annuler
+                          - generic: Annuler la dernière action. (⌘+Z / ⌥+Retour arrière)
+                      - generic [ref=e396]: Annuler
+                - button "Faire défiler le ruban vers la droite" [ref=e399]:
+                  - generic [ref=e403]: 
+              - button "Changer de disposition" [ref=e405]:
+                - generic [ref=e409]: 
+        - generic [ref=e411]:
+          - generic [ref=e415]:
+            - region "Volet de navigation" [ref=e416]:
+              - generic [ref=e420]:
+                - tree [ref=e421]:
+                  - heading "Volet de navigation" [level=2] [ref=e422]
+                  - group "Favoris" [ref=e424]:
+                    - treeitem "Favoris" [expanded] [level=1] [ref=e425] [cursor=pointer]:
+                      - button [ref=e426]:
+                        - generic [ref=e428]: 
+                      - generic [ref=e429]: Favoris
+                    - generic [ref=e431]:
+                      - treeitem "Boîte de réception 57 non lus" [level=2] [ref=e433] [cursor=pointer]:
+                        - generic [ref=e436]: 
+                        - generic [ref=e437]: Boîte de réception
+                        - generic [ref=e439]:
+                          - text: "57"
+                          - generic [ref=e440]: non lus
+                      - treeitem "Éléments envoyés" [level=2] [ref=e442] [cursor=pointer]:
+                        - generic [ref=e445]: 
+                        - generic [ref=e446]: Éléments envoyés
+                      - treeitem "Brouillons 8 Éléments" [level=2] [ref=e448] [cursor=pointer]:
+                        - generic [ref=e451]: 
+                        - generic [ref=e452]: Brouillons
+                        - generic [ref=e454]:
+                          - text: "8"
+                          - generic [ref=e455]: Éléments
+                      - treeitem "Éléments supprimés 15 non lus" [level=2] [ref=e457] [cursor=pointer]:
+                        - generic [ref=e460]: 
+                        - generic [ref=e461]: Éléments supprimés
+                        - generic [ref=e463]:
+                          - text: "15"
+                          - generic [ref=e464]: non lus
+                  - group [ref=e467]:
+                    - treeitem "achabrat@havea.com" [expanded] [level=1] [ref=e469] [cursor=pointer]:
+                      - button [ref=e470]:
+                        - generic [ref=e472]: 
+                      - generic [ref=e473]: achabrat@havea.com
+                    - group "achabrat@havea.com" [ref=e476]:
+                      - treeitem "Influence" [level=2] [ref=e478] [cursor=pointer]:
+                        - generic [ref=e481]: 
+                        - generic [ref=e482]: Influence
+                      - treeitem "Moi 18 non lus" [level=2] [ref=e484] [cursor=pointer]:
+                        - generic [ref=e487]: 
+                        - generic [ref=e488]: Moi
+                        - generic [ref=e490]:
+                          - text: "18"
+                          - generic [ref=e491]: non lus
+                      - treeitem "Pierre G 6 non lus" [level=2] [ref=e493] [cursor=pointer]:
+                        - generic [ref=e496]: 
+                        - generic [ref=e497]: Pierre G
+                        - generic [ref=e499]:
+                          - text: "6"
+                          - generic [ref=e500]: non lus
+                      - treeitem "Affiliatly 459 non lus" [level=2] [ref=e502] [cursor=pointer]:
+                        - generic [ref=e505]: 
+                        - generic [ref=e506]: Affiliatly
+                        - generic [ref=e508]:
+                          - text: "459"
+                          - generic [ref=e509]: non lus
+                      - treeitem "Automatisation" [level=2] [ref=e511] [cursor=pointer]:
+                        - generic [ref=e514]: 
+                        - generic [ref=e515]: Automatisation
+                      - treeitem "BigBlue 82 non lus" [level=2] [ref=e517] [cursor=pointer]:
+                        - generic [ref=e520]: 
+                        - generic [ref=e521]: BigBlue
+                        - generic [ref=e523]:
+                          - text: "82"
+                          - generic [ref=e524]: non lus
+                      - treeitem "Gorgias 32 non lus" [level=2] [ref=e526] [cursor=pointer]:
+                        - generic [ref=e529]: 
+                        - generic [ref=e530]: Gorgias
+                        - generic [ref=e532]:
+                          - text: "32"
+                          - generic [ref=e533]: non lus
+                      - treeitem "LOW 12 non lus" [level=2] [ref=e535] [cursor=pointer]:
+                        - generic [ref=e538]: 
+                        - generic [ref=e539]: LOW
+                        - generic [ref=e541]:
+                          - text: "12"
+                          - generic [ref=e542]: non lus
+                      - treeitem "Teams 10 non lus" [level=2] [ref=e544] [cursor=pointer]:
+                        - generic [ref=e547]: 
+                        - generic [ref=e548]: Teams
+                        - generic [ref=e550]:
+                          - text: "10"
+                          - generic [ref=e551]: non lus
+                      - treeitem "Boîte de réception sélectionné 57 non lus" [level=2] [selected] [ref=e553] [cursor=pointer]:
+                        - generic [ref=e556]: 
+                        - generic [ref=e557]: Boîte de réception
+                        - generic [ref=e558]: sélectionné
+                        - generic [ref=e560]:
+                          - text: "57"
+                          - generic [ref=e561]: non lus
+                      - treeitem "Brouillons 8 Éléments" [level=2] [ref=e563] [cursor=pointer]:
+                        - generic [ref=e566]: 
+                        - generic [ref=e567]: Brouillons
+                        - generic [ref=e569]:
+                          - text: "8"
+                          - generic [ref=e570]: Éléments
+                      - treeitem "DataReporting-IM" [level=2] [ref=e572] [cursor=pointer]:
+                        - generic [ref=e575]: 
+                        - generic [ref=e576]: DataReporting-IM
+                      - treeitem "Éléments envoyés" [level=2] [ref=e578] [cursor=pointer]:
+                        - generic [ref=e581]: 
+                        - generic [ref=e582]: Éléments envoyés
+                      - treeitem "Éléments supprimés 15 non lus" [level=2] [ref=e584] [cursor=pointer]:
+                        - generic [ref=e587]: 
+                        - generic [ref=e588]: Éléments supprimés
+                        - generic [ref=e590]:
+                          - text: "15"
+                          - generic [ref=e591]: non lus
+                      - treeitem "Archive" [level=2] [ref=e593] [cursor=pointer]:
+                        - generic [ref=e596]: 
+                        - generic [ref=e597]: Archive
+                      - treeitem "Courrier indésirable 1 élément" [level=2] [ref=e599] [cursor=pointer]:
+                        - generic [ref=e602]: 
+                        - generic [ref=e603]: Courrier indésirable
+                        - generic [ref=e605]:
+                          - text: "1"
+                          - generic [ref=e606]: élément
+                      - treeitem "Historique des conversations" [level=2] [ref=e608] [cursor=pointer]:
+                        - generic [ref=e611]: 
+                        - generic [ref=e612]: Historique des conversations
+                      - treeitem "Notes 3 Éléments" [level=2] [ref=e614] [cursor=pointer]:
+                        - generic [ref=e617]: 
+                        - generic [ref=e618]: Notes
+                        - generic [ref=e620]:
+                          - text: "3"
+                          - generic [ref=e621]: Éléments
+                      - treeitem "RH 2 non lus" [level=2] [ref=e623] [cursor=pointer]:
+                        - generic [ref=e626]: 
+                        - generic [ref=e627]: RH
+                        - generic [ref=e629]:
+                          - text: "2"
+                          - generic [ref=e630]: non lus
+                      - treeitem "RSS Feeds" [level=2] [ref=e632] [cursor=pointer]:
+                        - generic [ref=e635]: 
+                        - generic [ref=e636]: RSS Feeds
+                      - treeitem "Dossiers de recherche" [level=2] [ref=e637] [cursor=pointer]:
+                        - generic [ref=e640]: 
+                        - generic [ref=e641]: Dossiers de recherche
+                    - treeitem "Accéder aux Groupes" [level=1] [ref=e642] [cursor=pointer]:
+                      - generic [ref=e645]: 
+                      - generic [ref=e646]: Accéder aux Groupes
+                - status
+            - generic [ref=e651]:
+              - complementary "Liste des messages" [ref=e653]:
+                - generic [ref=e656]:
+                  - tablist [ref=e658]:
+                    - tab "Prioritaire" [selected] [ref=e661] [cursor=pointer]:
+                      - generic [ref=e662]: Prioritaire
+                    - tab "Autres" [ref=e664] [cursor=pointer]:
+                      - generic [ref=e665]: Autres
+                  - generic [ref=e667]:
+                    - button "Sélectionner" [ref=e669] [cursor=pointer]:
+                      - generic [ref=e673]: 
+                    - button "Aller à" [ref=e674]:
+                      - generic [ref=e676]: 
+                    - button "Filtrer" [ref=e677] [cursor=pointer]:
+                      - generic [ref=e679]: 
+                    - 'button "Trié : Par Date" [ref=e680] [cursor=pointer]':
+                      - generic [ref=e682]: 
+                - region [ref=e685]:
+                  - listbox "Liste des messages" [ref=e1033]:
+                    - generic [ref=e691]:
+                      - generic [ref=e693]:
+                        - button "Épinglé" [expanded] [ref=e694] [cursor=pointer]:
+                          - generic [ref=e697]: 
+                          - generic "Épinglé" [ref=e698]
+                          - button "Menu d’action de l’en-tête" [ref=e699]:
+                            - generic [ref=e701]: 
+                        - 'option "Réduit Avec indicateur Épinglés Simon Michel-Berger [External] Re: Recherche d''ambassadeur Impulse Nutrition 09/02/2026 Bonjour Antoine, Je suis Simon, agent d''Arwen que vous avez récemment contacté pour Impulse Nutrition 🙂 Merci beaucoup pour l’intérêt porté à son profil, Honnêtement, nous ne travaillons déjà plus comme tel avec Arwen, mais je te partage ses tar" [ref=e1034]':
+                          - group [ref=e705]:
+                            - generic [ref=e706]:
+                              - button "Marquer comme non lu" [ref=e708] [cursor=pointer]
+                              - generic [ref=e709]:
+                                - generic [ref=e710]:
+                                  - button "Développer la conversation" [ref=e712] [cursor=pointer]:
+                                    - generic [ref=e716]: 
+                                  - checkbox "Sélectionner une conversation" [ref=e717] [cursor=pointer]:
+                                    - img "Simon Michel-Berger" [ref=e718]:
+                                      - generic [ref=e719]: SM
+                                - generic [ref=e721]:
+                                  - generic [ref=e723]:
+                                    - generic [ref=e725]: Simon Michel-Berger
+                                    - generic [ref=e727]: "[External] Re: Recherche d'ambassadeur Impulse Nutrition"
+                                  - generic [ref=e728]:
+                                    - generic [ref=e729]: 
+                                    - generic [ref=e730]: 
+                      - 'option "Épinglés Z@dig Networking People [External] Votre identifiant d''accès au système \"GTA Web\". 30/01/2026 Bonjour ANTOINE CHABRAT, Nous avons le plaisir de vous communiquer ci-dessous votre identifiant d''accès au système \"GTA Web\". Votre identifiant : achabrat-jmg Pour des raisons de sécurité, votre mot de passe initial vous sera communiqué par l''env" [ref=e734]':
+                        - group [ref=e737]:
+                          - generic [ref=e738]:
+                            - button "Marquer comme non lu" [ref=e740] [cursor=pointer]
+                            - generic [ref=e741]:
+                              - checkbox "Sélectionner une conversation" [ref=e743] [cursor=pointer]:
+                                - img "Z@dig Networking People" [ref=e744]:
+                                  - generic [ref=e745]: ZP
+                              - generic [ref=e747]:
+                                - generic [ref=e749]:
+                                  - generic [ref=e751]: Z@dig Networking People
+                                  - generic [ref=e753]: "[External] Votre identifiant d'accès au système \"GTA Web\"."
+                                - generic [ref=e755]: 
+                      - generic [ref=e758]:
+                        - button "Aujourd’hui" [expanded] [ref=e759] [cursor=pointer]:
+                          - generic [ref=e762]: 
+                          - generic "Aujourd’hui" [ref=e763]
+                          - button "Menu d’action de l’en-tête" [ref=e764]:
+                            - generic [ref=e766]: 
+                        - option "Non lu Bigblue Auth [External] Sign in to Bigblue 09:59 sign in link Welcome back 🚀 Hello there, Click and confirm that you want to sign in to Bigblue. This link will expire in five minutes. Sign In to bigblue Having issues with your account? Please contact us by replying to this email :) Cheers, The B" [active] [selected] [ref=e767]:
+                          - group [ref=e770]:
+                            - generic [ref=e771]:
+                              - button "Marquer comme lu" [ref=e773] [cursor=pointer]
+                              - generic [ref=e774]:
+                                - checkbox "Sélectionner une conversation" [ref=e776] [cursor=pointer]:
+                                  - generic [ref=e1035]:
+                                    - checkbox [ref=e1036]
+                                    - generic [ref=e1039]: 
+                                - generic [ref=e779]:
+                                  - generic [ref=e781]: Bigblue Auth
+                                  - generic [ref=e782]:
+                                    - generic [ref=e784]: "[External] Sign in to Bigblue"
+                                    - generic "Mer 08/04/2026 09:59" [ref=e785]: 09:59
+                                  - generic [ref=e789]: sign in link Welcome back 🚀 Hello there, Click and confirm that you want to sign in to Bigblue. This link will expire in five minutes. Sign In to bigblue Having issues with your account? Please contact us by replying to this email :) Cheers, The B
+                      - 'option "Non lu amazon.fr [External] amazon.fr : Tentative d’accès aux données 09:26 Chabrat Antoine, Quelqu’un tente d’accéder aux données de votre compte. Quand: Apr 08, 2026 09:26 AM Central European Summer Time Appareil: generic web browser Windows (Ordinateur de bureau) À proximité: Paris Department, France Si" [ref=e793]':
+                        - group [ref=e796]:
+                          - generic [ref=e797]:
+                            - button "Marquer comme lu" [ref=e799] [cursor=pointer]
+                            - generic [ref=e800]:
+                              - checkbox "Sélectionner une conversation" [ref=e802] [cursor=pointer]:
+                                - img "amazon.fr" [ref=e803]:
+                                  - generic [ref=e804]: A
+                              - generic [ref=e805]:
+                                - generic [ref=e807]: amazon.fr
+                                - generic [ref=e808]:
+                                  - generic [ref=e810]: "[External] amazon.fr : Tentative d’accès aux données"
+                                  - generic "Mer 08/04/2026 09:26" [ref=e811]: 09:26
+                                - generic [ref=e815]: "Chabrat Antoine, Quelqu’un tente d’accéder aux données de votre compte. Quand: Apr 08, 2026 09:26 AM Central European Summer Time Appareil: generic web browser Windows (Ordinateur de bureau) À proximité: Paris Department, France Si"
+                      - generic [ref=e818]:
+                        - button "Hier" [expanded] [ref=e819] [cursor=pointer]:
+                          - generic [ref=e822]: 
+                          - generic "Hier" [ref=e823]
+                          - button "Menu d’action de l’en-tête" [ref=e824]:
+                            - generic [ref=e826]: 
+                        - option "Bigblue Auth [External] Sign in to Bigblue Mar 21:47 sign in link Welcome back 🚀 Hello there, Click and confirm that you want to sign in to Bigblue. This link will expire in five minutes. Sign In to bigblue Having issues with your account? Please contact us by replying to this email :) Cheers, The B" [ref=e827]:
+                          - group [ref=e830]:
+                            - generic [ref=e831]:
+                              - button "Marquer comme non lu" [ref=e833] [cursor=pointer]
+                              - generic [ref=e834]:
+                                - checkbox "Sélectionner une conversation" [ref=e836] [cursor=pointer]:
+                                  - img "Bigblue Auth" [ref=e837]:
+                                    - generic [ref=e838]: BA
+                                - generic [ref=e839]:
+                                  - generic [ref=e841]: Bigblue Auth
+                                  - generic [ref=e842]:
+                                    - generic [ref=e844]: "[External] Sign in to Bigblue"
+                                    - generic "Mar 07/04/2026 21:47" [ref=e845]: Mar 21:47
+                                  - generic [ref=e849]: sign in link Welcome back 🚀 Hello there, Click and confirm that you want to sign in to Bigblue. This link will expire in five minutes. Sign In to bigblue Having issues with your account? Please contact us by replying to this email :) Cheers, The B
+                - alert [ref=e853]
+              - main "Volet de lecture" [ref=e855]:
+                - generic [ref=e857]:
+                  - generic [ref=e1042]:
+                    - heading "[External] Sign in to Bigblue" [level=3] [ref=e1044]:
+                      - generic [ref=e1047]: "[External] Sign in to Bigblue"
+                    - generic "1 messages" [ref=e1049]:
+                      - generic [ref=e1054]:
+                        - heading "[External] Sign in to Bigblue" [level=3]
+                        - generic "Courrier électronique" [ref=e1056]:
+                          - generic [ref=e1057]:
+                            - generic [ref=e1058] [cursor=pointer]:
+                              - generic [ref=e1059]:
+                                - button "Ouvre la carte de fichier pour Bigblue Auth" [ref=e1062]:
+                                  - img "Bigblue Auth" [ref=e1063]:
+                                    - generic [ref=e1064]: BA
+                                - 'heading "De : Bigblue Auth" [level=3] [ref=e1068]':
+                                  - 'button "De : Bigblue Auth" [ref=e1069]':
+                                    - generic [ref=e1071]: Bigblue Auth<auth@sso.bigblue.io>
+                              - toolbar [ref=e1076]:
+                                - button "Réactions" [ref=e1080]:
+                                  - generic [ref=e1082]: 
+                                - menuitem "Répondre" [ref=e1083]:
+                                  - generic [ref=e1085]: 
+                                - separator [ref=e1086]
+                                - button "More items" [ref=e1087]:
+                                  - generic [ref=e1089]: 
+                            - generic [ref=e1092]:
+                              - 'heading "À : Antoine Chabrat" [level=3] [ref=e1097]':
+                                - 'generic "À : Antoine Chabrat" [ref=e1098]':
+                                  - generic [ref=e1099]: "À :"
+                                  - button "Antoine Chabrat" [ref=e1101] [cursor=pointer]:
+                                    - generic [ref=e1102]: Antoine Chabrat
+                              - heading "Mer 08/04/2026 09:59" [level=3] [ref=e1105]
+                            - group [ref=e1109]:
+                              - generic [ref=e1113]: 
+                              - generic [ref=e1115]: Le contenu de ce message a été partiellement bloqué car l’expéditeur ne figure pas dans votre liste d’expéditeurs approuvés.
+                              - generic [ref=e1116]:
+                                - button "Expéditeur de confiance" [ref=e1117] [cursor=pointer]
+                                - button "Afficher le contenu bloqué" [ref=e1118] [cursor=pointer]
+                          - document "Corps du message" [ref=e1121]:
+                            - generic [ref=e1125]:
+                              - generic [ref=e1126]:
+                                - button "Afficher la taille d’origine" [ref=e1127] [cursor=pointer]:
+                                  - generic [ref=e1129]: 
+                                - img "logo" [ref=e1132]
+                              - generic [ref=e1134]:
+                                - button "Afficher la taille d’origine" [ref=e1135] [cursor=pointer]:
+                                  - generic [ref=e1137]: 
+                                - generic [ref=e1138]:
+                                  - table [ref=e1139]:
+                                    - rowgroup [ref=e1140]:
+                                      - row "sign in link" [ref=e1141]:
+                                        - cell [ref=e1142]
+                                        - cell "sign in link" [ref=e1144]:
+                                          - strong [ref=e1145]: sign in link
+                                  - heading "Welcome back 🚀" [level=1] [ref=e1147]
+                                  - generic [ref=e1148]: Hello there,
+                                  - generic [ref=e1149]: Click and confirm that you want to sign in to Bigblue. This link will expire in five minutes.
+                                  - link "Sign In to bigblue" [ref=e1150] [cursor=pointer]:
+                                    - /url: https://fra01.safelinks.protection.outlook.com/?url=http%3A%2F%2Furl3410.sso.bigblue.io%2Fls%2Fclick%3Fupn%3Du001.0UYHV-2FPmjixJA-2BCRj-2B-2FYrrhG8TRVb0r8PBBS-2F1ID30LTQEnQ2q0KkhUTHuWMYO5hobF09rPQDZaTvw1SAxyCk1U-2Fg9e4C1vDXIg1-2FvM2-2FPs10oD2AoZ3LPzBUa-2Fdd0mKmkIHCRlAAhB-2FOZL7WrVO-2BJwiv43XJL1pVNfekGCzx8xscWubq82HVpJsVN0iHOENW-2Bh-2F6zGbzf-2BrR61Ss8sNT-2FyQyV5HsqysmEJfuShDRnDIiiHy5u-2BUTnjbhB7ZegtaaTy9YoTRDlnmkA-2FO0nDbLa1kZHu8yNAhu2OrRjNi3wjGEQ2Td9-2BlAoRvqXPJuNKsLNYnRFRgDGASjn2MpCq3oLFSKJku2DKVcfSAzImmhHLa3BnlZSBowkmA8B7uE20exA1ZKyihj-2BT2fDUGxfnrnquW7aeDnoj2A-2BsBEGph0Y3Mwp9dKPCvUtzk4QkkL9C6RhdkmKk1o5pkDoKhiehqdg-3D-3DW3Bt_bLbmXHBI-2BpakjAkZ26zcG1WVbXJj-2F1AwnCJ6pxi-2BPAo3-2BpxXWoQvEtTJrLZu1BCHDM7j-2BDFcITeijkQL0zUzpXAmcpBHZXkF2WNliWUuXxBuuETlGpyc7O7lgjZsQ6Ny8Uv4YUbuO8zK2NS-2B2K4fQJQI9T35GlyVjdzKtuCMbW1u8Jzk6XWm8iXF9byAl43nopLTtiA1zNMhhGQVghXaKw-3D-3D&data=05%7C02%7Cachabrat%40havea.com%7Cec1ea8dbc78d4d09372408de9544b95a%7C657c2a73b3b04f0085f867953c1d47f4%7C0%7C0%7C639112319568914266%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=O37IK5Uetk5yk2i9s3da9Q2wrdMFAA8a2i7csBs84FA%3D&reserved=0
+                                  - generic [ref=e1151]: Having issues with your account? Please contact us by replying to this email :)
+                                  - generic [ref=e1152]: Cheers,
+                                  - generic [ref=e1153]: The Bigblue Team
+                              - generic [ref=e1155]:
+                                - button "Afficher la taille d’origine" [ref=e1156] [cursor=pointer]:
+                                  - generic [ref=e1158]: 
+                                - generic [ref=e1159]:
+                                  - img
+                                  - generic [ref=e1160]: The future of logistics
+                                  - generic [ref=e1161]:
+                                    - text: "Copy and paste this URL if you can't click on the button:"
+                                    - link "https://sso.bigblue.co/passwordless/verify_redirect?scope=openid&response_type=token&redirect_uri=https%3A%2F%2Fapp.bigblue.co%2Flogincallback&audience=https%3A%2F%2Fapi.bigblue.co&state=LiEZH4cYXm~C4OP.O3ToxbpAT923vHsZ&verification_code=091124&connection=email&client_id=bwjJGmcIeffoDRyuSi9yXNpZZn0AFYPi&email=achabrat%40havea.com" [ref=e1162] [cursor=pointer]:
+                                      - /url: https://fra01.safelinks.protection.outlook.com/?url=http%3A%2F%2Furl3410.sso.bigblue.io%2Fls%2Fclick%3Fupn%3Du001.0UYHV-2FPmjixJA-2BCRj-2B-2FYrrhG8TRVb0r8PBBS-2F1ID30LTQEnQ2q0KkhUTHuWMYO5hobF09rPQDZaTvw1SAxyCk1U-2Fg9e4C1vDXIg1-2FvM2-2FPs10oD2AoZ3LPzBUa-2Fdd0mKmkIHCRlAAhB-2FOZL7WrVO-2BJwiv43XJL1pVNfekGCzx8xscWubq82HVpJsVN0iHOENW-2Bh-2F6zGbzf-2BrR61Ss8sNT-2FyQyV5HsqysmEJfuShDRnDIiiHy5u-2BUTnjbhB7ZegtaaTy9YoTRDlnmkA-2FO0nDbLa1kZHu8yNAhu2OrRjNi3wjGEQ2Td9-2BlAoRvqXPJuNKsLNYnRFRgDGASjn2MpCq3oLFSKJku2DKVcfSAzImmhHLa3BnlZSBowkmA8B7uE20exA1ZKyihj-2BT2fDUGxfnrnquW7aeDnoj2A-2BsBEGph0Y3Mwp9dKPCvUtzk4QkkL9C6RhdkmKk1o5pkDoKhiehqdg-3D-3DVRZw_bLbmXHBI-2BpakjAkZ26zcG1WVbXJj-2F1AwnCJ6pxi-2BPAo3-2BpxXWoQvEtTJrLZu1BCHYB132sJ0Xq7JsiGLud-2BdaPR2eoBCUeSzAULL7SrvjpRjhznBDisOnrr1s9EFh8cJoSg8tAIQ85i1l0HTMpaDALu8ACgRmZWPZ4-2BvOKgRJV3accgRxhqpQMWZ8hAMkhixgNzE347IcsPuW2SpoI-2Bfdw-3D-3D&data=05%7C02%7Cachabrat%40havea.com%7Cec1ea8dbc78d4d09372408de9544b95a%7C657c2a73b3b04f0085f867953c1d47f4%7C0%7C0%7C639112319568966753%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=H8OiDG1M4yEhoyH8VxkOOWzhErSN2WhRWGEDE8t58c0%3D&reserved=0
+                                  - generic [ref=e1163]: Bigblue SAS,
+                                  - generic [ref=e1164]: 75009 Paris, France
+                          - toolbar "Actions rapides" [ref=e1165]:
+                            - menuitem "Répondre" [ref=e1167]:
+                              - generic [ref=e1171]: 
+                              - text: Répondre
+                            - menuitem "Transférer" [ref=e1172]:
+                              - generic [ref=e1176]: 
+                              - text: Transférer
+                  - alert [ref=e861]
+          - generic:
+            - status

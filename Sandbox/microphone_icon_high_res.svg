@@ -1,0 +1,11 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="256" r="230" fill="#7FC791"/>
+  <g transform="rotate(-45 256 256)">
+    <!-- Microphone Head -->
+    <path d="M256 120C225.624 120 201 144.624 201 175V210H311V175C311 144.624 286.376 120 256 120Z" fill="white"/>
+    <!-- Band -->
+    <rect x="186" y="220" width="140" height="30" rx="4" fill="white"/>
+    <!-- Handle -->
+    <path d="M226 260L236 380H276L286 260H226Z" fill="white" stroke="white" stroke-width="8" stroke-linejoin="round"/>
+  </g>
+</svg>
