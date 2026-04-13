@@ -1,5 +1,15 @@
 # Impulse Nutrition — Factory Workspace
 
+## Navigation rapide
+> **[`docs/INDEX.md`](./docs/INDEX.md)** — point d'entrée unique pour tout (reference docs, process runbooks, templates, scripts).
+>
+> Références canoniques :
+> - Pipeline ambassadeur / dotation / paid → [`docs/reference_contract_types.md`](./docs/reference_contract_types.md)
+> - Colonnes Google Sheet (source de vérité) → [`docs/reference_sheet_schema.md`](./docs/reference_sheet_schema.md)
+> - MCP tools (12 BigBlue + 12 Gorgias + 15 Shopify + 26 Instagram) → [`docs/reference_mcps.md`](./docs/reference_mcps.md)
+> - Process SAV complet → [`docs/process_sav_unified.md`](./docs/process_sav_unified.md)
+> - Architecture / carte codebase → [`LLM.md`](./LLM.md) (auto-généré par `/codebase-memory`)
+
 ## Qui sommes-nous
 **Impulse Nutrition** est une marque française de nutrition sportive (compléments alimentaires, boissons d'effort, whey, preworkout, etc.) distribuée via [impulse-nutrition.fr](https://impulse-nutrition.fr). La marque appartient à **HAVEA COMMERCIAL SERVICES (HCS)**, SAS basée à Montaigu-Vendée.
 
@@ -22,7 +32,7 @@ In-cold → In-hot → A recontacter / A rediscuter → Contacter manager → Pr
 
 | Statut | Signification |
 |---|---|
-| In-cold | Identifié, pas encore contacté ou premier msg envoyé sans réponse |
+| In-cold | Identifié, pas encore contacté OU premier msg envoyé **sans réponse + > 7 jours depuis le dernier message envoyé**. C'est la zone "à relancer" naturelle. |
 | In-hot | A répondu positivement, en discussion active |
 | A recontacter | À relancer plus tard (délai convenu, absence temporaire) |
 | A rediscuter | Discussion en pause, nécessite relance |
@@ -98,6 +108,7 @@ In-cold → In-hot → A recontacter / A rediscuter → Contacter manager → Pr
 ### Suivi_Amb (principal)
 - **ID** : `1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4`
 - **Onglet** : `Suivi_Amb`
+- **⚠️ Source canonique** : [`docs/reference_sheet_schema.md`](./docs/reference_sheet_schema.md) — certaines colonnes listées ci-dessous ont dérivé depuis la dernière mise à jour de ce fichier.
 - **Colonnes clés** :
   - I = username Instagram
   - J = statut (pipeline)
