@@ -1,132 +1,173 @@
-# Impulse Nutrition — Codebase Index
+# LLM Context — Impulse Nutrition
+> Generated: 2026-04-09 | Stack: Python MCP servers + Google Sheets + Shopify/Gorgias/BigBlue/Instagram/TikTok APIs
+> To refresh: /codebase-index
 
-## Structure
+---
+
+## Stack
+Python 3.10-3.12 (fastmcp/httpx) + TypeScript (TikTok MCP) + Google Sheets (service account)
+Key deps: instagrapi, fpdf2, fastmcp, python-docx
+
+---
+
+## Directory Map
 
 ```
 Impulse-Nutrition/
-├── .mcp.json                  # MCP servers config (instagram_dms, instagram_veille, shopify_orders, google_sheets)
-├── CLAUDE.md                  # Business context, pipeline, Sheet schema, workflows
-├── LLM.md                     # This file — codebase map
-├── generate_contract.py        # PDF contract generator (dotation/ambassadeur/paid)
-│
-├── instagram_dm_mcp/           # Instagram DM MCP server (instagrapi)
-│   ├── src/mcp_server.py       # Tools: send_message, list_chats, list_messages, get_user_info, etc.
-│   ├── CLAUDE.md               # Detailed Sheet schema + workflow docs
-│   ├── personality.md          # Antoine's tone guide + message templates
-│   ├── update_priorities.py    # Sync DM state → col L (high/medium/good)
-│   ├── audit_ambassadors.py    # Update bio/story/post counts (cols R, X, Y)
-│   ├── run_campaign.py         # Send campaign DMs (reads col M, sends, marks OK/SKIP)
-│   ├── qualify_influencer.py   # Score Instagram profiles (GO/MAYBE/NO-GO)
-│   ├── veille_concurrents.py   # Competitor intelligence via Instagram
-│   ├── refresh_analyses.py     # Write KPI formulas to Analyses tab
-│   └── create_session.py       # Create/refresh Instagram session
-│
-├── shopify_mcp/                # Shopify MCP server (REST API, OAuth client credentials)
-│   └── src/mcp_server.py       # Tools: create/complete_draft_order, search_products/customers, create_discount_code
-│
-├── gorgias_mcp/                # Gorgias MCP server (customer support tickets)
-│   └── src/mcp_server.py       # Tools: list/reply/close_ticket, search_customers
-│
-├── bigblue_mcp/                # BigBlue MCP server (fulfillment/logistics)
-│   └── src/mcp_server.py       # Tools: get_order, list_orders, get_tracking, cancel_order
-│
-├── templates/                  # DM message templates
-│   ├── pitch_initial.md        # First contact
-│   ├── relance.md              # Follow-up
-│   ├── commande_validee.md     # Order confirmation
-│   ├── dm_response_guide.md    # Response decision tree
-│   ├── message_types.json      # Structured message library
-│   └── product_catalog.json    # Product list with prices
-│
-├── contracts/                  # Generated PDF contracts
-│   └── drive/                  # Signed contracts from Google Drive (.pdf, .docx)
-│
-└── assets/
-    └── logo_impulse.jpeg       # Brand logo
+  .mcp.json                    — MCP server configs + credentials
+  CLAUDE.md                    — Business context, pipeline, Sheet schema, all workflows
+  LLM.md                       — This file
+  generate_contract.py         — PDF contract generator (dotation/ambassadeur/paid)
+
+  instagram_dm_mcp/            — Instagram DM MCP server + batch scripts
+    src/mcp_server.py          — MCP tools (send_message, list_chats, etc.)
+    src/logger.py              — Logging helper
+    personality.md             — Antoine's tone guide
+    CLAUDE.md                  — Detailed Sheet schema + DM workflow docs
+    update_priorities.py       — Sync DM state -> col L
+    audit_ambassadors.py       — Update bio/story/post counts (R, X, Y)
+    run_campaign.py            — Send campaign DMs (col M)
+    qualify_influencer.py      — Score profiles (GO/MAYBE/NO-GO)
+    qualify_conversations.py   — Classify DM conversations
+    veille_concurrents.py      — Competitor intelligence
+    refresh_analyses.py        — Write KPI formulas to Analyses tab
+    create_session.py          — Create/refresh Instagram session
+    recover_updates.py         — Recover failed sheet updates
+    send_promo_20pct.py        — Send promo messages
+    migrate_suivi_amb.py       — One-time sheet migration
+    resolve_usernames.py       — Resolve user IDs to usernames
+
+  shopify_mcp/                 — Shopify MCP server (REST Admin API)
+    src/mcp_server.py          — Draft orders, discounts, customer/product search
+
+  gorgias_mcp/                 — Gorgias MCP server (customer support)
+    src/mcp_server.py          — Tickets, messages, customers
+    personality.md             — Customer service tone guide
+
+  bigblue_mcp/                 — BigBlue MCP server (fulfillment/logistics)
+    src/mcp_server.py          — Orders, tracking, inventory, support tickets
+
+  templates/                   — DM message templates
+    pitch_initial.md           — First contact
+    relance.md                 — Follow-up
+    commande_validee.md        — Order confirmation
+    demande_infos.md           — Info request
+    promo.md                   — Promo messages
+    dm_response_guide.md       — Response decision tree
+    real_response_examples.md  — Real conversation examples
+    message_types.json         — Structured message library
+    product_catalog.json       — Product list with prices
+
+  docs/                        — Process documentation
+    process_dm_check_and_onboarding.md
+    process_sav_shaker_manquant.md
+    plan_bigblue_claims_api.md
+    produits.md
+
+  KolSquare/                   — KolSquare API research (Firecrawl scrapes)
 ```
+
+---
 
 ## MCP Servers
 
-| Name | Type | Key Tools |
-|------|------|-----------|
-| `instagram_dms` | Custom (instagrapi) | send_message, list_chats, list_messages, get_user_info, search_users |
-| `instagram_veille` | Same code, different account (antman.lass) | Same tools, monitoring account |
-| `shopify_orders` | Custom (REST API) | create_draft_order, update_draft_order, complete_draft_order, search_products, search_customers |
-| `gorgias` | Custom (REST API) | list_tickets, reply_to_ticket, close_ticket, search_tickets |
-| `bigblue` | Custom (REST API) | get_order, list_orders, update_order, get_tracking, cancel_order |
-| `google_sheets` | Third-party (uvx) | get_sheet_data, update_cells, batch_update_cells, find_in_spreadsheet |
-| `shopify` (marketplace) | Built-in Claude Code | get-products, get-orders, get-customers (read-only, no draft orders) |
+```
+instagram_dms     Python (instagrapi)    send/list DMs, user info, media
+instagram_veille  Same code, antman.lass Monitoring account
+shopify_orders    Python (REST API)      Draft orders, discounts, search
+gorgias           Python (REST API)      Tickets, messages, customers
+bigblue           Python (REST API)      Orders, tracking, inventory, claims
+google_sheets     Third-party (uvx)      Read/write spreadsheet cells
+tiktokshop        TypeScript (Node)      Orders, products, CS conversations
+shopify           Built-in Claude Code   Read-only products/orders/customers
+```
+
+---
+
+## External: TikTok MCP (separate git repo)
+
+Path: `/Users/antoinechabrat/Documents/SmallProject/Tiktok/MCP-TikTokShop/`
+Stack: TypeScript + @modelcontextprotocol/sdk + HMAC-SHA256 signing
+Tools: list_orders, get_order_detail, list_products, get_product_detail,
+       list_conversations, read_conversation, reply_to_conversation
+
+API endpoints:
+  order/202309/orders/search             POST  (query params)
+  order/202309/orders                    GET   (ids in query)
+  product/202309/products/search         POST  (query params)
+  product/202309/products                GET   (ids in query)
+  customer_service/202309/conversations  GET   (page_size, page_token)
+  customer_service/202309/conversations/{id}/messages  GET/POST
+
+---
 
 ## Google Sheet — "InfluenceManager"
 
-**ID** : `1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4`
+ID: 1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4
 
-### Key Tabs
-- **Suivi_Amb** : Main ambassador tracking (~413 rows). Cols: I=username, J=statut, K=action, L=priorité, N=code, O=utilisations
-- **Suivi_Paid** : Paid contracts. Data rows 4-44. Cols: W=fixe, AD=dotation, AH-AL=livrables
-- **Suivi_Dot** : Dotation accounts (~20)
-- **Analyses** : KPI formulas (written by refresh_analyses.py)
+Tabs:
+  Suivi_Amb   Main ambassador tracking (~413 rows)
+  Suivi_Paid  Paid contracts (rows 4-44)
+  Suivi_Dot   Dotation accounts (~20)
+  Analyses    KPI formulas (refresh_analyses.py)
+
+### Suivi_Amb key columns
+  I=username  J=statut  K=action  L=priorite
+  N=code  O=utilisations  P=credit_used  Q=lien_affilie
+  R=bio  S=sport  T=sponsor_concurrent  U=followers  W=engagement
+  X=nb_stories  Y=nb_posts  AA=nom  AB=prenom  AC=mail  AD=tel  AE=adresse
 
 ### Pipeline (col J)
-```
-In-cold → In-hot → A recontacter / A rediscuter → Contacter manager → Produits envoyés → Out
-```
+  In-cold -> In-hot -> A recontacter / A rediscuter -> Contacter manager -> Produits envoyes -> Out
 
 ### Priorities (col L)
-- **high** : Influencer's last message unanswered
-- **medium** : Our last message, waiting for reply
-- **good** : All OK, no action needed
+  high    Influencer's last message unanswered
+  medium  Our last message read, waiting for reply
+  good    All OK, no action needed
+
+---
 
 ## Key Workflows
 
-### SAV (Gorgias → Shopify → BigBlue)
-1. Read Gorgias ticket → identify missing/wrong products
-2. Find original order on Shopify (shipping method, customer)
-3. Create draft order (variant_ids + customer_id), tag "Service client"
-4. Apply 100% discount + "Expédition gratuite"
-5. Complete draft order (mark as paid)
-6. Update BigBlue: set shipping_method + pickup_point if point relais
-7. Reply on Gorgias
+### SAV (Gorgias -> Shopify -> BigBlue)
+  1. Read Gorgias ticket -> identify issue
+  2. Find original order on Shopify
+  3. Create draft order (variants + customer), tag "Service client"
+  4. Apply 100% discount + free shipping
+  5. Complete draft order
+  6. Update BigBlue shipping_method + pickup_point if needed
+  7. Reply on Gorgias
 
 ### DM Priority Check
-1. list_chats(100) → cross-ref with Sheet col I
-2. For each tracked thread: check last sender (is_sent_by_viewer)
-3. Apply priority rules → update col L
-
-### Campaign Send
-1. Mark targets in col M with campaign name
-2. run_campaign.py sends DMs, marks M = "OK" or "SKIP"
+  1. list_chats(100) -> cross-ref Sheet col I
+  2. Check last sender per thread (is_sent_by_viewer)
+  3. Apply priority rules -> update col L
 
 ### Ambassador Onboarding
-1. Qualify profile (qualify_influencer.py)
-2. Pitch via DM → exchange → call
-3. Create order (Shopify draft) + affiliate code (Affiliatly manual)
-4. Send code + link via DM
-5. Update Sheet: J=Produits envoyés, N=code
+  1. Qualify profile (qualify_influencer.py)
+  2. Pitch via DM -> exchange -> call
+  3. Create Shopify draft order + affiliate code
+  4. Send code + link via DM
+  5. Update Sheet: J=Produits envoyes, N=code
 
-### BigBlue API -- endpoints disponibles
-L'API BigBlue est purement logistique. Pas de tickets/claims/retours/support via API.
-- Orders : CreateOrder, GetOrder, UpdateOrder, CancelOrder, ListOrders
-- Tracking : ListTrackings
-- Products : ListProducts, GetProduct, CreateProduct, UpdateProduct
-- Inventory : ListInventories
-- Bundles : ListBundles, CreateBundle
+---
 
-Pour ouvrir un ticket SAV BigBlue : passer par le dashboard web.
+## Auth Methods
 
-## Accounts & Auth
+  Instagram      Session JSON via instagrapi
+  Shopify        OAuth client credentials (~24h token)
+  Gorgias        HTTPBasicAuth (email + API key)
+  BigBlue        Bearer token
+  Google Sheets  Service account JSON
+  TikTok Shop    HMAC-SHA256 signed requests + access token
 
-| Service | Auth Method |
-|---------|-------------|
-| Instagram (impulse_nutrition_fr) | Session JSON via instagrapi |
-| Instagram (antman.lass) | Session JSON via instagrapi |
-| Shopify | OAuth client credentials (token ~24h) |
-| Gorgias | HTTPBasicAuth (email + API key) |
-| BigBlue | Bearer token |
-| Google Sheets | Service account JSON |
+---
 
-## Contacts
-- **Puls Agency** : marie@puls-agency.com
-- **Versacom** : simon@versacom.eu
-- **Fraich Touch** : gael@fraichtouch.com
-- **HCS interne** : pgautier@havea.com (commandes dotation)
+## Conventions
+- Tutoiement with ambassadors, vouvoiement on Gorgias
+- Signature: "Sportivement, Antoine"
+- All DM drafts require explicit "go" before sending
+- All external submissions (tickets, forms) require explicit "go"
+- Timestamps Instagram: microseconds (divide by 1_000_000)
+- Sheet dates: always absolute, never relative
+- Clubs/orgs/paid contracts -> never add to Suivi_Amb, flag to Antoine

@@ -103,21 +103,23 @@ In-cold → In-hot → A recontacter / A rediscuter → Contacter manager → Pr
   - J = statut (pipeline)
   - K = action/commentaire
   - L = priorité (high/medium/good)
-  - V = date premier contact
+  - W = date premier contact
   - AA = nom, AB = prénom, AC = mail, AD = numéro, AE = adresse
   - AF = commentaire, AG = ID Influ
   - H = lien Instagram
   - N = code affilié
   - O = nb utilisations du code
-  - P = nb credit used (négatif, ex: -3 = 3 × 20€ consommés via code CREDITUSE)
-  - Q = lien affilié
-  - R = bio (oui/Non, présence "impulse" ou code dans la bio)
-  - S = sport (discipline)
-  - T = sponsor concurrent identifié
-  - U = followers (k)
-  - W = taux engagement
-  - X = nb story partagées en DM
-  - Y = nb post/reels partagés en DM
+  - P = code crédit (ex: CREDITUSE — code dotation utilisable sur le site)
+  - Q = nb credit used (négatif, ex: -3 = 3 × 20€ consommés via code CREDITUSE)
+  - R = lien affilié
+  - S = bio (oui/Non, présence "impulse" ou code dans la bio)
+  - T = sport (discipline)
+  - U = sponsor concurrent identifié
+  - V = followers (k)
+  - W = date premier contact
+  - X = taux engagement
+  - Y = nb story partagées en DM
+  - Z = nb post/reels partagés en DM
 
 ### Colonne K (Action/Commentaire) -- verbes d'action principaux
 | Verbe | Signification | Statuts |

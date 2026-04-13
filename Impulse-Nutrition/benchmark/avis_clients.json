@@ -1,0 +1,206 @@
+{
+  "meta": {
+    "phase": 4,
+    "description": "Avis clients & satisfaction par marque",
+    "last_updated": "2026-04-07"
+  },
+  "brands": {
+    "nutriandco": {
+      "trustpilot_score": 4.45,
+      "trustpilot_nb_avis": 4400,
+      "trustpilot_url": "https://fr.trustpilot.com/review/nutriandco.com",
+      "points_forts": [
+        "Qualité des ingrédients",
+        "Transparence (certificats d'analyse)",
+        "Service client réactif",
+        "Marque française"
+      ],
+      "points_faibles": [
+        "Prix jugé élevé par certains",
+        "Quelques retards de livraison"
+      ],
+      "verbatims_abo": []
+    },
+    "nutrimuscle": {
+      "trustpilot_score": 4.05,
+      "trustpilot_nb_avis": 28000,
+      "trustpilot_url": "https://fr.trustpilot.com/review/nutrimuscle.com",
+      "points_forts": [
+        "Catalogue très large",
+        "Bon rapport qualité/prix",
+        "Livraison rapide"
+      ],
+      "points_faibles": [
+        "Ruptures de stock fréquentes",
+        "SAV parfois lent",
+        "Emballage perfectible"
+      ],
+      "verbatims_abo": [
+        "Abonnement pratique pour les produits récurrents",
+        "Parfois rupture de stock = livraison décalée"
+      ]
+    },
+    "novoma": {
+      "trustpilot_score": 4.6,
+      "trustpilot_nb_avis": 7000,
+      "trustpilot_url": "https://fr.trustpilot.com/review/novoma.com",
+      "points_forts": [
+        "Formules clean sans additifs",
+        "Transparence fabrication française",
+        "Livraison rapide et soignée",
+        "SAV réactif et bienveillant"
+      ],
+      "points_faibles": [
+        "Quelques retards ponctuels",
+        "Rares cas de non-efficacité"
+      ],
+      "verbatims_abo": []
+    },
+    "nutripure": {
+      "trustpilot_score": 4.75,
+      "trustpilot_nb_avis": 2000,
+      "trustpilot_url": "https://fr.trustpilot.com/review/nutripure.fr",
+      "points_forts": [
+        "Labels premium (Epax, Peptan, Creapure)",
+        "Transparence maximale",
+        "Digestibilité",
+        "Livraison 48-72h"
+      ],
+      "points_faibles": [
+        "Goûts neutres (whey)",
+        "Prix plus élevé que concurrents étrangers",
+        "Quelques ruptures de stock"
+      ],
+      "verbatims_abo": [
+        "N/A — pas d'abonnement"
+      ]
+    },
+    "cuure": {
+      "trustpilot_score": 4.5,
+      "trustpilot_nb_avis": 4400,
+      "trustpilot_url": "https://fr.trustpilot.com/review/cuure.com",
+      "points_forts": [
+        "Personnalisation poussée",
+        "Praticité sachets quotidiens",
+        "Comité scientifique",
+        "Application mobile"
+      ],
+      "points_faibles": [
+        "Reconduction automatique pas toujours transparente",
+        "Coût qui monte vite avec beaucoup de compléments",
+        "Goût oméga-3",
+        "Résultats longs (3+ mois)"
+      ],
+      "verbatims_abo": [
+        "Surprise par la reconduction automatique",
+        "Très pratique au quotidien",
+        "Personnalisation top"
+      ]
+    },
+    "decathlon": {
+      "trustpilot_score": 2.5,
+      "trustpilot_nb_avis": 2950,
+      "trustpilot_url": "https://fr.trustpilot.com/review/www.decathlon.fr",
+      "site_interne_score": 4.47,
+      "site_interne_nb_avis": 1700000,
+      "points_forts": [
+        "Rapport qualité/prix imbattable",
+        "Réseau physique 1700+ magasins",
+        "Programme fidélité",
+        "Nutrition sportive basique efficace"
+      ],
+      "points_faibles": [
+        "SAV critiqué en ligne",
+        "Problèmes de livraison",
+        "Qualité inégale selon produits",
+        "Peu de choix premium"
+      ],
+      "verbatims_abo": [
+        "Peu de retours spécifiques sur l'abonnement nutrition"
+      ],
+      "note": "Écart important entre avis internes (4.47/5) et Trustpilot (2.5/5). Le Trustpilot reflète surtout les problèmes logistiques e-commerce."
+    },
+    "aqeelab": {
+      "trustpilot_score": 4.9,
+      "trustpilot_nb_avis": 200,
+      "trustpilot_url": "https://fr.trustpilot.com/review/aqeelab-nutrition.fr",
+      "site_propre_score": 4.85,
+      "site_propre_nb_avis": "Plusieurs milliers",
+      "points_forts": [
+        "Qualité exceptionnelle",
+        "Transparence ingrédients",
+        "Livraison ultra-rapide (24-48h)",
+        "SAV français réactif",
+        "Éco-responsable"
+      ],
+      "points_faibles": [
+        "Peu d'avis Trustpilot (marque jeune)",
+        "Quelques écarts emballage/site"
+      ],
+      "verbatims_abo": []
+    },
+    "myprotein": {
+      "trustpilot_score": 3.1,
+      "trustpilot_nb_avis": 31000,
+      "trustpilot_url": "https://fr.trustpilot.com/review/myprotein.com",
+      "points_forts": [
+        "Prix les plus bas du marché",
+        "Catalogue gigantesque",
+        "Promos permanentes",
+        "Remise abo 30-45%"
+      ],
+      "points_faibles": [
+        "SAV très critiqué",
+        "Retours coûteux",
+        "Qualité variable selon produits",
+        "Livraison parfois longue (UK warehouse)"
+      ],
+      "verbatims_abo": [
+        "Subscribe & save pratique mais attention aux prix qui changent",
+        "Livraison parfois décalée sans prévenir"
+      ]
+    }
+  },
+  "ranking_trustpilot": [
+    {
+      "brand": "Aqeelab",
+      "score": 4.9,
+      "nb_avis": 200
+    },
+    {
+      "brand": "Nutripure",
+      "score": 4.75,
+      "nb_avis": 2000
+    },
+    {
+      "brand": "Novoma",
+      "score": 4.6,
+      "nb_avis": 7000
+    },
+    {
+      "brand": "Cuure",
+      "score": 4.5,
+      "nb_avis": 4400
+    },
+    {
+      "brand": "Nutri&Co",
+      "score": 4.45,
+      "nb_avis": 4400
+    },
+    {
+      "brand": "Nutrimuscle",
+      "score": 4.05,
+      "nb_avis": 28000
+    },
+    {
+      "brand": "MyProtein",
+      "score": 3.1,
+      "nb_avis": 31000
+    },
+    {
+      "brand": "Decathlon",
+      "score": 2.5,
+      "nb_avis": 2950
+    }
+  ]
+}

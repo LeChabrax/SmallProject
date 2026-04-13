@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "phase": 5,
+    "description": "Données marché nutrition sportive FR + économie abonnement",
+    "last_updated": "2026-04-07"
+  },
+  "marche_nutrition_sportive_fr": {
+    "taille_marche_total_eur": "~1 milliard €",
+    "taille_segment_specialise_eur": "210 M€ (2023)",
+    "evolution": {
+      "2016": "110 M€",
+      "2021": "152 M€",
+      "2023": "210 M€"
+    },
+    "cagr_pct": 8.3,
+    "segmentation": {
+      "proteines_pct": 85,
+      "gms_distribution_pct": 66,
+      "online_growing": true
+    },
+    "tendances": [
+      "Montée du premium / clean label",
+      "Explosion DTC (direct to consumer)",
+      "Convergence sport / bien-être / santé",
+      "Demande transparence et traçabilité",
+      "Nutrition personnalisée (Cuure, etc.)"
+    ],
+    "sources": [
+      "Xerfi",
+      "Euromonitor",
+      "Grand View Research"
+    ]
+  },
+  "economie_abonnement": {
+    "penetration_subscription_ecommerce_fr": "Croissante mais encore faible vs US/UK",
+    "churn_mensuel_supplements_pct": "8-12%",
+    "retention_annuelle_pct": "25-40%",
+    "ltv_abonnes_eur": "300-800€",
+    "ltv_multiplier_vs_oneshot": "3-5x",
+    "flexibilite_impact": "Pause/skip réduit les annulations de 15-18%",
+    "discount_sweet_spot_pct": "10-15% (au-delà érode la marge)",
+    "sources": [
+      "McKinsey Subscription Economy",
+      "Recharge Benchmarks",
+      "Bold Commerce"
+    ]
+  },
+  "comportement_consommateur": {
+    "frequence_achat_moyenne": "Toutes les 4-6 semaines",
+    "panier_moyen_nutrition_online_eur": "35-55€",
+    "motivations_abonnement": [
+      "Commodité (ne plus penser à commander)",
+      "Économies (remise abonné)",
+      "Régularité de prise (compliance)",
+      "Livraison automatique"
+    ],
+    "freins_abonnement": [
+      "Peur de l'engagement",
+      "Crainte de recevoir un produit non voulu",
+      "Difficulté à annuler (friction perçue)",
+      "Accumulation de stock",
+      "Variantes de goût (risque mauvaise surprise)"
+    ]
+  },
+  "ecommerce_fr_global": {
+    "ca_total_2024_eur": "175 milliards €",
+    "croissance_annuelle_pct": 8
+  }
+}

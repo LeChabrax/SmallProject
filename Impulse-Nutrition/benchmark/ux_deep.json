@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "phase": 6,
+    "description": "Analyse UX détaillée des modules abonnement par marque",
+    "last_updated": "2026-04-09"
+  },
+  "screenshots_dir": "assets/screenshots/benchmark/ux_deep/",
+  "screenshots_captured": 22,
+  "brands": {
+    "nutriandco": {
+      "screenshots": [
+        "nutriandco_homepage.png",
+        "nutriandco_product_sub.png",
+        "nutriandco_collection.png"
+      ],
+      "subscription_ux": {
+        "wording_cta": "S'abonner",
+        "wording_pitch": "Abonnez-vous & économisez 15%",
+        "placement_on_product_page": "Toggle Achat unique / Abonnement au-dessus du bouton Ajouter au panier",
+        "toggle_style": "Radio buttons (Achat unique vs S'abonner)",
+        "frequency_selector": "Dropdown (1, 2, 3 mois)",
+        "price_display": "Prix barré + prix abonné affiché en vert",
+        "dedicated_page": false,
+        "homepage_mention": false,
+        "navigation_mention": false,
+        "email_mention": "Non confirmé"
+      },
+      "overall_ux_score": 3.5,
+      "strengths": [
+        "Toggle clair sur la fiche produit",
+        "Prix abonné bien visible",
+        "Sans engagement mis en avant"
+      ],
+      "weaknesses": [
+        "Pas de page dédiée abonnement",
+        "Pas de mise en avant homepage/navigation",
+        "Module discret, peut passer inaperçu"
+      ]
+    },
+    "nutrimuscle": {
+      "screenshots": [
+        "nutrimuscle_homepage.png",
+        "nutrimuscle_product_sub.png",
+        "nutrimuscle_abonnement_page.png"
+      ],
+      "subscription_ux": {
+        "wording_cta": "S'abonner",
+        "wording_pitch": "Abonnez-vous et économisez sur vos produits préférés",
+        "wording_details": "-15% sur vos produits en abonnement. Livraison gratuite avec l'abonnement. Sans engagement.",
+        "placement_on_product_page": "Toggle Achat unique / Abonnement intégré dans le sélecteur de prix",
+        "toggle_style": "Radio buttons avec picto",
+        "frequency_selector": "Dropdown (1 à 6 mois)",
+        "price_display": "Double affichage : prix normal et prix abonné avec badge -15%",
+        "dedicated_page": true,
+        "dedicated_page_url": "nutrimuscle.com/pages/abonnement",
+        "dedicated_page_content": "Page complète avec avantages (3 pictos), catalogue produits éligibles, lien vers espace abonné",
+        "homepage_mention": true,
+        "navigation_mention": true,
+        "email_mention": "Oui, régulièrement dans les newsletters"
+      },
+      "overall_ux_score": 4.5,
+      "strengths": [
+        "Page dédiée très complète",
+        "Livraison gratuite = argument massue",
+        "3 pictos clairs : -15%, livraison gratuite, sans engagement",
+        "6 fréquences possibles (1-6 mois) = très flexible",
+        "Large catalogue éligible",
+        "Espace abonné dédié"
+      ],
+      "weaknesses": [
+        "Remise progressive (5% → 15%) peut être confuse",
+        "Page dédiée = long scroll"
+      ]
+    },
+    "novoma": {
+      "screenshots": [
+        "novoma_homepage.png",
+        "novoma_product_sub.png",
+        "novoma_abonnement_page.png"
+      ],
+      "subscription_ux": {
+        "wording_cta": "S'abonner",
+        "wording_pitch": "Passez à l'abonnement",
+        "wording_sub_pitch": "Recevez votre cure préférée automatiquement chez vous, à la fréquence de votre choix, tout en bénéficiant de 10% de réduction !",
+        "wording_rationale": "Les compléments alimentaires fonctionnent mieux s'ils sont pris de manière régulière et sur le long terme.",
+        "placement_on_product_page": "Toggle Achat unique / S'abonner, au-dessus du CTA",
+        "toggle_style": "Radio buttons",
+        "frequency_selector": "Dropdown (1, 2, 3 mois)",
+        "price_display": "Prix abonné affiché à côté du prix normal",
+        "dedicated_page": true,
+        "dedicated_page_url": "novoma.com/pages/abonnement",
+        "dedicated_page_content": "Processus en 3 étapes illustré, 5 avantages listés, FAQ complète (6 questions)",
+        "homepage_mention": false,
+        "navigation_mention": false,
+        "faq_items": [
+          "Comment sera livrée ma commande par abonnement ? → Colissimo domicile uniquement, 3.50€ (vs 4.90€), gratuit dès 50€ (vs 90€)",
+          "Code de réduction ? → Oui sur la 1ère livraison uniquement",
+          "Points fidélité ? → Pas utilisables mais cumulables",
+          "Annulation ? → À tout moment, jusqu'à la veille du renouvellement"
+        ]
+      },
+      "overall_ux_score": 4.0,
+      "strengths": [
+        "Page dédiée bien structurée (3 étapes + avantages + FAQ)",
+        "Argumentation santé ('les compléments marchent mieux sur le long terme')",
+        "Avantages livraison concrets (3.50€ vs 4.90€, gratuit dès 50€ vs 90€)",
+        "FAQ très transparente",
+        "Sans engagement clairement affiché"
+      ],
+      "weaknesses": [
+        "Remise 10% = plus faible que concurrents",
+        "Livraison Colissimo domicile uniquement (pas de point relais pour abo)",
+        "Pas mis en avant dans la navigation principale"
+      ]
+    },
+    "nutripure": {
+      "screenshots": [
+        "nutripure_homepage.png",
+        "nutripure_product.png"
+      ],
+      "subscription_ux": {
+        "wording_cta": "N/A",
+        "wording_pitch": "N/A",
+        "placement_on_product_page": "Aucun module abonnement",
+        "dedicated_page": false,
+        "toggle_style": "N/A",
+        "strategy_alternative": "Formats 1 mois / 3 mois encouragent implicitement la récurrence. Programme fidélité classique."
+      },
+      "overall_ux_score": "N/A",
+      "strengths": [
+        "UX produit très clean et premium",
+        "Formats 3 mois = stratégie anti-churn implicite",
+        "Labels qualité bien mis en avant (Epax, Peptan, Creapure)"
+      ],
+      "weaknesses": [
+        "Pas d'abonnement = perte de revenus récurrents potentiels",
+        "PrestaShop = frein technique probable"
+      ],
+      "why_no_subscription": "1) PrestaShop = pas de module abo natif mature. 2) Stratégie de fidélisation par la qualité premium plutôt que le lock-in. 3) Formats 3 mois compensent partiellement."
+    },
+    "cuure": {
+      "screenshots": [
+        "cuure_homepage.png",
+        "cuure_quiz.png",
+        "cuure_produits.png"
+      ],
+      "subscription_ux": {
+        "wording_cta": "Découvrir ma formule",
+        "wording_pitch": "Des compléments alimentaires sur-mesure",
+        "placement_on_product_page": "N/A — le modèle est 100% abonnement (box personnalisée)",
+        "toggle_style": "N/A — tout le parcours est orienté abonnement",
+        "onboarding_flow": "Quiz santé → Recommandation personnalisée → Box mensuelle",
+        "dedicated_page": true,
+        "dedicated_page_url": "cuure.com (le site entier est la page abo)",
+        "homepage_mention": true,
+        "navigation_mention": true,
+        "app_mobile": true,
+        "personalization_depth": "50+ ingrédients, 2M+ combinaisons, comité scientifique"
+      },
+      "overall_ux_score": 4.5,
+      "strengths": [
+        "UX entièrement orientée abonnement (pas de one-shot)",
+        "Quiz engageant et personnalisation poussée",
+        "Sachets quotidiens = expérience unique",
+        "App mobile pour suivi",
+        "Comité scientifique = crédibilité"
+      ],
+      "weaknesses": [
+        "Pas de possibilité d'achat one-shot simple",
+        "Reconduction automatique pas toujours transparente",
+        "Prix qui monte vite avec beaucoup de compléments",
+        "Résultats longs (3+ mois)"
+      ]
+    },
+    "decathlon": {
+      "screenshots": [
+        "decathlon_abo_homepage.png",
+        "decathlon_abo_proteines.png",
+        "decathlon_abo_faq.png"
+      ],
+      "subscription_ux": {
+        "wording_cta": "S'abonner",
+        "wording_pitch": "Faites des économies en cas d'abonnement par rapport à un achat unitaire et profitez d'un confort maximal. Plus besoin de vous soucier du réassort, on s'occupe de tout !",
+        "placement_on_product_page": "Sous-site dédié (abonnement.decathlon.fr) séparé du site principal",
+        "toggle_style": "N/A — site dédié, pas de toggle sur fiche produit classique",
+        "onboarding_flow": "4 étapes : Mon produit → Ma livraison → Mon paiement → Mes avantages",
+        "dedicated_page": true,
+        "dedicated_page_url": "abonnement.decathlon.fr",
+        "homepage_mention": true,
+        "navigation_mention": "Oui via lien footer + pages nutrition",
+        "pricing_display": "À partir de 12.74€/mois",
+        "loyalty": "10 points fidélité par euro dépensé",
+        "limitations": "1 produit par commande, commandes distinctes pour multi-produits"
+      },
+      "overall_ux_score": 3.0,
+      "strengths": [
+        "Sous-site dédié = clarté",
+        "Processus en 4 étapes bien illustré",
+        "Points fidélité = incentive supplémentaire",
+        "Livraison offerte en relais",
+        "Sans engagement"
+      ],
+      "weaknesses": [
+        "Séparation site principal / site abo = friction (redirect)",
+        "1 seul produit par commande = mauvaise UX pour multi-abonnements",
+        "Catalogue abo très limité (whey, créatine, quelques produits)",
+        "UX basique, pas d'optimisation conversion",
+        "Modification = résiliation + recréation"
+      ]
+    },
+    "aqeelab": {
+      "screenshots": [
+        "aqeelab_homepage.png",
+        "aqeelab_product_sub.png",
+        "aqeelab_collection.png"
+      ],
+      "subscription_ux": {
+        "wording_cta": "S'abonner & économiser",
+        "wording_pitch": "Économisez 20% en vous abonnant",
+        "placement_on_product_page": "Toggle Achat unique / Abonnement, directement sur la fiche produit au-dessus du CTA",
+        "toggle_style": "Radio buttons avec économie affichée (€ économisés)",
+        "frequency_selector": "Dropdown (1, 2, 3 mois)",
+        "price_display": "Prix barré + prix abonné + montant économisé en clair",
+        "dedicated_page": false,
+        "homepage_mention": true,
+        "navigation_mention": false,
+        "savings_display": "Montant économisé en euros affiché dynamiquement"
+      },
+      "overall_ux_score": 4.0,
+      "strengths": [
+        "Remise 20% = la plus haute en FR fixe → argument massue",
+        "Montant économisé affiché en euros = très persuasif",
+        "Toggle clair et intégré naturellement",
+        "Tous les produits éligibles (23/23)",
+        "Sans engagement"
+      ],
+      "weaknesses": [
+        "Pas de page dédiée abonnement",
+        "Pas de mise en avant forte dans la navigation",
+        "Marque jeune = moins de notoriété"
+      ]
+    },
+    "myprotein": {
+      "screenshots": [
+        "myprotein_homepage.png",
+        "myprotein_product_sub.png"
+      ],
+      "subscription_ux": {
+        "wording_cta": "Subscribe & Save",
+        "wording_pitch": "S'abonner et économiser — Économisez jusqu'à 30%",
+        "placement_on_product_page": "Toggle sous le sélecteur de taille/saveur, au-dessus du bouton Ajouter au panier",
+        "toggle_style": "Radio buttons avec badge remise (%)",
+        "frequency_selector": "Dropdown (1 à 5 mois)",
+        "price_display": "Prix barré + prix abonné + badge -30%",
+        "dedicated_page": false,
+        "homepage_mention": true,
+        "navigation_mention": true,
+        "promo_stacking": "Promos régulières jusqu'à -45% sur subscribe & save"
+      },
+      "overall_ux_score": 3.5,
+      "strengths": [
+        "Remise la plus agressive du marché (30%, jusqu'à 45%)",
+        "Promo stacking possible",
+        "Catalogue gigantesque éligible",
+        "Modèle mature et éprouvé internationalement",
+        "5 fréquences possibles"
+      ],
+      "weaknesses": [
+        "UX parfois confuse (promos empilées, prix changeants)",
+        "Pas de page dédiée abonnement",
+        "SAV critiqué = risque sur l'expérience abonné",
+        "Prix de base instables (promos permanentes)"
+      ]
+    }
+  },
+  "comparative_ux": {
+    "best_dedicated_page": "Nutrimuscle (page la plus complète : 3 pictos + catalogue + espace abonné)",
+    "best_product_toggle": "Aqeelab (montant économisé en € affiché dynamiquement)",
+    "best_onboarding": "Cuure (quiz personnalisé → box sur-mesure)",
+    "most_aggressive_discount": "MyProtein (30-45%)",
+    "best_shipping_incentive": "Nutrimuscle (livraison gratuite incluse dans l'abo)",
+    "best_frequency_flexibility": "Nutrimuscle (1-6 mois)",
+    "worst_ux": "Decathlon (site séparé, 1 produit/commande, modification = résiliation)",
+    "wording_patterns": {
+      "most_common": "S'abonner / S'abonner & économiser",
+      "unique_cuure": "Découvrir ma formule",
+      "argumentaire_sante": "Novoma ('les compléments marchent mieux sur le long terme')",
+      "argumentaire_prix": "Aqeelab (montant € économisé) / MyProtein (badge % remise)",
+      "argumentaire_confort": "Decathlon ('Plus besoin de vous soucier du réassort')"
+    },
+    "ux_ranking": [
+      {
+        "brand": "Nutrimuscle",
+        "score": 4.5,
+        "reason": "Page dédiée + livraison gratuite + 6 fréquences"
+      },
+      {
+        "brand": "Cuure",
+        "score": 4.5,
+        "reason": "100% abo, quiz personnalisé, app mobile"
+      },
+      {
+        "brand": "Novoma",
+        "score": 4.0,
+        "reason": "Page dédiée bien structurée + avantages livraison"
+      },
+      {
+        "brand": "Aqeelab",
+        "score": 4.0,
+        "reason": "Toggle persuasif + 20% remise"
+      },
+      {
+        "brand": "Nutri&Co",
+        "score": 3.5,
+        "reason": "Toggle correct mais discret, pas de page dédiée"
+      },
+      {
+        "brand": "MyProtein",
+        "score": 3.5,
+        "reason": "Modèle mature mais UX confuse avec promos"
+      },
+      {
+        "brand": "Decathlon",
+        "score": 3.0,
+        "reason": "Site séparé, UX basique, limitation 1 produit"
+      }
+    ]
+  }
+}

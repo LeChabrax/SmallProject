@@ -1,0 +1,422 @@
+{
+  "discount_rate": 0.1,
+  "recommended_threshold": 12.35,
+  "recommended_threshold_rounded": 25,
+  "full_matrix": [
+    {
+      "price": 15,
+      "m40_l4": {
+        "price": 15,
+        "discount_pct": 10.0,
+        "net_price": 13.5,
+        "gross_margin": 5.4,
+        "logistics_cost": 4.0,
+        "contribution_nette": 1.4,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 15,
+        "discount_pct": 10.0,
+        "net_price": 13.5,
+        "gross_margin": 6.08,
+        "logistics_cost": 5.0,
+        "contribution_nette": 1.08,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 15,
+        "discount_pct": 10.0,
+        "net_price": 13.5,
+        "gross_margin": 6.75,
+        "logistics_cost": 7.0,
+        "contribution_nette": -0.25,
+        "is_profitable": false,
+        "margin_rate_on_original": 45.0
+      }
+    },
+    {
+      "price": 20,
+      "m40_l4": {
+        "price": 20,
+        "discount_pct": 10.0,
+        "net_price": 18.0,
+        "gross_margin": 7.2,
+        "logistics_cost": 4.0,
+        "contribution_nette": 3.2,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 20,
+        "discount_pct": 10.0,
+        "net_price": 18.0,
+        "gross_margin": 8.1,
+        "logistics_cost": 5.0,
+        "contribution_nette": 3.1,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 20,
+        "discount_pct": 10.0,
+        "net_price": 18.0,
+        "gross_margin": 9.0,
+        "logistics_cost": 7.0,
+        "contribution_nette": 2.0,
+        "is_profitable": true,
+        "margin_rate_on_original": 45.0
+      }
+    },
+    {
+      "price": 25,
+      "m40_l4": {
+        "price": 25,
+        "discount_pct": 10.0,
+        "net_price": 22.5,
+        "gross_margin": 9.0,
+        "logistics_cost": 4.0,
+        "contribution_nette": 5.0,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 25,
+        "discount_pct": 10.0,
+        "net_price": 22.5,
+        "gross_margin": 10.12,
+        "logistics_cost": 5.0,
+        "contribution_nette": 5.12,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 25,
+        "discount_pct": 10.0,
+        "net_price": 22.5,
+        "gross_margin": 11.25,
+        "logistics_cost": 7.0,
+        "contribution_nette": 4.25,
+        "is_profitable": true,
+        "margin_rate_on_original": 45.0
+      }
+    },
+    {
+      "price": 30,
+      "m40_l4": {
+        "price": 30,
+        "discount_pct": 10.0,
+        "net_price": 27.0,
+        "gross_margin": 10.8,
+        "logistics_cost": 4.0,
+        "contribution_nette": 6.8,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 30,
+        "discount_pct": 10.0,
+        "net_price": 27.0,
+        "gross_margin": 12.15,
+        "logistics_cost": 5.0,
+        "contribution_nette": 7.15,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 30,
+        "discount_pct": 10.0,
+        "net_price": 27.0,
+        "gross_margin": 13.5,
+        "logistics_cost": 7.0,
+        "contribution_nette": 6.5,
+        "is_profitable": true,
+        "margin_rate_on_original": 45.0
+      }
+    },
+    {
+      "price": 35,
+      "m40_l4": {
+        "price": 35,
+        "discount_pct": 10.0,
+        "net_price": 31.5,
+        "gross_margin": 12.6,
+        "logistics_cost": 4.0,
+        "contribution_nette": 8.6,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 35,
+        "discount_pct": 10.0,
+        "net_price": 31.5,
+        "gross_margin": 14.18,
+        "logistics_cost": 5.0,
+        "contribution_nette": 9.18,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 35,
+        "discount_pct": 10.0,
+        "net_price": 31.5,
+        "gross_margin": 15.75,
+        "logistics_cost": 7.0,
+        "contribution_nette": 8.75,
+        "is_profitable": true,
+        "margin_rate_on_original": 45.0
+      }
+    },
+    {
+      "price": 40,
+      "m40_l4": {
+        "price": 40,
+        "discount_pct": 10.0,
+        "net_price": 36.0,
+        "gross_margin": 14.4,
+        "logistics_cost": 4.0,
+        "contribution_nette": 10.4,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 40,
+        "discount_pct": 10.0,
+        "net_price": 36.0,
+        "gross_margin": 16.2,
+        "logistics_cost": 5.0,
+        "contribution_nette": 11.2,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 40,
+        "discount_pct": 10.0,
+        "net_price": 36.0,
+        "gross_margin": 18.0,
+        "logistics_cost": 7.0,
+        "contribution_nette": 11.0,
+        "is_profitable": true,
+        "margin_rate_on_original": 45.0
+      }
+    },
+    {
+      "price": 45,
+      "m40_l4": {
+        "price": 45,
+        "discount_pct": 10.0,
+        "net_price": 40.5,
+        "gross_margin": 16.2,
+        "logistics_cost": 4.0,
+        "contribution_nette": 12.2,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 45,
+        "discount_pct": 10.0,
+        "net_price": 40.5,
+        "gross_margin": 18.23,
+        "logistics_cost": 5.0,
+        "contribution_nette": 13.23,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 45,
+        "discount_pct": 10.0,
+        "net_price": 40.5,
+        "gross_margin": 20.25,
+        "logistics_cost": 7.0,
+        "contribution_nette": 13.25,
+        "is_profitable": true,
+        "margin_rate_on_original": 45.0
+      }
+    },
+    {
+      "price": 50,
+      "m40_l4": {
+        "price": 50,
+        "discount_pct": 10.0,
+        "net_price": 45.0,
+        "gross_margin": 18.0,
+        "logistics_cost": 4.0,
+        "contribution_nette": 14.0,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 50,
+        "discount_pct": 10.0,
+        "net_price": 45.0,
+        "gross_margin": 20.25,
+        "logistics_cost": 5.0,
+        "contribution_nette": 15.25,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 50,
+        "discount_pct": 10.0,
+        "net_price": 45.0,
+        "gross_margin": 22.5,
+        "logistics_cost": 7.0,
+        "contribution_nette": 15.5,
+        "is_profitable": true,
+        "margin_rate_on_original": 45.0
+      }
+    },
+    {
+      "price": 60,
+      "m40_l4": {
+        "price": 60,
+        "discount_pct": 10.0,
+        "net_price": 54.0,
+        "gross_margin": 21.6,
+        "logistics_cost": 4.0,
+        "contribution_nette": 17.6,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 60,
+        "discount_pct": 10.0,
+        "net_price": 54.0,
+        "gross_margin": 24.3,
+        "logistics_cost": 5.0,
+        "contribution_nette": 19.3,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 60,
+        "discount_pct": 10.0,
+        "net_price": 54.0,
+        "gross_margin": 27.0,
+        "logistics_cost": 7.0,
+        "contribution_nette": 20.0,
+        "is_profitable": true,
+        "margin_rate_on_original": 45.0
+      }
+    },
+    {
+      "price": 75,
+      "m40_l4": {
+        "price": 75,
+        "discount_pct": 10.0,
+        "net_price": 67.5,
+        "gross_margin": 27.0,
+        "logistics_cost": 4.0,
+        "contribution_nette": 23.0,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 75,
+        "discount_pct": 10.0,
+        "net_price": 67.5,
+        "gross_margin": 30.38,
+        "logistics_cost": 5.0,
+        "contribution_nette": 25.38,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 75,
+        "discount_pct": 10.0,
+        "net_price": 67.5,
+        "gross_margin": 33.75,
+        "logistics_cost": 7.0,
+        "contribution_nette": 26.75,
+        "is_profitable": true,
+        "margin_rate_on_original": 45.0
+      }
+    },
+    {
+      "price": 90,
+      "m40_l4": {
+        "price": 90,
+        "discount_pct": 10.0,
+        "net_price": 81.0,
+        "gross_margin": 32.4,
+        "logistics_cost": 4.0,
+        "contribution_nette": 28.4,
+        "is_profitable": true,
+        "margin_rate_on_original": 36.0
+      },
+      "m45_l5": {
+        "price": 90,
+        "discount_pct": 10.0,
+        "net_price": 81.0,
+        "gross_margin": 36.45,
+        "logistics_cost": 5.0,
+        "contribution_nette": 31.45,
+        "is_profitable": true,
+        "margin_rate_on_original": 40.5
+      },
+      "m50_l7": {
+        "price": 90,
+        "discount_pct": 10.0,
+        "net_price": 81.0,
+        "gross_margin": 40.5,
+        "logistics_cost": 7.0,
+        "contribution_nette": 33.5,
+        "is_profitable": true,
+        "margin_rate_on_original": 45.0
+      }
+    }
+  ],
+  "narrative_scenarios": [
+    {
+      "price": 15,
+      "discount_pct": 10.0,
+      "net_price": 13.5,
+      "gross_margin": 6.08,
+      "logistics_cost": 5.0,
+      "contribution_nette": 1.08,
+      "is_profitable": true,
+      "margin_rate_on_original": 40.5,
+      "label": "Produit solo (ex: créatine 300g)"
+    },
+    {
+      "price": 35,
+      "discount_pct": 10.0,
+      "net_price": 31.5,
+      "gross_margin": 14.18,
+      "logistics_cost": 5.0,
+      "contribution_nette": 9.18,
+      "is_profitable": true,
+      "margin_rate_on_original": 40.5,
+      "label": "Produit mid-range (ex: oméga-3 60 caps)"
+    },
+    {
+      "price": 55,
+      "discount_pct": 10.0,
+      "net_price": 49.5,
+      "gross_margin": 22.28,
+      "logistics_cost": 5.0,
+      "contribution_nette": 17.28,
+      "is_profitable": true,
+      "margin_rate_on_original": 40.5,
+      "label": "Pack 2-3 produits"
+    }
+  ],
+  "thresholds": {
+    "m40": {
+      "l4": 11.11,
+      "l5": 13.89,
+      "l7": 19.44
+    },
+    "m45": {
+      "l4": 9.88,
+      "l5": 12.35,
+      "l7": 17.28
+    },
+    "m50": {
+      "l4": 8.89,
+      "l5": 11.11,
+      "l7": 15.56
+    }
+  }
+}
