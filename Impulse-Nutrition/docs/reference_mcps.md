@@ -216,14 +216,66 @@ Use `common.instagram_client.sleep_random(min, max)`.
 | `tiktokshop` | TikTok Shop orders / products / customer service / reviews | ⚠ Partiel — voir détail ci-dessous |
 | `shopify` | Official Shopify Storefront MCP (used for customer/order lookup with less auth friction) | ✓ OK |
 
-### TikTok Shop — détail outils (smoke-tested 2026-04-13)
+### TikTok Shop — détail outils (smoke-tested + patched 2026-04-13)
 
 | Tool | Status |
 |---|---|
 | `list_orders` / `get_order_detail` | ✓ OK (894 commandes en live, payload complet) |
 | `list_products` / `get_product_detail` | ✓ OK (41 produits actifs avec stock par warehouse) |
-| `list_conversations` / `read_conversation` / `reply_to_conversation` | ✓ OK — **le SAV TikTok est opérationnel**. Persona = vouvoiement formel + "Le service client" comme sur Gorgias. |
-| `list_reviews` / `reply_to_review` | ❌ **BROKEN** — TikTok renvoie `36009009: Invalid path. The specified path does not match any available endpoint`. Endpoint indisponible sur le scope actuel ou path incorrect. **TODO debug**. |
+| `list_conversations` / `read_conversation` | ✓ OK |
+| `reply_to_conversation` | ✓ **OK après patch 2026-04-13** — voir détail ci-dessous |
+| `list_reviews` / `reply_to_review` | ❌ **NOT SUPPORTED — pas d'endpoint public** |
+
+#### Patch `reply_to_conversation` (2026-04-13) — 2 bugs enchaînés
+
+Le MCP `sendMessage` dans `src/api/conversations.ts` avait **deux bugs
+cumulés** qui ont été corrigés après test empirique direct contre l'API
+live (POST HTTPS avec signature HMAC-SHA256 reconstituée en Python).
+
+**Bug 1** — `45101003: invalid conv_short_id`
+Le code passait `conversation_id` dans le body alors que TikTok l'attend
+uniquement dans l'URL path. Le champ body était interprété comme un
+*short* conv_id (format différent). **Fix** : supprimer le champ du body.
+
+**Bug 2** — `45101001: input params err`
+Une fois le bug 1 corrigé, le champ `content` envoyé comme texte brut
+était rejeté. TikTok stocke les messages comme des *payloads typés*
+(`TEXT` / `IMAGE` / `PRODUCT_CARD` / ...) où `content` est le payload
+sérialisé du type choisi. Pour `type: "TEXT"`, `content` doit donc être
+une JSON-string `{"content": "<texte>"}`. Observation tirée de la shape
+des messages retournés par `read_conversation`, puis **confirmée par un
+POST direct** qui a renvoyé `code:0, Success, message_id:7628369547846469142`.
+
+**Fix final** (dans `sendMessage`) :
+```typescript
+client.post(
+  `customer_service/202309/conversations/${conversationId}/messages`,
+  {},
+  {
+    type: "TEXT",
+    content: JSON.stringify({ content }),  // ← wrap obligatoire
+  }
+);
+```
+
+**Build** : `cd /Users/antoinechabrat/Documents/SmallProject/Tiktok/MCP-TikTokShop && npm run build`
+**Activation** : restart Claude Code (les MCP servers sont chargés au lancement, pas hot-reloadés).
+**Test réel** : 1er message delivered à `qsroyale` (conv `7626845579553653014`) via POST direct → `{code:0, message:"Success"}`. Visible dans `read_conversation`.
+
+#### `list_reviews` / `reply_to_review` — NOT SUPPORTED
+
+Retournent `36009009: Invalid path`. Après investigation (lecture du MCP
+source + recherche docs TikTok Partner Center + cross-ref avec le client
+de référence `EcomPHP/tiktokshop-php`) : **l'API publique TikTok Shop n'expose
+pas d'endpoint de gestion des reviews**. EcomPHP, qui est le client PHP le
+plus mature, n'implémente aucune ressource `Review` et n'a aucun endpoint
+review dans `Product.php`. Le path `product/202309/reviews/search` utilisé
+par le MCP a été inventé ou est obsolète.
+
+**→ Les reviews TikTok se gèrent exclusivement dans le Seller Center web.**
+Il n'existe pas de solution API à ce jour. Ne pas utiliser ces 2 outils
+du MCP — à terme, les retirer du tool registry ou les remplacer par un
+handler qui renvoie immédiatement un message clair.
 
 **Volume TikTok Shop** : ~894 commandes total — **significatif**, à traiter au même niveau que Shopify côté SAV. Voir [`process_sav_unified.md`](process_sav_unified.md) pour le workflow Gorgias (channels) — TikTok messages devraient à terme remonter dans Gorgias via une intégration similaire à WAX, ou être traités directement via `tiktokshop` MCP.
 
@@ -240,5 +292,5 @@ Full MCP list and env vars are in `.mcp.json`.
 | `gorgias_mcp` | ✓ OK (avec fallback `search_tickets`) | — |
 | `shopify_mcp` (orders, draft orders, products) | ✓ OK + compact mode (Phase 2026-04-13) | — |
 | `instagram_dm_mcp` | ✓ OK (rate limits à respecter) | — |
-| `tiktokshop` (orders, products, conversations) | ✓ OK | — |
-| `tiktokshop` (reviews : `list_reviews` / `reply_to_review`) | ⚠ BROKEN | TODO debug — `36009009 Invalid path` |
+| `tiktokshop` (orders, products, conversations, reply_to_conversation) | ✓ OK (reply patché 2026-04-13) | — |
+| `tiktokshop` (reviews : `list_reviews` / `reply_to_review`) | ❌ NOT SUPPORTED | Pas d'endpoint API public — Seller Center uniquement |
