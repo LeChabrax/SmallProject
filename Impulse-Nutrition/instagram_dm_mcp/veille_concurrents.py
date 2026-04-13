@@ -57,6 +57,10 @@ from datetime import datetime, timedelta
 from instagrapi import Client
 from dotenv import load_dotenv
 
+# Allow `from common.*` imports (common/ is at repo root).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from common.google_sheets import SUIVI_AMB_COLS, VEILLE_COLS  # noqa: E402
+
 load_dotenv()
 
 # ── Logging setup ──────────────────────────────────────────────────────────────
@@ -246,8 +250,8 @@ def find_common_ambassadors(ws_amb, competitor_name):
 
     common = []
     for row in all_data[1:]:
-        sponsor = row[19].strip() if len(row) > 19 else ""  # T = col 19 (0-indexed)
-        username = row[8].strip() if len(row) > 8 else ""   # I = col 8
+        sponsor = row[SUIVI_AMB_COLS["sponsor"]].strip() if len(row) > SUIVI_AMB_COLS["sponsor"] else ""
+        username = row[SUIVI_AMB_COLS["username"]].strip() if len(row) > SUIVI_AMB_COLS["username"] else ""
         if sponsor and competitor_name.lower() in sponsor.lower() and username:
             common.append(f"@{username}")
 

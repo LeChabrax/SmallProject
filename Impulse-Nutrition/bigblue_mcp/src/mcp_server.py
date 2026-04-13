@@ -1,20 +1,54 @@
+"""BigBlue fulfillment MCP.
+
+Thin bridge over BigBlue's internal gRPC-Web admin API. There is no public REST
+endpoint — every tool frames a protobuf message (`_encode_varint`,
+`_encode_string`, `_encode_submessage`) wraps it in a gRPC-Web frame and posts
+to `https://api.bigblue.co/.../Service`. Responses are decoded via
+`_extract_strings`, a regex-over-UTF-8 heuristic that is *fragile* by design:
+if BigBlue changes their proto schema, parsing will silently return garbage.
+
+All helpdesk messages MUST be in French (BigBlue SOP).
+
+Secrets live in `.env` at the repo root. See `.env.example`.
+"""
+
 from mcp.server.fastmcp import FastMCP
-import requests
-from typing import Optional, Dict, Any, List
+import logging
 import os
 import re
 import struct
 import time
+from typing import Any, Dict, List, Optional
+
+import requests
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
+logger = logging.getLogger(__name__)
+
 BIGBLUE_API_KEY = os.getenv("BIGBLUE_API_KEY", "")
 _session_token = os.getenv("BIGBLUE_SESSION_TOKEN", "")
 
-AUTH0_CLIENT_ID = "bwjJGmcIeffoDRyuSi9yXNpZZn0AFYPi"
-BIGBLUE_EMAIL = "achabrat@havea.com"
+AUTH0_CLIENT_ID = os.getenv(
+    "BIGBLUE_AUTH0_CLIENT_ID", "bwjJGmcIeffoDRyuSi9yXNpZZn0AFYPi"
+)
+BIGBLUE_EMAIL = os.getenv("BIGBLUE_EMAIL", "achabrat@havea.com")
 SSO_BASE = "https://sso.bigblue.co"
+
+
+def _err(tool: str, exc: Exception) -> Dict[str, Any]:
+    """Structured error payload for a failing tool.
+
+    Logs the full traceback on the server side and returns a safe dict that
+    can be surfaced in the MCP client.
+    """
+    logger.exception("BigBlue tool %s failed", tool)
+    return {
+        "error": str(exc),
+        "error_type": type(exc).__name__,
+        "tool": tool,
+    }
 ENV_FILE = os.path.join(os.path.dirname(__file__), "..", ".env")
 BASE_URL = "https://api.bigblue.co/bigblue.storeapi.v1.PublicAPI"
 HELPDESK_BASE = "https://api.bigblue.co/bigblue.helpdesk.v0.Service"
@@ -273,7 +307,7 @@ def list_support_tickets() -> Dict[str, Any]:
         strings = _extract_strings(raw)
         return {"tickets_raw_strings": strings, "byte_count": len(raw)}
     except Exception as e:
-        return {"error": str(e)}
+        return _err("list_support_tickets", e)
 
 
 @mcp.tool()
@@ -291,7 +325,7 @@ def get_support_ticket(ticket_id: str) -> Dict[str, Any]:
         strings = _extract_strings(raw)
         return {"ticket_raw_strings": strings, "byte_count": len(raw)}
     except Exception as e:
-        return {"error": str(e)}
+        return _err("get_support_ticket", e)
 
 
 @mcp.tool()
@@ -364,7 +398,7 @@ def create_support_ticket(
             "topic": topic,
         }
     except Exception as e:
-        return {"error": str(e)}
+        return _err("create_support_ticket", e)
 
 
 @mcp.tool()
@@ -389,7 +423,7 @@ def reply_to_support_ticket(ticket_id: str, message: str) -> Dict[str, Any]:
         strings = _extract_strings(raw)
         return {"success": True, "message_raw_strings": strings}
     except Exception as e:
-        return {"error": str(e)}
+        return _err("reply_to_support_ticket", e)
 
 
 @mcp.tool()
@@ -428,7 +462,7 @@ def trigger_token_refresh() -> Dict[str, Any]:
             "next_step": "Search Gmail for 'from:sso.bigblue.co' or subject 'Sign in to Bigblue', then call update_session_token(token).",
         }
     except Exception as e:
-        return {"error": str(e)}
+        return _err("trigger_token_refresh", e)
 
 
 @mcp.tool()

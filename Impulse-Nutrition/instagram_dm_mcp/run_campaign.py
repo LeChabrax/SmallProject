@@ -24,36 +24,23 @@ from datetime import datetime
 from instagrapi import Client
 from dotenv import load_dotenv
 
+# Allow `from common.*` imports (common/ is at repo root).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
+from common.google_sheets import SUIVI_AMB_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
+
 load_dotenv()
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
 PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
 SESSION_FILE = Path(__file__).parent / f"{USERNAME}_session.json"
 
-SPREADSHEET_ID = "1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4"
 SHEET_NAME = "Suivi_Amb"
 
 PROGRESS_FILE = Path(__file__).parent / "campaign_progress.json"
 LOG_FILE = Path(__file__).parent / "campaign_log.txt"
 
 DELAY_BETWEEN_ACCOUNTS = 3  # seconds
-
-# Qualification signals (from qualify_conversations.py)
-QUESTION_SIGNALS = [
-    "?", "peux-tu", "tu peux", "pourrais-tu", "pourras-tu",
-    "est-ce que", "est ce que", "quand", "comment", "pourquoi",
-    "qui", "où", "quel", "quelle", "c'est quoi", "c est quoi",
-    "tu sais", "savez-vous", "avez-vous", "as-tu", "aurais-tu",
-    "j'attends", "j attends", "en attente", "dites-moi", "dis-moi",
-]
-
-OK_SIGNALS = [
-    "ok", "okay", "oki", "oké", "merci", "merci !", "merci beaucoup",
-    "super", "parfait", "nickel", "cool", "top", "reçu", "bien reçu",
-    "c'est bon", "c est bon", "noté", "entendu", "👍", "👏", "🙏",
-    "❤️", "😊", "🥰", "d'accord", "d accord", "pas de souci",
-    "pas de problème", "avec plaisir",
-]
 
 NON_REPLY_TYPES = {
     "xma_reel_mention", "xma_story_share", "action_log",
@@ -67,22 +54,6 @@ def log(msg: str):
     print(line)
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(line + "\n")
-
-
-def classify_last_message(text: str, is_from_us: bool) -> str:
-    if is_from_us:
-        return "send"
-    text_lower = text.lower().strip()
-    if len(text_lower) <= 60:
-        for sig in OK_SIGNALS:
-            if sig in text_lower:
-                return "send"
-    for sig in QUESTION_SIGNALS:
-        if sig in text_lower:
-            return "flag"
-    if len(text_lower) > 60:
-        return "review"
-    return "review"
 
 
 def qualify_account(ig_client, username, our_user_id):
@@ -154,6 +125,9 @@ def main():
                         help="Backfill col M from a progress JSON (no Instagram login required)")
     parser.add_argument("--all-active", action="store_true",
                         help="Target all 'Produits envoyés' without pre-filling col M")
+    parser.add_argument("--statut", default="Produits envoyés",
+                        help="Required value in col J (Statut). Default 'Produits envoyés'. "
+                             "Use 'In-cold' for KolSquare-style cold campaigns.")
     args = parser.parse_args()
 
     if not args.backfill and not args.message_file and not args.message_template and not args.dry_run:
@@ -232,11 +206,11 @@ def main():
         username = row[8].strip() if len(row) > 8 else ""
         statut = row[9].strip() if len(row) > 9 else ""
         campagne = row[12].strip() if len(row) > 12 else ""
-        prenom = row[27].strip() if len(row) > 27 else ""
+        prenom = row[SUIVI_AMB_COLS["prenom"]].strip() if len(row) > SUIVI_AMB_COLS["prenom"] else ""
 
         if not username:
             continue
-        if statut != "Produits envoyés":
+        if statut != args.statut:
             continue
 
         if args.all_active:

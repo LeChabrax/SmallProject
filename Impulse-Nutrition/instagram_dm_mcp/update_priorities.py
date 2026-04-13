@@ -20,6 +20,10 @@ from datetime import datetime
 from instagrapi import Client
 from dotenv import load_dotenv
 
+# Allow `from common.*` imports (common/ is at repo root).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from common.google_sheets import SUIVI_AMB_COLS  # noqa: E402
+
 load_dotenv()
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
@@ -111,11 +115,11 @@ def main():
     # Filter accounts
     candidates = []
     for i, row in enumerate(data_rows):
-        username = row[8].strip() if len(row) > 8 else ""
-        statut = row[9].strip() if len(row) > 9 else ""
-        action = row[10].strip() if len(row) > 10 else ""
-        current_prio = row[11].strip() if len(row) > 11 else ""
-        id_influ = row[32].strip() if len(row) > 32 else ""
+        username = row[SUIVI_AMB_COLS["username"]].strip() if len(row) > SUIVI_AMB_COLS["username"] else ""
+        statut = row[SUIVI_AMB_COLS["statut"]].strip() if len(row) > SUIVI_AMB_COLS["statut"] else ""
+        action = row[SUIVI_AMB_COLS["action"]].strip() if len(row) > SUIVI_AMB_COLS["action"] else ""
+        current_prio = row[SUIVI_AMB_COLS["priorite"]].strip() if len(row) > SUIVI_AMB_COLS["priorite"] else ""
+        id_influ = row[SUIVI_AMB_COLS["id_influ"]].strip() if len(row) > SUIVI_AMB_COLS["id_influ"] else ""
 
         if not username:
             continue

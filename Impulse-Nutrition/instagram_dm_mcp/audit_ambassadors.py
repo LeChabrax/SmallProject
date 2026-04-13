@@ -23,6 +23,10 @@ from datetime import datetime
 from instagrapi import Client
 from dotenv import load_dotenv
 
+# Allow `from common.*` imports (common/ is at repo root).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from common.google_sheets import SUIVI_AMB_COLS  # noqa: E402
+
 load_dotenv()
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
@@ -192,10 +196,10 @@ def main():
 
     candidates = []
     for i, row in enumerate(data_rows):
-        username = row[8].strip() if len(row) > 8 else ""
-        statut = row[9].strip() if len(row) > 9 else ""
-        code_affiliation = row[13].strip() if len(row) > 13 else ""
-        id_influ = row[32].strip() if len(row) > 32 else ""
+        username = row[SUIVI_AMB_COLS["username"]].strip() if len(row) > SUIVI_AMB_COLS["username"] else ""
+        statut = row[SUIVI_AMB_COLS["statut"]].strip() if len(row) > SUIVI_AMB_COLS["statut"] else ""
+        code_affiliation = row[SUIVI_AMB_COLS["code_affilie"]].strip() if len(row) > SUIVI_AMB_COLS["code_affilie"] else ""
+        id_influ = row[SUIVI_AMB_COLS["id_influ"]].strip() if len(row) > SUIVI_AMB_COLS["id_influ"] else ""
 
         if not username or username.lower() == "compte @":
             continue

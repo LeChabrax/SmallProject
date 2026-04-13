@@ -24,68 +24,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
-PASSWORD = os.getenv("INSTAGRAM_PASSWORD", "2025Impulse!")
+PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
 SESSION_FILE = Path(__file__).parent / f"{USERNAME}_session.json"
 
 QUALIFY_RESULTS_FILE = Path(__file__).parent / "qualify_results.json"
 DELAY = 2  # secondes entre comptes (lecture seule)
 
-# Mots/patterns qui indiquent une question ou attente de réponse
-QUESTION_SIGNALS = [
-    "?",
-    "peux-tu", "tu peux", "pourrais-tu", "pourras-tu",
-    "est-ce que", "est ce que",
-    "quand", "comment", "pourquoi", "qui", "où", "quel", "quelle",
-    "c'est quoi", "c est quoi",
-    "tu sais", "savez-vous",
-    "avez-vous", "as-tu", "aurais-tu",
-    "j'attends", "j attends", "en attente",
-    "dites-moi", "dis-moi",
-]
-
-# Mots qui indiquent une réponse neutre/positive ne nécessitant pas de reply
-OK_SIGNALS = [
-    "ok", "okay", "oki", "oké",
-    "merci", "merci !", "merci beaucoup",
-    "super", "parfait", "nickel", "cool", "top",
-    "reçu", "bien reçu", "c'est bon", "c est bon",
-    "noté", "entendu",
-    "👍", "👏", "🙏", "❤️", "😊", "🥰",
-    "d'accord", "d accord",
-    "pas de souci", "pas de problème",
-    "avec plaisir",
-]
-
-
-def classify_last_message(text: str, is_from_us: bool) -> str:
-    """
-    Retourne :
-      "send"   → OK d'envoyer la promo
-      "flag"   → Attendre, l'influenceur attend une réponse
-      "review" → Dernier msg de l'influenceur mais contenu ambigu, revoir
-    """
-    if is_from_us:
-        return "send"
-
-    text_lower = text.lower().strip()
-
-    # Court message positif → OK
-    if len(text_lower) <= 60:
-        for sig in OK_SIGNALS:
-            if sig in text_lower:
-                return "send"
-
-    # Contient un signal de question → FLAG
-    for sig in QUESTION_SIGNALS:
-        if sig in text_lower:
-            return "flag"
-
-    # Message long de l'influenceur sans signal clair → review
-    if len(text_lower) > 60:
-        return "review"
-
-    # Court mais pas un ok clair → review par prudence
-    return "review"
+# Allow `from common.*` imports (common/ is at repo root).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
 
 
 # ──────────────────────────────────────────

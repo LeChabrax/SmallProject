@@ -473,7 +473,8 @@ def check_user_online_status(usernames: List[str]) -> Dict[str, Any]:
                 if user_id:
                     user_ids.append(int(user_id))
                     username_to_id[user_id] = username
-            except:
+            except Exception as e:
+                logger.warning("username lookup failed for %s: %s", username, e)
                 continue
         
         if not user_ids:
