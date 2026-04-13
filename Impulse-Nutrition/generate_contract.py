@@ -6,8 +6,12 @@ import os
 import sys
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Tuple
 
 from fpdf import FPDF
+
+# Allow `from common.*` imports (common/ is at repo root).
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -759,7 +763,7 @@ def interactive_cli() -> ContractData:
 # Argparse mode
 # ---------------------------------------------------------------------------
 
-def parse_args() -> ContractData:
+def _build_arg_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Generate Impulse Nutrition contract PDF")
     p.add_argument("--first-name", required=True)
     p.add_argument("--last-name", required=True)
@@ -780,8 +784,32 @@ def parse_args() -> ContractData:
     p.add_argument("--dotation-code", default="")
     p.add_argument("--siren", default="")
     p.add_argument("--deliverables", default="", help="Pipe-separated list of custom deliverables")
-    args = p.parse_args()
+    p.add_argument(
+        "--upload-drive",
+        action="store_true",
+        help="Upload the generated PDF to the Drive folder InfluenceContract.",
+    )
+    p.add_argument(
+        "--update-sheet",
+        action="store_true",
+        help="Write the Drive link into the corresponding Sheet row "
+             "(Suivi_Dot col AE for dotation, Suivi_Paid col AM for paid). "
+             "Implies --upload-drive.",
+    )
+    p.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Generate the PDF but skip Drive upload and Sheet write.",
+    )
+    return p
 
+
+def parse_args() -> Tuple["ContractData", argparse.Namespace]:
+    args = _build_arg_parser().parse_args()
+    return _args_to_data(args), args
+
+
+def _args_to_data(args: argparse.Namespace) -> "ContractData":
     return ContractData(
         athlete_first_name=args.first_name,
         athlete_last_name=args.last_name,
@@ -806,17 +834,91 @@ def parse_args() -> ContractData:
 
 
 # ---------------------------------------------------------------------------
+# Drive + Sheet integration helpers
+# ---------------------------------------------------------------------------
+
+def _drive_filename(data: ContractData) -> str:
+    """Match the existing Drive naming convention `YYYYMM - Contrat <Prénom Nom>.pdf`."""
+    parts = data.contract_date.split("/")
+    if len(parts) == 3:
+        yyyymm = f"{parts[2]}{parts[1]}"  # YYYYMM
+    else:
+        yyyymm = datetime.now().strftime("%Y%m")
+    name = f"{data.athlete_first_name} {data.athlete_last_name}".strip()
+    return f"{yyyymm} - Contrat {name}.pdf"
+
+
+def upload_and_link(
+    pdf_path: str, data: ContractData, update_sheet: bool
+) -> dict:
+    """Upload the PDF to Drive and (optionally) write the link in the Sheet.
+
+    Returns the Drive metadata dict (`id`, `name`, `webViewLink`, …) plus
+    `sheet_row` and `sheet_cell` if `update_sheet=True` and a row was found.
+    """
+    from common.google_drive import (
+        upload_pdf_to_drive,
+        update_sheet_with_contract_link,
+    )
+
+    drive_filename = _drive_filename(data)
+    print(f"  ↑ Uploading to Drive InfluenceContract as «{drive_filename}»…")
+    drive_meta = upload_pdf_to_drive(pdf_path, drive_filename=drive_filename)
+    drive_link = drive_meta.get("webViewLink", "")
+    print(f"  ✓ Drive link: {drive_link}")
+
+    result = dict(drive_meta)
+
+    if update_sheet:
+        print(f"  ↻ Updating Sheet ({data.contract_type})…")
+        try:
+            row, cell = update_sheet_with_contract_link(
+                contract_type=data.contract_type,
+                first_name=data.athlete_first_name,
+                last_name=data.athlete_last_name,
+                drive_link=drive_link,
+            )
+            if row is not None:
+                print(f"  ✓ Sheet updated at {cell} (row {row})")
+                result["sheet_row"] = row
+                result["sheet_cell"] = cell
+            else:
+                print(
+                    f"  ⚠ Sheet row not found for "
+                    f"{data.athlete_first_name} {data.athlete_last_name}. "
+                    f"Add the ambassador to the sheet first, then re-run."
+                )
+        except Exception as e:
+            print(f"  ✗ Sheet update failed: {type(e).__name__}: {e}")
+
+    return result
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
 def main():
     if len(sys.argv) > 1:
-        data = parse_args()
+        data, args = parse_args()
+        upload_drive = args.upload_drive or args.update_sheet
+        update_sheet = args.update_sheet
+        dry_run = args.dry_run
     else:
         data = interactive_cli()
+        upload_drive = False
+        update_sheet = False
+        dry_run = False
 
     path = build_contract(data)
     print(f"\nContrat généré : {path}")
+
+    if dry_run:
+        print("(dry-run — Drive upload and Sheet write skipped)")
+        return
+
+    if upload_drive:
+        upload_and_link(path, data, update_sheet=update_sheet)
 
 
 if __name__ == "__main__":
