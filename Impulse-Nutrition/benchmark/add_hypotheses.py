@@ -54,6 +54,35 @@ PROFILES = {
             {"sku": "VSPBIOT", "freq_months": 2, "label": "Pré-Probiotiques"},
             {"sku": "VSSOM", "freq_months": 2, "label": "Sommeil +"},
         ]
+    },
+    "recuperation": {
+        "name": "🧘 Profil Récupération Anti-fatigue",
+        "description": "Athlètes / sportifs assidus — focus récupération et sommeil",
+        # Inspiré de la tendance récupération chez Novoma + Cuure. Cible : athlètes
+        # 4+ séances/semaine qui cherchent à optimiser la récup et limiter les
+        # blessures. À valider avec un survey auprès des ambassadeurs trail/triathlon.
+        "items": [
+            {"sku": "VSMAG", "freq_months": 1, "label": "Magnésium Bisglycinate"},
+            {"sku": "VSOME", "freq_months": 1, "label": "Omega 3 EPAX"},
+            {"sku": "VSCOLMN", "freq_months": 2, "label": "Collagène Marin Nature"},
+            {"sku": "VSSOM", "freq_months": 2, "label": "Sommeil +"},
+            {"sku": "VSVITD", "freq_months": 3, "label": "Vitamine D3"},
+        ]
+    },
+    "equilibre_femme": {
+        "name": "🌸 Profil Équilibre Femme",
+        "description": "Femmes sportives — focus anémie, cycles, bien-être global",
+        # Inspiré du programme Cuure Femme. Cible : femmes actives 25-45 ans
+        # avec des besoins spécifiques en fer, magnésium, collagène. Non genré de
+        # fait (les micronutriments sont pertinents pour tout le monde), mais le
+        # wording "équilibre femme" est commercialement efficace.
+        "items": [
+            {"sku": "VSFER", "freq_months": 2, "label": "Fer Bisglycinate"},
+            {"sku": "VSMAG", "freq_months": 1, "label": "Magnésium Bisglycinate"},
+            {"sku": "VSOME", "freq_months": 1, "label": "Omega 3 EPAX"},
+            {"sku": "VSCOLMN", "freq_months": 2, "label": "Collagène Marin Nature"},
+            {"sku": "VSVITD", "freq_months": 3, "label": "Vitamine D3"},
+        ]
     }
 }
 
@@ -91,19 +120,29 @@ CURATED_PACKS = {
     }
 }
 
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from constants import LOGISTICS_HT, LOGISTICS_TTC
+
 DISCOUNT = 0.15
-SHIPPING_PR = 3.90
-SHIPPING_DOM = 5.90
+# Coûts logistiques HT (le calcul de rentabilité se fait en HT, cohérent avec le rapport principal)
+SHIPPING_PR = LOGISTICS_HT["point_relais"]
+SHIPPING_DOM = LOGISTICS_HT["domicile"]
+# Versions TTC pour les affichages côté client
+SHIPPING_PR_TTC = LOGISTICS_TTC["point_relais"]
+SHIPPING_DOM_TTC = LOGISTICS_TTC["domicile"]
 
 def model_h2_profile(profile):
     """Model a custom box with multi-frequency products."""
     items = profile["items"]
-    
+
     # Calculate over 12 months
     monthly_shipments = {}  # month -> list of items to ship
-    annual_cost_full = 0
-    annual_cogs = 0
-    
+    annual_cost_full_ttc = 0      # prix vitrine cumulé (affichage savings client)
+    annual_revenue_ht = 0         # recettes HT cumulées (base de calcul marge)
+    annual_cogs_ht = 0            # COGS HT cumulés
+
     for item in items:
         sku = item["sku"]
         p = by_sku.get(sku)
@@ -111,9 +150,10 @@ def model_h2_profile(profile):
             continue
         freq = item["freq_months"]
         qty_per_year = 12 // freq
-        annual_cost_full += p["retail_price"] * qty_per_year
-        annual_cogs += p["cogs_2026"] * qty_per_year
-        
+        annual_cost_full_ttc += p["retail_price_ttc"] * qty_per_year
+        annual_revenue_ht += p["retail_price_ht"] * qty_per_year
+        annual_cogs_ht += p["cogs_ht"] * qty_per_year
+
         for month in range(1, 13):
             if month % freq == 1 or freq == 1:  # ship in months 1, 1+freq, 1+2*freq...
                 if month not in monthly_shipments:
@@ -121,69 +161,89 @@ def model_h2_profile(profile):
                 monthly_shipments[month].append({
                     "sku": sku,
                     "label": item["label"],
-                    "price": p["retail_price"],
-                    "cogs": p["cogs_2026"]
+                    "price_ttc": p["retail_price_ttc"],
+                    "price_ht": p["retail_price_ht"],
+                    "cogs_ht": p["cogs_ht"],
                 })
-    
-    annual_cost_sub = round(annual_cost_full * (1 - DISCOUNT), 2)
-    monthly_payment = round(annual_cost_sub / 12, 2)
-    annual_margin = round(annual_cost_sub - annual_cogs, 2)
-    
-    # Shipping: count actual shipments (months with items)
+
+    # Calculs côté client (TTC, affichage économies)
+    annual_cost_sub_ttc = round(annual_cost_full_ttc * (1 - DISCOUNT), 2)
+    monthly_payment_ttc = round(annual_cost_sub_ttc / 12, 2)
+    savings_annual_ttc = round(annual_cost_full_ttc - annual_cost_sub_ttc, 2)
+
+    # Calculs de marge (HT)
+    annual_revenue_sub_ht = round(annual_revenue_ht * (1 - DISCOUNT), 2)
+    annual_margin_ht = round(annual_revenue_sub_ht - annual_cogs_ht, 2)
+
+    # Shipping HT (tarifs transporteur TTC - 20%)
     num_shipments = len(monthly_shipments)
-    annual_shipping_pr = round(num_shipments * SHIPPING_PR, 2)
-    annual_net = round(annual_margin - annual_shipping_pr, 2)
-    monthly_net = round(annual_net / 12, 2)
-    
-    # Monthly breakdown
+    annual_shipping_pr_ht = round(num_shipments * SHIPPING_PR, 2)
+    annual_net_ht = round(annual_margin_ht - annual_shipping_pr_ht, 2)
+    monthly_net_ht = round(annual_net_ht / 12, 2)
+
+    # Monthly breakdown (HT pour la marge, TTC pour l'affichage valeur shipment)
     monthly_detail = []
     for month in range(1, 13):
         items_this_month = monthly_shipments.get(month, [])
-        ship_value = sum(i["price"] for i in items_this_month) * (1 - DISCOUNT)
-        ship_cogs = sum(i["cogs"] for i in items_this_month)
-        shipping = SHIPPING_PR if items_this_month else 0
-        net = round(ship_value - ship_cogs - shipping, 2) if items_this_month else 0
+        ship_value_ttc = sum(i["price_ttc"] for i in items_this_month) * (1 - DISCOUNT)
+        ship_value_ht = sum(i["price_ht"] for i in items_this_month) * (1 - DISCOUNT)
+        ship_cogs_ht = sum(i["cogs_ht"] for i in items_this_month)
+        shipping_ht = SHIPPING_PR if items_this_month else 0
+        net_ht = round(ship_value_ht - ship_cogs_ht - shipping_ht, 2) if items_this_month else 0
         monthly_detail.append({
             "month": month,
             "items": [i["label"] for i in items_this_month],
             "items_count": len(items_this_month),
-            "shipment_value": round(ship_value, 2),
-            "cogs": round(ship_cogs, 2),
-            "shipping": shipping,
-            "net_contribution": net,
+            "shipment_value": round(ship_value_ttc, 2),
+            "shipment_value_ht": round(ship_value_ht, 2),
+            "cogs": round(ship_cogs_ht, 2),
+            "shipping": shipping_ht,
+            "net_contribution": net_ht,
         })
-    
+
     return {
-        "annual_full_price": round(annual_cost_full, 2),
-        "annual_sub_price": annual_cost_sub,
-        "monthly_payment": monthly_payment,
-        "savings_annual": round(annual_cost_full - annual_cost_sub, 2),
-        "annual_cogs": round(annual_cogs, 2),
-        "annual_margin": annual_margin,
+        "annual_full_price": round(annual_cost_full_ttc, 2),   # TTC, affichage économies
+        "annual_sub_price": annual_cost_sub_ttc,                # TTC, affichage prix payé
+        "monthly_payment": monthly_payment_ttc,                 # TTC, ce que paye le client
+        "savings_annual": savings_annual_ttc,
+        "annual_cogs": round(annual_cogs_ht, 2),
+        "annual_margin": annual_margin_ht,                      # HT
         "num_shipments": num_shipments,
-        "annual_shipping_pr": annual_shipping_pr,
-        "annual_net_contribution": annual_net,
-        "monthly_net_avg": monthly_net,
+        "annual_shipping_pr": annual_shipping_pr_ht,            # HT
+        "annual_net_contribution": annual_net_ht,               # HT
+        "monthly_net_avg": monthly_net_ht,                      # HT
         "monthly_detail": monthly_detail,
     }
 
 
 def model_h3_pack(pack):
-    """Model a curated pack subscription."""
+    """Model a curated pack subscription (HT for margin, TTC for display)."""
     items = pack["items"]
-    total_price = sum(by_sku[s]["retail_price"] for s in items if s in by_sku)
-    total_cogs = sum(by_sku[s]["cogs_2026"] for s in items if s in by_sku)
-    sub_price = round(total_price * (1 - DISCOUNT), 2)
-    margin = round(sub_price - total_cogs, 2)
-    net_pr = round(margin - SHIPPING_PR, 2)
-    net_dom = round(margin - SHIPPING_DOM, 2)
-    
-    # Progressive discount: 15% M1-M3, 17% M4-M6, 20% M7+
+    total_price_ttc = sum(by_sku[s]["retail_price_ttc"] for s in items if s in by_sku)
+    total_price_ht = sum(by_sku[s]["retail_price_ht"] for s in items if s in by_sku)
+    total_cogs_ht = sum(by_sku[s]["cogs_ht"] for s in items if s in by_sku)
+    sub_price_ttc = round(total_price_ttc * (1 - DISCOUNT), 2)
+    sub_price_ht = round(total_price_ht * (1 - DISCOUNT), 2)
+    margin_ht = round(sub_price_ht - total_cogs_ht, 2)
+    net_pr_ht = round(margin_ht - SHIPPING_PR, 2)
+    net_dom_ht = round(margin_ht - SHIPPING_DOM, 2)
+    # Les variables legacy restent pour compat avec le rendu HTML en aval
+    total_price = total_price_ttc
+    total_cogs = total_cogs_ht
+    sub_price = sub_price_ttc
+    margin = margin_ht
+    net_pr = net_pr_ht
+    net_dom = net_dom_ht
+
+    # Progressive discount: 15% M1-M3, 17% M4-M6, 20% M7+ (HT pour la marge)
     progressive = []
     for period, disc, label in [(3, 0.15, "M1-M3"), (3, 0.17, "M4-M6"), (6, 0.20, "M7-M12")]:
-        sp = round(total_price * (1 - disc), 2)
-        mg = round(sp - total_cogs, 2)
+        sp_ttc = round(total_price_ttc * (1 - disc), 2)
+        sp_ht = round(total_price_ht * (1 - disc), 2)
+        mg = round(sp_ht - total_cogs_ht, 2)
         nt = round(mg - SHIPPING_PR, 2)
+        # legacy alias for HTML rendering
+        sp = sp_ttc
         progressive.append({
             "period": label,
             "months": period,
@@ -347,13 +407,13 @@ def build_hypotheses_html():
             if not p:
                 continue
             qty = 12 // item["freq_months"]
-            annual = p["retail_price"] * qty
+            annual = p["retail_price_ttc"] * qty
             freq_label = f'Chaque mois' if item["freq_months"] == 1 else f'Tous les {item["freq_months"]} mois'
             freq_color = "#22c55e" if item["freq_months"] == 1 else "#f59e0b" if item["freq_months"] == 2 else "#3b82f6"
             html += f'''<tr>
     <td style="font-weight:500">{item["label"]}</td>
     <td style="text-align:center"><span style="background:{freq_color};color:white;padding:1px 6px;border-radius:3px;font-size:10px">{freq_label}</span></td>
-    <td style="text-align:right">{p["retail_price"]:.2f}€</td>
+    <td style="text-align:right">{p["retail_price_ttc"]:.2f}€</td>
     <td style="text-align:center">{qty}×</td>
     <td style="text-align:right">{annual:.2f}€</td>
 </tr>'''

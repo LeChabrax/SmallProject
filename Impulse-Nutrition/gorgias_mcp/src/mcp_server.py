@@ -74,11 +74,11 @@ def _slim_ticket(t: Dict) -> Dict:
     }
 
 
-def _slim_message(m: Dict) -> Dict:
+def _slim_message(m: Dict, full_body: bool = False) -> Dict:
     source = m.get("source") or {}
     sender = source.get("from") or {}
     body = m.get("body_text") or ""
-    if len(body) > 600:
+    if not full_body and len(body) > 600:
         body = body[:600] + "..."
     return {
         "id": m.get("id"),
@@ -140,29 +140,86 @@ def get_ticket(ticket_id: int) -> Dict[str, Any]:
 
 
 @mcp.tool()
-def list_ticket_messages(ticket_id: int, limit: int = 30) -> Dict[str, Any]:
+def list_ticket_messages(
+    ticket_id: int,
+    limit: int = 30,
+    full_body: bool = False,
+) -> Dict[str, Any]:
     """List all messages in a ticket.
 
     Args:
         ticket_id: The Gorgias ticket ID.
         limit: Number of messages to return.
+        full_body: If True, return the full body text (no 600-char truncation).
     """
     resp = _get(f"tickets/{ticket_id}/messages", {"limit": limit})
-    return {"messages": [_slim_message(m) for m in resp.get("data", [])]}
+    return {
+        "messages": [
+            _slim_message(m, full_body=full_body) for m in resp.get("data", [])
+        ]
+    }
 
 
 @mcp.tool()
 def search_tickets(query: str, limit: int = 20) -> Dict[str, Any]:
-    """Search tickets by keyword.
+    """Search tickets by customer email, name, order reference, or free text.
+
+    Strategy (the Gorgias /search endpoint is broken and returns 405):
+    1. Lookup customers by email → pull each matched customer's tickets.
+    2. Fallback: pull 100 recent tickets and substring-match against
+       subject / customer name / customer email.
 
     Args:
-        query: Search query (searches subject, body, customer name/email).
+        query: Search query (customer email, name, or keyword).
         limit: Number of results to return.
     """
-    resp = _get("search", {"type": "ticket", "query": query, "limit": limit})
+    q = (query or "").strip()
+    q_lower = q.lower()
+    tickets_by_id: Dict[int, Dict] = {}
+
+    try:
+        cust_resp = _get("customers", {"limit": 10, "email": q})
+        for c in cust_resp.get("data", []) or []:
+            cid = c.get("id")
+            if not cid:
+                continue
+            t_resp = _get(
+                "tickets",
+                {"customer_id": cid, "limit": limit, "order_by": "updated_datetime:desc"},
+            )
+            for t in t_resp.get("data", []) or []:
+                tid = t.get("id")
+                if tid and tid not in tickets_by_id:
+                    tickets_by_id[tid] = t
+                    if len(tickets_by_id) >= limit:
+                        break
+            if len(tickets_by_id) >= limit:
+                break
+    except Exception as e:
+        logger.warning("search_tickets customer lookup failed: %s", e)
+
+    if len(tickets_by_id) < limit and q_lower:
+        try:
+            recent = _get("tickets", {"limit": 100, "order_by": "updated_datetime:desc"})
+            for t in recent.get("data", []) or []:
+                tid = t.get("id")
+                if not tid or tid in tickets_by_id:
+                    continue
+                subject = (t.get("subject") or "").lower()
+                customer = t.get("customer") or {}
+                c_name = (customer.get("name") or "").lower()
+                c_email = (customer.get("email") or "").lower()
+                if q_lower in subject or q_lower in c_name or q_lower in c_email:
+                    tickets_by_id[tid] = t
+                    if len(tickets_by_id) >= limit:
+                        break
+        except Exception as e:
+            logger.warning("search_tickets fallback scan failed: %s", e)
+
+    results = list(tickets_by_id.values())[:limit]
     return {
-        "tickets": [_slim_ticket(hit.get("object", hit)) for hit in resp.get("data", [])],
-        "total": resp.get("meta", {}).get("total_resources"),
+        "tickets": [_slim_ticket(t) for t in results],
+        "total": len(results),
     }
 
 

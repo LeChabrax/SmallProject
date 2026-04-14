@@ -112,8 +112,14 @@ PROFILES = {
     }
 }
 
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from constants import LOGISTICS_HT, LOGISTICS_TTC, TVA_RATE
+
 DISCOUNT = 0.15  # -15% on subscription
-SHIPPING_PR = 3.90  # Point Relais
+SHIPPING_PR = LOGISTICS_HT["point_relais"]       # HT pour les calculs de marge
+SHIPPING_PR_TTC = LOGISTICS_TTC["point_relais"]  # TTC pour affichage client
 
 print("=" * 80)
 print("H2 REFACTORED: CUSTOM BOX — QUANTITY-BASED MODEL")
@@ -132,45 +138,67 @@ for pk, prof in PROFILES.items():
     print(f"{'─' * 60}")
     
     items = []
-    total_retail = 0
-    total_cogs = 0
-    
+    total_retail_ttc = 0
+    total_retail_ht = 0
+    total_cogs_ht = 0
+
     for prod in prof['products']:
         p = by_sku[prod['sku']]
         qty = adjusted_qty(prod['sku'], cycle, w, t)
-        retail_unit = p['retail_price']
-        cogs_unit = p['cogs_2026']
-        line_retail = retail_unit * qty
+        retail_ttc = p['retail_price_ttc']
+        retail_ht = p['retail_price_ht']
+        cogs_unit = p['cogs_ht']
+        line_retail_ttc = retail_ttc * qty
+        line_retail_ht = retail_ht * qty
         line_cogs = cogs_unit * qty
-        total_retail += line_retail
-        total_cogs += line_cogs
+        total_retail_ttc += line_retail_ttc
+        total_retail_ht += line_retail_ht
+        total_cogs_ht += line_cogs
         items.append({
             'sku': prod['sku'],
             'title': p['title'],
             'reason': prod['reason'],
             'conso_days': p['consumption_days'],
             'qty': qty,
-            'unit_price': retail_unit,
-            'unit_cogs': cogs_unit,
-            'line_total': line_retail,
-            'line_cogs': line_cogs
+            'unit_price': retail_ttc,        # TTC affiché
+            'unit_price_ht': retail_ht,
+            'unit_cogs': cogs_unit,           # HT
+            'line_total': line_retail_ttc,    # TTC affiché
+            'line_total_ht': line_retail_ht,
+            'line_cogs': line_cogs,           # HT
         })
-        print(f"  {p['title']:35} | {p['consumption_days']:2}j/unité → {qty:2}x | {retail_unit:6.2f}€ × {qty} = {line_retail:7.2f}€")
-    
-    # Calculations
-    total_sub = total_retail * (1 - DISCOUNT)
-    savings = total_retail - total_sub
-    monthly_payment = total_sub / cycle
-    
+        print(f"  {p['title']:35} | {p['consumption_days']:2}j/unité → {qty:2}x | {retail_ttc:6.2f}€ TTC × {qty} = {line_retail_ttc:7.2f}€")
+
+    # Affichage client (TTC)
+    total_sub_ttc = total_retail_ttc * (1 - DISCOUNT)
+    savings_ttc = total_retail_ttc - total_sub_ttc
+    monthly_payment_ttc = total_sub_ttc / cycle
+
+    # Marge (HT)
+    total_sub_ht = total_retail_ht * (1 - DISCOUNT)
+
     # Only 1 shipment per cycle (the whole point!)
     shipments_per_year = 12 // cycle
-    shipping_annual = shipments_per_year * SHIPPING_PR
-    
-    # Annual projections
-    annual_retail = total_retail * (12 / cycle)
-    annual_sub = total_sub * (12 / cycle)
-    annual_cogs = total_cogs * (12 / cycle)
-    annual_margin = annual_sub - annual_cogs - shipping_annual
+    shipping_annual_ht = shipments_per_year * SHIPPING_PR
+
+    # Annual projections (HT pour la marge, TTC pour l'affichage CA client)
+    annual_retail_ttc = total_retail_ttc * (12 / cycle)
+    annual_sub_ttc = total_sub_ttc * (12 / cycle)
+    annual_sub_ht = total_sub_ht * (12 / cycle)
+    annual_cogs_ht = total_cogs_ht * (12 / cycle)
+    annual_margin_ht = annual_sub_ht - annual_cogs_ht - shipping_annual_ht
+
+    # Compat legacy pour le rendu HTML existant
+    total_retail = total_retail_ttc
+    total_sub = total_sub_ttc
+    savings = savings_ttc
+    monthly_payment = monthly_payment_ttc
+    total_cogs = total_cogs_ht
+    shipping_annual = shipping_annual_ht
+    annual_retail = annual_retail_ttc
+    annual_sub = annual_sub_ttc
+    annual_cogs = annual_cogs_ht
+    annual_margin = annual_margin_ht
     
     # vs frequency model (old H2): 12 shipments/year
     old_shipping = 12 * SHIPPING_PR
@@ -479,63 +507,42 @@ def build_h2_html():
     
     return '\n'.join(h)
 
-# Find and replace the old H2 section
-# The old H2 is between "Hypothèse 2" header and "Hypothèse 3" header
-# Look for the old H2 div pattern
-old_h2_pattern = r'(<div[^>]*id="h2-multifreq".*?)(<!-- ═+ -->\s*<!-- H3)'
-match = re.search(old_h2_pattern, html, re.DOTALL)
+# ──────────────────────────────────────────────────────────────────────
+# Replace ciblé du bloc H2 par les commentaires anchors.
+#
+# Le bloc H2 généré par add_hypotheses.py est précédé par le commentaire
+#   <!-- ═══ H2: BOX CUSTOM MULTI-FRÉQUENCE ═══ -->
+# et suivi par
+#   <!-- ═══ H3: PACKS CURATÉS ═══ -->
+#
+# Ces commentaires sont uniques dans le HTML et servent d'anchors fiables.
+# On remplace tout le bloc entre ces deux anchors (anchors inclus pour la
+# borne haute, anchor H3 conservé pour la borne basse).
+# ──────────────────────────────────────────────────────────────────────
+H2_START_ANCHOR = "<!-- ═══ H2: BOX CUSTOM MULTI-FRÉQUENCE ═══ -->"
+H3_START_ANCHOR = "<!-- ═══ H3: PACKS CURATÉS ═══ -->"
 
-if match:
-    # Replace old H2 with new one
-    new_h2 = build_h2_html()
-    html = html[:match.start()] + new_h2 + '\n    ' + html[match.start(2):]
-    print("✅ Ancien H2 (multi-fréquence) remplacé par H2 (quantity-based)")
+h2_anchor_pos = html.find(H2_START_ANCHOR)
+h3_anchor_pos = html.find(H3_START_ANCHOR)
+
+if h2_anchor_pos == -1 or h3_anchor_pos == -1:
+    print("❌ Anchors H2/H3 introuvables — le rapport HTML n'a pas été généré par add_hypotheses.py ?")
+    print(f"   H2 anchor trouvé : {h2_anchor_pos != -1}")
+    print(f"   H3 anchor trouvé : {h3_anchor_pos != -1}")
 else:
-    # Try alternate: find the H2 section by looking for "Hypothèse 2" and next hypothesis
-    # Let's insert after H1 and before H3
-    h2_start = html.find('Hypothèse 2')
-    if h2_start == -1:
-        h2_start = html.find('hypothèse 2') or html.find('Hypothese 2')
-    
-    if h2_start > 0:
-        # Find the containing div - go backwards to find it
-        # Find H3 start
-        h3_marker = html.find('Hypothèse 3', h2_start)
-        if h3_marker == -1:
-            h3_marker = html.find('hypothèse 3', h2_start)
-        
-        if h3_marker > 0:
-            # Find the div start before H2 and the div start before H3
-            # Look for the last <!-- before H3
-            search_area = html[h2_start:h3_marker]
-            # Find the parent div of H2 - look for a div with background that contains H2
-            # Go backwards from h2_start to find enclosing div
-            chunk_before_h2 = html[max(0, h2_start-500):h2_start]
-            
-            # Find the div opening before H2
-            div_starts = [m.start() + max(0, h2_start-500) for m in re.finditer(r'<div[^>]*style="[^"]*margin-top', chunk_before_h2)]
-            if div_starts:
-                div_start = div_starts[-1]
-            else:
-                div_starts = [m.start() + max(0, h2_start-500) for m in re.finditer(r'<div[^>]*>', chunk_before_h2)]
-                div_start = div_starts[-1] if div_starts else h2_start - 100
-            
-            # Find the comment/div before H3
-            chunk_before_h3 = html[max(0, h3_marker-200):h3_marker]
-            comment_pos = chunk_before_h3.rfind('<!--')
-            if comment_pos >= 0:
-                h3_section_start = max(0, h3_marker-200) + comment_pos
-            else:
-                # Find the last </div> before H3 region
-                h3_section_start = h3_marker - 50
-            
-            new_h2 = build_h2_html()
-            html = html[:div_start] + new_h2 + '\n\n    ' + html[h3_section_start:]
-            print(f"✅ H2 remplacé (positions {div_start}→{h3_section_start})")
-        else:
-            print("❌ H3 non trouvé")
-    else:
-        print("❌ H2 non trouvé dans le HTML")
+    new_h2 = build_h2_html()
+    # On remplace de h2_anchor_pos (inclusif) jusqu'à h3_anchor_pos (exclusif).
+    # Le nouveau bloc H2 commence par son propre commentaire + div id="h2-quantity",
+    # on le préfixe avec l'anchor H2 pour préserver l'anchor pour d'éventuels
+    # re-runs.
+    html = (
+        html[:h2_anchor_pos]
+        + H2_START_ANCHOR + "\n"
+        + new_h2
+        + "\n    "
+        + html[h3_anchor_pos:]
+    )
+    print(f"✅ H2 remplacé via anchors (positions {h2_anchor_pos}→{h3_anchor_pos})")
 
 with open('benchmark/rapport_rentabilite_abonnement.html', 'w') as f:
     f.write(html)

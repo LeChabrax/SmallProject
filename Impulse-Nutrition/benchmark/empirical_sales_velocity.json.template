@@ -1,0 +1,18 @@
+{
+  "_doc": "Override du signal de demande dans le scoring. Si ce fichier existe sous le nom 'empirical_sales_velocity.json' (sans .template), ses valeurs remplacent le stock comme proxy de demande dans compute_subscription_score() de generate_html_report.py.",
+  "_format": "SKU → nombre de commandes mensuelles moyennes (int). Basé sur un export Shopify sur les 90 derniers jours, moyenné.",
+  "_bareme_scoring": {
+    "velocity_>=_50": "10 pts (score maximum — best seller)",
+    "velocity_>=_20": "7 pts",
+    "velocity_>=_10": "4 pts",
+    "velocity_<_10":  "2 pts"
+  },
+  "_source_recommandee": "Export Shopify via MCP : mcp__shopify__get-orders sur 90 derniers jours → agrégation par line_item.sku → count / 3 = moyenne mensuelle. Note : c'est un vrai signal de demande, contrairement au stock qui peut être un proxy trompeur (stock élevé = bonnes ventes OU slow seller dans certains cas).",
+  "_exemple_remplissage": {
+    "VSMVIT":  87,
+    "VSCREAC": 62,
+    "VSWHEYC": 145,
+    "VSBARLC": 28
+  },
+  "_note": "Ne pas éditer ce .template. Copier vers 'empirical_sales_velocity.json' (sans .template) et remplir avec les vraies valeurs."
+}

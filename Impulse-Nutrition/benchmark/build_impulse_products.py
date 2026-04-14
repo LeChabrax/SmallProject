@@ -1,11 +1,23 @@
 #!/usr/bin/env python3
 """
 T1: Merge COGS (from image) + Shopify retail prices + stock → impulse_products.json
+
+Convention HT/TTC (voir benchmark/constants.py) :
+  - COGS 2026 = prix de cession fournisseur = HT (TVA récupérable)
+  - Shopify retail price = prix vitrine = TTC (TVA collectée)
+  - Pour les calculs de marge, on convertit le retail en HT via constants.retail_ht()
+  - Les champs *_ht sont les valeurs utilisées par tous les scripts downstream
+  - Les champs retail_price (sans suffixe) restent en TTC pour l'affichage client
 """
 import json
+import os
+import sys
 
-# ── COGS 2026 (Prix de Cession) from user's image ──
-COGS_2026 = {
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from constants import TVA_RATE, retail_ht
+
+# ── COGS 2026 (Prix de Cession) from user's image — valeurs HT ──
+COGS_HT_2026 = {
     # Barres
     "VSBARC":   0.89,  "VSBARCC":  0.90,
     "VSBARLC":  3.81,  "VSBARLCC": 3.67,
@@ -110,42 +122,74 @@ SHOPIFY_PRODUCTS = {
     "VSFLASK500":{"title": "Flasque 500ml", "price": 19.90, "stock": 1628, "category": "accessoire"},
 }
 
-# ── Consumption pattern & recurrence scoring ──
-RECURRENCE = {
-    # Daily supplements → highest recurrence
-    "VSCREAC": 95,   # créatine = daily, 1 pot ~1 mois
-    "VSMVIT": 95,     # multivit = daily
-    "VSOME": 95,      # omega 3 = daily
-    "VSMAG": 95,      # magnésium = daily
-    "VSFER": 90,      # fer = daily (+ niche)
-    "VSVITC": 90,     # vit C = daily
-    "VSVITD": 90,     # vit D = daily
-    "VSSOM": 85,      # sommeil = daily
-    "VSSPI": 85,      # spiruline = daily
-    "VSCUR": 85,      # curcumine = daily
-    "VSPBIOT": 85,    # probiotiques = daily
-    "VSGLY": 80,      # glycine = daily
-    # Sport regular use
-    "VSBCAAC": 75, "VSBCAAP": 75,    # BCAA = per workout, 3-5x/week
-    "VSLGLU": 75,     # glutamine = per workout
-    "VSELECC": 75, "VSELECP": 75,    # electrolytes = per workout
-    "VSELEFC": 70, "VSELEFCV": 70, "VSELEFP": 70,  # efferv = per workout
-    "VSBOISM": 70, "VSBOISF": 70,    # boisson effort = per workout
-    "VSMAL": 65,      # maltodextrine = per workout
-    "VSPREWC": 70,    # preworkout = per workout
-    # Whey / Recovery = daily for builders
-    "VSWHEYN": 80, "VSWHEYC": 80, "VSWHEYV": 80,
-    "VSRECMC": 75, "VSRECMV": 75,
-    # Collagène = daily
-    "VSCOLMN": 85, "VSCOLMC": 85, "VSCOLME": 85,
-    "VSCOLBN": 85, "VSCOLBC": 85, "VSCOLBE": 85,
-    # Snacks = very irregular, impulse buy
-    "VSBARLC": 30, "VSBARLCC": 30,
-    # Portions individuelles = samples, not recurring
-    "VSWHEYCECH": 10, "VSWHEYVECH": 10,
-    # Accessories = one-time purchase
-    "VSSHAK450": 0, "VSSHAK750": 0, "VSGOURDE": 0, "VSFLASK500": 0,
-}
+#
+# ── Recurrence score : formule déterministe + override empirique ──────────────
+#
+# Le score de récurrence (0-100) mesure à quel point un produit est un candidat
+# naturel à l'abonnement. Plus la consommation est rapide et régulière, plus le
+# score est haut.
+#
+# Au lieu de hardcoder chaque SKU à la main (subjectif), on dérive le score d'une
+# formule déterministe basée sur deux données objectives :
+#   1. consumption_days — combien de jours dure une unité (grammages documentés)
+#   2. category — sport / santé / snack / accessoire
+#
+# La formule est transparente et défendable. Si un jour on a un historique Shopify
+# de repeat-purchase par SKU, on crée un `benchmark/empirical_recurrence.json` qui
+# surcharge la formule avec les vrais chiffres (% de clients qui ont racheté le
+# SKU au moins 2 fois dans les 12 derniers mois).
+
+def compute_recurrence_score(consumption_days: int, category: str) -> int:
+    """Score de récurrence 0-100 basé sur la fréquence naturelle de consommation.
+
+    Principe : plus un produit se consomme vite (petits consumption_days), plus
+    il y a de raison rationnelle de s'abonner → score élevé. Ensuite on module
+    par la catégorie : un produit "santé" quotidien (Multivit) a une stickiness
+    émotionnelle plus forte qu'un produit "sport" pris uniquement les jours
+    d'entraînement.
+
+    Barème (justification dans le benchmark doc) :
+      - Accessoire (≥ 365 j) : 0 — one-shot
+      - Consommation espacée (≥ 60 j) : 30 — peu de besoin de re-commande
+      - Cycle bi-mensuel (35-59 j) : 60 — candidat acceptable
+      - Mensuel ou + fréquent (≤ 30 j) :
+          * santé quotidienne  : 90 — daily + stickiness émotionnelle
+          * sport              : 75 — per workout, usage moins régulier
+          * snack              : 40 — impulse buy, faible récurrence
+          * autre              : 50 — neutre
+    """
+    if consumption_days >= 365:
+        return 0                  # one-shot accessoire
+    if consumption_days >= 60:
+        return 30                 # cycle espacé
+    if consumption_days >= 35:
+        return 60                 # cycle bi-mensuel
+    # Consumption <= 30 j → mensuel ou plus fréquent
+    if category == "sante":
+        return 90
+    if category == "sport":
+        return 75
+    if category == "snack":
+        return 40
+    return 50
+
+
+# Loader empirique : si un JSON existe, il override la formule pour les SKUs listés.
+# Format attendu : { "VSMVIT": 88, "VSCREAC": 72, ... }
+# Source typique : export Shopify 12 mois → % clients avec ≥ 2 achats du SKU.
+_empirical_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "empirical_recurrence.json")
+if os.path.exists(_empirical_path):
+    with open(_empirical_path, "r", encoding="utf-8") as _f:
+        EMPIRICAL_RECURRENCE = json.load(_f)
+else:
+    EMPIRICAL_RECURRENCE = {}
+
+
+def get_recurrence(sku: str, consumption_days: int, category: str) -> tuple[int, str]:
+    """Retourne (score, source) où source est 'empirical' ou 'formula'."""
+    if sku in EMPIRICAL_RECURRENCE:
+        return int(EMPIRICAL_RECURRENCE[sku]), "empirical"
+    return compute_recurrence_score(consumption_days, category), "formula"
 
 # ── SKU complexity (nb variants for same product line) ──
 SKU_COMPLEXITY = {
@@ -268,64 +312,90 @@ CONSUMPTION_DAYS = {
 def build_products():
     products = []
     for sku, shop in SHOPIFY_PRODUCTS.items():
-        cogs = COGS_2026.get(sku)
-        if cogs is None:
+        cogs_ht = COGS_HT_2026.get(sku)
+        if cogs_ht is None:
             continue
-        
-        price = shop["price"]
-        margin = round(price - cogs, 2)
-        margin_pct = round((margin / price) * 100, 1) if price > 0 else 0
+
+        retail_ttc = shop["price"]
+        retail_ht_val = retail_ht(retail_ttc)
+        gross_margin_ht = round(retail_ht_val - cogs_ht, 2)
+        gross_margin_pct_ht = round((gross_margin_ht / retail_ht_val) * 100, 1) if retail_ht_val > 0 else 0
         cat_key = SKU_TO_CATEGORY.get(sku, "autre")
-        
+        consumption_days = CONSUMPTION_DAYS.get(sku, 30)
+        category = shop["category"]
+        recurrence_score, recurrence_source = get_recurrence(sku, consumption_days, category)
+
         product = {
             "sku": sku,
             "title": shop["title"],
-            "retail_price": price,
-            "cogs_2026": cogs,
-            "gross_margin": margin,
-            "gross_margin_pct": margin_pct,
+            # Prix affichés au client = TTC (expérience vitrine)
+            "retail_price": retail_ttc,
+            "retail_price_ttc": retail_ttc,
+            # Base de calcul = HT (tous les downstream)
+            "retail_price_ht": retail_ht_val,
+            "cogs_ht": cogs_ht,
+            "gross_margin_ht": gross_margin_ht,
+            "gross_margin_pct_ht": gross_margin_pct_ht,
+            # Alias legacy (certains scripts downstream les lisent encore en attendant le rewrite)
+            "cogs_2026": cogs_ht,
+            "gross_margin": gross_margin_ht,
+            "gross_margin_pct": gross_margin_pct_ht,
             "stock": shop["stock"],
-            "category": shop["category"],
+            "category": category,
             "product_category": cat_key,
-            "recurrence_score": RECURRENCE.get(sku, 0),
+            "recurrence_score": recurrence_score,
+            "recurrence_source": recurrence_source,  # "formula" ou "empirical"
             "sku_variants": SKU_COMPLEXITY.get(sku, 1),
             "competitor_has_sub": COMPETITOR_SUB.get(cat_key, False),
-            "consumption_days": CONSUMPTION_DAYS.get(sku, 30),
+            "consumption_days": consumption_days,
             # Profitability by scenario (computed in T2)
             "scenarios": {}
         }
         products.append(product)
-    
+
     # Sort by gross margin % descending
-    products.sort(key=lambda p: p["gross_margin_pct"], reverse=True)
+    products.sort(key=lambda p: p["gross_margin_pct_ht"], reverse=True)
     return products
 
 if __name__ == "__main__":
+    from constants import LOGISTICS_TTC, LOGISTICS_HT
+
     products = build_products()
-    
+
     output = {
         "meta": {
             "source_cogs": "Image Prix de Cession 2026 (fournie par Antoine)",
             "source_retail": "Shopify MCP API - impulse-nutrition.fr",
-            "logistics_costs": {
-                "point_relais": 3.90,
-                "domicile": 5.90,
-                "express": 10.90
-            },
+            "tva_rate": TVA_RATE,
+            "cogs_basis": "HT (prix de cession fournisseur, TVA récupérable)",
+            "retail_basis": "TTC côté affichage client, HT utilisé pour tous les calculs de marge",
+            "logistics_costs_ttc": LOGISTICS_TTC,
+            "logistics_costs_ht": LOGISTICS_HT,
             "total_products": len(products),
             "excluded": ["Packs", "Duos", "Choose packs", "Flyers", "The Bradery packs", "TTS packs", "LRA packs"],
-            "note_electrolytes_efferv": "COGS effervescents estimé à 1.50€ (absent de l'image, produit récent)"
+            "note_electrolytes_efferv": "COGS effervescents estimé à 1.50€ HT (absent de l'image, produit récent)",
+            "todos": [
+                "Confirmer avec compta HCS : TVA 20% sur tous produits (ou 5.5% sur certaines boissons)",
+                "Vérifier COGS réel des électrolytes effervescents auprès fournisseur",
+                "Remplacer l'hypothèse 50 commandes/mois/produit par un export Shopify réel sur 90 jours",
+                "Obtenir devis Recharge/Loop/PayWhirl pour borner la fourchette app_cost",
+            ],
         },
         "products": products
     }
-    
+
     with open("benchmark/impulse_products.json", "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
-    
+
     print(f"✅ {len(products)} products merged → benchmark/impulse_products.json")
-    print(f"\nTop 10 margins:")
+    print(f"   Convention : prix retail TTC → HT (/ {1+TVA_RATE:.2f}), COGS HT, marges HT")
+    print(f"\nTop 10 margins (HT) :")
     for p in products[:10]:
-        print(f"  {p['sku']:<15} {p['title'][:35]:<35} {p['retail_price']:>6.2f}€ - {p['cogs_2026']:>5.2f}€ = {p['gross_margin']:>5.2f}€ ({p['gross_margin_pct']}%)")
-    print(f"\nBottom 5 margins:")
+        print(f"  {p['sku']:<15} {p['title'][:35]:<35} "
+              f"{p['retail_price_ttc']:>6.2f}€ TTC → {p['retail_price_ht']:>6.2f}€ HT "
+              f"- {p['cogs_ht']:>5.2f}€ = {p['gross_margin_ht']:>5.2f}€ ({p['gross_margin_pct_ht']}%)")
+    print(f"\nBottom 5 margins (HT) :")
     for p in products[-5:]:
-        print(f"  {p['sku']:<15} {p['title'][:35]:<35} {p['retail_price']:>6.2f}€ - {p['cogs_2026']:>5.2f}€ = {p['gross_margin']:>5.2f}€ ({p['gross_margin_pct']}%)")
+        print(f"  {p['sku']:<15} {p['title'][:35]:<35} "
+              f"{p['retail_price_ttc']:>6.2f}€ TTC → {p['retail_price_ht']:>6.2f}€ HT "
+              f"- {p['cogs_ht']:>5.2f}€ = {p['gross_margin_ht']:>5.2f}€ ({p['gross_margin_pct_ht']}%)")

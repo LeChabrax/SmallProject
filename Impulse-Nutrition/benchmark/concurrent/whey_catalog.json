@@ -1,0 +1,3538 @@
+{
+  "meta": {
+    "schema_version": 2,
+    "description": "Whey concurrents benchmark — raw SKU data. Derived prices (€/kg, €/g prot., discount) computed at build time.",
+    "last_updated": "2026-04-14",
+    "sources": {
+      "xlsx_vitavea_backport": "benchmark_whey_vitavea.xlsx (HAVEA internal, April 2026)",
+      "shopify_mcp_plus_manual_website": "Shopify MCP + impulse-nutrition.fr (April 2026)"
+    },
+    "enrichment_round": "round 2 : nutrition backfill via OFF + fddb + retailer pages",
+    "schema_v2_note": "3-layer price model : price_nominal (prix barré site propre), price_current (prix affiché site propre aujourd'hui, inclut promos permanentes), price_median_market (prix médian cross-retailers via idealo/ledenicheur). Legacy price_catalog_ttc_eur conservé en price_catalog_ttc_eur_legacy pour traçabilité.",
+    "schema_v2_refresh_round": "v2 3-layer price refresh via idealo/ledenicheur/brand sites",
+    "cleanup_round": "Phase 4 : delete obsolete + fix inexistent SKUs + add missing formats",
+    "v3_fix_round": "Phase 7 : MyProtein variant spot-check + ESN drift correction",
+    "v4_fix_round": "Phase 8 : Nutripure variants via Playwright click + Foodspring Amazon fallback"
+  },
+  "products": [
+    {
+      "brand": "impulse_nutrition",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 750,
+      "origin_milk": "France",
+      "certifications": [],
+      "protein_pct_100g": 85.0,
+      "protein_per_serving_g": 25.5,
+      "serving_size_g": 30,
+      "servings_per_pack": 25,
+      "bcaa_per_serving_g": 5.3,
+      "carbs_per_serving_g": 1.0,
+      "fat_per_serving_g": 0.5,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "site_propre"
+      ],
+      "snapshot_date": "2026-04-14",
+      "source": "shopify_mcp_plus_manual_website",
+      "source_url": "https://impulse-nutrition.fr/products/whey-isolate-saveur-chocolat",
+      "product_id": "impulse_nutrition_whey_isolate_750g_chocolat",
+      "product_name": "Whey Isolate",
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "nature"
+      ],
+      "price_current_ttc_eur": 39.9,
+      "price_nominal_ttc_eur": 39.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 39.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://impulse-nutrition.fr/products/whey-isolate-saveur-chocolat",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://impulse-nutrition.fr/products/whey-isolate-saveur-chocolat",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "impulse_nutrition",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 750,
+      "origin_milk": "France",
+      "certifications": [],
+      "protein_pct_100g": 85.0,
+      "protein_per_serving_g": 25.5,
+      "serving_size_g": 30,
+      "servings_per_pack": 25,
+      "bcaa_per_serving_g": 5.3,
+      "carbs_per_serving_g": 1.0,
+      "fat_per_serving_g": 0.5,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "site_propre"
+      ],
+      "snapshot_date": "2026-04-14",
+      "source": "shopify_mcp_plus_manual_website",
+      "source_url": "https://impulse-nutrition.fr/products/whey-isolate-saveur-vanille",
+      "product_id": "impulse_nutrition_whey_isolate_750g_vanille",
+      "product_name": "Whey Isolate",
+      "flavor": "vanille",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "nature"
+      ],
+      "price_current_ttc_eur": 39.9,
+      "price_nominal_ttc_eur": 39.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 39.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://impulse-nutrition.fr/products/whey-isolate-saveur-vanille",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://impulse-nutrition.fr/products/whey-isolate-saveur-vanille",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "impulse_nutrition",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 750,
+      "origin_milk": "France",
+      "certifications": [],
+      "protein_pct_100g": 85.0,
+      "protein_per_serving_g": 25.5,
+      "serving_size_g": 30,
+      "servings_per_pack": 25,
+      "bcaa_per_serving_g": 5.3,
+      "carbs_per_serving_g": 1.0,
+      "fat_per_serving_g": 0.5,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "site_propre"
+      ],
+      "snapshot_date": "2026-04-14",
+      "source": "shopify_mcp_plus_manual_website",
+      "source_url": "https://impulse-nutrition.fr/products/whey-isolate-nature",
+      "product_id": "impulse_nutrition_whey_isolate_750g_nature",
+      "product_name": "Whey Isolate",
+      "flavor": "nature",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "nature"
+      ],
+      "price_current_ttc_eur": 37.9,
+      "price_nominal_ttc_eur": 37.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 37.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://impulse-nutrition.fr/products/whey-isolate-nature",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://impulse-nutrition.fr/products/whey-isolate-nature",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "nutripure",
+      "product_id": "nutripure_whey_isolat_native_750g_750g_chocolat",
+      "product_name": "Whey Isolat Native 750g",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 750,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "Chocolat",
+        "Vanille",
+        "Neutre",
+        "Noisette",
+        "Fraise"
+      ],
+      "origin_milk": "France (pâturages)",
+      "certifications": [
+        "EN 17444"
+      ],
+      "protein_pct_100g": 94.0,
+      "protein_per_serving_g": 25.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 25.0,
+      "bcaa_per_serving_g": 5.0,
+      "carbs_per_serving_g": 0.3,
+      "fat_per_serving_g": 0.2,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.nutripure.fr/produits/whey-isolat-native-chocolat",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 39.9,
+      "price_nominal_ttc_eur": 39.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 57.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.nutripure.fr/fr/musculation/147-whey-chocolat-isolate.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.nutripure.fr/fr/musculation/147-whey-chocolat-isolate.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_median_market_ttc_eur": {
+          "source_url": "https://www.nutripure.fr/fr/musculation/147-whey-chocolat-isolate.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Prix marché = null (Nutripure vend uniquement sur site propre, pas de cross-retailers significatifs). Ancien 46€ sourcé via robshop.fr était un revendeur cher, pas un vrai marché médian."
+    },
+    {
+      "brand": "nutripure",
+      "product_id": "nutripure_whey_isolat_native_2kg_2000g_chocolat",
+      "product_name": "Whey Isolat Native 2kg",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 2000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "Chocolat",
+        "Vanille",
+        "Neutre",
+        "Noisette",
+        "Fraise"
+      ],
+      "origin_milk": "France (pâturages)",
+      "certifications": [
+        "EN 17444"
+      ],
+      "protein_pct_100g": 94.0,
+      "protein_per_serving_g": 25.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 66.0,
+      "bcaa_per_serving_g": 5.0,
+      "carbs_per_serving_g": 0.3,
+      "fat_per_serving_g": 0.2,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.nutripure.fr/fr/musculation/147-1115-whey-chocolat-isolate.html#/332-poids_poudre-seau_2kg",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 104.9,
+      "price_nominal_ttc_eur": 104.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 114.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.nutripure.fr/fr/musculation/147-1115-whey-chocolat-isolate.html#/332-poids_poudre-seau_2kg",
+          "source_note": "Confirmé via Playwright click sur variant radio Seau 2KG (id=332). Page nutripure.fr. Agent v2 avait mal lu '90€' (probablement le 'à partir de' affiché sur la page parent).",
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.nutripure.fr/fr/musculation/147-1115-whey-chocolat-isolate.html#/332-poids_poudre-seau_2kg",
+          "source_note": "Confirmé via Playwright click sur variant radio Seau 2KG (id=332). Page nutripure.fr. Agent v2 avait mal lu '90€' (probablement le 'à partir de' affiché sur la page parent).",
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Confirmé via Playwright click sur variant radio Seau 2KG (id=332). Page nutripure.fr. Agent v2 avait mal lu '90€' (probablement le 'à partir de' affiché sur la page parent)."
+    },
+    {
+      "brand": "nutrimuscle",
+      "product_id": "nutrimuscle_whey_native_concentrat_1000g_chocolat",
+      "product_name": "Whey Native Concentrat",
+      "type": "concentrat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 1000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "Chocolat",
+        "Vanille",
+        "Neutre",
+        "Fraise"
+      ],
+      "origin_milk": "France (Lactalis)",
+      "certifications": [
+        "Certifié",
+        "lait Lactalis FR"
+      ],
+      "protein_pct_100g": 80.0,
+      "protein_per_serving_g": 24.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 33.0,
+      "bcaa_per_serving_g": 5.0,
+      "carbs_per_serving_g": 3.5,
+      "fat_per_serving_g": 1.5,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "revendeurs"
+      ],
+      "source_url": "https://www.nutrimuscle.com/products/whey-concentree-native",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 37.95,
+      "price_nominal_ttc_eur": 37.95,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 25.95,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.nutrimuscle.com/products/whey-native",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.nutrimuscle.com/products/whey-native",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "v1 avait 25.95€ (+46% correction)"
+    },
+    {
+      "brand": "nutrimuscle",
+      "product_id": "nutrimuscle_whey_native_isolate_1000g_chocolat",
+      "product_name": "Whey Native Isolate",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 1000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "Chocolat",
+        "Vanille",
+        "Neutre",
+        "Fraise"
+      ],
+      "origin_milk": "France (Lactalis)",
+      "certifications": [
+        "Certifié",
+        "lait Lactalis FR"
+      ],
+      "protein_pct_100g": 85.0,
+      "protein_per_serving_g": 24.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 33.0,
+      "bcaa_per_serving_g": 6.0,
+      "carbs_per_serving_g": 1.5,
+      "fat_per_serving_g": 0.8,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "revendeurs"
+      ],
+      "source_url": "https://www.nutrimuscle.com/products/whey-isolat-native",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 57.95,
+      "price_nominal_ttc_eur": 57.95,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 39.95,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.nutrimuscle.com/products/whey-native-isolate",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.nutrimuscle.com/products/whey-native-isolate",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "v1 avait 39.95€ (+45% correction)"
+    },
+    {
+      "brand": "myprotein",
+      "product_id": "myprotein_impact_whey_protein_1kg_1000g_chocolat",
+      "product_name": "Impact Whey Protein 1kg",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 1000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "+40 saveurs (Choco Brownie",
+        "Vanille",
+        "Fraise",
+        "Neutre...)"
+      ],
+      "origin_milk": "UE (UK, IE, NL...)",
+      "certifications": [
+        "Informed Choice"
+      ],
+      "protein_pct_100g": 82.0,
+      "protein_per_serving_g": 23.0,
+      "serving_size_g": 25.0,
+      "servings_per_pack": 40.0,
+      "bcaa_per_serving_g": 4.5,
+      "carbs_per_serving_g": 2.0,
+      "fat_per_serving_g": 1.0,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "revendeurs"
+      ],
+      "source_url": "https://fr.myprotein.com/p/nutrition-sportive/myprotein-impact-whey-protein-chocolate-1kg/11068071/",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 17.99,
+      "price_nominal_ttc_eur": 41.99,
+      "price_median_market_ttc_eur": 34.99,
+      "price_catalog_ttc_eur_legacy": 33.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/myprotein-impact-whey-protein-chocolate-1kg/11068071/",
+          "source_note": "Prix actuel = 17.99€ sur fr.myprotein.com/.../11068071/ (scraped Playwright 2026-04-14). Promo site -30% + extra app ramène à 17.99 vs 41.99 nominal (soit -57%). Pattern MyProtein Whey Protein uniquement.",
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/myprotein-impact-whey-protein-chocolate-1kg/11068071/",
+          "source_note": "Prix actuel = 17.99€ sur fr.myprotein.com/.../11068071/ (scraped Playwright 2026-04-14). Promo site -30% + extra app ramène à 17.99 vs 41.99 nominal (soit -57%). Pattern MyProtein Whey Protein uniquement.",
+          "patched_at": "2026-04-14"
+        },
+        "price_median_market_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-protein/10530943/",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Prix actuel = 17.99€ sur fr.myprotein.com/.../11068071/ (scraped Playwright 2026-04-14). Promo site -30% + extra app ramène à 17.99 vs 41.99 nominal (soit -57%). Pattern MyProtein Whey Protein uniquement."
+    },
+    {
+      "brand": "myprotein",
+      "product_id": "myprotein_impact_whey_protein_2_5kg_2500g_chocolat",
+      "product_name": "Impact Whey Protein 2,5kg",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2500,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "+40 saveurs"
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Choice"
+      ],
+      "protein_pct_100g": 82.0,
+      "protein_per_serving_g": 23.0,
+      "serving_size_g": 25.0,
+      "servings_per_pack": 100.0,
+      "bcaa_per_serving_g": 4.5,
+      "carbs_per_serving_g": 2.0,
+      "fat_per_serving_g": 1.0,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre"
+      ],
+      "source_url": "https://fr.myprotein.com/p/nutrition-sportive/myprotein-impact-whey-protein-chocolate-nut-2.5kg/10530969/",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 40.99,
+      "price_nominal_ttc_eur": 84.99,
+      "price_median_market_ttc_eur": 56.4,
+      "price_catalog_ttc_eur_legacy": 47.94,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/myprotein-impact-whey-protein-chocolate-nut-2.5kg/10530969/",
+          "source_note": "Prix scrapé via variant Chocolate Nut 2.5kg (10530969) : 84.99€ barré / 40.99€ actuel. Promo -52%. Playwright 2026-04-14.",
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/myprotein-impact-whey-protein-chocolate-nut-2.5kg/10530969/",
+          "source_note": "Prix scrapé via variant Chocolate Nut 2.5kg (10530969) : 84.99€ barré / 40.99€ actuel. Promo -52%. Playwright 2026-04-14.",
+          "patched_at": "2026-04-14"
+        },
+        "price_median_market_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-protein/10530943/",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Prix scrapé via variant Chocolate Nut 2.5kg (10530969) : 84.99€ barré / 40.99€ actuel. Promo -52%. Playwright 2026-04-14."
+    },
+    {
+      "brand": "myprotein",
+      "product_id": "myprotein_impact_whey_protein_5kg_5000g_sans_arome",
+      "product_name": "Impact Whey Protein 5kg (Sans arôme)",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 5000,
+      "flavor": "sans arôme",
+      "flavors_available_sample": [
+        "sans arôme"
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Choice"
+      ],
+      "protein_pct_100g": 82.0,
+      "protein_per_serving_g": 23.0,
+      "serving_size_g": 25.0,
+      "servings_per_pack": 200.0,
+      "bcaa_per_serving_g": 4.5,
+      "carbs_per_serving_g": 2.0,
+      "fat_per_serving_g": 1.0,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre"
+      ],
+      "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-protein/10530943/",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 91.1,
+      "price_nominal_ttc_eur": 188.99,
+      "price_median_market_ttc_eur": 188.99,
+      "price_catalog_ttc_eur_legacy": 89.0,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-protein/10530943/",
+          "source_note": "5kg n'existe qu'en 'Sans arôme' (chocolat inexistant). Current price = extrapolation du ratio 2.5kg (40.99/84.99=0.482) : 188.99 × 0.482 ≈ 91.10€.",
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-protein/10530943/",
+          "source_note": "5kg n'existe qu'en 'Sans arôme' (chocolat inexistant). Current price = extrapolation du ratio 2.5kg (40.99/84.99=0.482) : 188.99 × 0.482 ≈ 91.10€.",
+          "patched_at": "2026-04-14"
+        },
+        "price_median_market_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-protein/10530943/",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "5kg n'existe qu'en 'Sans arôme' (chocolat inexistant). Current price = extrapolation du ratio 2.5kg (40.99/84.99=0.482) : 188.99 × 0.482 ≈ 91.10€."
+    },
+    {
+      "brand": "myprotein",
+      "product_id": "myprotein_impact_whey_isolate_1kg_1000g_chocolat",
+      "product_name": "Impact Whey Isolate 1kg",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 1000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "+40 saveurs"
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Choice"
+      ],
+      "protein_pct_100g": 90.0,
+      "protein_per_serving_g": 25.0,
+      "serving_size_g": 25.0,
+      "servings_per_pack": 40.0,
+      "bcaa_per_serving_g": 5.5,
+      "carbs_per_serving_g": 1.0,
+      "fat_per_serving_g": 0.5,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-isolate/10852482/",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 57.99,
+      "price_nominal_ttc_eur": 57.99,
+      "price_median_market_ttc_eur": 56.4,
+      "price_catalog_ttc_eur_legacy": 47.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-isolate/10852482/",
+          "source_note": "Isolate EXCLU de la promo -30% MyProtein. Prix current = prix nominal (pas de discount automatique). Revert de l'ancienne estimation ×0.7.",
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-isolate/10852482/",
+          "source_note": "Isolate EXCLU de la promo -30% MyProtein. Prix current = prix nominal (pas de discount automatique). Revert de l'ancienne estimation ×0.7.",
+          "patched_at": "2026-04-14"
+        },
+        "price_median_market_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-isolate/10852482/",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Isolate EXCLU de la promo -30% MyProtein. Prix current = prix nominal (pas de discount automatique). Revert de l'ancienne estimation ×0.7."
+    },
+    {
+      "brand": "myprotein",
+      "product_id": "myprotein_impact_whey_isolate_2_5kg_2500g_chocolat",
+      "product_name": "Impact Whey Isolate 2,5kg",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2500,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "+40 saveurs"
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Choice"
+      ],
+      "protein_pct_100g": 90.0,
+      "protein_per_serving_g": 25.0,
+      "serving_size_g": 25.0,
+      "servings_per_pack": 100.0,
+      "bcaa_per_serving_g": 5.5,
+      "carbs_per_serving_g": 1.0,
+      "fat_per_serving_g": 0.5,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-isolate-framboise-poche-2.5-kg/10530927/",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 124.99,
+      "price_nominal_ttc_eur": 124.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 100.0,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-isolate-framboise-poche-2.5-kg/10530927/",
+          "source_note": "Confirmé via variant Framboise 2.5kg (10530927) : 124.99€ affiché sans strikethrough. Isolate exclu de la promo -30%.",
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/impact-whey-isolate-framboise-poche-2.5-kg/10530927/",
+          "source_note": "Confirmé via variant Framboise 2.5kg (10530927) : 124.99€ affiché sans strikethrough. Isolate exclu de la promo -30%.",
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Confirmé via variant Framboise 2.5kg (10530927) : 124.99€ affiché sans strikethrough. Isolate exclu de la promo -30%."
+    },
+    {
+      "brand": "myprotein",
+      "product_id": "myprotein_clear_whey_isolate_875g_fraise",
+      "product_name": "Clear Whey Isolate 875g",
+      "type": "clear_hydrolysat",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 875,
+      "flavor": "fraise",
+      "flavors_available_sample": [
+        "Fraise",
+        "Pastèque",
+        "Limonade",
+        "Tropical..."
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Choice"
+      ],
+      "protein_pct_100g": 68.0,
+      "protein_per_serving_g": 20.0,
+      "serving_size_g": 25.0,
+      "servings_per_pack": 35,
+      "bcaa_per_serving_g": 4.0,
+      "carbs_per_serving_g": 0.5,
+      "fat_per_serving_g": 0.1,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://fr.myprotein.com/p/nutrition-sportive/clear-whey-isolate/12081395/",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 49.99,
+      "price_nominal_ttc_eur": 49.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 43.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/clear-whey-isolate/12081395/",
+          "source_note": "Clear Whey exclu de la promo -30% (mention explicite). Format 875g max (pas de 1kg). Confirmé via scraping 12081395.",
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://fr.myprotein.com/p/nutrition-sportive/clear-whey-isolate/12081395/",
+          "source_note": "Clear Whey exclu de la promo -30% (mention explicite). Format 875g max (pas de 1kg). Confirmé via scraping 12081395.",
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Clear Whey exclu de la promo -30% (mention explicite). Format 875g max (pas de 1kg). Confirmé via scraping 12081395."
+    },
+    {
+      "brand": "bulk",
+      "product_id": "bulk_pure_whey_protein_1kg_1000g_chocolat",
+      "product_name": "Pure Whey Protein 1kg",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 1000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "+20 saveurs (Choco",
+        "Vanille",
+        "Fraise",
+        "Neutre...)"
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Sport"
+      ],
+      "protein_pct_100g": 82.0,
+      "protein_per_serving_g": 22.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 33.0,
+      "bcaa_per_serving_g": 5.0,
+      "carbs_per_serving_g": 2.0,
+      "fat_per_serving_g": 1.0,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.bulk.com/fr/pure-whey-protein-1.html",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 27.99,
+      "price_nominal_ttc_eur": 37.99,
+      "price_median_market_ttc_eur": 23.99,
+      "price_catalog_ttc_eur_legacy": 29.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/proteine-whey-poudre/bpb-wpc8-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/proteine-whey-poudre/bpb-wpc8-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_median_market_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/proteine-whey-poudre/bpb-wpc8-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Catalogue partiellement fictif: barré 37.99€ vs current 27.99€ vs marché 23.99€"
+    },
+    {
+      "brand": "bulk",
+      "product_id": "bulk_pure_whey_protein_2_5kg_2500g_chocolat",
+      "product_name": "Pure Whey Protein 2,5kg",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2500,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "+20 saveurs"
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Sport"
+      ],
+      "protein_pct_100g": 82.0,
+      "protein_per_serving_g": 22.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 83.0,
+      "bcaa_per_serving_g": 5.0,
+      "carbs_per_serving_g": 2.0,
+      "fat_per_serving_g": 1.0,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre"
+      ],
+      "source_url": "https://www.bulk.com/fr/pure-whey-protein-1.html",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 64.99,
+      "price_nominal_ttc_eur": 84.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 52.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/proteine-whey-poudre/bpb-wpc8-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/proteine-whey-poudre/bpb-wpc8-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Catalogue fictif: 84.99€ barré vs 64.99€ réel (-23%)"
+    },
+    {
+      "brand": "bulk",
+      "product_id": "bulk_pure_whey_protein_5kg_5000g_chocolat",
+      "product_name": "Pure Whey Protein 5kg",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 5000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "+20 saveurs"
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Sport"
+      ],
+      "protein_pct_100g": 82.0,
+      "protein_per_serving_g": 22.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 166.0,
+      "bcaa_per_serving_g": 5.0,
+      "carbs_per_serving_g": 2.0,
+      "fat_per_serving_g": 1.0,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre"
+      ],
+      "source_url": "https://www.bulk.com/fr/pure-whey-protein-1.html",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 129.99,
+      "price_nominal_ttc_eur": 159.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 89.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/proteine-whey-poudre/bpb-wpc8-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/proteine-whey-poudre/bpb-wpc8-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Catalogue fictif: 159.99€ vs 129.99€ payé (-19%)"
+    },
+    {
+      "brand": "bulk",
+      "product_id": "bulk_pure_whey_isolate_1kg_1000g_chocolat",
+      "product_name": "Pure Whey Isolate 1kg",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 1000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "Choco",
+        "Vanille",
+        "Fraise",
+        "Neutre"
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Sport"
+      ],
+      "protein_pct_100g": 90.0,
+      "protein_per_serving_g": 26.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 33.0,
+      "bcaa_per_serving_g": 5.5,
+      "carbs_per_serving_g": 1.5,
+      "fat_per_serving_g": 0.5,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.bulk.com/fr/pure-whey-isolate-90.html",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 44.99,
+      "price_nominal_ttc_eur": 69.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 39.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/isolat-90-de-lactoserum-pur/bpb-wpi9-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/isolat-90-de-lactoserum-pur/bpb-wpi9-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Catalogue fictif majeur: 69.99€ barré vs 44.99€ réel (-36%)"
+    },
+    {
+      "brand": "bulk",
+      "product_id": "bulk_pure_whey_isolate_2_5kg_2500g_chocolat",
+      "product_name": "Pure Whey Isolate 2,5kg",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2500,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "Choco",
+        "Vanille",
+        "Fraise",
+        "Neutre"
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Sport"
+      ],
+      "protein_pct_100g": 90.0,
+      "protein_per_serving_g": 26.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 83.0,
+      "bcaa_per_serving_g": 5.5,
+      "carbs_per_serving_g": 1.5,
+      "fat_per_serving_g": 0.5,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre"
+      ],
+      "source_url": "https://www.bulk.com/fr/pure-whey-isolate-90.html",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 99.99,
+      "price_nominal_ttc_eur": 159.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 69.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/isolat-90-de-lactoserum-pur/bpb-wpi9-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/isolat-90-de-lactoserum-pur/bpb-wpi9-0000",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Catalogue fictif fort: 159.99€ vs 99.99€ réel (-37%)"
+    },
+    {
+      "brand": "bulk",
+      "product_id": "bulk_clear_whey_isolate_500g_500g_fraise",
+      "product_name": "Clear Whey Isolate 500g",
+      "type": "clear_hydrolysat",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 500,
+      "flavor": "fraise",
+      "flavors_available_sample": [
+        "Fraise",
+        "Pastèque",
+        "Pêche",
+        "Ananas..."
+      ],
+      "origin_milk": "UE",
+      "certifications": [
+        "Informed Sport"
+      ],
+      "protein_pct_100g": 72.0,
+      "protein_per_serving_g": 20.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 16.0,
+      "bcaa_per_serving_g": 4.0,
+      "carbs_per_serving_g": 0.5,
+      "fat_per_serving_g": 0.1,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre"
+      ],
+      "source_url": "https://www.bulk.com/fr/clear-whey-isolate.html",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 25.99,
+      "price_nominal_ttc_eur": 31.49,
+      "price_median_market_ttc_eur": 22.25,
+      "price_catalog_ttc_eur_legacy": 27.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/isolat-de-lactoserum-clarifie/bpb-cwhe",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/isolat-de-lactoserum-clarifie/bpb-cwhe",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_median_market_ttc_eur": {
+          "source_url": "https://www.bulk.com/fr/products/isolat-de-lactoserum-clarifie/bpb-cwhe",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Catalogue 31.49€ barré vs 25.99€ payé (-17%). Marché 22.25€"
+    },
+    {
+      "brand": "decathlon",
+      "product_id": "decathlon_whey_protein_900g_concentrat_900g_chocolat",
+      "product_name": "Whey Protein 900g (Concentrat)",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 900,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "Cacao",
+        "Vanille"
+      ],
+      "origin_milk": "UE (NL, IE, DK)",
+      "certifications": [
+        "IFS Food",
+        "EN 17444"
+      ],
+      "protein_pct_100g": 70.0,
+      "protein_per_serving_g": 21.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 30.0,
+      "bcaa_per_serving_g": 5.2,
+      "carbs_per_serving_g": 5.1,
+      "fat_per_serving_g": 2.1,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Magasins Decathlon",
+        "Site"
+      ],
+      "source_url": "https://www.decathlon.fr/p/mp/corength/whey-chocolat-corength/_/R-p-336437",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 28.99,
+      "price_nominal_ttc_eur": 28.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 27.0,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.decathlon.fr/p/whey-protein-chocolat-900g/_/R-p-336418",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.decathlon.fr/p/whey-protein-chocolat-900g/_/R-p-336418",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "decathlon",
+      "product_id": "decathlon_pure_whey_100_isolate_900g_900g_chocolat",
+      "product_name": "Pure Whey 100% Isolate 900g",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 900,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "Cacao",
+        "Vanille",
+        "Café Latte",
+        "Neutre"
+      ],
+      "origin_milk": "UE (NL, IE, DK)",
+      "certifications": [
+        "IFS Food",
+        "EN 17444"
+      ],
+      "protein_pct_100g": 82.0,
+      "protein_per_serving_g": 25.0,
+      "serving_size_g": 30.0,
+      "servings_per_pack": 30.0,
+      "bcaa_per_serving_g": 6.3,
+      "carbs_per_serving_g": 2.3,
+      "fat_per_serving_g": 0.6,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Magasins Decathlon",
+        "Site"
+      ],
+      "source_url": "https://www.decathlon.fr/p/mp/corength/whey-isolate-chocolat/_/R-p-336438",
+      "snapshot_date": "2026-04-14",
+      "source": "xlsx_vitavea_backport",
+      "price_current_ttc_eur": 39.99,
+      "price_nominal_ttc_eur": 39.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 35.0,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.decathlon.fr/p/pure-whey-proteine-100percent-isolate-chocolat-900g/_/R-p-339686",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.decathlon.fr/p/pure-whey-proteine-100percent-isolate-chocolat-900g/_/R-p-339686",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eric_favre",
+      "product_id": "ericfavre_iso_zero_100_whey_1500g_chocolat",
+      "product_name": "Iso Zero 100% Whey Protéine 1,5kg",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 1500,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "cookies cream",
+        "chocotella",
+        "pistache",
+        "framboisier",
+        "café latte"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Nutricontrole"
+      ],
+      "protein_pct_100g": 83,
+      "protein_per_serving_g": 25,
+      "serving_size_g": 30,
+      "servings_per_pack": 50,
+      "bcaa_per_serving_g": 5.66,
+      "carbs_per_serving_g": 0.5,
+      "fat_per_serving_g": 0.4,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-zero-100-whey-proteine-choco-intense-1-5kg-p-194-o-1200.htm",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 79.9,
+      "price_nominal_ttc_eur": 79.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 79.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-zero-100-whey-proteine-choco-intense-1-5kg-p-194-o-1200.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-zero-100-whey-proteine-choco-intense-1-5kg-p-194-o-1200.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eric_favre",
+      "product_id": "ericfavre_iso_zero_100_whey_2000g_chocolat",
+      "product_name": "Iso Zero 100% Whey Protéine 2kg",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2000,
+      "flavor": "chocotella",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "cookies cream",
+        "chocotella",
+        "pistache",
+        "framboisier",
+        "café latte"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Nutricontrole"
+      ],
+      "protein_pct_100g": 83,
+      "protein_per_serving_g": 25,
+      "serving_size_g": 30,
+      "servings_per_pack": 66,
+      "bcaa_per_serving_g": 5.66,
+      "carbs_per_serving_g": 0.5,
+      "fat_per_serving_g": 0.4,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-zero-100-whey-proteine-chocotella-2kg-p-194-o-155.htm",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 94.9,
+      "price_nominal_ttc_eur": 94.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 94.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-zero-100-whey-proteine-chocotella-2kg-p-194-o-155.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-zero-100-whey-proteine-chocotella-2kg-p-194-o-155.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eric_favre",
+      "product_id": "ericfavre_iso_zero_100_whey_500g",
+      "product_name": "Iso Zero 100% Whey Protéine 500g",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 500,
+      "flavor": "cookies cream",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "cookies cream",
+        "chocotella",
+        "pistache"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Nutricontrole"
+      ],
+      "protein_pct_100g": 83,
+      "protein_per_serving_g": 25,
+      "serving_size_g": 30,
+      "servings_per_pack": 16,
+      "bcaa_per_serving_g": 5.66,
+      "carbs_per_serving_g": 0.5,
+      "fat_per_serving_g": 0.4,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-zero-100-whey-proteine-cookies-cream-500g-p-194-o-1216.htm",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 33.9,
+      "price_nominal_ttc_eur": 33.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 33.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-zero-100-whey-proteine-cookies-cream-500g-p-194-o-1216.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-zero-100-whey-proteine-cookies-cream-500g-p-194-o-1216.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eric_favre",
+      "product_id": "ericfavre_iso_fusion_2000g_biscuit_cookie",
+      "product_name": "Iso Fusion Protein Complex 2kg",
+      "type": "mix_concentrat_isolat",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2000,
+      "flavor": "biscuit cookie",
+      "flavors_available_sample": [
+        "biscuit cookie",
+        "vanille",
+        "chocotella"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Nutricontrole"
+      ],
+      "protein_pct_100g": 81,
+      "protein_per_serving_g": 24.4,
+      "serving_size_g": 30,
+      "servings_per_pack": 66,
+      "bcaa_per_serving_g": 4.1,
+      "carbs_per_serving_g": 1.4,
+      "fat_per_serving_g": 1.6,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-fusion-biscuit-cookie-2kg-p-907-o-1925.htm",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 65.9,
+      "price_nominal_ttc_eur": 65.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 65.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-fusion-biscuit-cookie-2kg-p-907-o-1925.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-fusion-biscuit-cookie-2kg-p-907-o-1925.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eric_favre",
+      "product_id": "ericfavre_iso_fusion_750g_biscuit_cookie",
+      "product_name": "Iso Fusion Protein Complex 750g",
+      "type": "mix_concentrat_isolat",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 750,
+      "flavor": "biscuit cookie",
+      "flavors_available_sample": [
+        "biscuit cookie",
+        "vanille",
+        "chocotella"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Nutricontrole"
+      ],
+      "protein_pct_100g": 81,
+      "protein_per_serving_g": 24.4,
+      "serving_size_g": 30,
+      "servings_per_pack": 25,
+      "bcaa_per_serving_g": 4.1,
+      "carbs_per_serving_g": 1.4,
+      "fat_per_serving_g": 1.6,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-fusion-biscuit-cookie-750g-p-907-o-1924.htm",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 41.9,
+      "price_nominal_ttc_eur": 41.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 41.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-fusion-biscuit-cookie-750g-p-907-o-1924.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/iso-fusion-biscuit-cookie-750g-p-907-o-1924.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eric_favre",
+      "product_id": "ericfavre_whey_optimax_1500g_chocolat",
+      "product_name": "Whey Optimax Protein 1,5kg",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 1500,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "biscuit cookie",
+        "chocotella"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Nutricontrole"
+      ],
+      "protein_pct_100g": 73,
+      "protein_per_serving_g": 22,
+      "serving_size_g": 30,
+      "servings_per_pack": 50,
+      "bcaa_per_serving_g": 3.74,
+      "carbs_per_serving_g": null,
+      "fat_per_serving_g": null,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.ericfavre.com/fr_fr/proteines/whey-optimax-protein-chocolat-1-5kg-p-622-o-1370.htm",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 59.9,
+      "price_nominal_ttc_eur": 59.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 59.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/whey-optimax-protein-chocolat-1-5kg-p-622-o-1370.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/whey-optimax-protein-chocolat-1-5kg-p-622-o-1370.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eric_favre",
+      "product_id": "ericfavre_whey_optimax_500g_biscuit_cookie",
+      "product_name": "Whey Optimax Protein 500g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 500,
+      "flavor": "biscuit cookie",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "biscuit cookie"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Nutricontrole"
+      ],
+      "protein_pct_100g": 73,
+      "protein_per_serving_g": 22,
+      "serving_size_g": 30,
+      "servings_per_pack": 16,
+      "bcaa_per_serving_g": 3.74,
+      "carbs_per_serving_g": null,
+      "fat_per_serving_g": null,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.ericfavre.com/fr_fr/proteines/whey-optimax-protein-biscuit-cookie-500g-p-622-o-1369.htm",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 29.9,
+      "price_nominal_ttc_eur": 29.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 29.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/whey-optimax-protein-biscuit-cookie-500g-p-622-o-1369.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/whey-optimax-protein-biscuit-cookie-500g-p-622-o-1369.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eric_favre",
+      "product_id": "ericfavre_whey_zero_2000g_chocolat",
+      "product_name": "Whey Zero Protéine 2kg",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "cookies cream"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Nutricontrole"
+      ],
+      "protein_pct_100g": 75,
+      "protein_per_serving_g": 22.5,
+      "serving_size_g": 30,
+      "servings_per_pack": 66,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": 3,
+      "fat_per_serving_g": 1.4,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.ericfavre.com/fr_fr/proteines/whey-zero-chocolat-2kg-p-517-o-1093.htm",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 82.9,
+      "price_nominal_ttc_eur": 82.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 82.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/whey-zero-chocolat-2kg-p-517-o-1093.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.ericfavre.com/fr_fr/proteines/whey-zero-chocolat-2kg-p-517-o-1093.htm",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eafit",
+      "product_id": "eafit_pure_whey_750g_chocolat",
+      "product_name": "Pure Whey Protein 750g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 750,
+      "flavor": "double chocolat",
+      "flavors_available_sample": [
+        "double chocolat",
+        "café",
+        "chocolat noisette",
+        "vanille intense",
+        "caramel",
+        "fraise"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Marque N°1 en pharmacie"
+      ],
+      "protein_pct_100g": 77,
+      "protein_per_serving_g": 31,
+      "serving_size_g": 40,
+      "servings_per_pack": 19,
+      "bcaa_per_serving_g": 7,
+      "carbs_per_serving_g": 4,
+      "fat_per_serving_g": 1.7,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "Pharmacies"
+      ],
+      "source_url": "https://www.eafit.com/eafit-pure-whey.html",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 34.9,
+      "price_nominal_ttc_eur": 34.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 34.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-pure-whey.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-pure-whey.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eafit",
+      "product_id": "eafit_pure_whey_850g_chocolat",
+      "product_name": "Pure Whey Protein 850g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 850,
+      "flavor": "double chocolat",
+      "flavors_available_sample": [
+        "double chocolat",
+        "café",
+        "chocolat noisette",
+        "vanille intense",
+        "caramel"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Marque N°1 en pharmacie"
+      ],
+      "protein_pct_100g": 77,
+      "protein_per_serving_g": 31,
+      "serving_size_g": 40,
+      "servings_per_pack": 21,
+      "bcaa_per_serving_g": 7,
+      "carbs_per_serving_g": 4,
+      "fat_per_serving_g": 1.7,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "Pharmacies"
+      ],
+      "source_url": "https://www.eafit.com/eafit-pure-whey.html",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 38.9,
+      "price_nominal_ttc_eur": 38.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 38.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-pure-whey.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-pure-whey.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eafit",
+      "product_id": "eafit_pure_whey_2200g_chocolat",
+      "product_name": "Pure Whey Protein 2.2kg",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2200,
+      "flavor": "double chocolat",
+      "flavors_available_sample": [
+        "double chocolat",
+        "vanille intense",
+        "fraise",
+        "myrtille",
+        "chocolat noisette"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Marque N°1 en pharmacie"
+      ],
+      "protein_pct_100g": 77,
+      "protein_per_serving_g": 31,
+      "serving_size_g": 40,
+      "servings_per_pack": 55,
+      "bcaa_per_serving_g": 7,
+      "carbs_per_serving_g": 4,
+      "fat_per_serving_g": 1.7,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "Pharmacies"
+      ],
+      "source_url": "https://www.eafit.com/eafit-pure-whey.html",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 80.99,
+      "price_nominal_ttc_eur": 80.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 80.99,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-pure-whey.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-pure-whey.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eafit",
+      "product_id": "eafit_pure_isolate_750g_chocolat",
+      "product_name": "Pure Isolate 750g",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 750,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "fruits rouges"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Marque N°1 en pharmacie"
+      ],
+      "protein_pct_100g": 81,
+      "protein_per_serving_g": 25,
+      "serving_size_g": 30,
+      "servings_per_pack": 25,
+      "bcaa_per_serving_g": 5.5,
+      "carbs_per_serving_g": 1.4,
+      "fat_per_serving_g": 0.5,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "Pharmacies"
+      ],
+      "source_url": "https://www.eafit.com/eafit-pure-isolate.html",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 45.9,
+      "price_nominal_ttc_eur": 45.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 45.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-pure-isolate.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-pure-isolate.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eafit",
+      "product_id": "eafit_pure_isolate_premium_750g_citron",
+      "product_name": "Pure Isolate Premium 750g",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 750,
+      "flavor": "citron",
+      "flavors_available_sample": [
+        "citron"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Marque N°1 en pharmacie"
+      ],
+      "protein_pct_100g": 79,
+      "protein_per_serving_g": 24,
+      "serving_size_g": 30,
+      "servings_per_pack": 25,
+      "bcaa_per_serving_g": 5.2,
+      "carbs_per_serving_g": 0.5,
+      "fat_per_serving_g": 0.3,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "Pharmacies"
+      ],
+      "source_url": "https://www.eafit.com/eafit-pure-isolate-premium.html",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 45.9,
+      "price_nominal_ttc_eur": 45.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 45.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-pure-isolate-premium.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-pure-isolate-premium.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "eafit",
+      "product_id": "eafit_mega_whey_750g_chocolat",
+      "product_name": "Mega Whey Creatine Complex 750g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 750,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Marque N°1 en pharmacie"
+      ],
+      "protein_pct_100g": 73,
+      "protein_per_serving_g": 44.0,
+      "serving_size_g": 60,
+      "servings_per_pack": 12,
+      "bcaa_per_serving_g": 10.0,
+      "carbs_per_serving_g": 4.3,
+      "fat_per_serving_g": 2.0,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "Pharmacies"
+      ],
+      "source_url": "https://www.eafit.com/eafit-megawhey.html",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "field_sources": {
+        "protein_pct_100g": {
+          "source_url": "https://www.eafit.com/eafit-megawhey.html",
+          "source_note": "Formule muscle-mass : portion 60g = 44g protéines + 1.5g créatine. ~73% protein / 100g calculé. BCAA marketing = 23g/100g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "protein_per_serving_g": {
+          "source_url": "https://www.eafit.com/eafit-megawhey.html",
+          "source_note": "Formule muscle-mass : portion 60g = 44g protéines + 1.5g créatine. ~73% protein / 100g calculé. BCAA marketing = 23g/100g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "serving_size_g": {
+          "source_url": "https://www.eafit.com/eafit-megawhey.html",
+          "source_note": "Formule muscle-mass : portion 60g = 44g protéines + 1.5g créatine. ~73% protein / 100g calculé. BCAA marketing = 23g/100g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "servings_per_pack": {
+          "source_url": "https://www.eafit.com/eafit-megawhey.html",
+          "source_note": "Formule muscle-mass : portion 60g = 44g protéines + 1.5g créatine. ~73% protein / 100g calculé. BCAA marketing = 23g/100g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "bcaa_per_serving_g": {
+          "source_url": "https://www.eafit.com/eafit-megawhey.html",
+          "source_note": "Formule muscle-mass : portion 60g = 44g protéines + 1.5g créatine. ~73% protein / 100g calculé. BCAA marketing = 23g/100g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "carbs_per_serving_g": {
+          "source_url": "https://www.eafit.com/eafit-megawhey.html",
+          "source_note": "Formule muscle-mass : portion 60g = 44g protéines + 1.5g créatine. ~73% protein / 100g calculé. BCAA marketing = 23g/100g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "fat_per_serving_g": {
+          "source_url": "https://www.eafit.com/eafit-megawhey.html",
+          "source_note": "Formule muscle-mass : portion 60g = 44g protéines + 1.5g créatine. ~73% protein / 100g calculé. BCAA marketing = 23g/100g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "lactose_level": {
+          "source_url": "https://www.eafit.com/eafit-megawhey.html",
+          "source_note": "Formule muscle-mass : portion 60g = 44g protéines + 1.5g créatine. ~73% protein / 100g calculé. BCAA marketing = 23g/100g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-megawhey.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.eafit.com/eafit-megawhey.html",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_current_ttc_eur": 39.99,
+      "price_nominal_ttc_eur": 39.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 39.99
+    },
+    {
+      "brand": "aqeelab",
+      "product_id": "aqeelab_whey_native_810g_chocolat",
+      "product_name": "Whey Native 810g",
+      "type": "concentrat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 810,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille"
+      ],
+      "origin_milk": "France",
+      "certifications": [
+        "Testée labo indépendant"
+      ],
+      "protein_pct_100g": 94,
+      "protein_per_serving_g": 28.2,
+      "serving_size_g": 30,
+      "servings_per_pack": 27,
+      "bcaa_per_serving_g": 6.6,
+      "carbs_per_serving_g": 0.5,
+      "fat_per_serving_g": 0.4,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": 36.76,
+      "subscription_discount_pct": 20,
+      "channels": [
+        "Site propre"
+      ],
+      "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "field_sources": {
+        "protein_pct_100g": {
+          "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+          "source_note": "Produit nommé explicitement 'Whey Native 94%' sur la page Aqeelab → protein_pct=94%. BCAA calculé à partir du claim '22g BCAA / 100g protéines' sourcé nabfit.fr. Glucides/lipides estimés = pattern isolat natif (similaire à Nutripure).",
+          "patched_at": "2026-04-14"
+        },
+        "protein_per_serving_g": {
+          "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+          "source_note": "Produit nommé explicitement 'Whey Native 94%' sur la page Aqeelab → protein_pct=94%. BCAA calculé à partir du claim '22g BCAA / 100g protéines' sourcé nabfit.fr. Glucides/lipides estimés = pattern isolat natif (similaire à Nutripure).",
+          "patched_at": "2026-04-14"
+        },
+        "serving_size_g": {
+          "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+          "source_note": "Produit nommé explicitement 'Whey Native 94%' sur la page Aqeelab → protein_pct=94%. BCAA calculé à partir du claim '22g BCAA / 100g protéines' sourcé nabfit.fr. Glucides/lipides estimés = pattern isolat natif (similaire à Nutripure).",
+          "patched_at": "2026-04-14"
+        },
+        "servings_per_pack": {
+          "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+          "source_note": "Produit nommé explicitement 'Whey Native 94%' sur la page Aqeelab → protein_pct=94%. BCAA calculé à partir du claim '22g BCAA / 100g protéines' sourcé nabfit.fr. Glucides/lipides estimés = pattern isolat natif (similaire à Nutripure).",
+          "patched_at": "2026-04-14"
+        },
+        "bcaa_per_serving_g": {
+          "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+          "source_note": "Produit nommé explicitement 'Whey Native 94%' sur la page Aqeelab → protein_pct=94%. BCAA calculé à partir du claim '22g BCAA / 100g protéines' sourcé nabfit.fr. Glucides/lipides estimés = pattern isolat natif (similaire à Nutripure).",
+          "patched_at": "2026-04-14"
+        },
+        "carbs_per_serving_g": {
+          "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+          "source_note": "Produit nommé explicitement 'Whey Native 94%' sur la page Aqeelab → protein_pct=94%. BCAA calculé à partir du claim '22g BCAA / 100g protéines' sourcé nabfit.fr. Glucides/lipides estimés = pattern isolat natif (similaire à Nutripure).",
+          "patched_at": "2026-04-14"
+        },
+        "fat_per_serving_g": {
+          "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+          "source_note": "Produit nommé explicitement 'Whey Native 94%' sur la page Aqeelab → protein_pct=94%. BCAA calculé à partir du claim '22g BCAA / 100g protéines' sourcé nabfit.fr. Glucides/lipides estimés = pattern isolat natif (similaire à Nutripure).",
+          "patched_at": "2026-04-14"
+        },
+        "lactose_level": {
+          "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+          "source_note": "Produit nommé explicitement 'Whey Native 94%' sur la page Aqeelab → protein_pct=94%. BCAA calculé à partir du claim '22g BCAA / 100g protéines' sourcé nabfit.fr. Glucides/lipides estimés = pattern isolat natif (similaire à Nutripure).",
+          "patched_at": "2026-04-14"
+        },
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.aqeelab-nutrition.fr/products/whey-native-fabriquee-en-france-lait-francais",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_current_ttc_eur": 45.95,
+      "price_nominal_ttc_eur": 45.95,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 45.95
+    },
+    {
+      "brand": "nutriandco",
+      "product_id": "nutriandco_whey_isolate_native_900g_chocolat",
+      "product_name": "Whey Isolate Native 900g",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 900,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "sans arôme"
+      ],
+      "origin_milk": "France",
+      "certifications": [],
+      "protein_pct_100g": 94,
+      "protein_per_serving_g": 28,
+      "serving_size_g": 30,
+      "servings_per_pack": 30,
+      "bcaa_per_serving_g": 6.9,
+      "carbs_per_serving_g": 0.9,
+      "fat_per_serving_g": 0.6,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Pharmacies",
+        "Amazon"
+      ],
+      "source_url": "https://nutriandco.com/fr/produits/whey-isolate-native",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 54.9,
+      "price_nominal_ttc_eur": 54.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 54.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://nutriandco.com/fr/produits/whey-isolate-native",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://nutriandco.com/fr/produits/whey-isolate-native",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "nutriandco",
+      "product_id": "nutriandco_whey_concentree_native_900g_chocolat",
+      "product_name": "Whey Concentrée Native 900g",
+      "type": "concentrat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 900,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille"
+      ],
+      "origin_milk": "France (pâturages)",
+      "certifications": [],
+      "protein_pct_100g": 75,
+      "protein_per_serving_g": 22.1,
+      "serving_size_g": 30,
+      "servings_per_pack": 30,
+      "bcaa_per_serving_g": 5.1,
+      "carbs_per_serving_g": 4.0,
+      "fat_per_serving_g": 0.4,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Pharmacies",
+        "Amazon"
+      ],
+      "source_url": "https://nutriandco.com/fr/produits/whey-native",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 39.9,
+      "price_nominal_ttc_eur": 39.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 39.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://nutriandco.com/fr/produits/whey-native",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://nutriandco.com/fr/produits/whey-native",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "prozis",
+      "product_id": "prozis_100_real_whey_907g_chocolat",
+      "product_name": "100% Real Whey Protein 907g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 907,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "chocolat noir",
+        "chocolat au lait",
+        "brownie au chocolat",
+        "vanille",
+        "cookies et crème"
+      ],
+      "origin_milk": null,
+      "certifications": [],
+      "protein_pct_100g": 71,
+      "protein_per_serving_g": 21.3,
+      "serving_size_g": 30,
+      "servings_per_pack": 30,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": 2.0,
+      "fat_per_serving_g": 1.9,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-907g",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "field_sources": {
+        "protein_pct_100g": {
+          "source_url": "https://fr.openfoodfacts.org/produit/5600380896283/real-whey-100-whey-protein-prozis",
+          "source_note": "Open Food Facts community-verified entry, 2023-2024 formula. BCAA non documenté.",
+          "patched_at": "2026-04-14"
+        },
+        "protein_per_serving_g": {
+          "source_url": "https://fr.openfoodfacts.org/produit/5600380896283/real-whey-100-whey-protein-prozis",
+          "source_note": "Open Food Facts community-verified entry, 2023-2024 formula. BCAA non documenté.",
+          "patched_at": "2026-04-14"
+        },
+        "serving_size_g": {
+          "source_url": "https://fr.openfoodfacts.org/produit/5600380896283/real-whey-100-whey-protein-prozis",
+          "source_note": "Open Food Facts community-verified entry, 2023-2024 formula. BCAA non documenté.",
+          "patched_at": "2026-04-14"
+        },
+        "servings_per_pack": {
+          "source_url": "https://fr.openfoodfacts.org/produit/5600380896283/real-whey-100-whey-protein-prozis",
+          "source_note": "Open Food Facts community-verified entry, 2023-2024 formula. BCAA non documenté.",
+          "patched_at": "2026-04-14"
+        },
+        "carbs_per_serving_g": {
+          "source_url": "https://fr.openfoodfacts.org/produit/5600380896283/real-whey-100-whey-protein-prozis",
+          "source_note": "Open Food Facts community-verified entry, 2023-2024 formula. BCAA non documenté.",
+          "patched_at": "2026-04-14"
+        },
+        "fat_per_serving_g": {
+          "source_url": "https://fr.openfoodfacts.org/produit/5600380896283/real-whey-100-whey-protein-prozis",
+          "source_note": "Open Food Facts community-verified entry, 2023-2024 formula. BCAA non documenté.",
+          "patched_at": "2026-04-14"
+        },
+        "lactose_level": {
+          "source_url": "https://fr.openfoodfacts.org/produit/5600380896283/real-whey-100-whey-protein-prozis",
+          "source_note": "Open Food Facts community-verified entry, 2023-2024 formula. BCAA non documenté.",
+          "patched_at": "2026-04-14"
+        },
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-907g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-907g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_current_ttc_eur": 34.99,
+      "price_nominal_ttc_eur": 34.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 34.99
+    },
+    {
+      "brand": "prozis",
+      "product_id": "prozis_100_real_whey_2000g_chocolat",
+      "product_name": "100% Real Whey Protein 2000g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "chocolat noir",
+        "vanille",
+        "cookies et crème",
+        "brownie au chocolat"
+      ],
+      "origin_milk": null,
+      "certifications": [],
+      "protein_pct_100g": 71,
+      "protein_per_serving_g": 21.3,
+      "serving_size_g": 30,
+      "servings_per_pack": 66,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": 2.0,
+      "fat_per_serving_g": 1.9,
+      "lactose_level": "present",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-907g",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent_ESTIMATED",
+      "note": "Prix 2000g estimé par extrapolation (agent n'a pas obtenu prix direct) — à revérifier manuellement",
+      "field_sources": {
+        "protein_pct_100g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-2000g",
+          "source_note": "Prix 2000g réel confirmé via WebFetch Prozis (62.99€, pas 69.99 estimé). Nutrition = même que 907g (même formule).",
+          "patched_at": "2026-04-14"
+        },
+        "protein_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-2000g",
+          "source_note": "Prix 2000g réel confirmé via WebFetch Prozis (62.99€, pas 69.99 estimé). Nutrition = même que 907g (même formule).",
+          "patched_at": "2026-04-14"
+        },
+        "serving_size_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-2000g",
+          "source_note": "Prix 2000g réel confirmé via WebFetch Prozis (62.99€, pas 69.99 estimé). Nutrition = même que 907g (même formule).",
+          "patched_at": "2026-04-14"
+        },
+        "servings_per_pack": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-2000g",
+          "source_note": "Prix 2000g réel confirmé via WebFetch Prozis (62.99€, pas 69.99 estimé). Nutrition = même que 907g (même formule).",
+          "patched_at": "2026-04-14"
+        },
+        "carbs_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-2000g",
+          "source_note": "Prix 2000g réel confirmé via WebFetch Prozis (62.99€, pas 69.99 estimé). Nutrition = même que 907g (même formule).",
+          "patched_at": "2026-04-14"
+        },
+        "fat_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-2000g",
+          "source_note": "Prix 2000g réel confirmé via WebFetch Prozis (62.99€, pas 69.99 estimé). Nutrition = même que 907g (même formule).",
+          "patched_at": "2026-04-14"
+        },
+        "lactose_level": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-2000g",
+          "source_note": "Prix 2000g réel confirmé via WebFetch Prozis (62.99€, pas 69.99 estimé). Nutrition = même que 907g (même formule).",
+          "patched_at": "2026-04-14"
+        },
+        "price_catalog_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-2000g",
+          "source_note": "Prix 2000g réel confirmé via WebFetch Prozis (62.99€, pas 69.99 estimé). Nutrition = même que 907g (même formule).",
+          "patched_at": "2026-04-14"
+        },
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-2000g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-protein-2000g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_current_ttc_eur": 62.99,
+      "price_nominal_ttc_eur": 62.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 62.99
+    },
+    {
+      "brand": "prozis",
+      "product_id": "prozis_100_real_whey_isolate_1000g_chocolat",
+      "product_name": "100% Real Whey Isolate 1000g",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 1000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "chocolat noir",
+        "double chocolat",
+        "vanille",
+        "cappuccino"
+      ],
+      "origin_milk": null,
+      "certifications": [],
+      "protein_pct_100g": 86,
+      "protein_per_serving_g": 25.8,
+      "serving_size_g": 30,
+      "servings_per_pack": 33,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": 1.0,
+      "fat_per_serving_g": 0.5,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-isolate-1000-g",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "field_sources": {
+        "protein_pct_100g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-isolate-1000-g",
+          "source_note": "86% protéines (marketing claim marketing page Prozis). Glucides/lipides estimés = standard whey isolate (pas de nutrition table parsable).",
+          "patched_at": "2026-04-14"
+        },
+        "protein_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-isolate-1000-g",
+          "source_note": "86% protéines (marketing claim marketing page Prozis). Glucides/lipides estimés = standard whey isolate (pas de nutrition table parsable).",
+          "patched_at": "2026-04-14"
+        },
+        "serving_size_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-isolate-1000-g",
+          "source_note": "86% protéines (marketing claim marketing page Prozis). Glucides/lipides estimés = standard whey isolate (pas de nutrition table parsable).",
+          "patched_at": "2026-04-14"
+        },
+        "servings_per_pack": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-isolate-1000-g",
+          "source_note": "86% protéines (marketing claim marketing page Prozis). Glucides/lipides estimés = standard whey isolate (pas de nutrition table parsable).",
+          "patched_at": "2026-04-14"
+        },
+        "carbs_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-isolate-1000-g",
+          "source_note": "86% protéines (marketing claim marketing page Prozis). Glucides/lipides estimés = standard whey isolate (pas de nutrition table parsable).",
+          "patched_at": "2026-04-14"
+        },
+        "fat_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-isolate-1000-g",
+          "source_note": "86% protéines (marketing claim marketing page Prozis). Glucides/lipides estimés = standard whey isolate (pas de nutrition table parsable).",
+          "patched_at": "2026-04-14"
+        },
+        "lactose_level": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-isolate-1000-g",
+          "source_note": "86% protéines (marketing claim marketing page Prozis). Glucides/lipides estimés = standard whey isolate (pas de nutrition table parsable).",
+          "patched_at": "2026-04-14"
+        },
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-isolate-1000-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-real-whey-isolate-1000-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_current_ttc_eur": 53.99,
+      "price_nominal_ttc_eur": 53.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 53.99
+    },
+    {
+      "brand": "prozis",
+      "product_id": "prozis_whey_hydro_isolate_2000g_chocolat",
+      "product_name": "100% Whey Hydro Isolate 2000g",
+      "type": "clear_hydrolysat",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "brownie au chocolat",
+        "chocolat blanc",
+        "vanille",
+        "fraise"
+      ],
+      "origin_milk": null,
+      "certifications": [],
+      "protein_pct_100g": 88,
+      "protein_per_serving_g": 26.4,
+      "serving_size_g": 30,
+      "servings_per_pack": 66,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": 0.8,
+      "fat_per_serving_g": 0.4,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.prozis.com/fr/fr/prozis/100-whey-hydro-isolate-2000g",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "field_sources": {
+        "protein_pct_100g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-whey-hydro-isolate-2000g",
+          "source_note": "Hydrolysat isolat ~88% protéines (standard Prozis haut-de-gamme). Valeurs estimées sur la base du range isolat. À vérifier.",
+          "patched_at": "2026-04-14"
+        },
+        "protein_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-whey-hydro-isolate-2000g",
+          "source_note": "Hydrolysat isolat ~88% protéines (standard Prozis haut-de-gamme). Valeurs estimées sur la base du range isolat. À vérifier.",
+          "patched_at": "2026-04-14"
+        },
+        "serving_size_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-whey-hydro-isolate-2000g",
+          "source_note": "Hydrolysat isolat ~88% protéines (standard Prozis haut-de-gamme). Valeurs estimées sur la base du range isolat. À vérifier.",
+          "patched_at": "2026-04-14"
+        },
+        "servings_per_pack": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-whey-hydro-isolate-2000g",
+          "source_note": "Hydrolysat isolat ~88% protéines (standard Prozis haut-de-gamme). Valeurs estimées sur la base du range isolat. À vérifier.",
+          "patched_at": "2026-04-14"
+        },
+        "carbs_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-whey-hydro-isolate-2000g",
+          "source_note": "Hydrolysat isolat ~88% protéines (standard Prozis haut-de-gamme). Valeurs estimées sur la base du range isolat. À vérifier.",
+          "patched_at": "2026-04-14"
+        },
+        "fat_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-whey-hydro-isolate-2000g",
+          "source_note": "Hydrolysat isolat ~88% protéines (standard Prozis haut-de-gamme). Valeurs estimées sur la base du range isolat. À vérifier.",
+          "patched_at": "2026-04-14"
+        },
+        "lactose_level": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-whey-hydro-isolate-2000g",
+          "source_note": "Hydrolysat isolat ~88% protéines (standard Prozis haut-de-gamme). Valeurs estimées sur la base du range isolat. À vérifier.",
+          "patched_at": "2026-04-14"
+        },
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-whey-hydro-isolate-2000g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/100-whey-hydro-isolate-2000g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_current_ttc_eur": 89.99,
+      "price_nominal_ttc_eur": 89.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 89.99
+    },
+    {
+      "brand": "prozis",
+      "product_id": "prozis_zero_diet_whey_750g_brownie",
+      "product_name": "Zero Diet Whey 750g",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 750,
+      "flavor": "brownie au chocolat",
+      "flavors_available_sample": [
+        "brownie au chocolat",
+        "cappuccino",
+        "cookies et crème",
+        "vanille",
+        "chocolat blanc aux framboises"
+      ],
+      "origin_milk": null,
+      "certifications": [],
+      "protein_pct_100g": 80,
+      "protein_per_serving_g": 24.0,
+      "serving_size_g": 30,
+      "servings_per_pack": 25,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": 1.5,
+      "fat_per_serving_g": 0.8,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.prozis.com/fr/fr/prozis/zero-diet-whey-750-g",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "field_sources": {
+        "protein_pct_100g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/zero-diet-whey-750-g",
+          "source_note": "Zero Diet Whey = isolat low-carb marketing. ~80% protéines estimé. À vérifier sur packaging si possible.",
+          "patched_at": "2026-04-14"
+        },
+        "protein_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/zero-diet-whey-750-g",
+          "source_note": "Zero Diet Whey = isolat low-carb marketing. ~80% protéines estimé. À vérifier sur packaging si possible.",
+          "patched_at": "2026-04-14"
+        },
+        "serving_size_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/zero-diet-whey-750-g",
+          "source_note": "Zero Diet Whey = isolat low-carb marketing. ~80% protéines estimé. À vérifier sur packaging si possible.",
+          "patched_at": "2026-04-14"
+        },
+        "servings_per_pack": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/zero-diet-whey-750-g",
+          "source_note": "Zero Diet Whey = isolat low-carb marketing. ~80% protéines estimé. À vérifier sur packaging si possible.",
+          "patched_at": "2026-04-14"
+        },
+        "carbs_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/zero-diet-whey-750-g",
+          "source_note": "Zero Diet Whey = isolat low-carb marketing. ~80% protéines estimé. À vérifier sur packaging si possible.",
+          "patched_at": "2026-04-14"
+        },
+        "fat_per_serving_g": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/zero-diet-whey-750-g",
+          "source_note": "Zero Diet Whey = isolat low-carb marketing. ~80% protéines estimé. À vérifier sur packaging si possible.",
+          "patched_at": "2026-04-14"
+        },
+        "lactose_level": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/zero-diet-whey-750-g",
+          "source_note": "Zero Diet Whey = isolat low-carb marketing. ~80% protéines estimé. À vérifier sur packaging si possible.",
+          "patched_at": "2026-04-14"
+        },
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/zero-diet-whey-750-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.prozis.com/fr/fr/prozis/zero-diet-whey-750-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_current_ttc_eur": 37.99,
+      "price_nominal_ttc_eur": 37.99,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 37.99
+    },
+    {
+      "brand": "foodspring",
+      "product_id": "foodspring_whey_protein_750g_vanille",
+      "product_name": "Whey Protein 750g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 750,
+      "flavor": "vanille",
+      "flavors_available_sample": [
+        "vanille",
+        "chocolat",
+        "fraise",
+        "cookies et crème"
+      ],
+      "origin_milk": "Pâturages (vaches en plein air)",
+      "certifications": [],
+      "protein_pct_100g": 81,
+      "protein_per_serving_g": 24.3,
+      "serving_size_g": 30,
+      "servings_per_pack": 25,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": 1.5,
+      "fat_per_serving_g": 1.3,
+      "lactose_level": "faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "Pharmacies",
+        "GMS"
+      ],
+      "source_url": "https://www.amazon.fr/foodspring-croissance-musculaire-solubilit%C3%A9-ultra-filtr%C3%A9e/dp/B0CTR3FZ7W",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent_reseller",
+      "note": "Site foodspring.fr inaccessible lors de la collecte, prix récupéré via revendeur paraplus.fr",
+      "field_sources": {
+        "protein_pct_100g": {
+          "source_url": "https://fddb.info/db/en/food/foodspring_whey_protein_vanille/index.html",
+          "source_note": "FDDB nutrition DB (mirror shop-apotheke.com). 81% protéines, 5.1g glucides/100g, 4.3g lipides/100g. Serving 30g = 24.3g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "protein_per_serving_g": {
+          "source_url": "https://fddb.info/db/en/food/foodspring_whey_protein_vanille/index.html",
+          "source_note": "FDDB nutrition DB (mirror shop-apotheke.com). 81% protéines, 5.1g glucides/100g, 4.3g lipides/100g. Serving 30g = 24.3g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "serving_size_g": {
+          "source_url": "https://fddb.info/db/en/food/foodspring_whey_protein_vanille/index.html",
+          "source_note": "FDDB nutrition DB (mirror shop-apotheke.com). 81% protéines, 5.1g glucides/100g, 4.3g lipides/100g. Serving 30g = 24.3g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "servings_per_pack": {
+          "source_url": "https://fddb.info/db/en/food/foodspring_whey_protein_vanille/index.html",
+          "source_note": "FDDB nutrition DB (mirror shop-apotheke.com). 81% protéines, 5.1g glucides/100g, 4.3g lipides/100g. Serving 30g = 24.3g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "carbs_per_serving_g": {
+          "source_url": "https://fddb.info/db/en/food/foodspring_whey_protein_vanille/index.html",
+          "source_note": "FDDB nutrition DB (mirror shop-apotheke.com). 81% protéines, 5.1g glucides/100g, 4.3g lipides/100g. Serving 30g = 24.3g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "fat_per_serving_g": {
+          "source_url": "https://fddb.info/db/en/food/foodspring_whey_protein_vanille/index.html",
+          "source_note": "FDDB nutrition DB (mirror shop-apotheke.com). 81% protéines, 5.1g glucides/100g, 4.3g lipides/100g. Serving 30g = 24.3g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "lactose_level": {
+          "source_url": "https://fddb.info/db/en/food/foodspring_whey_protein_vanille/index.html",
+          "source_note": "FDDB nutrition DB (mirror shop-apotheke.com). 81% protéines, 5.1g glucides/100g, 4.3g lipides/100g. Serving 30g = 24.3g protéines.",
+          "patched_at": "2026-04-14"
+        },
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.amazon.fr/foodspring-croissance-musculaire-solubilit%C3%A9-ultra-filtr%C3%A9e/dp/B0CTR3FZ7W",
+          "source_note": "Site foodspring.fr = DNS dead (brand pas disponible en FR direct). Prix récupéré via Amazon FR fiche vanille 750g : 29,96€ current (39,90€ RRP affiché). Agent v2 avait 32,95€ via revendeur paraplus.fr, désormais obsolète.",
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.amazon.fr/foodspring-croissance-musculaire-solubilit%C3%A9-ultra-filtr%C3%A9e/dp/B0CTR3FZ7W",
+          "source_note": "Site foodspring.fr = DNS dead (brand pas disponible en FR direct). Prix récupéré via Amazon FR fiche vanille 750g : 29,96€ current (39,90€ RRP affiché). Agent v2 avait 32,95€ via revendeur paraplus.fr, désormais obsolète.",
+          "patched_at": "2026-04-14"
+        },
+        "price_median_market_ttc_eur": {
+          "source_url": "https://www.paraplus.fr/products/foodspring-whey-protein-vanille-750g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_current_ttc_eur": 29.96,
+      "price_nominal_ttc_eur": 39.9,
+      "price_median_market_ttc_eur": 22.25,
+      "price_catalog_ttc_eur_legacy": 32.95,
+      "price_gap_note": "Site foodspring.fr = DNS dead (brand pas disponible en FR direct). Prix récupéré via Amazon FR fiche vanille 750g : 29,96€ current (39,90€ RRP affiché). Agent v2 avait 32,95€ via revendeur paraplus.fr, désormais obsolète."
+    },
+    {
+      "brand": "esn",
+      "product_id": "esn_designer_whey_908g_chocolat",
+      "product_name": "Designer Whey Protein 908g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 908,
+      "flavor": "salted dark chocolate",
+      "flavors_available_sample": [
+        "salted dark chocolate",
+        "vanilla milk",
+        "white chocolate pistachio",
+        "almond coconut",
+        "cinnamon cereal"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Laborgeprüft"
+      ],
+      "protein_pct_100g": 73,
+      "protein_per_serving_g": 21.9,
+      "serving_size_g": 30,
+      "servings_per_pack": 30,
+      "bcaa_per_serving_g": 6.93,
+      "carbs_per_serving_g": 2.1,
+      "fat_per_serving_g": 1.7,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.esn.com/products/esn-designer-whey-protein",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 41.99,
+      "price_nominal_ttc_eur": 41.99,
+      "price_median_market_ttc_eur": 34.9,
+      "price_catalog_ttc_eur_legacy": 42.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.esn.com/products/esn-designer-whey-protein",
+          "source_note": "Prix réel confirmé 41.99€ (vs 42.90€ ancien). Drift mineur sans promo.",
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.esn.com/products/esn-designer-whey-protein",
+          "source_note": "Prix réel confirmé 41.99€ (vs 42.90€ ancien). Drift mineur sans promo.",
+          "patched_at": "2026-04-14"
+        },
+        "price_median_market_ttc_eur": {
+          "source_url": "https://www.esn.com/products/esn-designer-whey-protein",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Prix réel confirmé 41.99€ (vs 42.90€ ancien). Drift mineur sans promo."
+    },
+    {
+      "brand": "esn",
+      "product_id": "esn_designer_whey_2000g_chocolat",
+      "product_name": "Designer Whey Protein 2000g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2000,
+      "flavor": "salted dark chocolate",
+      "flavors_available_sample": [
+        "salted dark chocolate",
+        "vanilla milk",
+        "almond coconut",
+        "cinnamon cereal"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Laborgeprüft"
+      ],
+      "protein_pct_100g": 73,
+      "protein_per_serving_g": 21.9,
+      "serving_size_g": 30,
+      "servings_per_pack": 66,
+      "bcaa_per_serving_g": 6.93,
+      "carbs_per_serving_g": 2.1,
+      "fat_per_serving_g": 1.7,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.esn.com/products/esn-designer-whey-protein",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 85.9,
+      "price_nominal_ttc_eur": 85.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 85.8,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.esn.com/products/esn-designer-whey-protein",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.esn.com/products/esn-designer-whey-protein",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "esn",
+      "product_id": "esn_iso_whey_908g_chocolat",
+      "product_name": "Iso Whey Protein Isolat 908g",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 908,
+      "flavor": "chocolate",
+      "flavors_available_sample": [
+        "cinnamon cereal",
+        "chocolate",
+        "vanilla",
+        "strawberry"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Laborgeprüft"
+      ],
+      "protein_pct_100g": 84,
+      "protein_per_serving_g": 25.2,
+      "serving_size_g": 30,
+      "servings_per_pack": 30,
+      "bcaa_per_serving_g": 6.36,
+      "carbs_per_serving_g": 1.35,
+      "fat_per_serving_g": 0.45,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.esn.com/products/esn-iso-whey-protein",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 49.9,
+      "price_nominal_ttc_eur": 49.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 49.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.esn.com/products/esn-iso-whey-protein",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.esn.com/products/esn-iso-whey-protein",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "esn",
+      "product_id": "esn_basic_whey_1000g_chocolat",
+      "product_name": "Basic Whey 1000g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 1000,
+      "flavor": "chocolate",
+      "flavors_available_sample": [
+        "vanilla",
+        "chocolate",
+        "strawberry"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Laborgeprüft"
+      ],
+      "protein_pct_100g": 74,
+      "protein_per_serving_g": 22.2,
+      "serving_size_g": 30,
+      "servings_per_pack": 33,
+      "bcaa_per_serving_g": 6.51,
+      "carbs_per_serving_g": 2.31,
+      "fat_per_serving_g": 2.34,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.esn.com/products/basic-whey",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 26.9,
+      "price_nominal_ttc_eur": 26.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 26.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.esn.com/products/basic-whey",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.esn.com/products/basic-whey",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "esn",
+      "product_id": "esn_basic_whey_2000g_chocolat",
+      "product_name": "Basic Whey 2000g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2000,
+      "flavor": "chocolate",
+      "flavors_available_sample": [
+        "vanilla",
+        "chocolate",
+        "strawberry"
+      ],
+      "origin_milk": null,
+      "certifications": [
+        "Laborgeprüft"
+      ],
+      "protein_pct_100g": 74,
+      "protein_per_serving_g": 22.2,
+      "serving_size_g": 30,
+      "servings_per_pack": 66,
+      "bcaa_per_serving_g": 6.51,
+      "carbs_per_serving_g": 2.31,
+      "fat_per_serving_g": 2.34,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.esn.com/products/basic-whey",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 49.9,
+      "price_nominal_ttc_eur": 49.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 50.16,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.esn.com/products/basic-whey",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.esn.com/products/basic-whey",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "biotechusa",
+      "product_id": "biotechusa_100_pure_whey_400g_chocolat",
+      "product_name": "100% Pure Whey 400g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 400,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille bourbon",
+        "fraise",
+        "noisettes",
+        "beurre de cacahuète au chocolat",
+        "cookies & cream"
+      ],
+      "origin_milk": null,
+      "certifications": [],
+      "protein_pct_100g": 76,
+      "protein_per_serving_g": 21,
+      "serving_size_g": 30,
+      "servings_per_pack": 13,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": 1.4,
+      "fat_per_serving_g": 1.8,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://shop.biotechusa.fr/products/100-pure-whey-400-g",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 32.9,
+      "price_nominal_ttc_eur": 32.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 32.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/100-pure-whey-400-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/100-pure-whey-400-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "8.2€/100g vs 5.5€/100g sur format 1kg (petit format plus cher)"
+    },
+    {
+      "brand": "biotechusa",
+      "product_id": "biotechusa_100_pure_whey_1000g_chocolat",
+      "product_name": "100% Pure Whey 1000g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 1000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille bourbon",
+        "fraise",
+        "noisettes",
+        "cookies & cream"
+      ],
+      "origin_milk": null,
+      "certifications": [],
+      "protein_pct_100g": 76,
+      "protein_per_serving_g": 21,
+      "serving_size_g": 30,
+      "servings_per_pack": 33,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": 1.4,
+      "fat_per_serving_g": 1.8,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://shop.biotechusa.fr/products/100-pure-whey-renouvele-1000-g",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 54.9,
+      "price_nominal_ttc_eur": 54.9,
+      "price_median_market_ttc_eur": 27.02,
+      "price_catalog_ttc_eur_legacy": 54.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/100-pure-whey-renouvele-1000-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/100-pure-whey-renouvele-1000-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_median_market_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/100-pure-whey-renouvele-1000-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "GROS ÉCART : site marque 54.90€ vs idealo 27.02€ (-51%). Cross-retailers beaucoup moins cher."
+    },
+    {
+      "brand": "biotechusa",
+      "product_id": "biotechusa_100_pure_whey_2000g_chocolat",
+      "product_name": "100% Pure Whey 2000g",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 2000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille bourbon",
+        "fraise",
+        "noisettes",
+        "cookies & cream"
+      ],
+      "origin_milk": null,
+      "certifications": [],
+      "protein_pct_100g": 76,
+      "protein_per_serving_g": 21,
+      "serving_size_g": 30,
+      "servings_per_pack": 66,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": 1.4,
+      "fat_per_serving_g": 1.8,
+      "lactose_level": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://shop.biotechusa.fr/products/100-pure-whey-2000-g",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 89.9,
+      "price_nominal_ttc_eur": 89.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 89.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/100-pure-whey-2000-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/100-pure-whey-2000-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      },
+      "price_gap_note": "Cohérent avec 1kg : site marque surcoté vs cross-retailers (~-40-50%)"
+    },
+    {
+      "brand": "biotechusa",
+      "product_id": "biotechusa_iso_whey_zero_908g_chocolat",
+      "product_name": "Iso Whey Zero 908g",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 908,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "chocolat blanc",
+        "vanille",
+        "caramel catalan",
+        "banane",
+        "black biscuit"
+      ],
+      "origin_milk": null,
+      "certifications": [],
+      "protein_pct_100g": 84,
+      "protein_per_serving_g": 21,
+      "serving_size_g": 25,
+      "servings_per_pack": 36,
+      "bcaa_per_serving_g": 4.35,
+      "carbs_per_serving_g": 0.6,
+      "fat_per_serving_g": 0.4,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://shop.biotechusa.fr/products/iso-whey-zero-908-g",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 69.9,
+      "price_nominal_ttc_eur": 69.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 69.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/iso-whey-zero-908-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/iso-whey-zero-908-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "biotechusa",
+      "product_id": "biotechusa_iso_whey_zero_1816g_chocolat",
+      "product_name": "Iso Whey Zero 1816g",
+      "type": "isolat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 1816,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "chocolat blanc",
+        "vanille",
+        "caramel catalan",
+        "banane"
+      ],
+      "origin_milk": null,
+      "certifications": [],
+      "protein_pct_100g": 84,
+      "protein_per_serving_g": 21,
+      "serving_size_g": 25,
+      "servings_per_pack": 72,
+      "bcaa_per_serving_g": 4.35,
+      "carbs_per_serving_g": 0.6,
+      "fat_per_serving_g": 0.4,
+      "lactose_level": "tres_faible",
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://shop.biotechusa.fr/products/iso-whey-zero-poudre-de-proteine-isolat-1816-g",
+      "snapshot_date": "2026-04-14",
+      "source": "playwright_agent",
+      "price_current_ttc_eur": 104.9,
+      "price_nominal_ttc_eur": 104.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 104.9,
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/iso-whey-zero-poudre-de-proteine-isolat-1816-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://shop.biotechusa.fr/products/iso-whey-zero-poudre-de-proteine-isolat-1816-g",
+          "source_note": null,
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "nutrimuscle",
+      "product_id": "nutrimuscle_whey_native_concentrat_500g_chocolat",
+      "product_name": "Whey Native Concentrat 500g",
+      "type": "concentrat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 500,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "nature"
+      ],
+      "origin_milk": "France (Lactalis)",
+      "certifications": [
+        "Certifié, lait Lactalis FR"
+      ],
+      "protein_pct_100g": 80,
+      "protein_per_serving_g": 24,
+      "serving_size_g": 30,
+      "servings_per_pack": 16,
+      "bcaa_per_serving_g": 5,
+      "carbs_per_serving_g": 3.5,
+      "fat_per_serving_g": 1.5,
+      "lactose_level": "present",
+      "price_nominal_ttc_eur": 19.95,
+      "price_current_ttc_eur": 19.95,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "revendeurs"
+      ],
+      "source_url": "https://www.nutrimuscle.com/products/whey-native",
+      "snapshot_date": "2026-04-14",
+      "source": "webfetch_direct_2026-04-14"
+    },
+    {
+      "brand": "nutrimuscle",
+      "product_id": "nutrimuscle_whey_native_concentrat_2250g_chocolat",
+      "product_name": "Whey Native Concentrat 2,25kg",
+      "type": "concentrat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 2250,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "nature"
+      ],
+      "origin_milk": "France (Lactalis)",
+      "certifications": [
+        "Certifié, lait Lactalis FR"
+      ],
+      "protein_pct_100g": 80,
+      "protein_per_serving_g": 24,
+      "serving_size_g": 30,
+      "servings_per_pack": 75,
+      "bcaa_per_serving_g": 5,
+      "carbs_per_serving_g": 3.5,
+      "fat_per_serving_g": 1.5,
+      "lactose_level": "present",
+      "price_nominal_ttc_eur": 80.95,
+      "price_current_ttc_eur": 80.95,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "revendeurs"
+      ],
+      "source_url": "https://www.nutrimuscle.com/products/whey-native",
+      "snapshot_date": "2026-04-14",
+      "source": "webfetch_direct_2026-04-14"
+    },
+    {
+      "brand": "nutrimuscle",
+      "product_id": "nutrimuscle_whey_native_concentrat_4000g_chocolat",
+      "product_name": "Whey Native Concentrat 4kg",
+      "type": "concentrat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 4000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "nature"
+      ],
+      "origin_milk": "France (Lactalis)",
+      "certifications": [
+        "Certifié, lait Lactalis FR"
+      ],
+      "protein_pct_100g": 80,
+      "protein_per_serving_g": 24,
+      "serving_size_g": 30,
+      "servings_per_pack": 133,
+      "bcaa_per_serving_g": 5,
+      "carbs_per_serving_g": 3.5,
+      "fat_per_serving_g": 1.5,
+      "lactose_level": "present",
+      "price_nominal_ttc_eur": 131.95,
+      "price_current_ttc_eur": 131.95,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "revendeurs"
+      ],
+      "source_url": "https://www.nutrimuscle.com/products/whey-native",
+      "snapshot_date": "2026-04-14",
+      "source": "webfetch_direct_2026-04-14"
+    },
+    {
+      "brand": "nutrimuscle",
+      "product_id": "nutrimuscle_whey_native_isolate_500g_chocolat",
+      "product_name": "Whey Native Isolate 500g",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 500,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "nature",
+        "vanille",
+        "choco cookie",
+        "fraise",
+        "banane"
+      ],
+      "origin_milk": "France (Lactalis)",
+      "certifications": [
+        "Certifié, lait Lactalis FR"
+      ],
+      "protein_pct_100g": 87,
+      "protein_per_serving_g": 25,
+      "serving_size_g": 30,
+      "servings_per_pack": 16,
+      "bcaa_per_serving_g": 6,
+      "carbs_per_serving_g": 1.5,
+      "fat_per_serving_g": 0.8,
+      "lactose_level": "faible",
+      "price_nominal_ttc_eur": 31.95,
+      "price_current_ttc_eur": 31.95,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "revendeurs"
+      ],
+      "source_url": "https://www.nutrimuscle.com/products/whey-native-isolate",
+      "snapshot_date": "2026-04-14",
+      "source": "webfetch_direct_2026-04-14"
+    },
+    {
+      "brand": "nutrimuscle",
+      "product_id": "nutrimuscle_whey_native_isolate_2250g_chocolat",
+      "product_name": "Whey Native Isolate 2,25kg",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 2250,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "nature",
+        "vanille",
+        "choco cookie",
+        "fraise",
+        "banane"
+      ],
+      "origin_milk": "France (Lactalis)",
+      "certifications": [
+        "Certifié, lait Lactalis FR"
+      ],
+      "protein_pct_100g": 87,
+      "protein_per_serving_g": 25,
+      "serving_size_g": 30,
+      "servings_per_pack": 75,
+      "bcaa_per_serving_g": 6,
+      "carbs_per_serving_g": 1.5,
+      "fat_per_serving_g": 0.8,
+      "lactose_level": "faible",
+      "price_nominal_ttc_eur": 116.95,
+      "price_current_ttc_eur": 116.95,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "revendeurs"
+      ],
+      "source_url": "https://www.nutrimuscle.com/products/whey-native-isolate",
+      "snapshot_date": "2026-04-14",
+      "source": "webfetch_direct_2026-04-14"
+    },
+    {
+      "brand": "nutrimuscle",
+      "product_id": "nutrimuscle_whey_native_isolate_4000g_chocolat",
+      "product_name": "Whey Native Isolate 4kg",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 4000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "nature",
+        "vanille",
+        "choco cookie",
+        "fraise",
+        "banane"
+      ],
+      "origin_milk": "France (Lactalis)",
+      "certifications": [
+        "Certifié, lait Lactalis FR"
+      ],
+      "protein_pct_100g": 87,
+      "protein_per_serving_g": 25,
+      "serving_size_g": 30,
+      "servings_per_pack": 133,
+      "bcaa_per_serving_g": 6,
+      "carbs_per_serving_g": 1.5,
+      "fat_per_serving_g": 0.8,
+      "lactose_level": "faible",
+      "price_nominal_ttc_eur": 190.95,
+      "price_current_ttc_eur": 190.95,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon",
+        "revendeurs"
+      ],
+      "source_url": "https://www.nutrimuscle.com/products/whey-native-isolate",
+      "snapshot_date": "2026-04-14",
+      "source": "webfetch_direct_2026-04-14"
+    },
+    {
+      "brand": "nutripure",
+      "product_id": "nutripure_whey_isolat_native_4kg_4000g_chocolat",
+      "product_name": "Whey Isolat Native 4kg",
+      "type": "isolat_natif",
+      "native_vs_fromagere": "native",
+      "format_g": 4000,
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille",
+        "neutre",
+        "noisette",
+        "fraise"
+      ],
+      "origin_milk": "France (pâturages)",
+      "certifications": [
+        "EN 17444"
+      ],
+      "protein_pct_100g": 85,
+      "protein_per_serving_g": 25,
+      "serving_size_g": 30,
+      "servings_per_pack": 133,
+      "bcaa_per_serving_g": 5,
+      "carbs_per_serving_g": 0.3,
+      "fat_per_serving_g": 0.2,
+      "lactose_level": "tres_faible",
+      "price_nominal_ttc_eur": 179.9,
+      "price_current_ttc_eur": 179.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": null,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre",
+        "Amazon"
+      ],
+      "source_url": "https://www.nutripure.fr/fr/musculation/147-674-whey-chocolat-isolate.html#/47-poids_poudre-seau_4kg",
+      "snapshot_date": "2026-04-14",
+      "source": "webfetch_direct_2026-04-14",
+      "price_gap_note": "Confirmé via Playwright click sur variant radio Seau 4KG (id=47). Prix réel 179,90€ (pas 159,90€ extrapolé).",
+      "field_sources": {
+        "price_nominal_ttc_eur": {
+          "source_url": "https://www.nutripure.fr/fr/musculation/147-674-whey-chocolat-isolate.html#/47-poids_poudre-seau_4kg",
+          "source_note": "Confirmé via Playwright click sur variant radio Seau 4KG (id=47). Prix réel 179,90€ (pas 159,90€ extrapolé).",
+          "patched_at": "2026-04-14"
+        },
+        "price_current_ttc_eur": {
+          "source_url": "https://www.nutripure.fr/fr/musculation/147-674-whey-chocolat-isolate.html#/47-poids_poudre-seau_4kg",
+          "source_note": "Confirmé via Playwright click sur variant radio Seau 4KG (id=47). Prix réel 179,90€ (pas 159,90€ extrapolé).",
+          "patched_at": "2026-04-14"
+        }
+      }
+    },
+    {
+      "brand": "impulse_nutrition",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 525,
+      "origin_milk": "UE",
+      "certifications": [
+        "Creapure®",
+        "Peptan®"
+      ],
+      "protein_pct_100g": 60,
+      "protein_per_serving_g": 21,
+      "serving_size_g": 35,
+      "servings_per_pack": 15,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": null,
+      "fat_per_serving_g": null,
+      "lactose_level": "present",
+      "price_nominal_ttc_eur": 39.9,
+      "price_current_ttc_eur": 39.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 39.9,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre"
+      ],
+      "snapshot_date": "2026-04-14",
+      "source": "webfetch_impulse_nutrition_fr_2026-04-14",
+      "price_gap_note": "Blend recovery (concentrat whey + créatine Creapure 3g + collagène Peptan 5g + magnésium). Pas comparable 1-pour-1 aux whey pures — 60% protéines car le reste = additifs de récupération.",
+      "product_id": "impulse_nutrition_whey_recovery_525g_chocolat",
+      "product_name": "Whey Recovery",
+      "flavor": "chocolat",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille"
+      ],
+      "source_url": "https://impulse-nutrition.fr/products/whey-recovery-saveur-chocolat"
+    },
+    {
+      "brand": "impulse_nutrition",
+      "type": "concentrat_fromagere",
+      "native_vs_fromagere": "fromagere",
+      "format_g": 525,
+      "origin_milk": "UE",
+      "certifications": [
+        "Creapure®",
+        "Peptan®"
+      ],
+      "protein_pct_100g": 60,
+      "protein_per_serving_g": 21,
+      "serving_size_g": 35,
+      "servings_per_pack": 15,
+      "bcaa_per_serving_g": null,
+      "carbs_per_serving_g": null,
+      "fat_per_serving_g": null,
+      "lactose_level": "present",
+      "price_nominal_ttc_eur": 39.9,
+      "price_current_ttc_eur": 39.9,
+      "price_median_market_ttc_eur": null,
+      "price_catalog_ttc_eur_legacy": 39.9,
+      "price_subscription_ttc_eur": null,
+      "subscription_discount_pct": null,
+      "channels": [
+        "Site propre"
+      ],
+      "snapshot_date": "2026-04-14",
+      "source": "webfetch_impulse_nutrition_fr_2026-04-14",
+      "price_gap_note": "Blend recovery (concentrat whey + créatine Creapure 3g + collagène Peptan 5g + magnésium). Pas comparable 1-pour-1 aux whey pures — 60% protéines car le reste = additifs de récupération.",
+      "product_id": "impulse_nutrition_whey_recovery_525g_vanille",
+      "product_name": "Whey Recovery",
+      "flavor": "vanille",
+      "flavors_available_sample": [
+        "chocolat",
+        "vanille"
+      ],
+      "source_url": "https://impulse-nutrition.fr/products/whey-recovery-saveur-vanille"
+    }
+  ]
+}
