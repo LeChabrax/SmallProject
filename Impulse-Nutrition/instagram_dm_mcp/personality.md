@@ -122,8 +122,10 @@ Super, la commande est validée et sera expédiée très prochainement !
 
 Si les produits te plaisent et que tu souhaites faire découvrir la marque à
 tes abonné·es, j'ai créé un code affilié personnalisé ([CODE]) qui te
-permettra d'offrir -15% de remise sur leur première commande (sans minimum
-d'achat), avec un shaker offert dès 59 € d'achats.
+permettra d'offrir -15% de remise sur tout le site (sans minimum d'achat).
+Le code est cumulable avec toutes les autres réductions sur les produits
+ET avec les réductions sur l'expédition. La livraison est également
+gratuite dès 69 € d'achat.
 À l'avenir, si la marque te séduit vraiment et que nous avons de super retours
 sur tes contenus, nous pourrons envisager d'aller plus loin avec la mise en
 place d'un partenariat. Celui-ci te permettra de bénéficier de 20€ de crédit à

@@ -4,6 +4,7 @@ from typing import Optional, Dict, Any, List
 import os
 import time
 import logging
+from datetime import datetime, timezone
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -81,6 +82,57 @@ def _delete(endpoint: str) -> Dict[str, Any]:
     if resp.content:
         return resp.json()
     return {"status": "deleted"}
+
+
+def _graphql(query: str, variables: Optional[Dict] = None) -> Dict[str, Any]:
+    resp = requests.post(
+        f"{BASE_URL}/graphql.json",
+        headers=_headers(),
+        json={"query": query, "variables": variables or {}},
+    )
+    resp.raise_for_status()
+    data = resp.json()
+    if data.get("errors"):
+        raise RuntimeError(f"GraphQL errors: {data['errors']}")
+    return data
+
+
+def _set_combines_with(
+    price_rule_id: int,
+    order_discounts: bool,
+    product_discounts: bool,
+    shipping_discounts: bool,
+) -> Dict[str, Any]:
+    mutation = """
+    mutation($id: ID!, $combines: DiscountCombinesWithInput!) {
+      discountCodeBasicUpdate(
+        id: $id,
+        basicCodeDiscount: { combinesWith: $combines }
+      ) {
+        codeDiscountNode { id }
+        userErrors { field message }
+      }
+    }
+    """
+    result = _graphql(
+        mutation,
+        {
+            "id": f"gid://shopify/DiscountCodeNode/{price_rule_id}",
+            "combines": {
+                "orderDiscounts": order_discounts,
+                "productDiscounts": product_discounts,
+                "shippingDiscounts": shipping_discounts,
+            },
+        },
+    )
+    user_errors = (
+        result.get("data", {})
+        .get("discountCodeBasicUpdate", {})
+        .get("userErrors", [])
+    )
+    if user_errors:
+        raise RuntimeError(f"discountCodeBasicUpdate userErrors: {user_errors}")
+    return result
 
 
 # ============================================================================
@@ -572,6 +624,82 @@ def get_product_variants(product_id: int, compact: bool = True) -> Dict[str, Any
 # ── Discount Codes ────────────────────────────────────────────
 
 
+def _create_affiliate_code(name: str, percent: float) -> Dict[str, Any]:
+    """Internal — clone of the ALEXTV pattern. Used by the two affiliate tools."""
+    starts_at = datetime.now(timezone.utc).isoformat()
+    rule_resp = _post(
+        "price_rules.json",
+        {
+            "price_rule": {
+                "title": name,
+                "value_type": "percentage",
+                "value": str(percent),
+                "customer_selection": "all",
+                "target_type": "line_item",
+                "target_selection": "all",
+                "allocation_method": "across",
+                "starts_at": starts_at,
+                "ends_at": None,
+                "usage_limit": None,
+                "once_per_customer": True,
+            }
+        },
+    )
+    rule_id = rule_resp["price_rule"]["id"]
+    code_resp = _post(
+        f"price_rules/{rule_id}/discount_codes.json",
+        {"discount_code": {"code": name}},
+    )
+    _set_combines_with(
+        rule_id,
+        order_discounts=False,
+        product_discounts=True,
+        shipping_discounts=True,
+    )
+    return {
+        "price_rule": rule_resp["price_rule"],
+        "discount_code": code_resp["discount_code"],
+        "combines_with": {
+            "orderDiscounts": False,
+            "productDiscounts": True,
+            "shippingDiscounts": True,
+        },
+    }
+
+
+@mcp.tool()
+def create_affiliate_code(name: str) -> Dict[str, Any]:
+    """Create an ambassador affiliate discount code (clone of ALEXTV pattern).
+
+    Canonical Impulse Nutrition ambassador code: -15% percentage, unlimited uses,
+    once_per_customer=true, starts now, no end date, combinesWith order=false /
+    product=true / shipping=true. This is THE pattern for every Suivi_Amb
+    ambassador — see docs/process_create_codes.md §1.
+
+    Args:
+        name: The code name (will be uppercased — e.g. "florine" -> "FLORINE").
+    """
+    return _create_affiliate_code(name=name.upper(), percent=-15.0)
+
+
+@mcp.tool()
+def create_paid_affiliate_code(name: str, percent: float = -20.0) -> Dict[str, Any]:
+    """Create a paid-contract affiliate discount code (clone of LRA20 pattern).
+
+    Same as create_affiliate_code but with a configurable percentage (default
+    -20%) for paid partnership contracts. See docs/process_create_codes.md §1
+    table §6.
+
+    Args:
+        name: The code name (will be uppercased).
+        percent: Discount value, negative (default -20.0 = 20% off). A positive
+            value will be auto-flipped to negative.
+    """
+    if percent > 0:
+        percent = -percent
+    return _create_affiliate_code(name=name.upper(), percent=percent)
+
+
 @mcp.tool()
 def create_discount_code(
     title: str,
@@ -579,17 +707,34 @@ def create_discount_code(
     value: float,
     value_type: str = "percentage",
     usage_limit: Optional[int] = None,
+    once_per_customer: bool = False,
+    starts_at: Optional[str] = None,
+    ends_at: Optional[str] = None,
+    combines_order_discounts: bool = False,
+    combines_product_discounts: bool = True,
+    combines_shipping_discounts: bool = True,
 ) -> Dict[str, Any]:
-    """Create a discount code via a price rule.
+    """Create a generic discount code via a price rule.
+
+    For the canonical -15% ambassador pattern (ALEXTV), prefer
+    `create_affiliate_code(name)` which auto-locks all the right fields. Use
+    this generic tool for SAV, dotation, credit, welcome (-25%) or one-off
+    custom codes.
 
     Args:
         title: Internal name for the price rule.
         code: The discount code customers will use (e.g. "ACHAB25").
-        value: Discount value (negative for discounts, e.g. -25.0 for 25% off).
+        value: Discount value (negative for discounts, e.g. -25.0).
         value_type: "percentage" or "fixed_amount".
         usage_limit: Max number of uses (None = unlimited).
+        once_per_customer: Limit to one redemption per customer (default False).
+        starts_at: ISO datetime; defaults to now if omitted.
+        ends_at: Optional ISO datetime end date.
+        combines_order_discounts: Combine with other order-level discounts.
+        combines_product_discounts: Combine with product discounts.
+        combines_shipping_discounts: Combine with shipping discounts.
     """
-    price_rule = {
+    rule_payload = {
         "price_rule": {
             "title": title,
             "target_type": "line_item",
@@ -598,22 +743,38 @@ def create_discount_code(
             "value_type": value_type,
             "value": str(value),
             "customer_selection": "all",
-            "starts_at": "2020-01-01T00:00:00Z",
+            "starts_at": starts_at or datetime.now(timezone.utc).isoformat(),
+            "once_per_customer": once_per_customer,
         }
     }
-    if usage_limit:
-        price_rule["price_rule"]["usage_limit"] = usage_limit
+    if usage_limit is not None:
+        rule_payload["price_rule"]["usage_limit"] = usage_limit
+    if ends_at is not None:
+        rule_payload["price_rule"]["ends_at"] = ends_at
 
-    rule_resp = _post("price_rules.json", price_rule)
+    rule_resp = _post("price_rules.json", rule_payload)
     rule_id = rule_resp["price_rule"]["id"]
 
     code_resp = _post(
         f"price_rules/{rule_id}/discount_codes.json",
         {"discount_code": {"code": code}},
     )
+
+    _set_combines_with(
+        rule_id,
+        order_discounts=combines_order_discounts,
+        product_discounts=combines_product_discounts,
+        shipping_discounts=combines_shipping_discounts,
+    )
+
     return {
         "price_rule": rule_resp["price_rule"],
         "discount_code": code_resp["discount_code"],
+        "combines_with": {
+            "orderDiscounts": combines_order_discounts,
+            "productDiscounts": combines_product_discounts,
+            "shippingDiscounts": combines_shipping_discounts,
+        },
     }
 
 

@@ -70,6 +70,7 @@ class ContractData:
     dotation_code: str = ""  # paid: code dotation spécifique
     siren: str = ""  # optional: numéro SIREN/immatriculation
     custom_deliverables: str = ""  # paid: livrables détaillés (lignes séparées par |)
+    renewal_threshold: int = 50  # dotation: seuil d'utilisations pour renouvellement auto
 
     @property
     def full_name(self) -> str:
@@ -279,10 +280,11 @@ def article_2(d: ContractData) -> str:
     )
     if d.contract_type == "dotation":
         renewal = (
-            " Le présent contrat pourra être automatiquement renouvelé pour une durée de douze "
-            "mois, dès lors que le nombre d'utilisation du code d'affiliation sera utilisé 50 fois "
-            "ou plus sur une durée de douze mois. A défaut d'atteinte de cet objectif, les parties "
-            "seront considérées libres de tous engagements à l'expiration du contrat."
+            f" Le présent contrat pourra être automatiquement renouvelé pour une durée de "
+            f"{duration_text}, dès lors que le nombre d'utilisation du code d'affiliation "
+            f"sera utilisé {d.renewal_threshold} fois ou plus sur la durée du présent "
+            f"contrat. A défaut d'atteinte de cet objectif, les parties seront considérées "
+            f"libres de tous engagements à l'expiration du contrat."
         )
     else:  # paid
         renewal = (
@@ -525,7 +527,7 @@ def build_contract(data: ContractData) -> str:
 
     # Article 4 — Obligations
     pdf._write_article_header(art_num, f"OBLIGATIONS DE {data.term_article.upper()}")
-    if data.contract_type == "paid" and data.deliverables_list:
+    if data.deliverables_list:
         # Paid: detailed custom deliverables
         intro = (
             f"En contrepartie de l'exécution par HCS de ses obligations, {data.term_article} s'engage "
@@ -581,39 +583,65 @@ def build_contract(data: ContractData) -> str:
     pdf._spacing(2)
     art_num += 1
 
-    # Article 6
-    pdf._write_article(art_num, "AUTORISATION DROIT A L'IMAGE", article_6(data))
-    art_num += 1
+    # --- Tail articles with last-page balance (two-pass midpoint split) ---
+    # Collect the tail: Art 6, (paid only) Art 7 Rémunération paragraphs, Art droit applicable.
+    # Dry-measure all blocks, compute cumulative heights, decide midpoint split if we land
+    # on a non-first page in the left column — so col 0 and col 1 end up visually balanced.
+    art6_body = article_6(data)
+    art_droit_body = article_droit_applicable()
 
-    # Article 7 — Rémunération (paid only) — write as separate paragraphs for flow
+    # Each tail block: (kind, payload, height). kind ∈ {"article", "header", "para"}.
+    tail_blocks: list = []
+    tail_blocks.append(("article", ("AUTORISATION DROIT A L'IMAGE", art6_body),
+                        4.0 + pdf._measure_multicell(art6_body, "", 8.5, COL_W, 4.0) + 3))
+
     if data.contract_type == "paid":
-        pdf._write_article_header(art_num, "REMUNERATION")
-        paras = [p.strip() for p in article_remuneration(data).split("\n\n") if p.strip()]
-        # Measure total height of remaining content (art 7 paras + art 8)
-        total_h = sum(pdf._measure_multicell(p, "", 8.5, COL_W, 4.0) + 3 for p in paras)
-        art8_text = article_droit_applicable()
-        total_h += 4.0 + pdf._measure_multicell(art8_text, "", 8.5, COL_W, 4.0)  # header + body
-        # Find where to break: accumulate height, break at ~midpoint
+        tail_blocks.append(("header", "REMUNERATION", 4.0))
+        for para in [p.strip() for p in article_remuneration(data).split("\n\n") if p.strip()]:
+            tail_blocks.append(("para", para,
+                                pdf._measure_multicell(para, "", 8.5, COL_W, 4.0) + 3))
+        # spacing added after art 7 before art droit
+        tail_blocks.append(("spacing", 2, 2))
+
+    tail_blocks.append(("article", ("DROIT APPLICABLE - ATTRIBUTION DE JURIDICTION", art_droit_body),
+                        4.0 + pdf._measure_multicell(art_droit_body, "", 8.5, COL_W, 4.0) + 3))
+
+    # Trigger any pending column/page break BEFORE measuring state, so the decision below
+    # reflects where the tail will actually start rendering (and not the position at the
+    # end of Art 5 which may still be in the right column of the previous page).
+    if tail_blocks:
+        pdf._ensure_space(tail_blocks[0][2])
+
+    # Decide split: only if we're on a non-first page, in col 0 (i.e. tail spilled onto a
+    # fresh page with col 1 otherwise empty). Otherwise let natural flow handle it.
+    break_after = None
+    if not pdf.is_first_page and pdf.col == 0:
+        total_h = sum(h for _, _, h in tail_blocks)
         midpoint = total_h / 2
         accum = 0
-        break_after = len(paras)  # default: no break within art 7
-        for i, para in enumerate(paras):
-            h = pdf._measure_multicell(para, "", 8.5, COL_W, 4.0) + 3
+        for i, (_, _, h) in enumerate(tail_blocks):
             accum += h
             if accum >= midpoint:
                 break_after = i + 1
                 break
-        for i, para in enumerate(paras):
-            pdf._write_block(para)
-            pdf._spacing(1)
-            # Force column break at the balanced midpoint (only on non-first page, left col)
-            if i + 1 == break_after and not pdf.is_first_page and pdf.col == 0:
-                pdf._force_column_break()
-        pdf._spacing(2)
-        art_num += 1
 
-    # Last article — Droit applicable
-    pdf._write_article(art_num, "DROIT APPLICABLE - ATTRIBUTION DE JURIDICTION", article_droit_applicable())
+    # Render the tail, forcing a column break at the computed midpoint
+    for i, (kind, payload, _) in enumerate(tail_blocks):
+        if kind == "article":
+            title, body = payload
+            pdf._write_article(art_num, title, body)
+            art_num += 1
+        elif kind == "header":
+            pdf._write_article_header(art_num, payload)
+            art_num += 1
+        elif kind == "para":
+            pdf._write_block(payload)
+            pdf._spacing(1)
+        elif kind == "spacing":
+            pdf._spacing(payload)
+
+        if break_after == i + 1 and pdf.col == 0:
+            pdf._force_column_break()
 
     # --- Signature block (below both columns) ---
     # Track the bottom of both columns to place signature below the tallest
@@ -784,6 +812,8 @@ def _build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--dotation-code", default="")
     p.add_argument("--siren", default="")
     p.add_argument("--deliverables", default="", help="Pipe-separated list of custom deliverables")
+    p.add_argument("--renewal-threshold", type=int, default=50,
+                   help="Dotation: nombre d'utilisations du code affilié pour renouvellement auto")
     p.add_argument(
         "--upload-drive",
         action="store_true",
@@ -830,6 +860,7 @@ def _args_to_data(args: argparse.Namespace) -> "ContractData":
         dotation_code=args.dotation_code,
         siren=args.siren,
         custom_deliverables=args.deliverables,
+        renewal_threshold=args.renewal_threshold,
     )
 
 
