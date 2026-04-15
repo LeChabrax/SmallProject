@@ -27,6 +27,25 @@ réels en production** (audit 2026-04-13) — ne pas réinventer.
 nouvelle création doit être une copie exacte de cette config (sauf le nom
 du code et le `title`).
 
+### ✅ Méthode recommandée — tool MCP `create_affiliate_code`
+
+Depuis 2026-04-15, le MCP `shopify_orders` expose un tool dédié qui clone
+exactement le pattern ALEXTV (validé par comparaison field-by-field en prod).
+Un seul argument, tout est verrouillé :
+
+```
+create_affiliate_code(name="florine")
+→ FLORINE créé avec -15%, once_per_customer=true, starts=now, ends=null,
+  usage_limit=null, combinesWith {order:false, product:true, shipping:true}
+```
+
+Pour les contrats Paid (-20% type `LRA20`) : `create_paid_affiliate_code(name="...")`
+(percent par défaut -20, override possible).
+
+La recette REST + GraphQL manuelle ci-dessous reste documentée pour référence
+et pour les cas exotiques, mais **ne pas l'utiliser directement** : passer par
+le tool MCP garantit la conformité.
+
 ### Configuration price_rule (REST)
 
 ```json

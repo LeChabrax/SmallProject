@@ -51,6 +51,51 @@ Le `applied_discount.title` change selon le contexte (`SAV`, `Dotation`,
 
 ---
 
+## 1.5 HARD RULE — mail client OBLIGATOIRE sur le draft
+
+**Un draft order NE DOIT JAMAIS avoir `email: null`.** Le mail client est
+bloquant pour le reste du flow :
+- Pas de confirmation Shopify envoyée au client
+- Pas de tracking BigBlue (le mail est la clé de routage)
+- Pas de rattachement Affiliatly du code à la commande (pour les dotations
+  avec code affilié)
+
+### Checklist obligatoire avant `create_draft_order`
+
+1. **Récupérer l'email du client** (DM Instagram, ticket Gorgias, thread
+   conversationnel). Sans email, on n'avance pas.
+2. **`search_customers(query=email)`** pour vérifier s'il existe déjà :
+   - **Client existe** → récupérer son `id` numérique et le passer dans
+     `customer_id=<integer>`. Ne JAMAIS passer `customer_email=`.
+   - **Client n'existe pas** → créer le customer d'abord via
+     `mcp__shopify__create-customer` (firstName, lastName, email, adresse),
+     puis passer le `customer_id` obtenu.
+3. **Après création** : `get_draft_order(draft_id)` et vérifier :
+   - `draft_order.email` ≠ `null`
+   - `draft_order.customer.email` correspond à l'email attendu
+4. Si email manque → **STOP** et patcher avant de continuer (cf §1.6).
+
+### 1.6 Fallback — patcher un draft existant sans email
+
+Si le draft a déjà été créé sans email (l'erreur crée un customer "blank"
+automatiquement attaché au draft) :
+
+```python
+mcp__shopify__update_customer(
+    id=<blank_customer_id>,
+    email="<vrai_email>",
+    firstName="...",
+    lastName="...",
+)
+```
+
+Le draft récupère automatiquement l'email au prochain `get_draft_order`.
+**Incidents historiques** : SAV Renaud Claus 14/04/2026 (#D745), dotation
+Dylan @dylan.coaching_ 15/04/2026 (#D746) — tous deux corrigés via ce
+fallback, mais on évite le re-travail en suivant §1.5 dès la création.
+
+---
+
 ## 2. Mapping par scénario
 
 ### 2.1 Replacement SAV (colis bloqué, returned-to-sender, etc.)
