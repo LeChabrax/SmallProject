@@ -12,7 +12,8 @@
 > - Création des codes Shopify (4 patterns) → [`docs/process_create_codes.md`](./docs/process_create_codes.md)
 > - Création des draft orders + tags (impact CA) → [`docs/process_create_orders.md`](./docs/process_create_orders.md)
 > - Calcul du crédit ambassadeur `(O−Q)×20€` → [`docs/process_calculate_credits.md`](./docs/process_calculate_credits.md)
-> - Decision tree DM Instagram (templates réels) → [`docs/dm_decision_tree.md`](./docs/dm_decision_tree.md)
+> - **Instagram DM workflow (protocole 9 étapes bloquant)** → skill `/instagram-dm`
+> - Decision tree DM Instagram (templates réels, référence humaine) → [`docs/dm_decision_tree.md`](./docs/dm_decision_tree.md)
 > - Architecture / carte codebase → [`LLM.md`](./LLM.md)
 
 ## Qui sommes-nous
@@ -31,93 +32,36 @@
 
 → **JAMAIS signer "Antoine" côté SC**, même si c'est lui qui rédige. Le client final achète à une marque, pas à une personne. Détails dans [`docs/process_sav_unified.md`](./docs/process_sav_unified.md) §0.
 
-### Tone Instagram (détaillé)
-- Tutoiement systématique avec les ambassadeurs
-- Ton enthousiaste mais pro, jamais pushy
-- Emojis modérés (😉🔥💪😊😍) — 0 à 2 par message, max
-- ❌ Jamais : 🙏 ✨ 💖 (mielleux)
-- ❌ **Jamais de tirets em (`—`)** dans les messages rédigés (utiliser virgule, point, ou reformuler)
-- Decision tree complet + templates : [`docs/dm_decision_tree.md`](./docs/dm_decision_tree.md)
-- Personality auto-régénérée : [`instagram_dm_mcp/personality.md`](./instagram_dm_mcp/personality.md)
+---
+
+## Workflows par plateforme — skills dédiés
+
+Trois skills au niveau user, chacun est une bulle étanche pour son domaine. Ils sont loop-compatibles (ex : `/loop 30m /gorgias`).
+
+### Instagram DM — ambassadeurs
+**Skill : `/instagram-dm`** (protocole 9 étapes bloquant, auto-trigger sur "check les DMs", "draft pour {user}", "/instagram-dm", "relance {user}", etc.).
+
+Absorbe tout ce qui était éparpillé : persona détaillé, pipeline ambassadeur, statuts, priorités, règles catégorisation voice_media/raven_media/club, pre-draft check welcome codes, format carte de décision, templates.
+
+Référence humaine : [`docs/dm_decision_tree.md`](./docs/dm_decision_tree.md). Corpus ton : [`instagram_dm_mcp/personality.md`](./instagram_dm_mcp/personality.md).
+
+### Gorgias — service client (tous canaux)
+**Skill : `/gorgias`** (protocole 8 étapes bloquant, auto-trigger sur "check le SAV", "check les tickets", "passe SAV", "service client", "/gorgias", etc.).
+
+Bulle complète pour tous les tickets SAV (email / chat / contact_form / Instagram / Facebook / WhatsApp via WAX). Absorbe : pull protocol 100+, filtrage par channels/tags, persona entité Impulse Nutrition (vouvoiement formel), style emails (structure, formules interdites), cross-links Shopify draft replacement + BigBlue claims, recette draft SAV (discount 100% + shipping 0€ + tag `Service client`), red flags (jamais signer "Antoine", jamais de délai chiffré, jamais `update_draft_order` sur line_items, etc.). Cas particulier ambassadeur qui contacte le SAV géré dans le skill.
+
+Référence humaine : [`docs/process_sav_unified.md`](./docs/process_sav_unified.md). Persona : [`gorgias_mcp/personality.md`](./gorgias_mcp/personality.md).
+
+### TikTok Shop SAV
+**Skill : `/tiktok-sav`** (narrow, pipeline Python `tiktok_sav/sav.py` + ACK T0 auto + templates T1-T9 + queue.json pour cas complexes).
+
+Reste intact comme aujourd'hui. Workflow SAV TikTok uniquement.
+
+⚠️ Ne plus rédiger manuellement DM / ticket / message SAV. Toujours passer par le skill correspondant.
 
 ---
 
-## Pipeline ambassadeur
-
-### Statuts (col J du Sheet `Suivi_Amb`)
-```
-In-cold → In-hot → A recontacter / A rediscuter → Contacter manager → Produits envoyés → Out
-```
-
-| Statut | Signification |
-|---|---|
-| **In-cold** | Identifié, pas encore contacté OU premier msg envoyé **sans réponse + > 7 jours depuis le dernier message envoyé**. Zone "à relancer" naturelle. |
-| **In-hot** | A répondu positivement, en discussion active |
-| **A recontacter** | À relancer plus tard (délai convenu, absence temporaire) |
-| **A rediscuter** | Discussion en pause, nécessite relance sans contexte précis |
-| **Contacter manager** | Passer par une agence/manager (Puls, Versacom, etc.) |
-| **Produits envoyés** | Commande validée, produits expédiés, code affilié créé |
-| **Out** | Refus, déjà pris, ou conversation terminée |
-
-### Priorités (col L)
-| Priorité | Quand |
-|---|---|
-| **high** | Action urgente requise (répondre, appeler, corriger une erreur) |
-| **medium** | En attente, surveiller, relancer si pas de retour |
-| **good** | RAS, tout va bien, pas d'action immédiate |
-
-### Règle générale L (priorité)
-- **Antoine est le dernier à avoir envoyé** → L = good
-- **Antoine a liké le dernier message de l'autre** → L = good
-- **L'autre a envoyé un message sans réponse ni like d'Antoine** → L = high (à signaler)
-- **"En vue"** (message d'Antoine lu mais pas répondu) → L = medium
-
-### Routing par modèle de partenariat
-1. Pitch ❶ : **Affiliation pure** (20€/utilisation, code affilié -15%) — défaut pour tout prospect
-2. Si refus → Pitch ❷ : **Dotation négociée** (`€/mois × durée ↔ utilisations cibles`)
-3. Si veut cash + SIREN → **Paid** (rare, top-tier)
-
-Détails et structure des contrats : [`docs/reference_contract_types.md`](./docs/reference_contract_types.md).
-
----
-
-## Règles de catégorisation DMs (cas spéciaux)
-
-### Messages vocaux (`voice_media`)
-- `item_type == "voice_media"` et `is_sent_by_viewer == False` → **L = high**
-- Exception : si Antoine a liké le message → L = good (il a écouté)
-- K = "message vocal non lu — à écouter manuellement"
-
-### Messages éphémères (`raven_media`)
-- `item_type == "raven_media"` → **L = medium/high** (contenu inaccessible via MCP)
-- K = "raven media reçue [date] — contenu inaccessible"
-
-### Réponse positive à une relance
-- Toute réponse positive → **J = In-hot, L = high**
-- Formulations : "c'est intéressant", "je suis attentive", "ça me plairait", "pourquoi pas"
-
-### Post annoncé
-- Si ambassadeur dit "je vais poster ce soir/demain" → K = "a annoncé post le [date] — vérifier tag @impulse_nutrition"
-
-### Clubs / organisations / contrats payants
-- Messages contenant "nous" (pluriel = club/duo), "Head Coach", "je représente [club/asso]", projets events → **NE PAS ajouter au Sheet `Suivi_Amb`**
-- Signaler à Antoine dans le chat uniquement
-- Ce sont des contrats payants, une catégorie différente (Suivi_Paid)
-
-### `xma_reel_mention`
-- Mention dans un reel = signal à vérifier au cas par cas
-- Peut être une mention positive d'ambassadeur OU une mention spontanée d'un inconnu
-
----
-
-## Quirks techniques connus
-
-### Timestamps Instagram = microsecondes
-```python
-from datetime import datetime, timezone
-dt = datetime.fromtimestamp(ts / 1_000_000, tz=timezone.utc)
-date_str = dt.strftime("%d/%m/%Y")
-```
+## Quirks techniques connus (cross-domain)
 
 ### Bug Excel "sériel" dans colonnes date du Sheet
 Si une colonne est formatée "date" et qu'on y entre un nombre (ex: dotation `150`), Google Sheets l'affiche comme `29/05/1900` (serial 150). Fix : réécrire la valeur numérique correcte via `batch_update_cells`.
@@ -133,6 +77,14 @@ Après `complete_draft_order`, il faut manuellement régler le pickup point sur 
 - A read+write sur le folder `InfluenceContract` (`1dxT2gSAm6tcnd8Ck6hXxPDS5yieMuj4x`)
 - Utilisé par `common/google_sheets.py` (Sheets) et `common/google_drive.py` (Drive contracts)
 
+### Timestamps Instagram = microsecondes
+```python
+from datetime import datetime, timezone
+dt = datetime.fromtimestamp(ts / 1_000_000, tz=timezone.utc)
+date_str = dt.strftime("%d/%m/%Y")
+```
+Quirk Python pour les scripts CLI `instagram_dm_mcp/*.py`.
+
 ---
 
 ## Contacts agences / managers
@@ -146,7 +98,7 @@ Après `complete_draft_order`, il faut manuellement régler le pickup point sur 
 | **Primelis** | (tripartite standard) |
 | **HCS interne** | pgautier@havea.com (Pierre Gautier — commandes dotation) |
 
-Quand un influenceur mentionne son agent → statut `Contacter manager` en `Suivi_Amb`.
+Quand un influenceur mentionne son agent → le skill `/instagram-dm` gère le routing "Contacter manager".
 
 ---
 
@@ -158,6 +110,8 @@ Quand un influenceur mentionne son agent → statut `Contacter manager` en `Suiv
 | Code affilié | Code promo personnalisé (ex: ALEXTV, FLORINE, NADIARUN) |
 | Crédit | 20 € débloqués par commande passée avec le code affilié |
 | Code crédit | Code Shopify ad-hoc créé pour redeem les crédits accumulés (formule `(O−Q)×20€`) |
+| Code welcome | Code -25% first-order Shopify. `ACHAB25` (Antoine), `PGAU25` (Pierre Gautier), format `{NOM}25`. Donné aux prospects trop petits = **parqués** |
+| Prospect parqué | Prospect qui a déjà reçu un code welcome dans un échange antérieur. Jamais re-pitcher comme un nouveau contact → skill `/instagram-dm` gère via §16 relance contextualisée |
 | Dotation | Envoi gratuit de produits contre contenu (négocié au cas par cas) |
 | Enveloppe | Budget produits alloué (~80-100 €) |
 | Tag `Service client` | Commande SAV/replacement — sort du CA HCS |
@@ -174,5 +128,7 @@ Persistées dans la mémoire auto, donc actives sans relire ce fichier :
 - **Lire le thread complet avant de drafter une réponse** (`list_ticket_messages` ou `read_conversation`)
 - **Excuses si retard de réponse** : > 4j (légère), > 10j (appuyée)
 - **MCP = tout accès plateforme** — natif ou API, jamais dire "j'ai pas de MCP"
+- **Instagram DM** : toujours passer par le skill `/instagram-dm` (protocole bloquant), jamais rédiger depuis les règles éparpillées
+- **Gorgias = vouvoiement service client**, Instagram DM = tutoiement ambassadeur (jamais mélanger)
 
 Carte complète dans la mémoire auto à `~/.claude/projects/-Users-antoinechabrat-Documents-SmallProject/memory/MEMORY.md`.

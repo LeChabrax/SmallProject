@@ -7,6 +7,20 @@ Entry point for everything project-related. If you're looking for *how to do X*,
 
 ---
 
+## 0. Skills workflow (niveau user, `~/.claude/skills/`)
+
+Chaque skill est une bulle étanche pour un domaine, loop-compatible (ex : `/loop 30m /gorgias`). Une fois invoqué, le skill applique son propre protocole bloquant sans confusion avec le reste.
+
+| Skill | Domaine | Triggers principaux | Structure |
+|---|---|---|---|
+| [`/instagram-dm`](~/.claude/skills/instagram-dm/SKILL.md) | DMs ambassadeurs Instagram (check, draft, relance, onboarding) | "check les DMs", "draft pour {user}", "relance {user}", "pitch {user}" | SKILL.md + reference/ (decision_tree, red_flags, welcome_codes, format_carte) |
+| [`/gorgias`](~/.claude/skills/gorgias/SKILL.md) | Service client tous canaux (email / chat / contact_form / IG / FB / WhatsApp-WAX) | "check le SAV", "check les tickets", "passe SAV", "service client" | SKILL.md + reference/ (pull_protocol, categorization, sav_recipe, shopify_tags, red_flags) |
+| [`/tiktok-sav`](~/.claude/skills/tiktok-sav/SKILL.md) | SAV TikTok Shop (pipeline Python `tiktok_sav/sav.py` + templates T0-T9) | "check tiktok sav", "traite les messages tiktok", "queue tiktok" | SKILL.md (narrow, auto-send T1/T3/T6/T7/T9, queue T2/T4/T5/T8) |
+
+**Règles transversales** (draft + go, lire thread avant drafter, no em dash, excuses si retard, persona SC vs humain) : vivent dans la **memory auto**, toujours chargées quel que soit le skill invoqué. Les 3 skills ne les répètent pas dans leurs §0.
+
+---
+
 ## 1. Reference docs (read first)
 
 | Doc | Use when |

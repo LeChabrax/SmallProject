@@ -1,6 +1,10 @@
 # Instagram DM MCP — Impulse Nutrition
 
-> **Pointer** : règles globales projet, pipeline, persona, ton, decision tree DM → voir [`../CLAUDE.md`](../CLAUDE.md) et [`../docs/INDEX.md`](../docs/INDEX.md).
+> **Source de vérité pour TOUT travail DM** (check, draft, relance, onboarding, catégorisation, templates) : **skill `/instagram-dm`** (niveau user). Protocole 9 étapes bloquant. Triggers : `/instagram-dm`, "check les DMs", "draft pour {user}", "relance {user}", etc.
+>
+> Référence humaine (templates complets) : [`../docs/dm_decision_tree.md`](../docs/dm_decision_tree.md).
+>
+> ⚠️ **Ne jamais rédiger un DM sans invoquer le skill.** Les règles éparpillées dans les feedback memory files ont toutes été absorbées dans le SKILL.md.
 
 ## Spécifique à ce sous-projet
 
