@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Benchmark consolidé — Abonnement Nutrition FR 2026",
-    "last_updated": "2026-04-07",
+    "last_updated": "2026-04-15",
     "brands_analyzed": 8,
     "phases_completed": [
       "catalogues",
@@ -12,7 +12,19 @@
       "rentabilite",
       "ux_deep"
     ],
-    "phases_pending": []
+    "phases_pending": [],
+    "source_of_truth": "benchmark/marques/<brand>/data.json",
+    "generator": "benchmark/build_master.py",
+    "audit_statuses": {
+      "nutriandco": "verified_live",
+      "nutrimuscle": "verified_live",
+      "novoma": "verified_live",
+      "nutripure": "verified_live",
+      "cuure": "verified_live",
+      "decathlon": "verified_live",
+      "aqeelab": "verified_live",
+      "myprotein": "verified_live"
+    }
   },
   "brands": {
     "nutriandco": {
@@ -21,10 +33,9 @@
         "url": "https://nutriandco.com",
         "has_subscription": true,
         "subscription_discount_pct": 15,
-        "subscription_model": "Subscribe & save sur chaque produit",
+        "subscription_model": "-15% flat, valeur identique mensuel et trimestriel (vérifié sur /fr/pages/page-abonnement). Non cumulable avec les codes welcome ni les codes promo ponctuels (le client doit choisir entre code et abo).",
         "frequencies_available": [
           "1 mois",
-          "2 mois",
           "3 mois"
         ],
         "flexibility": {
@@ -98,8 +109,17 @@
             "format": "Gélules"
           }
         ],
-        "subscription_scope": "Tous les produits éligibles",
-        "estimated_avg_basket_sub": 35
+        "subscription_scope": "Produits individuels uniquement — le modèle '1 produit = 1 abonnement' exclut les packs",
+        "estimated_avg_basket_sub": 35,
+        "subscription_shipping": {
+          "offerte": true,
+          "seuil_eur": 0,
+          "note": "Livraison domicile gratuite pour tous les abonnés, sans seuil minimum. En one-shot, livraison domicile gratuite seulement à partir de 89€ et relais à partir de 69€."
+        },
+        "subscription_exclusions": [
+          "Packs de compléments (composition figée incompatible avec abo récurrent)",
+          "Coffrets cadeaux"
+        ]
       },
       "logistique": {
         "transporteurs": [
@@ -140,33 +160,44 @@
       },
       "ux_deep": {
         "screenshots": [
-          "nutriandco_homepage.png",
-          "nutriandco_product_sub.png",
-          "nutriandco_collection.png"
+          "homepage.png",
+          "product_sub.png",
+          "collection.png",
+          "abonnement_page.png"
         ],
         "subscription_ux": {
           "wording_cta": "S'abonner",
           "wording_pitch": "Abonnez-vous & économisez 15%",
           "placement_on_product_page": "Toggle Achat unique / Abonnement au-dessus du bouton Ajouter au panier",
           "toggle_style": "Radio buttons (Achat unique vs S'abonner)",
-          "frequency_selector": "Dropdown (1, 2, 3 mois)",
+          "frequency_selector": "Dropdown (1 ou 3 mois)",
           "price_display": "Prix barré + prix abonné affiché en vert",
-          "dedicated_page": false,
+          "dedicated_page": true,
           "homepage_mention": false,
           "navigation_mention": false,
-          "email_mention": "Non confirmé"
+          "email_mention": "Oui — email de pré-expédition avec fenêtre de modification de 48h avant chaque renouvellement"
         },
         "overall_ux_score": 3.5,
         "strengths": [
           "Toggle clair sur la fiche produit",
           "Prix abonné bien visible",
-          "Sans engagement mis en avant"
+          "Sans engagement mis en avant",
+          "Livraison domicile offerte sur tous les abonnements, sans seuil (alors qu'elle coûte ~6,50€ en one-shot sous 89€)",
+          "Email de pré-expédition avec fenêtre de modification de 48h (anti-pattern churn bien exécuté)",
+          "Page dédiée /fr/pages/page-abonnement avec pitch éditorial",
+          "Programme fidélité global (1€ = 1 point) — non spécifique à l'abo mais les points se cumulent sur les achats abo"
         ],
         "weaknesses": [
-          "Pas de page dédiée abonnement",
-          "Pas de mise en avant homepage/navigation",
-          "Module discret, peut passer inaperçu"
-        ]
+          "Pas de mise en avant homepage/navigation (module discret, peut passer inaperçu)",
+          "Codes welcome et codes promo non cumulables avec l'abo (friction conversion : le client doit choisir entre son -15% welcome et la souscription)",
+          "Seulement 2 fréquences (1 mois / 3 mois) — pas de 2 mois qui serait le sweet spot pour un pot de 60 gélules"
+        ],
+        "scores": {
+          "ux": 3.5,
+          "offre_commerciale": 4.0,
+          "pertinence_vs_impulse": 4.5,
+          "global": 4.0
+        }
       }
     },
     "nutrimuscle": {
@@ -174,8 +205,8 @@
         "name": "Nutrimuscle",
         "url": "https://www.nutrimuscle.com",
         "has_subscription": true,
-        "subscription_discount_pct": "5% 1ère livraison, 15% à partir de la 2ème",
-        "subscription_model": "Abonnement progressif (5% → 15%)",
+        "subscription_discount_pct": 15,
+        "subscription_model": "-15% flat dès la première livraison (vérifié sur /pages/abonnement et article blog officiel). La mécanique progressive 5% → 15% listée dans l'ancien master_data semble obsolète — Nutrimuscle a vraisemblablement simplifié son modèle.",
         "frequencies_available": [
           "1 mois",
           "2 mois",
@@ -255,9 +286,20 @@
             "format": "Poudre"
           }
         ],
-        "subscription_scope": "Quasi tous les produits (250+ références)",
+        "subscription_scope": "Sélection de produits (250+ formats éligibles). Modèle '1 produit = 1 abonnement' (un abo par SKU, plusieurs abos possibles en parallèle).",
         "estimated_avg_basket_sub": 45,
-        "note": "Catalogue très large, 250+ produits. Première livraison -5%, puis -15% ensuite."
+        "subscription_shipping": {
+          "offerte": true,
+          "seuil_eur": 0,
+          "note": "Livraison domicile offerte pour tous les abonnés, sans seuil. En one-shot, seuil domicile à 100€ et relais à 60€ — l'abo débloque la gratuité même sur un panier de 17€."
+        },
+        "subscription_exclusions": [
+          "Packs (Pack Starter, Pack Muscu Sèche, Pack Prise de masse, packs collagène/vitamines) — composition figée",
+          "Gros formats (4 kg et plus, 800 gélules et plus) — probable, à confirmer navigation live",
+          "Textile et accessoires — non consommable, pas de récurrence naturelle",
+          "Native Whey — à confirmer, source secondaire l'indiquait comme exclue"
+        ],
+        "note": "Catalogue très large, 250+ produits. Remise -15% flat dès la 1ère livraison (corrigé 2026-04-15 — l'ancienne mention '5% 1ère puis 15%' est obsolète)."
       },
       "logistique": {
         "transporteurs": [
@@ -300,38 +342,49 @@
       },
       "ux_deep": {
         "screenshots": [
-          "nutrimuscle_homepage.png",
-          "nutrimuscle_product_sub.png",
-          "nutrimuscle_abonnement_page.png"
+          "homepage.png",
+          "product_sub.png",
+          "abonnement_page.png",
+          "blog_offre_abonnement.png",
+          "nos_offres.png"
         ],
         "subscription_ux": {
           "wording_cta": "S'abonner",
           "wording_pitch": "Abonnez-vous et économisez sur vos produits préférés",
-          "wording_details": "-15% sur vos produits en abonnement. Livraison gratuite avec l'abonnement. Sans engagement.",
           "placement_on_product_page": "Toggle Achat unique / Abonnement intégré dans le sélecteur de prix",
           "toggle_style": "Radio buttons avec picto",
           "frequency_selector": "Dropdown (1 à 6 mois)",
           "price_display": "Double affichage : prix normal et prix abonné avec badge -15%",
           "dedicated_page": true,
-          "dedicated_page_url": "nutrimuscle.com/pages/abonnement",
-          "dedicated_page_content": "Page complète avec avantages (3 pictos), catalogue produits éligibles, lien vers espace abonné",
           "homepage_mention": true,
           "navigation_mention": true,
-          "email_mention": "Oui, régulièrement dans les newsletters"
+          "email_mention": "Oui, régulièrement dans les newsletters",
+          "wording_details": "-15% sur vos produits en abonnement. Livraison gratuite avec l'abonnement. Sans engagement.",
+          "dedicated_page_url": "https://www.nutrimuscle.com/pages/abonnement",
+          "dedicated_page_content": "Page complète avec avantages (3 pictos), catalogue produits éligibles, lien vers espace abonné"
         },
-        "overall_ux_score": 4.5,
+        "overall_ux_score": 4.0,
         "strengths": [
-          "Page dédiée très complète",
-          "Livraison gratuite = argument massue",
-          "3 pictos clairs : -15%, livraison gratuite, sans engagement",
-          "6 fréquences possibles (1-6 mois) = très flexible",
-          "Large catalogue éligible",
-          "Espace abonné dédié"
+          "Page dédiée complète (/pages/abonnement) avec pitch éditorial, 3 pictos clés, catalogue des produits éligibles et lien espace abonné",
+          "Livraison domicile offerte sur l'abo sans seuil (argument massue vs le seuil one-shot de 100€)",
+          "6 fréquences disponibles (1 à 6 mois) — le plus flexible du panel, couvre les SKUs à rotation rapide (créatine, Oméga-3) comme les rotations lentes (gros pots)",
+          "Grand catalogue éligible (250+ formats) — couvre sport + santé",
+          "Espace abonné dédié pour gérer les abonnements",
+          "Mention dans la homepage, la navigation et les newsletters = visibilité maximale",
+          "-15% flat dès la 1ère livraison (simplicité du message)",
+          "Programme fidélité Nm Club couplé (points → produits gratuits)"
         ],
         "weaknesses": [
-          "Remise progressive (5% → 15%) peut être confuse",
-          "Page dédiée = long scroll"
-        ]
+          "Ruptures de stock occasionnelles mentionnées dans les verbatims → peut retarder les livraisons abo",
+          "Pas de mécanisme publique d'anti-churn (email pré-expédition non confirmé) — à vérifier",
+          "Stacking avec codes welcome/promos non trivial (certains codes influenceurs cumulables, d'autres non — manque de clarté pour le client)"
+        ],
+        "scores": {
+          "ux": 4.0,
+          "offre_commerciale": 4.0,
+          "pertinence_vs_impulse": 3.5,
+          "global": 3.8
+        }
       }
     },
     "novoma": {
@@ -340,7 +393,7 @@
         "url": "https://novoma.com",
         "has_subscription": true,
         "subscription_discount_pct": 10,
-        "subscription_model": "Abonnement -10% + avantages livraison",
+        "subscription_model": "-10% à vie sur chaque commande abo (vérifié 2026-04-15 sur /pages/abonnement). Modèle hybride : remise plus modérée que Nutri&Co/Nutrimuscle (-15%) mais compensé par un avantage livraison chiffré (3,50€ vs 4,90€) et un seuil de gratuité abaissé (50€ vs 90€). Codes promo cumulables uniquement sur la 1ère livraison de l'abo.",
         "frequencies_available": [
           "1 mois",
           "2 mois",
@@ -350,7 +403,7 @@
           "pause": true,
           "modify": true,
           "cancel_anytime": true,
-          "minimum_commitment": "Aucun"
+          "minimum_commitment": "Aucun (annulation jusqu'à la veille du renouvellement)"
         },
         "products": [
           {
@@ -399,8 +452,16 @@
             "format": "Gélules"
           }
         ],
-        "subscription_scope": "Tous les produits du catalogue",
+        "subscription_scope": "Tous les produits individuels du catalogue (aucune exclusion explicite documentée sur la page abo). Modèle '1 produit = 1 abonnement'.",
         "estimated_avg_basket_sub": 30,
+        "subscription_shipping": {
+          "offerte": false,
+          "seuil_eur": 50,
+          "note": "Modèle stepped : 3,50€ en Colissimo domicile (vs 4,90€ standard), offerte dès 50€ d'achat (vs 90€ standard). Seule option disponible pour l'abo = Colissimo domicile (pas de point relais ni DPD). 2 jours ouvrés."
+        },
+        "subscription_exclusions": [
+          "Packs probablement exclus — à confirmer navigation live (cohérent avec Nutri&Co et Nutrimuscle qui excluent aussi les packs pour la même raison)"
+        ],
         "subscription_shipping_advantage": "Domicile 3.50€ au lieu de 4.90€, gratuit dès 50€ (vs 90€ standard)"
       },
       "logistique": {
@@ -448,24 +509,25 @@
       },
       "ux_deep": {
         "screenshots": [
-          "novoma_homepage.png",
-          "novoma_product_sub.png",
-          "novoma_abonnement_page.png"
+          "homepage.png",
+          "product_sub.png",
+          "abonnement_page.png"
         ],
         "subscription_ux": {
           "wording_cta": "S'abonner",
           "wording_pitch": "Passez à l'abonnement",
-          "wording_sub_pitch": "Recevez votre cure préférée automatiquement chez vous, à la fréquence de votre choix, tout en bénéficiant de 10% de réduction !",
-          "wording_rationale": "Les compléments alimentaires fonctionnent mieux s'ils sont pris de manière régulière et sur le long terme.",
           "placement_on_product_page": "Toggle Achat unique / S'abonner, au-dessus du CTA",
           "toggle_style": "Radio buttons",
           "frequency_selector": "Dropdown (1, 2, 3 mois)",
           "price_display": "Prix abonné affiché à côté du prix normal",
           "dedicated_page": true,
-          "dedicated_page_url": "novoma.com/pages/abonnement",
-          "dedicated_page_content": "Processus en 3 étapes illustré, 5 avantages listés, FAQ complète (6 questions)",
           "homepage_mention": false,
           "navigation_mention": false,
+          "email_mention": null,
+          "wording_sub_pitch": "Recevez votre cure préférée automatiquement chez vous, à la fréquence de votre choix, tout en bénéficiant de 10% de réduction !",
+          "wording_rationale": "Les compléments alimentaires fonctionnent mieux s'ils sont pris de manière régulière et sur le long terme.",
+          "dedicated_page_url": "novoma.com/pages/abonnement",
+          "dedicated_page_content": "Processus en 3 étapes illustré, 5 avantages listés, FAQ complète (6 questions)",
           "faq_items": [
             "Comment sera livrée ma commande par abonnement ? → Colissimo domicile uniquement, 3.50€ (vs 4.90€), gratuit dès 50€ (vs 90€)",
             "Code de réduction ? → Oui sur la 1ère livraison uniquement",
@@ -473,19 +535,29 @@
             "Annulation ? → À tout moment, jusqu'à la veille du renouvellement"
           ]
         },
-        "overall_ux_score": 4.0,
+        "overall_ux_score": 3.5,
         "strengths": [
-          "Page dédiée bien structurée (3 étapes + avantages + FAQ)",
-          "Argumentation santé ('les compléments marchent mieux sur le long terme')",
-          "Avantages livraison concrets (3.50€ vs 4.90€, gratuit dès 50€ vs 90€)",
-          "FAQ très transparente",
-          "Sans engagement clairement affiché"
+          "Page dédiée très bien structurée (/pages/abonnement) : processus 3 étapes illustré + 5 avantages + FAQ complète 6 questions",
+          "Argumentation santé unique : 'Les compléments alimentaires fonctionnent mieux s'ils sont pris de manière régulière et sur le long terme' — justifie l'abo par la conviction, pas juste la remise",
+          "Avantages livraison chiffrés et concrets : 3,50€ vs 4,90€ (−1,40€), gratuit dès 50€ vs 90€ (−40€ de seuil)",
+          "FAQ très transparente (6 questions couvrant tous les sujets sensibles)",
+          "Sans engagement clairement affiché (annulation jusqu'à la veille du renouvellement)",
+          "Points fidélité toujours cumulés sur l'abo (même si non dépensables sur abo) — le client ne perd pas sa récompense long terme",
+          "Trustpilot 4.6 / 5 sur 7 000 avis — le meilleur score du panel"
         ],
         "weaknesses": [
-          "Remise 10% = plus faible que concurrents",
-          "Livraison Colissimo domicile uniquement (pas de point relais pour abo)",
-          "Pas mis en avant dans la navigation principale"
-        ]
+          "Remise faciale à −10% = plus faible que les -15% concurrents (Nutri&Co, Nutrimuscle) — moins 'sexy' sur le CTA",
+          "Livraison Colissimo domicile uniquement (pas de point relais ni DPD pour l'abo) — friction pour clients qui préfèrent le relais",
+          "Points fidélité non utilisables sur abo — friction : un pure subscriber accumule mais ne peut jamais dépenser ses points (doit faire au moins 1 commande one-shot pour convertir)",
+          "Codes promo applicables uniquement sur la 1ère livraison abo — pas de cumul sur les renouvellements",
+          "Pas mis en avant dans la homepage ni la navigation principale"
+        ],
+        "scores": {
+          "ux": 3.5,
+          "offre_commerciale": 3.0,
+          "pertinence_vs_impulse": 4.5,
+          "global": 3.7
+        }
       }
     },
     "nutripure": {
@@ -493,7 +565,15 @@
         "name": "Nutripure",
         "url": "https://www.nutripure.fr",
         "has_subscription": false,
-        "subscription_model": "Aucun — achat one-shot uniquement",
+        "subscription_discount_pct": null,
+        "subscription_model": "Aucun système d'abonnement récurrent (confirmé 2026-04-15). Modèle de récurrence alternatif basé sur 3 leviers : (1) packs multi-mois permanents à -10% minimum (jusqu'à -25% sur certains), (2) programme fidélité qui crédite 10% du montant de chaque commande (convertible en produits offerts uniquement, pas en déduction cash), (3) programme de parrainage qui crédite 10% des commandes du filleul. L'économie client approche celle d'un abo -15% mais sans friction contractuelle.",
+        "frequencies_available": [],
+        "flexibility": {
+          "pause": null,
+          "modify": null,
+          "cancel_anytime": null,
+          "minimum_commitment": null
+        },
         "products": [
           {
             "name": "Whey Isolate Native",
@@ -553,6 +633,12 @@
           }
         ],
         "subscription_scope": "N/A",
+        "estimated_avg_basket_sub": null,
+        "subscription_shipping": {
+          "offerte": null,
+          "seuil_eur": null,
+          "note": "N/A — pas d'abonnement. Seuils standard : relais gratuit dès 49,90€, domicile gratuit dès 99€. Les formats 3 mois (~70€) et packs 6 mois (~130€) franchissent naturellement ces seuils."
+        },
         "estimated_avg_basket": 55,
         "why_no_subscription": "Positionnement ultra-premium, vente par lots (1 mois / 3 mois), stratégie de fidélisation par la qualité plutôt que par le lock-in. Formats 3 mois encouragent implicitement la récurrence."
       },
@@ -599,28 +685,46 @@
       },
       "ux_deep": {
         "screenshots": [
-          "nutripure_homepage.png",
-          "nutripure_product.png"
+          "homepage.png",
+          "product.png"
         ],
         "subscription_ux": {
           "wording_cta": "N/A",
           "wording_pitch": "N/A",
           "placement_on_product_page": "Aucun module abonnement",
-          "dedicated_page": false,
           "toggle_style": "N/A",
+          "frequency_selector": null,
+          "price_display": null,
+          "dedicated_page": false,
+          "homepage_mention": null,
+          "navigation_mention": null,
+          "email_mention": null,
           "strategy_alternative": "Formats 1 mois / 3 mois encouragent implicitement la récurrence. Programme fidélité classique."
         },
-        "overall_ux_score": "N/A",
+        "overall_ux_score": null,
         "strengths": [
-          "UX produit très clean et premium",
-          "Formats 3 mois = stratégie anti-churn implicite",
-          "Labels qualité bien mis en avant (Epax, Peptan, Creapure)"
+          "UX produit très clean et premium, labels qualité bien mis en avant (Epax, Peptan, Creapure)",
+          "Stratégie anti-churn implicite via formats 3 mois et packs 6 mois (pack 6 mois ≈ 130€ vs 25€ × 6 = 150€, soit ~13% d'économie)",
+          "Programme fidélité généreux : 10% du montant de chaque commande crédité sur compte récompenses (valable 12 mois)",
+          "Programme de parrainage cumulable : 10% des commandes filleuls → compte fidélité illimité",
+          "Trustpilot 4.75 / 5 sur 2 000 avis — meilleur score en pourcentage du panel (signale un vrai fit qualité/client)",
+          "Pas de lock-in contractuel = zéro friction conversion et zéro risque de churn négatif",
+          "Labels premium (Epax, Peptan, Creapure) justifient des tickets élevés sans besoin d'abo"
         ],
         "weaknesses": [
-          "Pas d'abonnement = perte de revenus récurrents potentiels",
-          "PrestaShop = frein technique probable"
+          "Pas d'abonnement = pas de revenus récurrents prévisibles (impossible de projeter une MRR fiable)",
+          "Récompenses fidélité non déductibles du panier — convertibles en produits offerts uniquement (friction perçue : 'je gagne 10% mais je ne peux pas les dépenser cash')",
+          "PrestaShop = frein technique à l'intégration d'un module abo moderne (vs Shopify natif chez les 3 concurrents premium)",
+          "Pas d'engagement forcé du client à acheter de nouveau — compte sur la qualité produit seule pour la rétention",
+          "Volume d'avis Trustpilot plus faible (2 000 vs 7 000 Novoma, 28 000 Nutrimuscle) — moins de signal social"
         ],
-        "why_no_subscription": "1) PrestaShop = pas de module abo natif mature. 2) Stratégie de fidélisation par la qualité premium plutôt que le lock-in. 3) Formats 3 mois compensent partiellement."
+        "why_no_subscription": "1) PrestaShop = pas de module abo natif mature. 2) Stratégie de fidélisation par la qualité premium plutôt que le lock-in. 3) Formats 3 mois compensent partiellement.",
+        "scores": {
+          "ux": null,
+          "offre_commerciale": null,
+          "pertinence_vs_impulse": 4.5,
+          "global": null
+        }
       }
     },
     "cuure": {
@@ -628,18 +732,16 @@
         "name": "Cuure",
         "url": "https://cuure.com",
         "has_subscription": true,
-        "subscription_discount_pct": "~10% vs achat individuel",
-        "subscription_model": "Box personnalisée mensuelle (questionnaire → sélection auto)",
+        "subscription_discount_pct": null,
+        "subscription_model": "Modèle 100% abonnement (pas de one-shot possible). Box personnalisée mensuelle générée par l'algorithme à partir d'un quiz santé (~5 min). Prix variable selon la composition : 18-40€/mois pour une cure moyenne de 3 compléments, ~40€/mois pour une cure complète (programme standard Cuure). La remise théorique de ~10% vs 'acheter les mêmes ingrédients un par un' est une comparaison marketing, pas contractuelle — il n'y a pas de one-shot équivalent chez Cuure.",
         "frequencies_available": [
-          "1 mois",
-          "2 mois",
-          "3 mois"
+          "1 mois (mensuel uniquement)"
         ],
         "flexibility": {
           "pause": true,
           "modify": true,
-          "cancel_anytime": true,
-          "minimum_commitment": "Aucun"
+          "cancel_anytime": "partiel — suspension self-serve OK, résiliation définitive nécessite email au support",
+          "minimum_commitment": "Aucun mais friction UX documentée : suspendre est self-serve (dashboard onglet Commandes), résilier définitivement nécessite d'écrire à support@cuure.com. Annuler une commande déjà enregistrée = fenêtre de 1h seulement. Cette architecture en 2 temps explique vraisemblablement les verbatims 'surpris par la reconduction automatique'."
         },
         "products": [
           {
@@ -675,8 +777,16 @@
             "category": "Minéraux"
           }
         ],
-        "subscription_scope": "50+ ingrédients, 2M+ combinaisons possibles",
+        "subscription_scope": "Box personnalisée uniquement — aucun catalogue individuel public. 50+ ingrédients disponibles, 2M+ combinaisons possibles. Algorithme de recommandation (2 à 8 compléments par personne) développé avec un comité de pros : médecins nutritionnistes, pharmaciens, naturopathes, biologistes. 30 sachets quotidiens pré-dosés, prénom imprimé sur les sachets + messages de motivation.",
         "estimated_avg_basket_sub": 35,
+        "subscription_shipping": {
+          "offerte": true,
+          "seuil_eur": 20,
+          "note": "Frais standard 6,50€, gratuite dès 20€ d'achat. Le programme standard à ~40€/mois dépasse naturellement ce seuil → livraison offerte pour ~100% des abonnés. Certaines sources mentionnent un seuil à 39€ — la vérité officielle Cuure est 20€ (page d'accueil)."
+        },
+        "subscription_exclusions": [
+          "Pas d'achat one-shot possible — tout le parcours est orienté abonnement box personnalisée"
+        ],
         "unique_selling_point": "Personnalisation via questionnaire, sachets quotidiens pré-dosés, comité scientifique"
       },
       "logistique": {
@@ -720,37 +830,52 @@
       },
       "ux_deep": {
         "screenshots": [
-          "cuure_homepage.png",
-          "cuure_quiz.png",
-          "cuure_produits.png"
+          "homepage.png",
+          "quiz.png",
+          "produits.png"
         ],
         "subscription_ux": {
           "wording_cta": "Découvrir ma formule",
           "wording_pitch": "Des compléments alimentaires sur-mesure",
           "placement_on_product_page": "N/A — le modèle est 100% abonnement (box personnalisée)",
           "toggle_style": "N/A — tout le parcours est orienté abonnement",
-          "onboarding_flow": "Quiz santé → Recommandation personnalisée → Box mensuelle",
+          "frequency_selector": null,
+          "price_display": null,
           "dedicated_page": true,
-          "dedicated_page_url": "cuure.com (le site entier est la page abo)",
           "homepage_mention": true,
           "navigation_mention": true,
+          "email_mention": null,
+          "onboarding_flow": "Quiz santé → Recommandation personnalisée → Box mensuelle",
+          "dedicated_page_url": "cuure.com (le site entier est la page abo)",
           "app_mobile": true,
           "personalization_depth": "50+ ingrédients, 2M+ combinaisons, comité scientifique"
         },
-        "overall_ux_score": 4.5,
+        "overall_ux_score": 4.0,
         "strengths": [
-          "UX entièrement orientée abonnement (pas de one-shot)",
-          "Quiz engageant et personnalisation poussée",
-          "Sachets quotidiens = expérience unique",
-          "App mobile pour suivi",
-          "Comité scientifique = crédibilité"
+          "UX 100% orientée abonnement (absence totale de parcours one-shot = pas de dilution du message commercial)",
+          "Quiz engageant ~5 min → 4-6 min d'engagement client avant même l'achat = barrière psychologique à l'annulation",
+          "Algorithme de recommandation validé par un comité scientifique (médecins, pharmaciens, naturopathes, biologistes)",
+          "Sachets quotidiens pré-dosés avec prénom imprimé + messages motivation = expérience physique différenciante",
+          "App mobile pour suivi quotidien de la prise → engagement long terme",
+          "Téléconsultations avec experts nutrition pour les abonnés = valeur ajoutée rétention",
+          "Livraison offerte dès 20€ → quasi systématique sur l'abo (programme standard ~40€/mois)",
+          "Trustpilot 4.5 / 5 sur 4 400 avis (solide pour une marque avec un modèle aussi atypique)"
         ],
         "weaknesses": [
-          "Pas de possibilité d'achat one-shot simple",
-          "Reconduction automatique pas toujours transparente",
-          "Prix qui monte vite avec beaucoup de compléments",
-          "Résultats longs (3+ mois)"
-        ]
+          "Pas de possibilité d'achat one-shot — barrière d'essai haute, le client doit s'engager dès le départ",
+          "Résiliation en 2 temps (suspension self-serve vs résiliation définitive par email au support) = friction UX documentée",
+          "Verbatims explicites : 'Surprise par la reconduction automatique' → signal fort que la communication du cycle n'est pas claire",
+          "Fenêtre d'annulation de commande de 1h seulement après enregistrement = timing serré pour les clients qui changent d'avis",
+          "Prix qui monte vite avec beaucoup de compléments (18€ à 40€+ selon composition) — le client peut se sentir piégé par un prix variable",
+          "Résultats longs (3+ mois) — perception valeur décalée par rapport au paiement mensuel, risque de churn avant l'effet ressenti",
+          "Modèle technique nécessite une stack custom (initialement Bubble, puis propriétaire) — pas reproductible simplement"
+        ],
+        "scores": {
+          "ux": 4.0,
+          "offre_commerciale": 3.0,
+          "pertinence_vs_impulse": 2.0,
+          "global": 3.0
+        }
       }
     },
     "decathlon": {
@@ -758,8 +883,8 @@
         "name": "Decathlon (Abonnement Nutrition)",
         "url": "https://abonnement.decathlon.fr",
         "has_subscription": true,
-        "subscription_discount_pct": "10-15%",
-        "subscription_model": "Abonnement par produit, 1 produit = 1 abonnement",
+        "subscription_discount_pct": "10-15% (stepped par produit, pas flat)",
+        "subscription_model": "Remise variable selon le SKU : -10% sur les whey (900g, 1.5kg, 2kg), -15% sur la créatine 300g, -10% sur les packs combinés (whey + créatine). Pattern rare — c'est une remise par produit, pas flat. Modèle '1 produit = 1 abonnement' (un pack compté comme 1 SKU est possible ; mais pas de panier multi-produits à la carte dans une même commande abo).",
         "frequencies_available": [
           "1 mois",
           "2 mois",
@@ -810,8 +935,17 @@
             "format": "Poudre"
           }
         ],
-        "subscription_scope": "Sélection limitée : whey, créatine, quelques compléments, croquettes",
+        "subscription_scope": "Scope plus large que prévu (vérifié 2026-04-15). Catégorie nutrition complète : whey (standard, isolate, concentré), gainers, créatine, BCAA, ISO drinks (boissons isotoniques), électrolytes, gels énergétiques, compotes, barres, pâtes de fruits, préparations énergétiques. Plus packs 'développement musculaire' (whey + créatine combinés). Plus catégorie à part : croquettes pour chien (37,01€/mois de plancher). Ce n'est PAS tout le catalogue nutrition Decathlon — c'est une sélection curée pour les SKUs à consommation récurrente.",
         "estimated_avg_basket_sub": 40,
+        "subscription_shipping": {
+          "offerte": "relais uniquement",
+          "seuil_eur": 0,
+          "note": "Livraison offerte en point relais (Mondial Relay) sans seuil pour les abonnés. Livraison domicile reste payante (3-4,50€ variable). C'est un modèle stepped comme Novoma (relais inclus seulement), pas flat comme Nutri&Co/Nutrimuscle (domicile inclus)."
+        },
+        "subscription_exclusions": [
+          "Produits one-shot ou saisonniers du catalogue nutrition Decathlon (ex : matériel, textile, accessoires fitness)",
+          "Probables : promotions ponctuelles et packs événementiels — à confirmer navigation live"
+        ],
         "loyalty_program": "10 points fidélité par euro dépensé en abonnement"
       },
       "logistique": {
@@ -859,39 +993,52 @@
       },
       "ux_deep": {
         "screenshots": [
-          "decathlon_abo_homepage.png",
-          "decathlon_abo_proteines.png",
-          "decathlon_abo_faq.png"
+          "homepage.png",
+          "proteines.png",
+          "faq.png"
         ],
         "subscription_ux": {
           "wording_cta": "S'abonner",
           "wording_pitch": "Faites des économies en cas d'abonnement par rapport à un achat unitaire et profitez d'un confort maximal. Plus besoin de vous soucier du réassort, on s'occupe de tout !",
           "placement_on_product_page": "Sous-site dédié (abonnement.decathlon.fr) séparé du site principal",
           "toggle_style": "N/A — site dédié, pas de toggle sur fiche produit classique",
-          "onboarding_flow": "4 étapes : Mon produit → Ma livraison → Mon paiement → Mes avantages",
+          "frequency_selector": null,
+          "price_display": null,
           "dedicated_page": true,
-          "dedicated_page_url": "abonnement.decathlon.fr",
           "homepage_mention": true,
           "navigation_mention": "Oui via lien footer + pages nutrition",
+          "email_mention": null,
+          "onboarding_flow": "4 étapes : Mon produit → Ma livraison → Mon paiement → Mes avantages",
+          "dedicated_page_url": "abonnement.decathlon.fr",
           "pricing_display": "À partir de 12.74€/mois",
           "loyalty": "10 points fidélité par euro dépensé",
           "limitations": "1 produit par commande, commandes distinctes pour multi-produits"
         },
-        "overall_ux_score": 3.0,
+        "overall_ux_score": 2.5,
         "strengths": [
-          "Sous-site dédié = clarté",
-          "Processus en 4 étapes bien illustré",
-          "Points fidélité = incentive supplémentaire",
-          "Livraison offerte en relais",
-          "Sans engagement"
+          "Sous-site dédié (abonnement.decathlon.fr) avec processus en 4 étapes clair : Mon produit → Ma livraison → Mon paiement → Mes avantages",
+          "Programme fidélité **Decat'Club** cumulable : 10 points par euro dépensé, points crédités sur le compte global Decathlon, échangeables contre cartes cadeaux / coaching nutrition / livraison offerte / dons",
+          "Catalogue plus large que prévu (confirmé 2026) : whey, créatine, BCAA, gainers, ISO drinks, électrolytes, gels, compotes, barres, pâtes de fruits + packs combinés + croquettes chien",
+          "Livraison offerte en point relais Mondial Relay sans seuil",
+          "Prix plancher le plus bas du panel : 12,74€/mois (créatine 300g) — permet un entry-point très accessible",
+          "Sans engagement, annulation à tout moment",
+          "Pouvoir de feu omnicanal : 1700+ magasins physiques + app mobile + programme fidélité global = ambassadeur marketing gratuit du sous-site abo"
         ],
         "weaknesses": [
-          "Séparation site principal / site abo = friction (redirect)",
-          "1 seul produit par commande = mauvaise UX pour multi-abonnements",
-          "Catalogue abo très limité (whey, créatine, quelques produits)",
-          "UX basique, pas d'optimisation conversion",
-          "Modification = résiliation + recréation"
-        ]
+          "Sous-domaine séparé abonnement.decathlon.fr = friction (redirect depuis le site principal, parcours abonné isolé)",
+          "Modèle '1 produit = 1 abonnement' : pour plusieurs produits, il faut créer plusieurs abos distincts (pas de panier multi-produits abo)",
+          "Modification = résiliation + recréation (friction majeure — pas de changement de SKU ou de fréquence in-place)",
+          "Livraison domicile reste payante (3-4,50€), contrairement aux concurrents premium qui l'offrent",
+          "UX basique comparée aux marques premium — pas d'optimisation conversion poussée (pas de badge '% économisé', pas de témoignages clients, pas de FAQ contextuelle)",
+          "Trustpilot 2,5/5 sur 2 950 avis (écart énorme avec site interne 4,47/5 sur 1,7M avis — les avis négatifs concernent surtout la logistique e-commerce Decathlon, pas l'abo spécifiquement)",
+          "Aucun champ 'pause' ou 'skip' documenté dans l'UX — le mécanisme de pause existe mais sans visibilité marketing"
+        ],
+        "scores": {
+          "ux": 2.5,
+          "offre_commerciale": 3.0,
+          "pertinence_vs_impulse": 2.0,
+          "global": 2.5
+        }
       }
     },
     "aqeelab": {
@@ -900,7 +1047,7 @@
         "url": "https://www.aqeelab-nutrition.fr",
         "has_subscription": true,
         "subscription_discount_pct": 20,
-        "subscription_model": "Subscribe & save -20% sur chaque produit",
+        "subscription_model": "-20% flat à vie sur chaque commande en abonnement (confirmé 2026-04-15 sur /collections/abonnement : '20% A VIE' et '-20% TOUS LES MOIS'). C'est la remise la plus agressive du panel (vs -15% Nutri&Co/Nutrimuscle, -10% Novoma). Codes promo NON cumulables avec l'abo : un seul code par commande.",
         "frequencies_available": [
           "1 mois",
           "2 mois",
@@ -909,8 +1056,8 @@
         "flexibility": {
           "pause": true,
           "modify": true,
-          "cancel_anytime": true,
-          "minimum_commitment": "Aucun"
+          "cancel_anytime": "après 2 mois minimum",
+          "minimum_commitment": "2 mois minimum requis pour débuter un abonnement (correction 2026-04-15 — le master_data disait à tort 'Aucun'). C'est une friction d'entrée documentée sur la page abo officielle. Le client ne peut pas résilier dès la 1ère commande pour bénéficier ponctuellement du -20% — il doit maintenir l'abo au moins 2 cycles. Point à surveiller pour la conformité Loi Chatel."
         },
         "products": [
           {
@@ -1006,6 +1153,11 @@
         ],
         "subscription_scope": "Tous les 23 produits du catalogue",
         "estimated_avg_basket_sub": 45,
+        "subscription_shipping": {
+          "offerte": null,
+          "seuil_eur": null,
+          "note": "Mentionné par sources secondaires comme 'reduced delivery shipping' pour les abonnés, mais la page /collections/abonnement officielle n'explicite pas de conditions spécifiques. Seuils standard : relais gratuit dès 69€, domicile gratuit dès 100€. À confirmer par navigation parcours abonné live."
+        },
         "note": "Plus haute remise abo du marché FR (20%). Catalogue petit mais ultra-ciblé."
       },
       "logistique": {
@@ -1049,9 +1201,9 @@
       },
       "ux_deep": {
         "screenshots": [
-          "aqeelab_homepage.png",
-          "aqeelab_product_sub.png",
-          "aqeelab_collection.png"
+          "homepage.png",
+          "product_sub.png",
+          "collection.png"
         ],
         "subscription_ux": {
           "wording_cta": "S'abonner & économiser",
@@ -1060,24 +1212,38 @@
           "toggle_style": "Radio buttons avec économie affichée (€ économisés)",
           "frequency_selector": "Dropdown (1, 2, 3 mois)",
           "price_display": "Prix barré + prix abonné + montant économisé en clair",
-          "dedicated_page": false,
+          "dedicated_page": true,
           "homepage_mention": true,
-          "navigation_mention": false,
+          "navigation_mention": true,
+          "email_mention": null,
           "savings_display": "Montant économisé en euros affiché dynamiquement"
         },
-        "overall_ux_score": 4.0,
+        "overall_ux_score": 4.5,
         "strengths": [
-          "Remise 20% = la plus haute en FR fixe → argument massue",
-          "Montant économisé affiché en euros = très persuasif",
-          "Toggle clair et intégré naturellement",
-          "Tous les produits éligibles (23/23)",
-          "Sans engagement"
+          "Remise -20% flat à vie : la plus haute du panel FR (vs -15% Nutri&Co/Nutrimuscle, -10% Novoma) — argument massue sur le CTA",
+          "Wording puissant et explicite : CTA 'S'abonner & économiser' + badge '20% A VIE 🔥' sur la page dédiée",
+          "Affichage du montant économisé en euros sur la fiche produit = pattern UX très persuasif (tangible vs abstraction du %)",
+          "Toggle clair et intégré directement sur la fiche produit au-dessus du CTA principal",
+          "Tous les produits éligibles (23/23) — catalogue petit mais 100% abonnable, cohérent et simple à communiquer",
+          "Page dédiée /collections/abonnement avec pitch éditorial '20% A VIE' + liste catalogue éligible",
+          "Fabrication et expédition depuis Bordeaux, livraison 24-48h (la plus rapide du panel)",
+          "Programme de fidélité RePoints / Club AqeeLab (détails partiels non accessibles)",
+          "Trustpilot 4.9 / 5 (sur 200 avis — volume faible mais meilleur score % du panel)",
+          "Positionnement premium cohérent : prix one-shot élevés (ex Whey 45,95€, Oméga-3 49,95€) = marge suffisante pour soutenir le -20%"
         ],
         "weaknesses": [
-          "Pas de page dédiée abonnement",
-          "Pas de mise en avant forte dans la navigation",
-          "Marque jeune = moins de notoriété"
-        ]
+          "Engagement minimum de 2 mois requis pour débuter l'abonnement — friction d'entrée importante (point vigilance Loi Chatel)",
+          "Codes promo et programmes de fidélité NON cumulables entre eux ni avec l'abonnement — un seul code par commande",
+          "Livraison offerte ou non sur l'abo : non explicité officiellement, signal de communication faible",
+          "Marque jeune (~200 avis Trustpilot) = notoriété limitée malgré un score de 4.9",
+          "Programme RePoints mentionné mais détails des conditions non accessibles publiquement = opacité"
+        ],
+        "scores": {
+          "ux": 4.5,
+          "offre_commerciale": 4.0,
+          "pertinence_vs_impulse": 4.5,
+          "global": 4.3
+        }
       }
     },
     "myprotein": {
@@ -1085,8 +1251,8 @@
         "name": "MyProtein",
         "url": "https://fr.myprotein.com",
         "has_subscription": true,
-        "subscription_discount_pct": "30% (jusqu'à 45% en promo)",
-        "subscription_model": "Subscribe & Save, remise très agressive",
+        "subscription_discount_pct": "Jusqu'à 45% (variable, 30% standard en moyenne)",
+        "subscription_model": "Programme 'Subscribe and Gain' (nom officiel interne), affiché côté user comme 'S'abonner' en FR. Remise variable : point standard autour de -30%, pouvant monter jusqu'à -45% voire -50% en périodes promo. C'est une mécanique variable bien différente des remises flat des concurrents FR (-15% Nutri&Co/Nutrimuscle, -10% Novoma, -20% Aqeelab). Point d'attention : les prix de base MyProtein sont eux-mêmes instables (promos permanentes sitewide) donc la remise abo affichée s'applique sur un prix-barré déjà volatil — la vraie économie perçue par le client est difficile à lire.",
         "frequencies_available": [
           "1 mois",
           "2 mois",
@@ -1098,7 +1264,7 @@
           "pause": true,
           "modify": true,
           "cancel_anytime": true,
-          "minimum_commitment": "Aucun"
+          "minimum_commitment": "Aucun (confirmé 2026-04-15 : 'Annulez à tout moment - pas d'engagement'). Pause possible à tout moment avec reprise quand le client est prêt."
         },
         "products": [
           {
@@ -1158,6 +1324,11 @@
         ],
         "subscription_scope": "Quasi tous les produits (1000+ références)",
         "estimated_avg_basket_sub": 35,
+        "subscription_shipping": {
+          "offerte": true,
+          "seuil_eur": 0,
+          "note": "Livraison gratuite sur TOUTES les commandes récurrentes, sans seuil (citation officielle fr.myprotein.com : 'Livraison gratuite sur toutes les commandes récurrentes'). En one-shot, le seuil gratuit est à 55€ (sinon 3,99€ relais ou 4,99€ domicile). Pattern flat comme Nutri&Co/Nutrimuscle : livraison abo offerte sans contrepartie de panier."
+        },
         "note": "Remise la plus agressive du marché (30% standard, jusqu'à 45% en promo). Modèle volume international."
       },
       "logistique": {
@@ -1205,35 +1376,50 @@
       },
       "ux_deep": {
         "screenshots": [
-          "myprotein_homepage.png",
-          "myprotein_product_sub.png"
+          "homepage.png",
+          "product_sub.png"
         ],
         "subscription_ux": {
-          "wording_cta": "Subscribe & Save",
-          "wording_pitch": "S'abonner et économiser — Économisez jusqu'à 30%",
-          "placement_on_product_page": "Toggle sous le sélecteur de taille/saveur, au-dessus du bouton Ajouter au panier",
+          "wording_cta": "S'abonner (FR) — 'Abonnez-vous' dans la nav",
+          "wording_pitch": "Progressez à moindre coût grâce à nos avantages exclusifs + 'Annulez à tout moment - pas d'engagement' + 'Changez à la fréquence qui vous convient'",
+          "placement_on_product_page": "Toggle sous le sélecteur de taille/saveur, au-dessus du bouton Ajouter au panier. Bannière dédiée avec CTA 'Souscrire' sur la homepage.",
           "toggle_style": "Radio buttons avec badge remise (%)",
           "frequency_selector": "Dropdown (1 à 5 mois)",
-          "price_display": "Prix barré + prix abonné + badge -30%",
-          "dedicated_page": false,
+          "price_display": "Prix barré + prix abonné + badge de remise (% variable selon le produit et la promo en cours)",
+          "dedicated_page": true,
           "homepage_mention": true,
           "navigation_mention": true,
+          "email_mention": null,
           "promo_stacking": "Promos régulières jusqu'à -45% sur subscribe & save"
         },
         "overall_ux_score": 3.5,
         "strengths": [
-          "Remise la plus agressive du marché (30%, jusqu'à 45%)",
-          "Promo stacking possible",
-          "Catalogue gigantesque éligible",
-          "Modèle mature et éprouvé internationalement",
-          "5 fréquences possibles"
+          "Remise la plus agressive du panel en valeur brute (jusqu'à -45% voire -50%) — argument commercial massue pour l'acquisition",
+          "Livraison gratuite sur TOUTES les commandes récurrentes, sans seuil",
+          "Catalogue gigantesque éligible (1000+ références — le plus grand du panel)",
+          "Modèle mature et éprouvé internationalement (décennies d'itérations sur Subscribe and Gain)",
+          "5 fréquences possibles (1 à 5 mois) — flexibilité proche de Nutrimuscle",
+          "Page dédiée /c/subscribe/ avec pitch éditorial + bannière homepage avec CTA direct",
+          "Engagement 'zéro' confirmé : pause et reprise à tout moment",
+          "Prix plancher très bas (créatine 250g à 5,59€ abo) — entry-point le plus accessible après Decathlon",
+          "Programme de parrainage : filleul obtient -25% + livraison gratuite pendant 3 mois (incentive fort)"
         ],
         "weaknesses": [
-          "UX parfois confuse (promos empilées, prix changeants)",
-          "Pas de page dédiée abonnement",
-          "SAV critiqué = risque sur l'expérience abonné",
-          "Prix de base instables (promos permanentes)"
-        ]
+          "Prix de base instables (promos permanentes sitewide) : la remise -30% abo affichée sur un prix-barré déjà volatil rend la vraie économie perçue difficile à lire. Le client ne sait jamais exactement combien il 'gagne' vraiment.",
+          "UX parfois confuse (promos empilées, prix changeants, codes cumulables ou non selon le produit)",
+          "Trustpilot 3,1 / 5 sur 31 000 avis — **pire score du panel** (signal volume important)",
+          "SAV très critiqué = risque sur l'expérience abonné (points faibles récurrents dans les verbatims)",
+          "UK warehouse = livraisons parfois longues (2-4 jours) et retours coûteux vers l'UK",
+          "Verbatim abo : *'Subscribe & save pratique mais attention aux prix qui changent'* → confirme l'instabilité du prix de référence",
+          "Verbatim abo : *'Livraison parfois décalée sans prévenir'* → pas d'email pré-expédition clair",
+          "Positionnement mass-market volume international très éloigné d'Impulse (premium FR) — pertinence reco faible"
+        ],
+        "scores": {
+          "ux": 3.5,
+          "offre_commerciale": 3.5,
+          "pertinence_vs_impulse": 1.5,
+          "global": 2.8
+        }
       }
     }
   },

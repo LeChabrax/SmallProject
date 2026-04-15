@@ -1,0 +1,189 @@
+{
+  "brand": "Nutripure",
+  "slug": "nutripure",
+  "url": "https://www.nutripure.fr",
+  "has_subscription": false,
+  "modele_commercial": {
+    "remise_pct": null,
+    "remise_note": "Aucun système d'abonnement récurrent (confirmé 2026-04-15). Modèle de récurrence alternatif basé sur 3 leviers : (1) packs multi-mois permanents à -10% minimum (jusqu'à -25% sur certains), (2) programme fidélité qui crédite 10% du montant de chaque commande (convertible en produits offerts uniquement, pas en déduction cash), (3) programme de parrainage qui crédite 10% des commandes du filleul. L'économie client approche celle d'un abo -15% mais sans friction contractuelle.",
+    "frequencies": [],
+    "flexibility": {
+      "pause": null,
+      "modify": null,
+      "cancel_anytime": null
+    },
+    "engagement_min": null,
+    "livraison_abo": {
+      "offerte": null,
+      "seuil_eur": null,
+      "note": "N/A — pas d'abonnement. Seuils standard : relais gratuit dès 49,90€, domicile gratuit dès 99€. Les formats 3 mois (~70€) et packs 6 mois (~130€) franchissent naturellement ces seuils."
+    }
+  },
+  "perimetre_produit": {
+    "scope": "N/A",
+    "exclusions": [],
+    "produits_sample": [
+      {
+        "name": "Whey Isolate Native",
+        "category": "Protéines",
+        "price_oneshot": 46.9,
+        "weight": "750g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Whey Isolate Native 1.5kg",
+        "category": "Protéines",
+        "price_oneshot": 84.9,
+        "weight": "1.5kg",
+        "format": "Poudre"
+      },
+      {
+        "name": "Créatine Creapure",
+        "category": "Performance",
+        "price_oneshot": 25.9,
+        "weight": "300g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Oméga-3 Epax (3 mois)",
+        "category": "Acides gras",
+        "price_oneshot": 69.9,
+        "weight": "180 capsules",
+        "format": "Capsules"
+      },
+      {
+        "name": "Oméga-3 Epax (1 mois)",
+        "category": "Acides gras",
+        "price_oneshot": 27.9,
+        "weight": "60 capsules",
+        "format": "Capsules"
+      },
+      {
+        "name": "Magnésium Bisglycinate (3 mois)",
+        "category": "Minéraux",
+        "price_oneshot": 39.9,
+        "weight": "180 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "Magnésium Bisglycinate (1 mois)",
+        "category": "Minéraux",
+        "price_oneshot": 18.9,
+        "weight": "60 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "Multivitamines",
+        "category": "Vitamines",
+        "price_oneshot": 24.9,
+        "weight": "60 gélules",
+        "format": "Gélules"
+      }
+    ],
+    "ticket_moyen_estime_eur": null
+  },
+  "ux_page_produit": {
+    "wording_cta": "N/A",
+    "wording_pitch": "N/A",
+    "placement_module": "Aucun module abonnement",
+    "toggle_style": "N/A",
+    "frequency_selector": null,
+    "price_display": null,
+    "dedicated_page": false,
+    "homepage_mention": null,
+    "navigation_mention": null,
+    "email_mention": null,
+    "screenshots_files": [
+      "homepage.png",
+      "product.png"
+    ]
+  },
+  "evaluation": {
+    "strengths": [
+      "UX produit très clean et premium, labels qualité bien mis en avant (Epax, Peptan, Creapure)",
+      "Stratégie anti-churn implicite via formats 3 mois et packs 6 mois (pack 6 mois ≈ 130€ vs 25€ × 6 = 150€, soit ~13% d'économie)",
+      "Programme fidélité généreux : 10% du montant de chaque commande crédité sur compte récompenses (valable 12 mois)",
+      "Programme de parrainage cumulable : 10% des commandes filleuls → compte fidélité illimité",
+      "Trustpilot 4.75 / 5 sur 2 000 avis — meilleur score en pourcentage du panel (signale un vrai fit qualité/client)",
+      "Pas de lock-in contractuel = zéro friction conversion et zéro risque de churn négatif",
+      "Labels premium (Epax, Peptan, Creapure) justifient des tickets élevés sans besoin d'abo"
+    ],
+    "weaknesses": [
+      "Pas d'abonnement = pas de revenus récurrents prévisibles (impossible de projeter une MRR fiable)",
+      "Récompenses fidélité non déductibles du panier — convertibles en produits offerts uniquement (friction perçue : 'je gagne 10% mais je ne peux pas les dépenser cash')",
+      "PrestaShop = frein technique à l'intégration d'un module abo moderne (vs Shopify natif chez les 3 concurrents premium)",
+      "Pas d'engagement forcé du client à acheter de nouveau — compte sur la qualité produit seule pour la rétention",
+      "Volume d'avis Trustpilot plus faible (2 000 vs 7 000 Novoma, 28 000 Nutrimuscle) — moins de signal social"
+    ],
+    "score_ux": null,
+    "score_offre_commerciale": null,
+    "score_pertinence_vs_impulse": 4.5,
+    "score_global": null,
+    "note": "Scores calibrés en fin de revue pass 1 (2026-04-15) après vérif live homogène des 8 marques. Grille : UX / Offre / Pertinence vs Impulse + Global = moyenne arithmétique.",
+    "rationale": {
+      "ux": "N/A — pas d'abonnement, pas de toggle, pas de page dédiée abo, pas de parcours abonné.",
+      "offre": "N/A — pas d'abonnement. Mécanismes alternatifs (packs permanents -10 à -25%, programme fidélité 10% crédité, parrainage) approchent l'économie d'un abo -15% sans lock-in contractuel.",
+      "pertinence": "Très pertinent POUR LE DECK comme contre-exemple : même positionnement premium FR santé/sport qu'Impulse, même taille catalogue, même exigence qualité. Rôle de contrôle : prouve qu'on peut fidéliser sans abo si on a des packs permanents + programme fidélité + ticket moyen élevé.",
+      "note": "Pas de note globale — rôle de contrôle dans le panel, pas un modèle à scorer."
+    }
+  },
+  "logistique": {
+    "transporteurs": [
+      "Point relais",
+      "Colissimo"
+    ],
+    "frais_relais": 4.9,
+    "seuil_gratuit_relais": 49.9,
+    "frais_domicile_standard": 5.9,
+    "seuil_gratuit_domicile": 99,
+    "frais_domicile_colissimo": 7.5,
+    "seuil_reduit_colissimo": 99,
+    "frais_colissimo_reduit": 1.6,
+    "delai_standard": "2-5 jours ouvrés"
+  },
+  "tech": {
+    "platform": "PrestaShop",
+    "confidence": "confirmed",
+    "source": "URL structure (/fr/29-gamme-produits) + Zendesk support",
+    "subscription_app": "N/A (pas d'abonnement)",
+    "psp": "Non confirmé (probablement Stripe ou Mollie)",
+    "note": "PrestaShop = pas de module abo natif mature, pourrait expliquer l'absence d'abonnement"
+  },
+  "avis": {
+    "trustpilot_score": 4.75,
+    "trustpilot_nb_avis": 2000,
+    "trustpilot_url": "https://fr.trustpilot.com/review/nutripure.fr",
+    "points_forts": [
+      "Labels premium (Epax, Peptan, Creapure)",
+      "Transparence maximale",
+      "Digestibilité",
+      "Livraison 48-72h"
+    ],
+    "points_faibles": [
+      "Goûts neutres (whey)",
+      "Prix plus élevé que concurrents étrangers",
+      "Quelques ruptures de stock"
+    ],
+    "verbatims_abo": [
+      "N/A — pas d'abonnement"
+    ]
+  },
+  "_extras": {
+    "catalogue": {
+      "estimated_avg_basket": 55,
+      "why_no_subscription": "Positionnement ultra-premium, vente par lots (1 mois / 3 mois), stratégie de fidélisation par la qualité plutôt que par le lock-in. Formats 3 mois encouragent implicitement la récurrence."
+    },
+    "ux_deep": {
+      "why_no_subscription": "1) PrestaShop = pas de module abo natif mature. 2) Stratégie de fidélisation par la qualité premium plutôt que le lock-in. 3) Formats 3 mois compensent partiellement."
+    },
+    "subscription_ux": {
+      "strategy_alternative": "Formats 1 mois / 3 mois encouragent implicitement la récurrence. Programme fidélité classique."
+    },
+    "flexibility": {}
+  },
+  "_meta": {
+    "last_updated": "2026-04-15",
+    "audit_status": "verified_live",
+    "source_format": "split from master_data.json + vérif live 2026-04-15 via programme fidélité officiel + articles packs + parrainage Nutripure (homepage en 403, contournée via sources secondaires croisées)"
+  }
+}

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Benchmark abonnement — Synthèse comparative</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0f1e;
+    --cream: #f5f1e8;
+    --cream-2: #ebe6d8;
+    --ink-2: #1e2433;
+    --amber: #c96e1f;
+    --amber-hi: #e8871a;
+    --muted: #6b6558;
+    --rule: #c7bfa9;
+    --hi: #0d6e3d;
+    --mid: #c96e1f;
+    --lo: #8b2a1b;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--cream); color: var(--ink); }
+  body {
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
+    font-size: 13px;
+    line-height: 1.45;
+    padding: 48px 40px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+    line-height: 1;
+  }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 4px;
+  }
+  .sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 48px;
+    max-width: 700px;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 56px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  h2 .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    margin-right: 8px;
+    font-weight: 600;
+  }
+  h2 + .caption {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0 0 18px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+    margin-bottom: 8px;
+  }
+  th {
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 10px 10px 0;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  td {
+    padding: 12px 10px 12px 0;
+    border-bottom: 0.5px solid var(--rule);
+    vertical-align: top;
+  }
+  tr:hover td { background: rgba(201, 110, 31, 0.04); }
+  td.brand {
+    font-weight: 600;
+    font-size: 12.5px;
+    width: 150px;
+    white-space: nowrap;
+  }
+  td.num {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  td.num.hi { color: var(--hi); font-weight: 600; }
+  td.num.mid { color: var(--mid); font-weight: 600; }
+  td.num.lo { color: var(--lo); font-weight: 600; }
+  td.num.mut { color: var(--muted); }
+  td.num.global {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    background: rgba(201, 110, 31, 0.08);
+    text-align: center;
+    min-width: 40px;
+  }
+  td.c { text-align: center; }
+  td.scope { color: var(--muted); font-size: 10.5px; max-width: 280px; }
+  td.excl { color: var(--muted); font-size: 10.5px; max-width: 220px; }
+  td.highlight { color: var(--ink); font-size: 11px; max-width: 320px; }
+  .insight {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 32px 36px;
+    margin: 56px 0 0;
+    border-left: 4px solid var(--amber);
+  }
+  .insight h2 {
+    color: var(--cream);
+    margin-top: 0;
+    font-size: 22px;
+  }
+  .insight h2 .num { color: var(--amber-hi); }
+  .insight h3 {
+    color: var(--amber-hi);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 24px 0 8px;
+  }
+  .insight p { margin: 4px 0; font-size: 12.5px; color: #d8d3c4; }
+  .insight strong { color: var(--cream); }
+  .insight .rank { margin: 4px 0; font-size: 12.5px; }
+  .insight .rank strong { color: var(--amber-hi); font-family: 'JetBrains Mono', monospace; font-weight: 600; margin-right: 8px; }
+  .patterns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 16px 0 8px;
+  }
+  .pattern {
+    padding: 16px 20px;
+    border: 1px solid rgba(245, 241, 232, 0.15);
+  }
+  .pattern.a { border-left: 3px solid var(--amber-hi); }
+  .pattern.b { border-left: 3px solid #6b8d7a; }
+  .pattern h4 {
+    margin: 0 0 8px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+  .pattern ul { margin: 6px 0 0; padding-left: 16px; font-size: 11.5px; color: #c9c3b0; }
+  .pattern li { margin: 2px 0; }
+  .footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 0.5px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<div class="kicker">Benchmark nutrition sportive FR · 2026-04-15</div>
+<h1>Modèles d'abonnement<br>8 marques, 3 lectures</h1>
+<p class="sub">Synthèse comparative du panel de référence pour la mission Impulse. 8/8 marques audités en live. Section 4 du deck interne comité projet.</p>
+
+<h2><span class="num">01 /</span>Modèle commercial</h2>
+<p class="caption">Remise, fréquences, livraison, engagement, stacking codes — les leviers commerciaux bruts.</p>
+<table>
+<thead><tr>
+<th>Marque</th><th>Remise</th><th>Fréquences</th><th>Livraison abo</th><th>Engagement</th><th>Stacking</th>
+</tr></thead>
+<tbody>
+<tr><td class='brand'>Aqeelab Nutrition</td><td>−20%</td><td>3 (1 mois, 2 mois, 3 mois)</td><td>❓ Non explicité</td><td>✅ Aucun</td><td>❌ Zéro</td></tr><tr><td class='brand'>Nutri&Co</td><td>−15%</td><td>2 (1 mois, 3 mois)</td><td>✅ Flat (sans seuil)</td><td>✅ Aucun</td><td>❌ Zéro</td></tr><tr><td class='brand'>Nutrimuscle</td><td>−15%</td><td>6 (1 mois, 2 mois, 3 mois, 4 mois, 5 mois, 6 mois)</td><td>✅ Flat (sans seuil)</td><td>✅ Aucun</td><td>⚪ Partiel</td></tr><tr><td class='brand'>Novoma</td><td>−10%</td><td>3 (1 mois, 2 mois, 3 mois)</td><td>⚪ Stepped (dès 50€)</td><td>✅ Aucun</td><td>⚪ Partiel</td></tr><tr><td class='brand'>Cuure</td><td>—</td><td>1 (1 mois (mensuel uniquement))</td><td>✅ dès 20€</td><td>✅ Aucun</td><td>❓ Non documenté</td></tr><tr><td class='brand'>MyProtein</td><td>Jusqu'à 45% (variable, 30% standard en moyenne)</td><td>5 (1 mois, 2 mois, 3 mois, 4 mois, 5 mois)</td><td>✅ Flat (sans seuil)</td><td>✅ Aucun</td><td>✅ Possible</td></tr><tr><td class='brand'>Decathlon (Abonnement Nutrition)</td><td>10-15% (stepped par produit, pas flat)</td><td>3 (1 mois, 2 mois, 3 mois)</td><td>⚪ Relais only</td><td>✅ Aucun</td><td>❓ Non documenté</td></tr><tr><td class='brand'>Nutripure</td><td>—</td><td>—</td><td>❓ Non explicité</td><td>—</td><td>❓ Non documenté</td></tr>
+</tbody>
+</table>
+
+<h2><span class="num">02 /</span>Périmètre produit · UX fiche</h2>
+<p class="caption">Ce qui est abonnable, où l'offre est visible sur le site, et comment elle est formulée.</p>
+<table>
+<thead><tr>
+<th>Marque</th><th>Scope</th><th>Exclusions</th><th>Panier moy.</th><th>Page dédiée</th><th>Home / Nav</th><th>CTA</th>
+</tr></thead>
+<tbody>
+<tr><td class='brand'>Aqeelab Nutrition</td><td class='scope'>Tous les 23 produits du catalogue</td><td class='excl'>Aucune documentée</td><td class='num'>45€</td><td class='c'>✅</td><td class='c'>✅ / ✅</td><td>S'abonner & économiser</td></tr><tr><td class='brand'>Nutri&Co</td><td class='scope'>Produits individuels uniquement — le modèle '1 produit = 1 abonnement'…</td><td class='excl'>Packs de compléments · Coffrets cadeaux</td><td class='num'>35€</td><td class='c'>✅</td><td class='c'>❌ / ❌</td><td>S'abonner</td></tr><tr><td class='brand'>Nutrimuscle</td><td class='scope'>Sélection de produits (250+ formats éligibles). Modèle '1 produit = 1 …</td><td class='excl'>Packs · Gros formats · Textile et accessoires</td><td class='num'>45€</td><td class='c'>✅</td><td class='c'>✅ / ✅</td><td>S'abonner</td></tr><tr><td class='brand'>Novoma</td><td class='scope'>Tous les produits individuels du catalogue (aucune exclusion explicite…</td><td class='excl'>Packs probablement exclus</td><td class='num'>30€</td><td class='c'>✅</td><td class='c'>❌ / ❌</td><td>S'abonner</td></tr><tr><td class='brand'>Cuure</td><td class='scope'>Box personnalisée uniquement — aucun catalogue individuel public. 50+ …</td><td class='excl'>Pas d'achat one-shot poss</td><td class='num'>35€</td><td class='c'>✅</td><td class='c'>✅ / ✅</td><td>Découvrir ma formule</td></tr><tr><td class='brand'>MyProtein</td><td class='scope'>Quasi tous les produits (1000+ références)</td><td class='excl'>Aucune documentée</td><td class='num'>35€</td><td class='c'>✅</td><td class='c'>✅ / ✅</td><td>S'abonner</td></tr><tr><td class='brand'>Decathlon (Abonnement Nutrition)</td><td class='scope'>Scope plus large que prévu (vérifié 2026-04-15). Catégorie nutrition c…</td><td class='excl'>Produits one-shot ou sais · Probables : promotions po</td><td class='num'>40€</td><td class='c'>✅</td><td class='c'>✅ / ✅</td><td>S'abonner</td></tr><tr><td class='brand'>Nutripure</td><td class='scope'>N/A</td><td class='excl'>Aucune documentée</td><td class='num'>—</td><td class='c'>❌</td><td class='c'>❌ / ❌</td><td>N/A</td></tr>
+</tbody>
+</table>
+
+<h2><span class="num">03 /</span>Évaluation synthétique</h2>
+<p class="caption">Notes /5 calibrées en fin de revue homogène (UX, Offre, Pertinence vs Impulse, Global = moyenne).</p>
+<table>
+<thead><tr>
+<th>Marque</th><th>UX /5</th><th>Offre /5</th><th>Pertinence /5</th><th>Global /5</th><th>Trustpilot</th><th>Highlight</th>
+</tr></thead>
+<tbody>
+<tr><td class='brand'>Aqeelab Nutrition</td><td class='num hi'>4.5</td><td class='num hi'>4.0</td><td class='num hi'>4.5</td><td class='num global'>4.3</td><td class='num'>4.9 / 200</td><td class='highlight'>Remise -20% flat à vie</td></tr><tr><td class='brand'>Nutri&Co</td><td class='num mid'>3.5</td><td class='num hi'>4.0</td><td class='num hi'>4.5</td><td class='num global'>4.0</td><td class='num'>4.45 / 4.4k</td><td class='highlight'>Toggle clair sur la fiche produit</td></tr><tr><td class='brand'>Nutrimuscle</td><td class='num hi'>4.0</td><td class='num hi'>4.0</td><td class='num mid'>3.5</td><td class='num global'>3.8</td><td class='num'>4.05 / 28.0k</td><td class='highlight'>Page dédiée complète</td></tr><tr><td class='brand'>Novoma</td><td class='num mid'>3.5</td><td class='num mid'>3.0</td><td class='num hi'>4.5</td><td class='num global'>3.7</td><td class='num'>4.6 / 7.0k</td><td class='highlight'>Page dédiée très bien structurée</td></tr><tr><td class='brand'>Cuure</td><td class='num hi'>4.0</td><td class='num mid'>3.0</td><td class='num lo'>2.0</td><td class='num global'>3.0</td><td class='num'>4.5 / 4.4k</td><td class='highlight'>UX 100% orientée abonnement</td></tr><tr><td class='brand'>MyProtein</td><td class='num mid'>3.5</td><td class='num mid'>3.5</td><td class='num lo'>1.5</td><td class='num global'>2.8</td><td class='num'>3.1 / 31.0k</td><td class='highlight'>Remise la plus agressive du panel en valeur brute</td></tr><tr><td class='brand'>Decathlon (Abonnement Nutrition)</td><td class='num lo'>2.5</td><td class='num mid'>3.0</td><td class='num lo'>2.0</td><td class='num global'>2.5</td><td class='num'>2.5 / 3.0k</td><td class='highlight'>Sous-site dédié</td></tr><tr><td class='brand'>Nutripure</td><td class='num mut'>—</td><td class='num mut'>—</td><td class='num hi'>4.5</td><td class='num mut'>N/A</td><td class='num'>4.75 / 2.0k</td><td class='highlight'>UX produit très clean et premium</td></tr>
+</tbody>
+</table>
+
+<div class="insight">
+<h2><span class="num">04 /</span>Lecture stratégique</h2>
+
+<h3>Deux patterns antagonistes</h3>
+<div class="patterns">
+<div class="pattern a">
+  <h4>A · Acquisition agressive</h4>
+  <p>Aqeelab, Nutri&Co, Nutrimuscle, MyProtein</p>
+  <ul>
+    <li>Remise −15% à −45%</li>
+    <li>Livraison offerte sans seuil</li>
+    <li>Zéro engagement (sauf Aqeelab)</li>
+    <li>Sacrifice marge logistique</li>
+  </ul>
+</div>
+<div class="pattern b">
+  <h4>B · Rentabilité prudente</h4>
+  <p>Novoma, Decathlon</p>
+  <ul>
+    <li>Remise −10% à −15%</li>
+    <li>Livraison stepped (frais réduits)</li>
+    <li>Zéro engagement</li>
+    <li>Protège la marge — moins attractif</li>
+  </ul>
+</div>
+</div>
+
+<h3>Top 3 inspirations pour Impulse</h3>
+<p class="rank"><strong>01</strong> <strong style="color:var(--cream)">Aqeelab</strong> · Wording «&nbsp;S'abonner & économiser&nbsp;» + affichage du montant économisé en euros</p>
+<p class="rank"><strong>02</strong> <strong style="color:var(--cream)">Nutri&amp;Co</strong> · Email de pré-expédition avec fenêtre de modification 48h (anti-churn éprouvé)</p>
+<p class="rank"><strong>03</strong> <strong style="color:var(--cream)">Nutrimuscle</strong> · Visibilité max : mention homepage + navigation + newsletter</p>
+
+<h3>Top 3 anti-patterns à éviter</h3>
+<p class="rank"><strong>01</strong> <strong style="color:var(--cream)">Decathlon</strong> · Sous-domaine séparé + «&nbsp;1 produit = 1 abo&nbsp;» + modification = résiliation + recréation</p>
+<p class="rank"><strong>02</strong> <strong style="color:var(--cream)">Cuure</strong> · Résiliation en 2 temps : suspension self-serve vs email obligatoire pour résilier</p>
+<p class="rank"><strong>03</strong> <strong style="color:var(--cream)">MyProtein</strong> · Prix de base instables qui rendent la remise abo illisible pour le client</p>
+</div>
+
+<p class="footer">
+benchmark/synthesis_table.html · généré par build_synthesis_table.py · source : benchmark/marques/&lt;brand&gt;/data.json · 8/8 verified_live
+</p>
+
+</body>
+</html>
