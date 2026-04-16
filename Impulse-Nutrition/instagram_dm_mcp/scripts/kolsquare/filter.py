@@ -43,21 +43,14 @@ from infra.common.google_sheets import (  # noqa: E402
     SUIVI_PAID_COLS,
     get_worksheet,
 )
-from infra.common.instagram_client import sleep_random  # noqa: E402
+from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 from infra.common.constants import COMPETITORS  # noqa: E402
 
 # Reuse the scoring logic from the sibling script scripts/qualify/influencer.py.
-# That script isn't a package, so we add its dir to sys.path and import it by
-# its filename. Chantier B will drop the USERNAME/PASSWORD/SESSION_FILE imports
-# once filter.py also moves to get_ig_client("veille").
+# That script isn't a package, so we add its dir to sys.path and import by
+# filename.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "qualify"))
-from influencer import (  # noqa: E402
-    qualify_profile,
-    format_followers_k,
-    USERNAME as VEILLE_USERNAME,
-    PASSWORD as VEILLE_PASSWORD,
-    SESSION_FILE as VEILLE_SESSION_FILE,
-)
+from influencer import qualify_profile, format_followers_k  # noqa: E402
 
 logger = logging.getLogger("filter_kolsquare")
 
@@ -434,25 +427,17 @@ def mcp_qualify_all(
     }
 
     targets = prospects if limit is None else prospects[:limit]
-    logger.info("MCP qualify — %d profils (compte veille %s)", len(targets), VEILLE_USERNAME)
+    logger.info("MCP qualify — %d profils (compte veille)", len(targets))
 
-    # Use the same login pattern as qualify_influencer.py — it has a hardcoded
-    # password fallback and a working session file for antman.lass, so we don't
-    # need infra/common/instagram_client.py's stricter env-var handling.
-    from instagrapi import Client
-    ig_client = Client()
+    ig_client = get_ig_client("veille")
     ig_client.request_timeout = 5
-    if VEILLE_SESSION_FILE.exists():
-        ig_client.load_settings(VEILLE_SESSION_FILE)
-    ig_client.login(VEILLE_USERNAME, VEILLE_PASSWORD)
-    ig_client.dump_settings(VEILLE_SESSION_FILE)
     # Instagram's public (anonymous) endpoint currently returns HTTP 201 with
     # broken JSON, which makes instagrapi retry 3x before falling back to the
     # private API — wasting ~30s per profile. Force the v1 (private API) path
     # directly so we skip the broken public endpoint entirely.
     ig_client.user_info_by_username = ig_client.user_info_by_username_v1
     ig_client.user_medias = ig_client.user_medias_v1
-    logger.info("veille client logged in as %s (forced v1 endpoints)", VEILLE_USERNAME)
+    logger.info("veille client ready (forced v1 endpoints)")
 
     for idx, p in enumerate(targets, 1):
         logger.info("[%d/%d] @%s", idx, len(targets), p.ig_username)

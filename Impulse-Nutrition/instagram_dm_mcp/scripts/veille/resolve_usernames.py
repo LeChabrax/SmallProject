@@ -10,21 +10,16 @@ Usage:
     python resolve_usernames.py [--dry-run] [--limit N]
 """
 
-import time
 import random
-import os
 import sys
 import logging
 import traceback
 from pathlib import Path
 from datetime import datetime
-from instagrapi import Client
-from dotenv import load_dotenv
-
-load_dotenv()
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import SHEET_ID as SPREADSHEET_ID  # noqa: E402
+from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 
 # ── Logging setup ──────────────────────────────────────────────────────────────
 LOG_DIR = Path(__file__).parent.parent.parent / "data" / "logs"
@@ -43,18 +38,14 @@ log = logging.getLogger("resolve")
 log.info(f"=== resolve_usernames.py démarré — log: {LOG_FILE} ===")
 # ──────────────────────────────────────────────────────────────────────────────
 
-# Veille uses a dedicated account to avoid risking the main brand account
-USERNAME = os.environ["INSTAGRAM_VEILLE_USERNAME"]
-PASSWORD = os.environ["INSTAGRAM_VEILLE_PASSWORD"]
-SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
-
 SHEET_NAME = "VeilleConcu"
 
 MAX_CONSECUTIVE_FAILURES = 3  # Stop after N consecutive failures (rate limit detected)
 
+
 def smart_delay():
     """Random delay to avoid detection patterns."""
-    time.sleep(random.uniform(2, 6))
+    sleep_random(2, 6)
 
 
 def fake_activity(ig_client):
@@ -70,7 +61,7 @@ def fake_activity(ig_client):
             ig_client.explore_page()
     except Exception:
         pass
-    time.sleep(random.uniform(1, 3))
+    sleep_random(1, 3)
 
 # Known brand → Instagram username mapping
 KNOWN_MAPPING = {
@@ -243,19 +234,13 @@ def main():
         log.info("Tout est déjà résolu!")
         return
 
-    # Instagram login
-    log.info(f"Connexion Instagram avec le compte veille: {USERNAME}")
-    ig_client = Client()
-    ig_client.request_timeout = 1
-    if SESSION_FILE.exists():
-        log.info(f"Session existante chargée: {SESSION_FILE}")
-        ig_client.load_settings(SESSION_FILE)
+    log.info("Connexion Instagram (compte veille)")
     try:
-        ig_client.login(USERNAME, PASSWORD)
-        ig_client.dump_settings(SESSION_FILE)
-        log.info(f"Login OK — connecté en tant que {USERNAME}")
+        ig_client = get_ig_client("veille")
+        ig_client.request_timeout = 1
+        log.info("Login OK — compte veille prêt")
     except Exception as e:
-        log.critical(f"Echec login Instagram ({USERNAME}): {e}")
+        log.critical(f"Echec login Instagram veille: {e}")
         log.debug(traceback.format_exc())
         log.critical("⛔ Arrêt — impossible de se connecter. Vérifier le compte ou résoudre le challenge manuellement.")
         sys.exit(1)

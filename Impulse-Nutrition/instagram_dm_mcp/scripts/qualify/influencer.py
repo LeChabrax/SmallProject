@@ -24,26 +24,13 @@ Usage :
 """
 
 import argparse
-import time
-import os
 import sys
 from pathlib import Path
 from datetime import datetime
-from instagrapi import Client
-from dotenv import load_dotenv
-
-load_dotenv()
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import SHEET_ID as SPREADSHEET_ID  # noqa: E402
-
-# Qualification uses a dedicated account to avoid risking the main brand account
-USERNAME = os.environ["INSTAGRAM_VEILLE_USERNAME"]
-PASSWORD = os.environ["INSTAGRAM_VEILLE_PASSWORD"]
-SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
-
-DELAY = 2  # seconds between accounts
-
+from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 from infra.common.constants import COMPETITORS, SPORT_KEYWORDS, NUTRITION_KEYWORDS  # noqa: E402
 
 
@@ -181,7 +168,7 @@ def qualify_profile(ig_client, username, debug=False):
     result["followers"] = info.follower_count or 0
 
     # 2. Engagement rate (fetch recent posts)
-    time.sleep(1)
+    sleep_random(1, 2)
     try:
         posts = ig_client.user_medias(info.pk, 12)
     except Exception:
@@ -327,14 +314,9 @@ def main():
 
     print(f"[{ts()}] Qualification de {len(usernames)} profils")
 
-    # Instagram login
-    ig_client = Client()
+    ig_client = get_ig_client("veille")
     ig_client.request_timeout = 1
-    if SESSION_FILE.exists():
-        ig_client.load_settings(SESSION_FILE)
-    ig_client.login(USERNAME, PASSWORD)
-    ig_client.dump_settings(SESSION_FILE)
-    print(f"[{ts()}] Logged in as {USERNAME}")
+    print(f"[{ts()}] Logged in as veille ({USERNAME})")
 
     results = []
     for idx, uname in enumerate(usernames, 1):
@@ -348,7 +330,7 @@ def main():
             print(f"    {key}: {detail}")
 
         if idx < len(usernames):
-            time.sleep(DELAY)
+            sleep_random(2, 4)
 
     # Summary
     print(f"\n{'='*60}")
