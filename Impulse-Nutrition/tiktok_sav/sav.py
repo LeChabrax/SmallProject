@@ -79,14 +79,17 @@ DRY_RUN = "--dry-run" in sys.argv
 # TikTok API — signing (porté depuis client.ts lignes 31-55)
 # ---------------------------------------------------------------------------
 
-def _sign(path: str, params: dict, body: dict | None = None) -> str:
-    """HMAC-SHA256 : secret + path + sorted(params sans sign/token) + body_json + secret."""
+def _sign(path: str, params: dict, body_str: str = "") -> str:
+    """HMAC-SHA256 : secret + path + sorted(params sans sign/token) + body_str + secret.
+
+    body_str doit être la string JSON EXACTE qui sera envoyée (compact, ensure_ascii=False).
+    Sinon TikTok recalcule la sig sur le body reçu et le hash diverge → 401 sign invalid.
+    """
     filtered = sorted(
         [(k, str(v)) for k, v in params.items() if k not in ("sign", "access_token")],
         key=lambda x: x[0],
     )
     param_str = "".join(f"{k}{v}" for k, v in filtered)
-    body_str = json.dumps(body, separators=(",", ":"), ensure_ascii=False) if body else ""
     sign_str = APP_SECRET + path + param_str + body_str + APP_SECRET
     return hmac.new(APP_SECRET.encode(), sign_str.encode(), hashlib.sha256).hexdigest()
 
@@ -101,15 +104,17 @@ def _base_params() -> dict:
 def _request(method: str, path: str, params: dict | None = None, body: dict | None = None) -> Any:
     full_path = f"/{path}"
     qp = {**_base_params(), **(params or {})}
-    qp["sign"] = _sign(full_path, qp, body)
+    body_str = json.dumps(body, separators=(",", ":"), ensure_ascii=False) if body else ""
+    qp["sign"] = _sign(full_path, qp, body_str)
     url = f"{BASE_URL}{full_path}?{urlencode(qp)}"
     headers = {"Content-Type": "application/json", "x-tts-access-token": ACCESS_TOKEN}
-    resp = requests.request(method, url, headers=headers, json=body, timeout=30)
+    data_bytes = body_str.encode("utf-8") if body else None
+    resp = requests.request(method, url, headers=headers, data=data_bytes, timeout=30)
     resp.raise_for_status()
-    data = resp.json()
-    if data.get("code") != 0:
-        raise RuntimeError(f"TikTok API {data.get('code')}: {data.get('message')}")
-    return data.get("data", {})
+    payload = resp.json()
+    if payload.get("code") != 0:
+        raise RuntimeError(f"TikTok API {payload.get('code')}: {payload.get('message')}")
+    return payload.get("data", {})
 
 # ---------------------------------------------------------------------------
 # TikTok API — helpers
