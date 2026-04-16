@@ -601,7 +601,7 @@
 
   .brand__grid {
     display: grid;
-    grid-template-columns: 0.55fr 1fr;
+    grid-template-columns: 1fr 0.45fr;
     gap: 24px;
     flex: 1;
     min-height: 0;
@@ -609,8 +609,9 @@
   }
 
   .brand__screen-wrap {
+    order: 2;
     position: relative;
-    background: var(--ink);
+    background: transparent;
     overflow: hidden;
     height: 100%;
     max-height: 720px;
@@ -622,32 +623,23 @@
     width: 100%;
     height: auto;
     max-height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center top;
     display: block;
+    box-shadow: 0 4px 24px rgba(10,15,30,0.10);
   }
   .brand__screen-caption {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 12px 20px;
-    background: rgba(10, 15, 30, 0.92);
-    color: var(--white);
-    font-size: 13px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 5;
+    display: none;
   }
-  .brand__screen-caption-url { color: var(--mint-soft); font-weight: 600; }
-  .brand__screen-caption-type { color: rgba(255,255,255,0.7); font-style: italic; }
+  .brand__screen-caption-url { color: var(--mint-dark); font-weight: 600; }
+  .brand__screen-caption-type { color: var(--grey-500); font-style: italic; }
 
   /* Annotations désactivées en V3 — trop fragiles avec screenshots de tailles variables.
      Les insights UX sont déjà dans la fiche à droite. */
   .annot { display: none; }
 
   .brand__right {
+    order: 1;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -1765,7 +1757,7 @@
   <div class="body">
     <div class="brand__grid">
       <div class="brand__screen-wrap">
-        <img class="brand__screen" src="../../marques/aqeelab/screenshots/product_sub.png" alt="Aqeelab Nutrition screenshot">
+        <img class="brand__screen" src="screenshots/aqeelab.png" alt="Aqeelab Nutrition screenshot">
       <div class="annot" style="top:34%;left:24%">
         <div class="annot__dot"></div>
         <div class="annot__label">Toggle abo au-dessus du CTA</div>
@@ -1861,7 +1853,7 @@
   <div class="body">
     <div class="brand__grid">
       <div class="brand__screen-wrap">
-        <img class="brand__screen" src="../../marques/nutriandco/screenshots/abonnement_page.png" alt="Nutri&Co screenshot">
+        <img class="brand__screen" src="screenshots/nutriandco.png" alt="Nutri&Co screenshot">
       <div class="annot" style="top:20%;left:30%">
         <div class="annot__dot"></div>
         <div class="annot__label">Page dédiée /pages/abonnement</div>
@@ -1957,7 +1949,7 @@
   <div class="body">
     <div class="brand__grid">
       <div class="brand__screen-wrap">
-        <img class="brand__screen" src="../../marques/nutrimuscle/screenshots/abonnement_page.png" alt="Nutrimuscle screenshot">
+        <img class="brand__screen" src="screenshots/nutrimuscle.png" alt="Nutrimuscle screenshot">
       <div class="annot" style="top:15%;left:20%">
         <div class="annot__dot"></div>
         <div class="annot__label">Pitch '−15% + livraison offerte'</div>
@@ -2053,7 +2045,7 @@
   <div class="body">
     <div class="brand__grid">
       <div class="brand__screen-wrap">
-        <img class="brand__screen" src="../../marques/novoma/screenshots/abonnement_page.png" alt="Novoma screenshot">
+        <img class="brand__screen" src="screenshots/novoma.png" alt="Novoma screenshot">
       <div class="annot" style="top:20%;left:22%">
         <div class="annot__dot"></div>
         <div class="annot__label">Argumentation santé long terme</div>
@@ -2149,7 +2141,7 @@
   <div class="body">
     <div class="brand__grid">
       <div class="brand__screen-wrap">
-        <img class="brand__screen" src="../../marques/cuure/screenshots/produits.png" alt="Cuure screenshot">
+        <img class="brand__screen" src="screenshots/cuure.png" alt="Cuure screenshot">
       <div class="annot" style="top:30%;left:30%">
         <div class="annot__dot"></div>
         <div class="annot__label">Quiz santé ~5 min</div>
@@ -2245,7 +2237,7 @@
   <div class="body">
     <div class="brand__grid">
       <div class="brand__screen-wrap">
-        <img class="brand__screen" src="../../marques/myprotein/screenshots/product_sub.png" alt="MyProtein screenshot">
+        <img class="brand__screen" src="screenshots/myprotein.png" alt="MyProtein screenshot">
       <div class="annot" style="top:25%;left:25%">
         <div class="annot__dot"></div>
         <div class="annot__label">Badge remise variable</div>
@@ -2341,7 +2333,7 @@
   <div class="body">
     <div class="brand__grid">
       <div class="brand__screen-wrap">
-        <img class="brand__screen" src="../../marques/decathlon/screenshots/homepage.png" alt="Decathlon (Abonnement Nutrition) screenshot">
+        <img class="brand__screen" src="screenshots/decathlon.png" alt="Decathlon (Abonnement Nutrition) screenshot">
       <div class="annot" style="top:20%;left:25%">
         <div class="annot__dot"></div>
         <div class="annot__label">Sous-domaine dédié séparé</div>
