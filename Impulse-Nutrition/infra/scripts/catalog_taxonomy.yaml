@@ -18,28 +18,28 @@ complements:
     - "preworkout"
     - "barre protéinée"
     - "maltodextrine"
-    - "bcaa"
 
   pendant_effort:
     - "électrolytes"
     - "boisson d'effort"
+    - "bcaa"
 
   apres_effort:
     - "whey isolate"
     - "whey recovery"
+    - "créatine"
+    - "glycine"
 
   au_quotidien:
-    # Collagène + glycine + L-glutamine (user clarification 2026-04-16)
+    # Collagène + L-glutamine (alignés sur le site officiel 2026-04-16)
     - "collagène"
     - "peptides de collagène"
-    - "glycine"
     - "l-glutamine"
     # Gélules / vitamines / minéraux / santé
     - "magnésium"
     - "vitamine c"
     - "vitamine d"
     - "multivitamines"
-    - "créatine"
     - "omega"
     - "fer bisglycinate"
     - "spiruline"
