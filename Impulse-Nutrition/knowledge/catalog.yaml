@@ -1,0 +1,643 @@
+# Catalogue Impulse Nutrition — AUTO-GÉNÉRÉ
+# Source : Shopify Admin API (produits actifs uniquement).
+# Taxonomie : infra/scripts/catalog_taxonomy.yaml
+# Refresh : python3 infra/scripts/refresh_catalog.py
+# Dernière mise à jour : 2026-04-16 18:50 UTC
+#
+# Moments de consommation :
+# - avant_effort   : preworkout, barres protéinées, maltodextrine, BCAA
+# - pendant_effort : électrolytes, boissons d'effort isotoniques
+# - apres_effort   : whey isolate, whey recovery
+# - au_quotidien   : gélules, collagène, glycine, L-glutamine, vitamines, créatine
+# - _accessoires   : hardware (shaker, bidon, flasque) — pas de moment
+# - _unclassified  : produit non reconnu par la taxonomie — ajouter un pattern dans catalog_taxonomy.yaml
+
+avant_effort:
+  - title: BCAA 2.1.1 saveur citron
+    handle: bcaa-2-1-1-saveur-citron
+    category: complement
+    moment: pendant_effort
+    variant_id: "51857203429707"
+    sku: VSBCAAC
+    price_eur: 22.9
+    page_url: https://impulse-nutrition.fr/products/bcaa-2-1-1-saveur-citron
+  - title: BCAA 2.1.1 saveur pêche
+    handle: bcaa-2-1-1-saveur-peche
+    category: complement
+    moment: avant_effort
+    variant_id: "51857203298635"
+    sku: VSBCAAP
+    price_eur: 22.9
+    page_url: https://impulse-nutrition.fr/products/bcaa-2-1-1-saveur-peche
+  - title: Barre protéinée crispy saveur choco-coco
+    handle: barre-proteinee-crispy-saveur-choco-coco
+    category: complement
+    moment: avant_effort
+    variant_id: "51870633296203"
+    sku: VSBARLCC
+    price_eur: 10.9
+    page_url: https://impulse-nutrition.fr/products/barre-proteinee-crispy-saveur-choco-coco
+  - title: Barre protéinée crispy saveur chocolat
+    handle: barre-proteinee-crispy-saveur-chocolat
+    category: complement
+    moment: avant_effort
+    variant_id: "51870635032907"
+    sku: VSBARLC
+    price_eur: 10.9
+    page_url: https://impulse-nutrition.fr/products/barre-proteinee-crispy-saveur-chocolat
+  - title: Duo Avant
+    handle: duo-avant
+    category: bundle
+    moment: avant_effort
+    variant_id: "52346896056651"
+    sku: DUO_AVA
+    price_eur: 43.92
+    page_url: https://impulse-nutrition.fr/products/duo-avant
+  - title: Maltodextrine
+    handle: maltodextrine
+    category: complement
+    moment: avant_effort
+    variant_id: "51857627742539"
+    sku: VSMAL
+    price_eur: 11.9
+    page_url: https://impulse-nutrition.fr/products/maltodextrine
+  - title: Preworkout saveur citron
+    handle: preworkout-saveur-citron
+    category: complement
+    moment: avant_effort
+    variant_id: "51857627644235"
+    sku: VSPREWC
+    price_eur: 37.9
+    page_url: https://impulse-nutrition.fr/products/preworkout-saveur-citron
+pendant_effort:
+  - title: Boisson d'effort isotonique saveur fruits rouges
+    handle: boisson-deffort-isotonique-saveur-fruits-rouges
+    category: complement
+    moment: pendant_effort
+    variant_id: "51857625481547"
+    sku: VSBOISF
+    price_eur: 21.9
+    page_url: https://impulse-nutrition.fr/products/boisson-deffort-isotonique-saveur-fruits-rouges
+  - title: Boisson d'effort isotonique saveur menthe
+    handle: boisson-deffort-isotonique-saveur-menthe
+    category: complement
+    moment: pendant_effort
+    variant_id: "51857627873611"
+    sku: VSBOISM
+    price_eur: 21.9
+    page_url: https://impulse-nutrition.fr/products/boisson-deffort-isotonique-saveur-menthe
+  - title: Duo Pendant
+    handle: duo-pendant
+    category: bundle
+    moment: pendant_effort
+    variant_id: "52347199586635"
+    sku: DUO_PDT
+    price_eur: 34.02
+    page_url: https://impulse-nutrition.fr/products/duo-pendant
+  - title: Pack Endurance
+    handle: pack-endurance
+    category: bundle
+    moment: pendant_effort
+    variant_id: "52349387997515"
+    sku: PACK_END
+    price_eur: 44.73
+    page_url: https://impulse-nutrition.fr/products/pack-endurance
+  - title: Pack Routine Endurance
+    handle: pack-routine-endurance
+    category: bundle
+    moment: pendant_effort
+    variant_id: "53602805449035"
+    sku: PACK_REND
+    price_eur: 55.5
+    page_url: https://impulse-nutrition.fr/products/pack-routine-endurance
+  - title: Pack accessoires - Electrolytes citron + Bidon
+    handle: pack-accessoires-electrolytes-citron-bidon
+    category: bundle
+    moment: pendant_effort
+    variant_id: "56371610681675"
+    sku: null
+    price_eur: 23.8
+    page_url: https://impulse-nutrition.fr/products/pack-accessoires-electrolytes-citron-bidon
+  - title: Pack accessoires - Electrolytes pêche + Bidon
+    handle: tts-electrolytes-bidon
+    category: bundle
+    moment: pendant_effort
+    variant_id: "56031432540491"
+    sku: null
+    price_eur: 23.8
+    page_url: https://impulse-nutrition.fr/products/tts-electrolytes-bidon
+  - title: TTS - Boisson d'effort + Bidon
+    handle: tts-boisson-deffort-bidon
+    category: bundle
+    moment: pendant_effort
+    variant_id: "56031430705483"
+    sku: null
+    price_eur: 29.8
+    page_url: https://impulse-nutrition.fr/products/tts-boisson-deffort-bidon
+  - title: Électrolytes comprimés effervescents saveur cerise
+    handle: electrolytes-comprimes-cerise
+    category: complement
+    moment: pendant_effort
+    variant_id: "56887101096267"
+    sku: VSELEFC
+    price_eur: 9.9
+    page_url: https://impulse-nutrition.fr/products/electrolytes-comprimes-cerise
+  - title: Électrolytes comprimés effervescents saveur citron
+    handle: electrolytes-comprimes-citron
+    category: complement
+    moment: pendant_effort
+    variant_id: "56887117939019"
+    sku: VSELEFCV
+    price_eur: 9.9
+    page_url: https://impulse-nutrition.fr/products/electrolytes-comprimes-citron
+  - title: Électrolytes comprimés effervescents saveur pêche
+    handle: electrolytes-comprimes-peche
+    category: complement
+    moment: pendant_effort
+    variant_id: "56887119577419"
+    sku: VSELEFP
+    price_eur: 9.9
+    page_url: https://impulse-nutrition.fr/products/electrolytes-comprimes-peche
+  - title: Électrolytes saveur citron
+    handle: electrolytes-saveur-citron
+    category: complement
+    moment: pendant_effort
+    variant_id: "51870634017099"
+    sku: VSELECC
+    price_eur: 15.9
+    page_url: https://impulse-nutrition.fr/products/electrolytes-saveur-citron
+  - title: Électrolytes saveur pêche
+    handle: electrolytes-saveur-peche
+    category: complement
+    moment: pendant_effort
+    variant_id: "51870634475851"
+    sku: VSELECP
+    price_eur: 15.9
+    page_url: https://impulse-nutrition.fr/products/electrolytes-saveur-peche
+apres_effort:
+  - title: Duo Après
+    handle: duo-apres
+    category: bundle
+    moment: apres_effort
+    variant_id: "52348607725899"
+    sku: DUO_APR
+    price_eur: 45.72
+    page_url: https://impulse-nutrition.fr/products/duo-apres
+  - title: LRA - Pack Performance
+    handle: lra-pack-essentiels
+    category: bundle
+    moment: apres_effort
+    variant_id: "55985212686667"
+    sku: LRA_PERF
+    price_eur: 76.6
+    page_url: https://impulse-nutrition.fr/products/lra-pack-essentiels
+  - title: Pack - Développement musculaire
+    handle: pack-developpement-musculaire
+    category: bundle
+    moment: apres_effort
+    variant_id: "52350202151243"
+    sku: PACK_MUSC
+    price_eur: 66.33
+    page_url: https://impulse-nutrition.fr/products/pack-developpement-musculaire
+  - title: Pack - Récupération
+    handle: pack-recuperation
+    category: bundle
+    moment: apres_effort
+    variant_id: "52345838076235"
+    sku: PACK_REC
+    price_eur: 68.13
+    page_url: https://impulse-nutrition.fr/products/pack-recuperation
+  - title: Pack Essentiel - BCAA Citron + Créatine + Whey Choco
+    handle: pack-essentiel-bcaa-creatine-whey-choco
+    category: bundle
+    moment: apres_effort
+    variant_id: "56371819610443"
+    sku: null
+    price_eur: 75.7
+    page_url: https://impulse-nutrition.fr/products/pack-essentiel-bcaa-creatine-whey-choco
+  - title: Pack Essentiel - BCAA Pêche + Créatine + Whey Choco
+    handle: pack-essentiel-bcaa-peche-creatine-whey-choco
+    category: bundle
+    moment: apres_effort
+    variant_id: "56371831374155"
+    sku: null
+    price_eur: 75.7
+    page_url: https://impulse-nutrition.fr/products/pack-essentiel-bcaa-peche-creatine-whey-choco
+  - title: Pack Essentiel Citron
+    handle: pack-essentiel-citron
+    category: bundle
+    moment: apres_effort
+    variant_id: "56371623330123"
+    sku: null
+    price_eur: 74.7
+    page_url: https://impulse-nutrition.fr/products/pack-essentiel-citron
+  - title: Pack Essentiel Pêche
+    handle: pack-essentiel-peche
+    category: bundle
+    moment: apres_effort
+    variant_id: "56371620249931"
+    sku: null
+    price_eur: 74.7
+    page_url: https://impulse-nutrition.fr/products/pack-essentiel-peche
+  - title: Pack Routine Essentiels
+    handle: pack-routine-essentiels
+    category: bundle
+    moment: apres_effort
+    variant_id: "53602843623755"
+    sku: PACK_RESS
+    price_eur: 67.3
+    page_url: https://impulse-nutrition.fr/products/pack-routine-essentiels
+  - title: Pack Routine Musculation
+    handle: pack-routine-musculation
+    category: bundle
+    moment: apres_effort
+    variant_id: "53589349204299"
+    sku: PACK_RMUSC
+    price_eur: 84.3
+    page_url: https://impulse-nutrition.fr/products/pack-routine-musculation
+  - title: Pack accessoires - BCAA + Shaker
+    handle: tts-bcaa-shaker
+    category: bundle
+    moment: apres_effort
+    variant_id: "56031413010763"
+    sku: null
+    price_eur: 29.8
+    page_url: https://impulse-nutrition.fr/products/tts-bcaa-shaker
+  - title: Pack accessoires - BCAA Citron + Shaker
+    handle: pack-accessoires-bcaa-citron-shaker
+    category: bundle
+    moment: apres_effort
+    variant_id: "56371805749579"
+    sku: null
+    price_eur: 30.8
+    page_url: https://impulse-nutrition.fr/products/pack-accessoires-bcaa-citron-shaker
+  - title: Pack accessoires - BCAA Pêche + Shaker
+    handle: pack-accessoires-bcaa-peche-shaker
+    category: bundle
+    moment: apres_effort
+    variant_id: "56371807682891"
+    sku: null
+    price_eur: 30.8
+    page_url: https://impulse-nutrition.fr/products/pack-accessoires-bcaa-peche-shaker
+  - title: TTS - Collagène + Shaker
+    handle: tts-collagene-shaker
+    category: bundle
+    moment: apres_effort
+    variant_id: "56031428280651"
+    sku: null
+    price_eur: 32.8
+    page_url: https://impulse-nutrition.fr/products/tts-collagene-shaker
+  - title: TTS - Créatine + Shaker
+    handle: tts-creatine-shaker
+    category: bundle
+    moment: apres_effort
+    variant_id: "56031411798347"
+    sku: null
+    price_eur: 19.8
+    page_url: https://impulse-nutrition.fr/products/tts-creatine-shaker
+  - title: TTS - Pack Whey Recovery Chocolat + Multivitamines
+    handle: tts-pack-whey-recovery-chocolat-multivitamines
+    category: bundle
+    moment: apres_effort
+    variant_id: "56755783958859"
+    sku: null
+    price_eur: 58.8
+    page_url: https://impulse-nutrition.fr/products/tts-pack-whey-recovery-chocolat-multivitamines
+  - title: TTS - Pack Whey Recovery Chocolat + Preworkout + BCAA Pêche + Shaker
+    handle: tts-pack-whey-recovery-chocolat-preworkout-bcaa-peche-shaker
+    category: bundle
+    moment: apres_effort
+    variant_id: "56755789857099"
+    sku: null
+    price_eur: 108.6
+    page_url: https://impulse-nutrition.fr/products/tts-pack-whey-recovery-chocolat-preworkout-bcaa-peche-shaker
+  - title: TTS - Pack Whey Recovery Chocolat + Shaker
+    handle: tts-pack-whey-recovery-shaker
+    category: bundle
+    moment: apres_effort
+    variant_id: "56755758596427"
+    sku: null
+    price_eur: 47.8
+    page_url: https://impulse-nutrition.fr/products/tts-pack-whey-recovery-shaker
+  - title: TTS - Pack Whey Recovery Vanille + Multivitamines
+    handle: tts-pack-whey-recovery-vanille-multivitamines
+    category: bundle
+    moment: apres_effort
+    variant_id: "56755776487755"
+    sku: null
+    price_eur: 58.8
+    page_url: https://impulse-nutrition.fr/products/tts-pack-whey-recovery-vanille-multivitamines
+  - title: TTS - Pack Whey Recovery Vanille + Shaker
+    handle: tts-pack-whey-recovery-vanille-shaker
+    category: bundle
+    moment: apres_effort
+    variant_id: "56755768328523"
+    sku: null
+    price_eur: 47.8
+    page_url: https://impulse-nutrition.fr/products/tts-pack-whey-recovery-vanille-shaker
+  - title: TTS - Pack musculation
+    handle: tts-pack-musculation
+    category: bundle
+    moment: apres_effort
+    variant_id: "56031436374347"
+    sku: PACK_TTS_MUSC
+    price_eur: 75.7
+    page_url: https://impulse-nutrition.fr/products/tts-pack-musculation
+  - title: TTS - Whey isolate + shaker
+    handle: tts-whey-isolate-shaker
+    category: bundle
+    moment: apres_effort
+    variant_id: "56031402164555"
+    sku: null
+    price_eur: 46.8
+    page_url: https://impulse-nutrition.fr/products/tts-whey-isolate-shaker
+  - title: Whey Isolate nature
+    handle: whey-isolate-nature
+    category: complement
+    moment: apres_effort
+    variant_id: "51857627513163"
+    sku: VSWHEYN
+    price_eur: 37.9
+    page_url: https://impulse-nutrition.fr/products/whey-isolate-nature
+  - title: Whey Isolate saveur chocolat
+    handle: whey-isolate-saveur-chocolat
+    category: complement
+    moment: apres_effort
+    variant_id: "51887753003339"
+    sku: VSWHEYC
+    price_eur: 39.9
+    page_url: https://impulse-nutrition.fr/products/whey-isolate-saveur-chocolat
+  - title: Whey Isolate saveur chocolat - portion individuelle
+    handle: whey-isolate-saveur-chocolat-portion-individuelle
+    category: complement
+    moment: apres_effort
+    variant_id: "51857627775307"
+    sku: VSWHEYCECH
+    price_eur: 2.95
+    page_url: https://impulse-nutrition.fr/products/whey-isolate-saveur-chocolat-portion-individuelle
+  - title: Whey Isolate saveur vanille
+    handle: whey-isolate-saveur-vanille
+    category: complement
+    moment: apres_effort
+    variant_id: "51857626136907"
+    sku: VSWHEYV
+    price_eur: 39.9
+    page_url: https://impulse-nutrition.fr/products/whey-isolate-saveur-vanille
+  - title: Whey Isolate saveur vanille - portion individuelle
+    handle: whey-isolate-saveur-vanille-portion-individuelle
+    category: complement
+    moment: apres_effort
+    variant_id: "51860866761035"
+    sku: VSWHEYVECH
+    price_eur: 2.95
+    page_url: https://impulse-nutrition.fr/products/whey-isolate-saveur-vanille-portion-individuelle
+  - title: Whey Recovery saveur chocolat
+    handle: whey-recovery-saveur-chocolat
+    category: complement
+    moment: apres_effort
+    variant_id: "51870639489355"
+    sku: VSRECMC
+    price_eur: 39.9
+    page_url: https://impulse-nutrition.fr/products/whey-recovery-saveur-chocolat
+  - title: Whey Recovery saveur vanille
+    handle: whey-recovery-saveur-vanille
+    category: complement
+    moment: apres_effort
+    variant_id: "51857627611467"
+    sku: VSRECMV
+    price_eur: 39.9
+    page_url: https://impulse-nutrition.fr/products/whey-recovery-saveur-vanille
+au_quotidien:
+  - title: Collagène marin Peptan® nature
+    handle: collagene-marin-peptan-nature
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857625579851"
+    sku: VSCOLMN
+    price_eur: 32.9
+    page_url: https://impulse-nutrition.fr/products/collagene-marin-peptan-nature
+  - title: Collagène marin Peptan® saveur cacao
+    handle: collagene-marin-peptan-saveur-cacao
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857627709771"
+    sku: VSCOLMC
+    price_eur: 36.9
+    page_url: https://impulse-nutrition.fr/products/collagene-marin-peptan-saveur-cacao
+  - title: Collagène marin Peptan® saveur exotique
+    handle: collagene-marin-peptan-saveur-exotique
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857627971915"
+    sku: VSCOLME
+    price_eur: 36.9
+    page_url: https://impulse-nutrition.fr/products/collagene-marin-peptan-saveur-exotique
+  - title: Créatine Creapure®
+    handle: creatine-creapure
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857627808075"
+    sku: VSCREAC
+    price_eur: 12.9
+    page_url: https://impulse-nutrition.fr/products/creatine-creapure
+  - title: Curcumine
+    handle: curcumine
+    category: complement
+    moment: au_quotidien
+    variant_id: "56072545272139"
+    sku: VSCUR
+    price_eur: 19.9
+    page_url: https://impulse-nutrition.fr/products/curcumine
+  - title: Duo Au Quotidien
+    handle: duo-au-quotidien
+    category: bundle
+    moment: au_quotidien
+    variant_id: "52349209936203"
+    sku: PDUQ
+    price_eur: 31.32
+    page_url: https://impulse-nutrition.fr/products/duo-au-quotidien
+  - title: Duo Coup de Boost
+    handle: duo-coup-de-boost
+    category: bundle
+    moment: au_quotidien
+    variant_id: "52312112759115"
+    sku: DUO_BOO
+    price_eur: 23.22
+    page_url: https://impulse-nutrition.fr/products/duo-coup-de-boost
+  - title: Duo Digestion
+    handle: duo-digestion
+    category: bundle
+    moment: au_quotidien
+    variant_id: "52312046928203"
+    sku: DUO_DIG
+    price_eur: 33.12
+    page_url: https://impulse-nutrition.fr/products/duo-digestion
+  - title: Duo Os & Articulations
+    handle: duo-apres-os-articulations
+    category: bundle
+    moment: au_quotidien
+    variant_id: "52299109826891"
+    sku: DUO_ART
+    price_eur: 43.92
+    page_url: https://impulse-nutrition.fr/products/duo-apres-os-articulations
+  - title: Duo Sommeil & Fatigue
+    handle: duo-sommeil-fatigue
+    category: bundle
+    moment: au_quotidien
+    variant_id: "52311769219403"
+    sku: DUO_SOM
+    price_eur: 31.32
+    page_url: https://impulse-nutrition.fr/products/duo-sommeil-fatigue
+  - title: Fer Bisglycinate
+    handle: fer-bisglycinate
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857627545931"
+    sku: VSFER
+    price_eur: 16.9
+    page_url: https://impulse-nutrition.fr/products/fer-bisglycinate
+  - title: Glycine cristallisée
+    handle: glycine-cristallisee
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857625547083"
+    sku: VSGLY
+    price_eur: 10.9
+    page_url: https://impulse-nutrition.fr/products/glycine-cristallisee
+  - title: L-Glutamine Kyowa®
+    handle: l-glutamine-kyowa
+    category: complement
+    moment: au_quotidien
+    variant_id: "51739127382347"
+    sku: VSLGLU
+    price_eur: 13.9
+    page_url: https://impulse-nutrition.fr/products/l-glutamine-kyowa
+  - title: Magnésium Bisglycinate
+    handle: magnesium-bisglycinate
+    category: complement
+    moment: au_quotidien
+    variant_id: "51870638997835"
+    sku: VSMAG
+    price_eur: 15.9
+    page_url: https://impulse-nutrition.fr/products/magnesium-bisglycinate
+  - title: Multivitamines
+    handle: multivitamines
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857627480395"
+    sku: VSMVIT
+    price_eur: 18.9
+    page_url: https://impulse-nutrition.fr/products/multivitamines
+  - title: Omega 3 EPAX®
+    handle: omega-3-epax
+    category: complement
+    moment: au_quotidien
+    variant_id: "51887935258955"
+    sku: VSOME
+    price_eur: 23.9
+    page_url: https://impulse-nutrition.fr/products/omega-3-epax
+  - title: Pack - Les Indispensables du Quotidien
+    handle: pack-les-indispensables-du-quotidien
+    category: bundle
+    moment: au_quotidien
+    variant_id: "52294838911307"
+    sku: PACK_INDIS
+    price_eur: 52.83
+    page_url: https://impulse-nutrition.fr/products/pack-les-indispensables-du-quotidien
+  - title: Peptides de collagène Peptan® nature
+    handle: peptides-de-collagene-peptan-nature
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857625514315"
+    sku: VSCOLBN
+    price_eur: 21.9
+    page_url: https://impulse-nutrition.fr/products/peptides-de-collagene-peptan-nature
+  - title: Peptides de collagène Peptan® saveur cacao
+    handle: peptides-de-collagene-peptan-saveur-cacao
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857627840843"
+    sku: VSCOLBC
+    price_eur: 25.9
+    page_url: https://impulse-nutrition.fr/products/peptides-de-collagene-peptan-saveur-cacao
+  - title: Peptides de collagène Peptan® saveur exotique
+    handle: peptides-de-collagene-peptan-saveur-exotique
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857628004683"
+    sku: VSCOLBE
+    price_eur: 25.9
+    page_url: https://impulse-nutrition.fr/products/peptides-de-collagene-peptan-saveur-exotique
+  - title: Pré-Probiotiques
+    handle: pre-probiotiques
+    category: complement
+    moment: au_quotidien
+    variant_id: "51870634574155"
+    sku: VSPBIOT
+    price_eur: 22.9
+    page_url: https://impulse-nutrition.fr/products/pre-probiotiques
+  - title: Sommeil +
+    handle: sommeil
+    category: complement
+    moment: au_quotidien
+    variant_id: "51860866859339"
+    sku: VSSOM
+    price_eur: 18.9
+    page_url: https://impulse-nutrition.fr/products/sommeil
+  - title: Spiruline Biologique
+    handle: spiruline-biologique-1
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857627906379"
+    sku: VSSPI
+    price_eur: 12.9
+    page_url: https://impulse-nutrition.fr/products/spiruline-biologique-1
+  - title: Vitamine C
+    handle: vitamine-c
+    category: complement
+    moment: au_quotidien
+    variant_id: "51794418106699"
+    sku: VSVITC
+    price_eur: 12.9
+    page_url: https://impulse-nutrition.fr/products/vitamine-c
+  - title: Vitamine D3
+    handle: vitamine-d3
+    category: complement
+    moment: au_quotidien
+    variant_id: "51857627578699"
+    sku: VSVITD
+    price_eur: 15.9
+    page_url: https://impulse-nutrition.fr/products/vitamine-d3
+_accessoires:
+  - title: Bidon - 750ml
+    handle: bidon-750ml
+    category: accessoire
+    moment: null
+    variant_id: "51956610367819"
+    sku: VSGOURDE
+    price_eur: 7.9
+    page_url: https://impulse-nutrition.fr/products/bidon-750ml
+  - title: Flasque - 500ml
+    handle: flasque-500ml
+    category: accessoire
+    moment: null
+    variant_id: "56625958748491"
+    sku: VSFLASK500
+    price_eur: 19.9
+    page_url: https://impulse-nutrition.fr/products/flasque-500ml
+  - title: Shaker - 450ml
+    handle: shaker-450ml
+    category: accessoire
+    moment: null
+    variant_id: "51956593230155"
+    sku: VSSHAK450
+    price_eur: 6.9
+    page_url: https://impulse-nutrition.fr/products/shaker-450ml
+  - title: Shaker - 750ml
+    handle: shaker-750ml
+    category: accessoire
+    moment: null
+    variant_id: "51956599652683"
+    sku: VSSHAK750
+    price_eur: 7.9
+    page_url: https://impulse-nutrition.fr/products/shaker-750ml

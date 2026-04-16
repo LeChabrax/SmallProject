@@ -59,8 +59,10 @@ Impulse-Nutrition/
 │   └── data/
 │       └── conversations/              #   gitignored — private DM archive
 │
-├── knowledge/                          # "c'est quoi Impulse" — source unique consolidée
-│   ├── impulse.md                      #   LE doc métier : identité, programme, catalog, SAV, voice, runbooks, glossaire, quirks
+├── knowledge/                          # "c'est quoi Impulse" — savoir métier réparti sur 3 docs
+│   ├── impulse.md                      #   onboarding : identité, programme, pipeline, catalog framework, glossaire
+│   ├── operations.md                   #   operating : SAV, voice & persona, runbooks, quirks
+│   ├── catalog.yaml                    #   78 SKUs structuré (auto-généré via infra/scripts/refresh_catalog.py)
 │   ├── voice/
 │   │   └── templates.yaml              #   20 DM templates (source of truth, chargé par skill /instagram-dm)
 │   └── assets/                         #   images (logo, visuels, screenshots benchmark/bigblue)

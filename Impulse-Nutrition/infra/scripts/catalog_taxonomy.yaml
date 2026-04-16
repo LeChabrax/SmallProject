@@ -1,0 +1,91 @@
+# Taxonomie catalogue Impulse Nutrition
+#
+# Mapping produit (title Shopify) → moment de consommation.
+# Patterns = substring case-insensitive dans le title (premier match gagne).
+# Si aucun pattern ne match, le produit reçoit `moment: null` et sort en
+# "unclassified" dans le YAML — tu l'ajoutes à la main dans ce fichier.
+#
+# Règles métier Impulse (validées 2026-04-16) :
+# - avant_effort : preworkout, barres protéinées, maltodextrine, BCAA
+# - pendant_effort : électrolytes, boissons d'effort isotoniques
+# - apres_effort : whey isolate, whey recovery
+# - au_quotidien : toutes les gélules + collagène + glycine + L-glutamine
+# - accessoire : hardware (shaker, bidon, flasque) — pas de moment, `moment: null`
+# - bundle : pack/duo multi-produits — moment dérivé du nom du bundle
+
+complements:
+  avant_effort:
+    - "preworkout"
+    - "barre protéinée"
+    - "maltodextrine"
+    - "bcaa"
+
+  pendant_effort:
+    - "électrolytes"
+    - "boisson d'effort"
+
+  apres_effort:
+    - "whey isolate"
+    - "whey recovery"
+
+  au_quotidien:
+    # Collagène + glycine + L-glutamine (user clarification 2026-04-16)
+    - "collagène"
+    - "peptides de collagène"
+    - "glycine"
+    - "l-glutamine"
+    # Gélules / vitamines / minéraux / santé
+    - "magnésium"
+    - "vitamine c"
+    - "vitamine d"
+    - "multivitamines"
+    - "créatine"
+    - "omega"
+    - "fer bisglycinate"
+    - "spiruline"
+    - "curcumine"
+    - "pré-probiotiques"
+    - "sommeil +"
+
+accessoires:
+  # Pas de moment — hardware
+  - "shaker"
+  - "bidon"
+  - "flasque"
+
+bundles:
+  # Bundles / packs / duos / TTS — moment principal dérivé du nom
+  avant_effort:
+    - "duo avant"
+
+  pendant_effort:
+    - "duo pendant"
+    - "pack endurance"
+    - "pack routine endurance"
+    - "tts - boisson d'effort"
+    - "pack accessoires - electrolytes"
+
+  apres_effort:
+    - "duo après"
+    - "pack - récupération"
+    - "pack - développement musculaire"
+    - "pack routine musculation"
+    - "pack routine essentiels"
+    - "pack essentiel"
+    - "tts - whey"
+    - "tts - pack whey"
+    - "tts - pack musculation"
+    - "tts - créatine"
+    - "tts - collagène"
+    - "pack accessoires - bcaa"
+    - "lra - pack performance"
+    - "pack - développement"
+
+  au_quotidien:
+    - "duo au quotidien"
+    - "duo sommeil"
+    - "duo coup de boost"
+    - "duo digestion"
+    - "duo os"
+    - "pack - les indispensables"
+

@@ -2,7 +2,7 @@
 
 > **Source de vérité pour TOUT travail DM** (check, draft, relance, onboarding, catégorisation, templates) : **skill `/instagram-dm`** (niveau user). Protocole 9 étapes bloquant. Triggers : `/instagram-dm`, "check les DMs", "draft pour {user}", "relance {user}", etc.
 >
-> Référence humaine (templates complets, voice, red flags) : [`../knowledge/impulse.md#6-voice--persona-split`](../knowledge/impulse.md#6-voice--persona-split). Source machine-readable des templates : [`../knowledge/voice/templates.yaml`](../knowledge/voice/templates.yaml).
+> Référence humaine (templates complets, voice, red flags) : [`../knowledge/operations.md#voice--persona-split`](../knowledge/operations.md#voice--persona-split). Source machine-readable des templates : [`../knowledge/voice/templates.yaml`](../knowledge/voice/templates.yaml).
 >
 > ⚠️ **Ne jamais rédiger un DM sans invoquer le skill.** Les règles éparpillées dans les feedback memory files ont toutes été absorbées dans le SKILL.md.
 
