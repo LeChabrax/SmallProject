@@ -81,8 +81,8 @@ log.info(f"=== veille_concurrents.py démarré — log: {LOG_FILE} ===")
 # ──────────────────────────────────────────────────────────────────────────────
 
 # Veille uses a dedicated account to avoid risking the main brand account
-VEILLE_USERNAME = os.getenv("VEILLE_INSTAGRAM_USERNAME", "antman.lass")
-VEILLE_PASSWORD = os.getenv("VEILLE_INSTAGRAM_PASSWORD", "Vald2003.INSTAGRAM")
+VEILLE_USERNAME = os.environ["INSTAGRAM_VEILLE_USERNAME"]
+VEILLE_PASSWORD = os.environ["INSTAGRAM_VEILLE_PASSWORD"]
 SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{VEILLE_USERNAME}_session.json"
 
 SHEET_NAME = "VeilleConcu"

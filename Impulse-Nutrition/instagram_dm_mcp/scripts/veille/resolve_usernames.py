@@ -44,8 +44,8 @@ log.info(f"=== resolve_usernames.py démarré — log: {LOG_FILE} ===")
 # ──────────────────────────────────────────────────────────────────────────────
 
 # Veille uses a dedicated account to avoid risking the main brand account
-USERNAME = os.getenv("VEILLE_INSTAGRAM_USERNAME", "antman.lass")
-PASSWORD = os.getenv("VEILLE_INSTAGRAM_PASSWORD", "Vald2003.INSTAGRAM")
+USERNAME = os.environ["INSTAGRAM_VEILLE_USERNAME"]
+PASSWORD = os.environ["INSTAGRAM_VEILLE_PASSWORD"]
 SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
 SHEET_NAME = "VeilleConcu"
