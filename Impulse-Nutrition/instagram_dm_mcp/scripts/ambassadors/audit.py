@@ -15,27 +15,16 @@ Usage :
 """
 
 import argparse
-import time
-import os
 import sys
 from pathlib import Path
 from datetime import datetime
-from instagrapi import Client
-from dotenv import load_dotenv
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import SUIVI_AMB_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
-
-load_dotenv()
-
-USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
-PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
+from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 
 SHEET_NAME = "Suivi_Amb"
-
-DELAY = 2  # seconds between accounts
 
 # item_types classification
 STORY_ITEM_TYPES = {"story_share", "xma_story_share", "xma_reel_mention"}
@@ -221,15 +210,10 @@ def main():
     full_count = len(candidates) - in_cold_count
     print(f"[{ts()}] Auditing {len(candidates)} ambassadors ({full_count} full U/V/X/Y, {in_cold_count} U-only In-cold)")
 
-    # Instagram login
-    ig_client = Client()
+    ig_client = get_ig_client("impulse")
     ig_client.request_timeout = 1
-    if SESSION_FILE.exists():
-        ig_client.load_settings(SESSION_FILE)
-    ig_client.login(USERNAME, PASSWORD)
-    ig_client.dump_settings(SESSION_FILE)
     our_user_id = str(ig_client.user_id)
-    print(f"[{ts()}] Logged in as {USERNAME} (id={our_user_id})")
+    print(f"[{ts()}] Logged in as impulse (id={our_user_id})")
 
     results = []
     bio_yes = 0
@@ -260,7 +244,7 @@ def main():
         elif bio_result == "non":
             bio_no += 1
 
-        time.sleep(1)
+        sleep_random(1, 2)
 
         # 2. DM analysis (skip for In-cold)
         story_count = 0
@@ -299,7 +283,7 @@ def main():
         })
 
         if idx < len(candidates):
-            time.sleep(DELAY)
+            sleep_random(2, 4)
 
     # Apply updates
     if args.dry_run:

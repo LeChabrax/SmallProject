@@ -13,12 +13,8 @@ Usage :
 from __future__ import annotations
 
 import argparse
-import os
 import sys
-import time
 from pathlib import Path
-
-from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import (  # noqa: E402
@@ -27,9 +23,11 @@ from infra.common.google_sheets import (  # noqa: E402
     SUIVI_AMB_COLS,
     get_worksheet,
 )
+from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 
-# Reuse build_message() from the existing campaign runner.
-from run_campaign import build_message  # noqa: E402
+# Reuse build_message() from the campaign runner script.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "campaign"))
+from run import build_message  # noqa: E402
 
 USERNAMES = [
     "isa_nutricoaching",
@@ -100,23 +98,9 @@ def main() -> int:
     # -----------------------------------------------------------------
     # 2. Instagram login (main account)
     # -----------------------------------------------------------------
-    load_dotenv(Path(__file__).parent.parent.parent / ".env")
-
-    ig_username = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
-    ig_password = os.getenv("INSTAGRAM_PASSWORD")
-    if not ig_password:
-        raise RuntimeError("INSTAGRAM_PASSWORD missing from .env")
-
-    session_file = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{ig_username}_session.json"
-
-    from instagrapi import Client  # lazy import
-    cl = Client()
+    cl = get_ig_client("impulse")
     cl.request_timeout = 5
-    if session_file.exists():
-        cl.load_settings(session_file)
-    cl.login(ig_username, ig_password)
-    cl.dump_settings(session_file)
-    print(f"\nLogged in as @{ig_username}")
+    print(f"\nLogged in as impulse")
 
     # -----------------------------------------------------------------
     # 3. Send DMs
@@ -140,7 +124,7 @@ def main() -> int:
             errors[u] = str(e)
 
         if i < len(USERNAMES):
-            time.sleep(DELAY_BETWEEN_SENDS)
+            sleep_random(DELAY_BETWEEN_SENDS, DELAY_BETWEEN_SENDS + 3)
 
     # -----------------------------------------------------------------
     # 4. Batch update col K for successfully sent

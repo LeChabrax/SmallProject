@@ -16,24 +16,15 @@ Usage :
 
 import argparse
 import json
-import time
-import os
 import sys
 from pathlib import Path
 from datetime import datetime
-from instagrapi import Client
-from dotenv import load_dotenv
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
 from infra.common.google_sheets import SUIVI_AMB_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
-
-load_dotenv()
-
-USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
-PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
+from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 
 SHEET_NAME = "Suivi_Amb"
 
@@ -41,8 +32,6 @@ PROGRESS_FILE = Path(__file__).parent.parent.parent / "data" / "progress" / "cam
 PROGRESS_FILE.parent.mkdir(parents=True, exist_ok=True)
 LOG_FILE = Path(__file__).parent.parent.parent / "data" / "logs" / "campaign_log.txt"
 LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
-
-DELAY_BETWEEN_ACCOUNTS = 3  # seconds
 
 NON_REPLY_TYPES = {
     "xma_reel_mention", "xma_story_share", "action_log",
@@ -122,7 +111,7 @@ def main():
     parser.add_argument("--message-template", help="Inline message template (use {prenom} for first name)")
     parser.add_argument("--dry-run", action="store_true", help="Qualify only, don't send")
     parser.add_argument("--skip-qualify", action="store_true", help="Skip qualification, send to all")
-    parser.add_argument("--delay", type=int, default=DELAY_BETWEEN_ACCOUNTS, help="Delay between accounts (seconds)")
+    parser.add_argument("--delay", type=int, default=3, help="Minimum delay between accounts (seconds); sleep_random adds up to +2s jitter")
     parser.add_argument("--backfill", metavar="PROGRESS_JSON",
                         help="Backfill col M from a progress JSON (no Instagram login required)")
     parser.add_argument("--all-active", action="store_true",
@@ -230,18 +219,14 @@ def main():
         log("No eligible accounts found. Check campaign name and statut.")
         return
 
-    # Instagram login
-    ig_client = Client()
+    ig_client = get_ig_client("impulse")
     ig_client.request_timeout = 1
-    if SESSION_FILE.exists():
-        ig_client.load_settings(SESSION_FILE)
-    ig_client.login(USERNAME, PASSWORD)
-    ig_client.dump_settings(SESSION_FILE)
     our_user_id = str(ig_client.user_id)
-    log(f"Logged in as {USERNAME} (id={our_user_id})")
+    log(f"Logged in as impulse (id={our_user_id})")
 
-    # Patch timeout
-    import functools
+    # Raise the per-call timeout ceiling to 30s so long DM posts don't get
+    # cut mid-flight. We do this on top of get_ig_client(), not inside it,
+    # because other scripts share the helper and don't need this override.
     _orig_post = ig_client.private.post
     _orig_get = ig_client.private.get
     def _post_t(*a, **kw): kw.setdefault("timeout", 30); return _orig_post(*a, **kw)
@@ -272,7 +257,7 @@ def main():
                 progress[prog_key] = {"done": True, "status": "skip_flag"}
                 save_progress(progress)
                 skipped += 1
-                time.sleep(args.delay)
+                sleep_random(args.delay, args.delay + 2)
                 continue
             elif status == "review":
                 log(f"  → SKIP (needs review)")
@@ -280,11 +265,11 @@ def main():
                 progress[prog_key] = {"done": True, "status": "skip_review"}
                 save_progress(progress)
                 skipped += 1
-                time.sleep(args.delay)
+                sleep_random(args.delay, args.delay + 2)
                 continue
             elif status == "error":
                 errors += 1
-                time.sleep(args.delay)
+                sleep_random(args.delay, args.delay + 2)
                 continue
 
         if args.dry_run:
@@ -310,7 +295,7 @@ def main():
             save_progress(progress)
 
         if idx < len(eligible):
-            time.sleep(args.delay)
+            sleep_random(args.delay, args.delay + 2)
 
     log(f"\n{'='*60}")
     log(f"DONE — Sent: {sent}, Skipped: {skipped}, Errors: {errors}")

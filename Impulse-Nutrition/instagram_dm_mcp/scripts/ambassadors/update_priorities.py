@@ -11,28 +11,17 @@ Usage:
 """
 
 import argparse
-import time
 import json
-import os
 import sys
 from pathlib import Path
 from datetime import datetime
-from instagrapi import Client
-from dotenv import load_dotenv
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import SUIVI_AMB_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
-
-load_dotenv()
-
-USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
-PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
+from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 
 SHEET_NAME = "Suivi_Amb"
-
-DELAY = 2  # seconds between accounts
 
 # Keywords that map to priorities (searched case-insensitive in col K text)
 HIGH_KEYWORDS = ["répondre", "préparer commande", "appeler", "envoyer code"]
@@ -141,15 +130,10 @@ def main():
 
     print(f"[{ts()}] Processing {len(candidates)} accounts")
 
-    # Instagram login
-    ig_client = Client()
+    ig_client = get_ig_client("impulse")
     ig_client.request_timeout = 1
-    if SESSION_FILE.exists():
-        ig_client.load_settings(SESSION_FILE)
-    ig_client.login(USERNAME, PASSWORD)
-    ig_client.dump_settings(SESSION_FILE)
     our_user_id = str(ig_client.user_id)
-    print(f"[{ts()}] Logged in as {USERNAME} (id={our_user_id})")
+    print(f"[{ts()}] Logged in as impulse (id={our_user_id})")
 
     updates = []
     for idx, acct in enumerate(candidates, 1):
@@ -174,7 +158,7 @@ def main():
                 priority = determine_priority(acct["action"], None, False)
                 print(f" → no thread → {priority}")
                 updates.append((acct["row"], priority))
-                time.sleep(DELAY)
+                sleep_random(2, 4)
                 continue
 
             messages = ig_client.direct_messages(str(thread_id), 3)
@@ -182,7 +166,7 @@ def main():
                 priority = determine_priority(acct["action"], None, True)
                 print(f" → no messages → {priority}")
                 updates.append((acct["row"], priority))
-                time.sleep(DELAY)
+                sleep_random(2, 4)
                 continue
 
             last_msg = messages[0]
@@ -202,7 +186,7 @@ def main():
                 updates.append((acct["row"], acct["current_prio"]))
 
         if idx < len(candidates):
-            time.sleep(DELAY)
+            sleep_random(2, 4)
 
     # Apply updates
     if args.dry_run:

@@ -11,28 +11,18 @@ Usage :
     python qualify_conversations.py --limit 10   # premier batch de 10
 """
 
-import time
 import json
 import sys
-import os
 import argparse
 from pathlib import Path
 from datetime import datetime
-from instagrapi import Client
-from dotenv import load_dotenv
-
-load_dotenv()
-
-USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
-PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
 QUALIFY_RESULTS_FILE = Path(__file__).parent.parent.parent / "qualify_results.json"
-DELAY = 2  # secondes entre comptes (lecture seule)
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
+from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 
 
 # ──────────────────────────────────────────
@@ -197,14 +187,9 @@ def main():
     parser.add_argument("--limit", type=int, default=None, help="Nombre de comptes à traiter")
     args = parser.parse_args()
 
-    # Connexion
-    client = Client()
-    if SESSION_FILE.exists():
-        client.load_settings(SESSION_FILE)
-    client.login(USERNAME, PASSWORD)
-    client.dump_settings(SESSION_FILE)
+    client = get_ig_client("impulse")
     our_user_id = str(client.user_id)
-    print(f"[{ts()}] Connecté en tant que {USERNAME} (id={our_user_id})")
+    print(f"[{ts()}] Connecté en tant que impulse (id={our_user_id})")
 
     # Charger résultats existants
     results = load_results()
@@ -299,7 +284,7 @@ def main():
             review_list.append(username)
 
         if i < len(batch):
-            time.sleep(DELAY)
+            sleep_random(2, 4)
 
     # Résumé
     print()
