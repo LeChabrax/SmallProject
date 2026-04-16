@@ -1,5 +1,6 @@
 contracts/
-.mcp.json
+# .mcp.json is now committed (shared MCP config with credentials).
+# Veille Instagram password is masked — ask Antoine for it.
 .env
 *.pyc
 __pycache__/

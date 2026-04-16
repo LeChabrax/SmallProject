@@ -1,0 +1,62 @@
+{
+  "mcpServers": {
+    "instagram_dms": {
+      "command": "uv",
+      "args": ["run", "--directory", "./instagram_dm_mcp", "python", "src/mcp_server.py"],
+      "env": {
+        "INSTAGRAM_USERNAME": "impulse_nutrition_fr",
+        "INSTAGRAM_PASSWORD": "2025Impulse!"
+      }
+    },
+    "instagram_veille": {
+      "command": "uv",
+      "args": ["run", "--directory", "./instagram_dm_mcp", "python", "src/mcp_server.py"],
+      "env": {
+        "INSTAGRAM_USERNAME": "antman.lass",
+        "INSTAGRAM_PASSWORD": "DEMANDER_A_ANTOINE"
+      }
+    },
+    "shopify_orders": {
+      "command": "uv",
+      "args": ["run", "--directory", "./shopify_mcp", "python", "src/mcp_server.py"],
+      "env": {
+        "SHOPIFY_DOMAIN": "impulse-nutrition-vitavea.myshopify.com",
+        "SHOPIFY_CLIENT_ID": "2d5744b859ec46f37659860967fa5c85",
+        "SHOPIFY_CLIENT_SECRET": "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"
+      }
+    },
+    "google_sheets": {
+      "command": "uvx",
+      "args": ["mcp-google-sheets@latest"],
+      "env": {
+        "SERVICE_ACCOUNT_PATH": "~/.config/google-service-account.json"
+      }
+    },
+    "bigblue": {
+      "command": "uv",
+      "args": ["run", "--directory", "./bigblue_mcp", "python", "src/mcp_server.py"],
+      "env": {
+        "BIGBLUE_API_KEY": "i0nBdn0ScMbC-Oe27kx7Y4gVEoTjjOHXLcEQCRUCNKk"
+      }
+    },
+    "tiktokshop": {
+      "command": "node",
+      "args": ["../Tiktok/MCP-TikTokShop/build/index.js"],
+      "env": {
+        "TIKTOK_SHOP_APP_KEY": "6jg392kv2s7j7",
+        "TIKTOK_SHOP_APP_SECRET": "3036b38c478854f9260ffcfb49905af8712b3a43",
+        "TIKTOK_SHOP_ACCESS_TOKEN": "GCP_NexnnwAAAAAdkG5E1SVro62o-7buGmYwexYc5uu_7doXhs4W1trACvGJjb4wkGMBl1qogtMuh-l94XN51vhjkaNgtMLxA7xS4TH5EKGXJPk0IrE94sSuNPvMsBWAOxlc8GRLsi3OiQJLXBJh0IVttgeFo30aM07ZmntY-D-9ShMHOc5pgU1oPPFQzsKyHVNa3OnjbLzsCrY",
+        "TIKTOK_SHOP_SHOP_CIPHER": "GCP_Gk8uhwAAAAC2CxX0AMBN6sG3U3fncQGS"
+      }
+    },
+    "gorgias": {
+      "command": "uv",
+      "args": ["run", "--directory", "./gorgias_mcp", "python", "src/mcp_server.py"],
+      "env": {
+        "GORGIAS_DOMAIN": "impulse-nutrition",
+        "GORGIAS_EMAIL": "achabrat@impulse-nutrition.fr",
+        "GORGIAS_API_KEY": "c2dbb7bc29eb62b3d1a6b8fc5bab2f6b4f0e2e0f860e7db89e15f97f94c0b7ec"
+      }
+    }
+  }
+}
