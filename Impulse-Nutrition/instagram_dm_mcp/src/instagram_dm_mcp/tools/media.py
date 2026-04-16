@@ -5,6 +5,13 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict
 
+from ._helpers import (
+    extract_clips_audio_from_dict,
+    extract_location,
+    extract_sponsor_tags_info,
+    extract_usertags,
+)
+
 
 def register(mcp, client) -> None:
     def _ensure_download_directory(download_path: str) -> None:
@@ -63,51 +70,19 @@ def register(mcp, client) -> None:
                 result["video_duration"] = media.video_duration
                 result["view_count"] = getattr(media, "view_count", None)
 
-            sponsor_tags = getattr(media, "sponsor_tags", None)
-            if sponsor_tags:
-                result["sponsor_tags"] = [
-                    {
-                        "pk": str(getattr(s, "pk", "")),
-                        "username": getattr(s, "username", None),
-                        "full_name": getattr(s, "full_name", None),
-                    }
-                    for s in sponsor_tags
-                ]
-            else:
-                result["sponsor_tags"] = []
+            result["sponsor_tags"] = extract_sponsor_tags_info(media)
 
-            usertags = getattr(media, "usertags", None)
-            if usertags:
-                result["usertags"] = [
-                    getattr(ut, "username", None) or getattr(getattr(ut, "user", None), "username", None)
-                    for ut in usertags
-                ]
+            usertags = extract_usertags(media)
+            if usertags is not None:
+                result["usertags"] = usertags
 
-            location = getattr(media, "location", None)
-            if location:
-                result["location"] = getattr(location, "name", str(location))
+            location = extract_location(media)
+            if location is not None:
+                result["location"] = location
 
-            clips_meta = getattr(media, "clips_metadata", None)
-            if clips_meta and isinstance(clips_meta, dict):
-                audio_info = {"audio_type": clips_meta.get("audio_type")}
-
-                music_info = clips_meta.get("music_info")
-                if music_info and isinstance(music_info, dict):
-                    music_asset = music_info.get("music_asset_info") or music_info.get("music_canonical") or {}
-                    if isinstance(music_asset, dict):
-                        audio_info["title"] = music_asset.get("title")
-                        audio_info["artist"] = music_asset.get("display_artist") or music_asset.get("artist_name")
-
-                if not audio_info.get("title"):
-                    osi = clips_meta.get("original_sound_info")
-                    if osi and isinstance(osi, dict):
-                        audio_info["title"] = osi.get("original_audio_title")
-                        ig_artist = osi.get("ig_artist")
-                        if ig_artist and isinstance(ig_artist, dict):
-                            audio_info["artist"] = ig_artist.get("username")
-
-                if any(v for k, v in audio_info.items() if k != "audio_type"):
-                    result["audio"] = audio_info
+            audio = extract_clips_audio_from_dict(getattr(media, "clips_metadata", None))
+            if audio is not None:
+                result["audio"] = audio
 
             return {"success": True, "media": result}
         except Exception as e:

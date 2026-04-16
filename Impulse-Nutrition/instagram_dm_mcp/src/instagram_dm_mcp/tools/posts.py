@@ -4,6 +4,13 @@ from __future__ import annotations
 
 from typing import Any, Dict
 
+from ._helpers import (
+    extract_clips_audio_from_attr,
+    extract_location,
+    extract_sponsor_tags_attr,
+    extract_usertags,
+)
+
 
 def register(mcp, client) -> None:
     @mcp.tool()
@@ -190,43 +197,21 @@ def register(mcp, client) -> None:
                     media_data["video_duration"] = media.video_duration
                     media_data["view_count"] = getattr(media, "view_count", None)
 
-                sponsor_tags = getattr(media, "sponsor_tags", None)
-                if sponsor_tags:
-                    media_data["sponsor_tags"] = [
-                        {
-                            "username": getattr(s, "username", None) or getattr(getattr(s, "user", None), "username", None),
-                            "full_name": getattr(s, "full_name", None) or getattr(getattr(s, "user", None), "full_name", None),
-                        }
-                        for s in sponsor_tags
-                    ]
+                sponsor_tags = extract_sponsor_tags_attr(media)
+                if sponsor_tags is not None:
+                    media_data["sponsor_tags"] = sponsor_tags
 
-                clips_metadata = getattr(media, "clips_metadata", None)
-                if clips_metadata:
-                    music_info = {}
-                    if hasattr(clips_metadata, "music_info"):
-                        mi = clips_metadata.music_info
-                        if mi:
-                            music_canonical = getattr(mi, "music_asset_info", None) or getattr(mi, "music_canonical", None) or mi
-                            music_info["title"] = getattr(music_canonical, "title", None)
-                            music_info["artist"] = getattr(music_canonical, "display_artist", None) or getattr(music_canonical, "artist_name", None)
-                    elif hasattr(clips_metadata, "original_sound_info"):
-                        osi = clips_metadata.original_sound_info
-                        if osi:
-                            music_info["title"] = getattr(osi, "original_audio_title", None)
-                            music_info["artist"] = None
-                    if any(music_info.values()):
-                        media_data["music"] = music_info
+                music = extract_clips_audio_from_attr(getattr(media, "clips_metadata", None))
+                if music is not None:
+                    media_data["music"] = music
 
-                usertags = getattr(media, "usertags", None)
-                if usertags:
-                    media_data["usertags"] = [
-                        getattr(ut, "username", None) or getattr(getattr(ut, "user", None), "username", None)
-                        for ut in usertags
-                    ]
+                usertags = extract_usertags(media)
+                if usertags is not None:
+                    media_data["usertags"] = usertags
 
-                location = getattr(media, "location", None)
-                if location:
-                    media_data["location"] = getattr(location, "name", str(location))
+                location = extract_location(media)
+                if location is not None:
+                    media_data["location"] = location
 
                 media_results.append(media_data)
 
