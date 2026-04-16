@@ -12,7 +12,6 @@ Usage:
 
 import random
 import sys
-import logging
 import traceback
 from pathlib import Path
 from datetime import datetime
@@ -20,23 +19,11 @@ from datetime import datetime
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import SHEET_ID as SPREADSHEET_ID  # noqa: E402
 from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
+from infra.common.logging_utils import get_logger  # noqa: E402
 
-# ── Logging setup ──────────────────────────────────────────────────────────────
 LOG_DIR = Path(__file__).parent.parent.parent / "data" / "logs"
-LOG_DIR.mkdir(exist_ok=True)
-LOG_FILE = LOG_DIR / f"resolve_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.FileHandler(LOG_FILE, encoding="utf-8"),
-        logging.StreamHandler(sys.stdout),
-    ],
-)
-log = logging.getLogger("resolve")
-log.info(f"=== resolve_usernames.py démarré — log: {LOG_FILE} ===")
-# ──────────────────────────────────────────────────────────────────────────────
+log = get_logger("resolve", log_dir=LOG_DIR)
+log.info("=== resolve_usernames démarré ===")
 
 SHEET_NAME = "VeilleConcu"
 

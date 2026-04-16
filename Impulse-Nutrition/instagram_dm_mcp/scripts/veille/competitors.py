@@ -48,7 +48,6 @@ Usage :
 import argparse
 import os
 import sys
-import logging
 import traceback
 from pathlib import Path
 from datetime import datetime, timedelta
@@ -57,23 +56,11 @@ from datetime import datetime, timedelta
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import SUIVI_AMB_COLS, VEILLE_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
 from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
+from infra.common.logging_utils import get_logger  # noqa: E402
 
-# ── Logging setup ──────────────────────────────────────────────────────────────
 LOG_DIR = Path(__file__).parent.parent.parent / "data" / "logs"
-LOG_DIR.mkdir(exist_ok=True)
-LOG_FILE = LOG_DIR / f"veille_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.FileHandler(LOG_FILE, encoding="utf-8"),
-        logging.StreamHandler(sys.stdout),
-    ],
-)
-log = logging.getLogger("veille")
-log.info(f"=== veille_concurrents.py démarré — log: {LOG_FILE} ===")
-# ──────────────────────────────────────────────────────────────────────────────
+log = get_logger("veille", log_dir=LOG_DIR)
+log.info("=== veille_concurrents démarré ===")
 
 SHEET_NAME = "VeilleConcu"
 AMB_SHEET = "Suivi_Amb"
