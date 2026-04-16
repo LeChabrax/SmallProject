@@ -7,8 +7,8 @@ from instagrapi import Client
 from dotenv import load_dotenv
 
 # Add current dir and instagram_dm_mcp/src to path
-sys.path.append(str(Path(__file__).parent))
-sys.path.append(str(Path(__file__).parent.parent.parent))
+sys.path.append(str(Path(__file__).parent.parent.parent / "src"))
+sys.path.append(str(Path(__file__).parent.parent.parent.parent))
 
 from instagram_dm_mcp.compact import _compact_message, _sort_messages_newest_first
 
@@ -16,7 +16,7 @@ load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
 PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
+SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
 def main():
     if len(sys.argv) < 2:

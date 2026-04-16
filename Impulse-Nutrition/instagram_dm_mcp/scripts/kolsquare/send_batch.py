@@ -20,7 +20,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import (  # noqa: E402
     HEADER_ROW,
     SHEET_ID,
@@ -44,7 +44,7 @@ USERNAMES = [
     "alexia__bailly",
 ]
 
-TEMPLATE_PATH = Path(__file__).resolve().parent.parent / "templates" / "pitch_initial_plain.txt"
+TEMPLATE_PATH = Path(__file__).resolve().parents[3] / "templates" / "pitch_initial_plain.txt"
 ACTION_K = "premier message sent"
 DELAY_BETWEEN_SENDS = 4  # seconds
 
@@ -100,14 +100,14 @@ def main() -> int:
     # -----------------------------------------------------------------
     # 2. Instagram login (main account)
     # -----------------------------------------------------------------
-    load_dotenv(Path(__file__).parent / ".env")
+    load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
     ig_username = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
     ig_password = os.getenv("INSTAGRAM_PASSWORD")
     if not ig_password:
         raise RuntimeError("INSTAGRAM_PASSWORD missing from .env")
 
-    session_file = Path(__file__).parent / "data" / "sessions" / f"{ig_username}_session.json"
+    session_file = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{ig_username}_session.json"
 
     from instagrapi import Client  # lazy import
     cl = Client()

@@ -7,8 +7,8 @@ from google.oauth2.service_account import Credentials
 from dotenv import load_dotenv
 
 # Add repo root for common
-sys.path.append(str(Path(__file__).parent))
-sys.path.append(str(Path(__file__).parent.parent))
+sys.path.append(str(Path(__file__).parent.parent.parent / "src"))
+sys.path.append(str(Path(__file__).parent.parent.parent.parent))
 
 load_dotenv()
 

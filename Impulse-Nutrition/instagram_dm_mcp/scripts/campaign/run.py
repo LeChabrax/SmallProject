@@ -25,7 +25,7 @@ from instagrapi import Client
 from dotenv import load_dotenv
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
 from infra.common.google_sheets import SUIVI_AMB_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
 
@@ -33,13 +33,13 @@ load_dotenv()
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
 PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent / "data" / "sessions" / f"{USERNAME}_session.json"
+SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
 SHEET_NAME = "Suivi_Amb"
 
-PROGRESS_FILE = Path(__file__).parent / "data" / "progress" / "campaign_progress.json"
+PROGRESS_FILE = Path(__file__).parent.parent.parent / "data" / "progress" / "campaign_progress.json"
 PROGRESS_FILE.parent.mkdir(parents=True, exist_ok=True)
-LOG_FILE = Path(__file__).parent / "data" / "logs" / "campaign_log.txt"
+LOG_FILE = Path(__file__).parent.parent.parent / "data" / "logs" / "campaign_log.txt"
 LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 DELAY_BETWEEN_ACCOUNTS = 3  # seconds

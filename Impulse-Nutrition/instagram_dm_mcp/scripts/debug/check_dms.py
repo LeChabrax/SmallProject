@@ -7,9 +7,9 @@ from instagrapi import Client
 from dotenv import load_dotenv
 
 # Add current dir to path
-sys.path.append(str(Path(__file__).parent))
+sys.path.append(str(Path(__file__).parent.parent.parent / "src"))
 # Add repo root for common
-sys.path.append(str(Path(__file__).parent.parent.parent))
+sys.path.append(str(Path(__file__).parent.parent.parent.parent))
 
 from instagram_dm_mcp.compact import _compact_user, _compact_message, _sort_messages_newest_first, _compute_thread_signals
 
@@ -17,7 +17,7 @@ load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
 PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
+SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
 def main():
     client = Client()

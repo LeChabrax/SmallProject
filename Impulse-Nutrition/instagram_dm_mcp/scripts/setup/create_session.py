@@ -8,7 +8,7 @@ load_dotenv()
 username = os.getenv("INSTAGRAM_USERNAME")
 password = os.getenv("INSTAGRAM_PASSWORD")
 
-SESSION_DIR = Path(__file__).parent / "data" / "sessions"
+SESSION_DIR = Path(__file__).parent.parent.parent / "data" / "sessions"
 SESSION_DIR.mkdir(parents=True, exist_ok=True)
 
 # Try with web API instead of mobile API

@@ -21,14 +21,14 @@ from instagrapi import Client
 from dotenv import load_dotenv
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import SUIVI_AMB_COLS  # noqa: E402
 
 load_dotenv()
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
 PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent / "data" / "sessions" / f"{USERNAME}_session.json"
+SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
 SPREADSHEET_ID = "1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4"
 SHEET_NAME = "Suivi_Amb"

@@ -34,7 +34,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
 # `from infra.common.*` imports — infra/common — added to sys.path below.
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import (  # noqa: E402
     HEADER_ROW,
     SHEET_ID,

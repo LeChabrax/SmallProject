@@ -25,13 +25,13 @@ load_dotenv()
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
 PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent / "data" / "sessions" / f"{USERNAME}_session.json"
+SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
-QUALIFY_RESULTS_FILE = Path(__file__).parent / "qualify_results.json"
+QUALIFY_RESULTS_FILE = Path(__file__).parent.parent.parent / "qualify_results.json"
 DELAY = 2  # secondes entre comptes (lecture seule)
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
 
 
