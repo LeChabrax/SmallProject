@@ -23,6 +23,12 @@ from datetime import datetime
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import SUIVI_AMB_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
 from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
+from infra.common.logging_utils import get_logger  # noqa: E402
+
+log = get_logger(
+    "ambassadors_audit",
+    log_dir=Path(__file__).resolve().parents[2] / "data" / "logs",
+)
 
 SHEET_NAME = "Suivi_Amb"
 
@@ -214,6 +220,7 @@ def main():
     ig_client.request_timeout = 1
     our_user_id = str(ig_client.user_id)
     print(f"[{ts()}] Logged in as impulse (id={our_user_id})")
+    log.info("audit starting on %d candidates (impulse user_id=%s)", len(candidates), our_user_id)
 
     results = []
     bio_yes = 0

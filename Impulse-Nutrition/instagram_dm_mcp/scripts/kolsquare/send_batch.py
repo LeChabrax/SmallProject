@@ -24,6 +24,12 @@ from infra.common.google_sheets import (  # noqa: E402
     get_worksheet,
 )
 from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
+from infra.common.logging_utils import get_logger  # noqa: E402
+
+log = get_logger(
+    "kolsquare_send",
+    log_dir=Path(__file__).resolve().parents[2] / "data" / "logs",
+)
 
 # Reuse build_message() from the campaign runner script.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "campaign"))
@@ -100,7 +106,7 @@ def main() -> int:
     # -----------------------------------------------------------------
     cl = get_ig_client("impulse")
     cl.request_timeout = 5
-    print(f"\nLogged in as impulse")
+    log.info("Logged in as impulse for KolSquare batch (%d targets)", len(USERNAMES))
 
     # -----------------------------------------------------------------
     # 3. Send DMs
@@ -118,9 +124,11 @@ def main() -> int:
             dm = cl.direct_send(msg, [user_id])
             dm_id = getattr(dm, "id", "?")
             print(f"  ✓ sent (dm id={dm_id})")
+            log.info("sent @%s (dm_id=%s)", u, dm_id)
             sent.append((u, sheet_row))
         except Exception as e:
             print(f"  ✗ error: {e}")
+            log.exception("send failed @%s", u)
             errors[u] = str(e)
 
         if i < len(USERNAMES):
@@ -144,6 +152,7 @@ def main() -> int:
     print(f"\n{'=' * 60}")
     print(f"DONE — sent: {len(sent)}/{len(USERNAMES)}, errors: {len(errors)}")
     print(f"{'=' * 60}")
+    log.info("DONE sent=%d/%d errors=%d", len(sent), len(USERNAMES), len(errors))
     if errors:
         print("Errors:")
         for u, e in errors.items():

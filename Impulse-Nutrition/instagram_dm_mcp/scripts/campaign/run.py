@@ -25,13 +25,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
 from infra.common.google_sheets import SUIVI_AMB_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
 from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
+from infra.common.logging_utils import get_logger  # noqa: E402
 
 SHEET_NAME = "Suivi_Amb"
 
 PROGRESS_FILE = Path(__file__).parent.parent.parent / "data" / "progress" / "campaign_progress.json"
 PROGRESS_FILE.parent.mkdir(parents=True, exist_ok=True)
-LOG_FILE = Path(__file__).parent.parent.parent / "data" / "logs" / "campaign_log.txt"
-LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+_logger = get_logger("campaign", log_dir=Path(__file__).parent.parent.parent / "data" / "logs")
 
 NON_REPLY_TYPES = {
     "xma_reel_mention", "xma_story_share", "action_log",
@@ -40,11 +40,9 @@ NON_REPLY_TYPES = {
 
 
 def log(msg: str):
-    ts = datetime.now().strftime("%H:%M:%S")
-    line = f"[{ts}] {msg}"
-    print(line)
-    with open(LOG_FILE, "a", encoding="utf-8") as f:
-        f.write(line + "\n")
+    """Thin wrapper around the module logger; kept as a function so every
+    existing `log(...)` call site (dozens of them) works unchanged."""
+    _logger.info(msg)
 
 
 def qualify_account(ig_client, username, our_user_id):
