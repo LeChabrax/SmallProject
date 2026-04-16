@@ -234,10 +234,10 @@ Chaque complément est rangé dans **exactement 1 moment** :
 
 | Moment | Produits (résumé) |
 |---|---|
-| **`avant_effort`** | Preworkout, barres protéinées, maltodextrine, BCAA |
-| **`pendant_effort`** | Électrolytes (comprimés et poudre), boissons d'effort isotoniques |
-| **`apres_effort`** | Whey Isolate, Whey Recovery |
-| **`au_quotidien`** | Collagène, glycine, L-glutamine, créatine, magnésium, vitamines, multivitamines, fer, omega 3, spiruline, curcumine, pré-probiotiques, sommeil+ |
+| **`avant_effort`** | Preworkout, barres protéinées, maltodextrine |
+| **`pendant_effort`** | Électrolytes (comprimés et poudre), boissons d'effort isotoniques, BCAA |
+| **`apres_effort`** | Whey Isolate, Whey Recovery, créatine, glycine |
+| **`au_quotidien`** | Collagène, L-glutamine, magnésium, vitamines, multivitamines, fer, omega 3, spiruline, curcumine, pré-probiotiques, sommeil+ |
 
 Les **accessoires** (shaker 450/750, bidon 750ml, flasque 500ml) sont en `category: accessoire` sans moment.
 
@@ -247,7 +247,7 @@ Les **bundles** (Duo/Pack/TTS) héritent d'un moment dérivé du nom (`Duo Avant
 
 - **Ajouter un produit sur Shopify** → `python3 infra/scripts/refresh_catalog.py` → `catalog.yaml` est à jour
 - **Produit non reconnu** (pattern manquant) → ajoute le mot-clé dans `infra/scripts/catalog_taxonomy.yaml` sous le bon `moment`, re-run le script
-- **Règle métier change** (ex: créatine passe en `apres_effort`) → édite `catalog_taxonomy.yaml`, re-run
+- **Règle métier change** (ex: un produit change de moment) → édite `catalog_taxonomy.yaml`, re-run
 
 ### 4.3 Règles d'usage / dosage (collectées en SAV)
 
@@ -296,7 +296,7 @@ Utilisés en geste commercial ou base de dotation :
 | **Produits envoyés** | Draft complétée, colis expédié. Mode réactif |
 | **Formule crédit** | `(O − Q) × 20€` où O = total utilisations, Q = utilisations consommées |
 | **RAS** | Rien à signaler |
-| **Au Quotidien** | Moment de consommation = gélules santé (magnésium, vitamines, etc.) et collagène/glycine |
+| **Au Quotidien** | Moment de consommation = gélules santé (magnésium, vitamines, etc.) et collagène/L-glutamine |
 | **Avant / Pendant / Après effort** | Moments de consommation structurés, cf [catalog.yaml](./catalog.yaml) |
 | **WAX** | Outil WhatsApp qui pousse les messages dans Gorgias avec tag `WAX` |
 
