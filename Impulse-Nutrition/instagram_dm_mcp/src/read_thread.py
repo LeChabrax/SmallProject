@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 sys.path.append(str(Path(__file__).parent))
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from mcp_server import _compact_message, _sort_messages_newest_first
+from instagram_dm_mcp.server import _compact_message, _sort_messages_newest_first
 
 load_dotenv(Path(__file__).parent.parent.parent / ".env")
 

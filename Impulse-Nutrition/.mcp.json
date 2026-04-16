@@ -2,7 +2,7 @@
   "mcpServers": {
     "instagram_dms": {
       "command": "uv",
-      "args": ["run", "--directory", "./instagram_dm_mcp", "python", "src/mcp_server.py"],
+      "args": ["run", "--directory", "./instagram_dm_mcp", "python", "src/instagram_dm_mcp/server.py"],
       "env": {
         "INSTAGRAM_USERNAME": "impulse_nutrition_fr",
         "INSTAGRAM_PASSWORD": "2025Impulse!"
@@ -10,7 +10,7 @@
     },
     "instagram_veille": {
       "command": "uv",
-      "args": ["run", "--directory", "./instagram_dm_mcp", "python", "src/mcp_server.py"],
+      "args": ["run", "--directory", "./instagram_dm_mcp", "python", "src/instagram_dm_mcp/server.py"],
       "env": {
         "INSTAGRAM_USERNAME": "antman.lass",
         "INSTAGRAM_PASSWORD": "DEMANDER_A_ANTOINE"
