@@ -44,11 +44,15 @@ from infra.common.google_sheets import (  # noqa: E402
     get_worksheet,
 )
 from infra.common.instagram_client import sleep_random  # noqa: E402
+from infra.common.constants import COMPETITORS  # noqa: E402
 
-# Reuse the scoring logic already battle-tested in qualify_influencer.py
-from qualify_influencer import (  # noqa: E402
+# Reuse the scoring logic from the sibling script scripts/qualify/influencer.py.
+# That script isn't a package, so we add its dir to sys.path and import it by
+# its filename. Chantier B will drop the USERNAME/PASSWORD/SESSION_FILE imports
+# once filter.py also moves to get_ig_client("veille").
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "qualify"))
+from influencer import (  # noqa: E402
     qualify_profile,
-    COMPETITORS,
     format_followers_k,
     USERNAME as VEILLE_USERNAME,
     PASSWORD as VEILLE_PASSWORD,

@@ -44,27 +44,7 @@ SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{US
 
 DELAY = 2  # seconds between accounts
 
-# Competitor brands to check in bio
-COMPETITORS = [
-    "ta.energy", "ta energy", "nutripure", "cooknrun", "cook n run",
-    "mule bar", "mulebar", "isostar", "overstim", "maurten", "gu energy",
-    "science in sport", "sis", "baouw", "aptonia", "nduranz", "226ers",
-    "namedsport", "named sport", "myprotein", "bulk", "foodspring",
-    "prozis", "eric favre", "eafit", "olimp", "optimum nutrition",
-]
-
-# Sport keywords (French)
-SPORT_KEYWORDS = [
-    "trail", "running", "course", "marathon", "triathlon", "hyrox",
-    "crossfit", "cross fit", "musculation", "fitness", "cyclisme",
-    "vélo", "natation", "ultra", "endurance", "sport", "athlète",
-    "athlete", "coach", "entraîneur", "prépa physique", "strava",
-]
-
-NUTRITION_KEYWORDS = [
-    "nutrition", "diététique", "dieteticien", "santé", "bien-être",
-    "healthy", "recette", "alimentation",
-]
+from infra.common.constants import COMPETITORS, SPORT_KEYWORDS, NUTRITION_KEYWORDS  # noqa: E402
 
 
 def ts():
