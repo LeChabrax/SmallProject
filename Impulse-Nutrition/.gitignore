@@ -6,7 +6,30 @@ contracts/
 __pycache__/
 .claude/
 .playwright-mcp/
+.DS_Store
+
+# Virtualenvs (chaque MCP a le sien, jamais commité).
+**/.venv/
+**/venv/
+
+# Logs applicatifs (runtime, jamais commités).
+*.log
 firebase-debug.log
+
+# Caches externes.
+**/.firecrawl/
+
+# État runtime TikTok SAV (pipeline sav.py les recrée au besoin).
+tiktok_sav/state.json
+tiktok_sav/pending.json
+tiktok_sav/queue.json
+apps/tiktok_sav/data/
+
+# État runtime Instagram DM.
+apps/instagram_dm/data/
+instagram_dm_mcp/logs/
+instagram_dm_mcp/campaign_log.txt
+instagram_dm_mcp/send_promo_log.txt
 
 # Conversation archive — private DMs, never commit.
 data/conversations/
