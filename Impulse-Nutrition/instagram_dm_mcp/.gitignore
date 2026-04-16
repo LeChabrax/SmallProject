@@ -7,10 +7,5 @@ pyvenv.cfg
 .env
 .venv
 .DS_Store
-*_session.json
-conversations/
-*_progress.json
-*_log.txt
+data/
 qualify_results.json
-campaign_progress.json
-campaign_log.txt

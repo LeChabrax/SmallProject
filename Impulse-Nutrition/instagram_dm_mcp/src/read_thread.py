@@ -16,7 +16,7 @@ load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
 PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent.parent / f"{USERNAME}_session.json"
+SESSION_FILE = Path(__file__).parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
 def main():
     if len(sys.argv) < 2:

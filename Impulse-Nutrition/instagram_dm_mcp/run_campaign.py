@@ -33,12 +33,14 @@ load_dotenv()
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
 PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent / f"{USERNAME}_session.json"
+SESSION_FILE = Path(__file__).parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
 SHEET_NAME = "Suivi_Amb"
 
-PROGRESS_FILE = Path(__file__).parent / "campaign_progress.json"
-LOG_FILE = Path(__file__).parent / "campaign_log.txt"
+PROGRESS_FILE = Path(__file__).parent / "data" / "progress" / "campaign_progress.json"
+PROGRESS_FILE.parent.mkdir(parents=True, exist_ok=True)
+LOG_FILE = Path(__file__).parent / "data" / "logs" / "campaign_log.txt"
+LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 DELAY_BETWEEN_ACCOUNTS = 3  # seconds
 

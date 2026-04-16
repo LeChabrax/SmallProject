@@ -1,11 +1,15 @@
 from instagrapi import Client
 from dotenv import load_dotenv
 import os
+from pathlib import Path
 
 load_dotenv()
 
 username = os.getenv("INSTAGRAM_USERNAME")
 password = os.getenv("INSTAGRAM_PASSWORD")
+
+SESSION_DIR = Path(__file__).parent / "data" / "sessions"
+SESSION_DIR.mkdir(parents=True, exist_ok=True)
 
 # Try with web API instead of mobile API
 cl = Client()
@@ -44,7 +48,7 @@ cl.challenge_code_handler = challenge_code_handler
 print(f"Logging in as {username}...")
 try:
     cl.login(username, password)
-    cl.dump_settings(f"{username}_session.json")
+    cl.dump_settings(str(SESSION_DIR / f"{username}_session.json"))
     print("\nSession saved! MCP server should work now.")
 except Exception as e:
     print(f"\nFailed: {e}")

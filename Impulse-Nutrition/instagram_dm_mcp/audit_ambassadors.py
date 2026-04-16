@@ -31,7 +31,7 @@ load_dotenv()
 
 USERNAME = os.getenv("INSTAGRAM_USERNAME", "impulse_nutrition_fr")
 PASSWORD = os.getenv("INSTAGRAM_PASSWORD")
-SESSION_FILE = Path(__file__).parent / f"{USERNAME}_session.json"
+SESSION_FILE = Path(__file__).parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
 SPREADSHEET_ID = "1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4"
 SHEET_NAME = "Suivi_Amb"

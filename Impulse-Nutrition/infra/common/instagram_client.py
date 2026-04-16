@@ -21,13 +21,16 @@ from typing import Literal
 
 from dotenv import load_dotenv
 
-# Session files live alongside the MCP server (gitignored). The `.env` with
-# Instagram credentials historically lives there too.
-_SESSION_DIR = Path(__file__).resolve().parent.parent / "instagram_dm_mcp"
+# Session files now live under instagram_dm_mcp/data/sessions/ (gitignored via
+# the `data/` entry). The `.env` with Instagram credentials stays at the
+# instagram_dm_mcp root for backwards compat.
+_MCP_ROOT = Path(__file__).resolve().parent.parent.parent / "instagram_dm_mcp"
+_SESSION_DIR = _MCP_ROOT / "data" / "sessions"
+_SESSION_DIR.mkdir(parents=True, exist_ok=True)
 
 # Load from repo-root .env first, then fall back to the subfolder .env.
-load_dotenv(_SESSION_DIR.parent / ".env")
-load_dotenv(_SESSION_DIR / ".env", override=False)
+load_dotenv(_MCP_ROOT.parent / ".env")
+load_dotenv(_MCP_ROOT / ".env", override=False)
 
 _ACCOUNTS = {
     "impulse": {

@@ -24,7 +24,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ── Logging setup ──────────────────────────────────────────────────────────────
-LOG_DIR = Path(__file__).parent / "logs"
+LOG_DIR = Path(__file__).parent / "data" / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / f"resolve_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 
@@ -43,7 +43,7 @@ log.info(f"=== resolve_usernames.py démarré — log: {LOG_FILE} ===")
 # Veille uses a dedicated account to avoid risking the main brand account
 USERNAME = os.getenv("VEILLE_INSTAGRAM_USERNAME", "antman.lass")
 PASSWORD = os.getenv("VEILLE_INSTAGRAM_PASSWORD", "Vald2003.INSTAGRAM")
-SESSION_FILE = Path(__file__).parent / f"{USERNAME}_session.json"
+SESSION_FILE = Path(__file__).parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
 SPREADSHEET_ID = "1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4"
 SHEET_NAME = "VeilleConcu"

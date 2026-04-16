@@ -107,7 +107,7 @@ def main() -> int:
     if not ig_password:
         raise RuntimeError("INSTAGRAM_PASSWORD missing from .env")
 
-    session_file = Path(__file__).parent / f"{ig_username}_session.json"
+    session_file = Path(__file__).parent / "data" / "sessions" / f"{ig_username}_session.json"
 
     from instagrapi import Client  # lazy import
     cl = Client()
