@@ -2,18 +2,20 @@
   "mcpServers": {
     "instagram_dms": {
       "command": "uv",
-      "args": ["run", "--directory", "./instagram_dm_mcp", "python", "src/instagram_dm_mcp/server.py"],
+      "args": ["run", "--directory", "./instagram_dm_mcp", "python", "-m", "instagram_dm_mcp.server"],
       "env": {
         "INSTAGRAM_USERNAME": "impulse_nutrition_fr",
-        "INSTAGRAM_PASSWORD": "2025Impulse!"
+        "INSTAGRAM_PASSWORD": "2025Impulse!",
+        "PYTHONPATH": "src"
       }
     },
     "instagram_veille": {
       "command": "uv",
-      "args": ["run", "--directory", "./instagram_dm_mcp", "python", "src/instagram_dm_mcp/server.py"],
+      "args": ["run", "--directory", "./instagram_dm_mcp", "python", "-m", "instagram_dm_mcp.server"],
       "env": {
         "INSTAGRAM_USERNAME": "antman.lass",
-        "INSTAGRAM_PASSWORD": "DEMANDER_A_ANTOINE"
+        "INSTAGRAM_PASSWORD": "DEMANDER_A_ANTOINE",
+        "PYTHONPATH": "src"
       }
     },
     "shopify_orders": {

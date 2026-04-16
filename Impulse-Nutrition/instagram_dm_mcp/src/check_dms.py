@@ -11,7 +11,7 @@ sys.path.append(str(Path(__file__).parent))
 # Add repo root for common
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from instagram_dm_mcp.server import _compact_user, _compact_message, _sort_messages_newest_first, _compute_thread_signals
+from instagram_dm_mcp.compact import _compact_user, _compact_message, _sort_messages_newest_first, _compute_thread_signals
 
 load_dotenv(Path(__file__).parent.parent.parent / ".env")
 
