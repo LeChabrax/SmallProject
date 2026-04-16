@@ -170,11 +170,25 @@ def list_chats(
         t = thread if isinstance(thread, dict) else thread.dict()
         users = t.get("users", [])
         user_summaries = [_compact_user(u) for u in users]
-        last_msg = t.get("messages", [None])[-1] if t.get("messages") else None
-        if last_msg and compact:
-            last_msg = _compact_message(last_msg if isinstance(last_msg, dict) else last_msg)
+
+        # Fetch the actual last message via dedicated API call.
+        # thread.messages only contains the first N messages (Instagrapi default,
+        # typically 10), so using [-1] on it returns an old opening message, not
+        # the real last message of the thread. Verified 2026-04-15 on 4 threads
+        # where last_activity_at was today but thread.messages[-1] was months old.
+        thread_id = t.get("id")
+        last_msg = None
+        try:
+            messages = client.direct_messages(thread_id, amount=1)
+            if messages:
+                msg = messages[0]
+                last_msg_dict = msg.dict() if hasattr(msg, 'dict') else (msg if isinstance(msg, dict) else {})
+                last_msg = _compact_message(last_msg_dict) if compact else last_msg_dict
+        except Exception as e:
+            logger.warning("thread_summary: failed to fetch last message for thread %s: %s", thread_id, e)
+
         return {
-            "thread_id": t.get("id"),
+            "thread_id": thread_id,
             "thread_title": t.get("thread_title"),
             "users": user_summaries,
             "last_activity_at": t.get("last_activity_at"),
