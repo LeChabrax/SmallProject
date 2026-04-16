@@ -59,7 +59,7 @@ from dotenv import load_dotenv
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
-from infra.common.google_sheets import SUIVI_AMB_COLS, VEILLE_COLS  # noqa: E402
+from infra.common.google_sheets import SUIVI_AMB_COLS, VEILLE_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
 
 load_dotenv()
 
@@ -85,7 +85,6 @@ VEILLE_USERNAME = os.getenv("VEILLE_INSTAGRAM_USERNAME", "antman.lass")
 VEILLE_PASSWORD = os.getenv("VEILLE_INSTAGRAM_PASSWORD", "Vald2003.INSTAGRAM")
 SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{VEILLE_USERNAME}_session.json"
 
-SPREADSHEET_ID = "1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4"
 SHEET_NAME = "VeilleConcu"
 AMB_SHEET = "Suivi_Amb"
 

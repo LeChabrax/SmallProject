@@ -23,6 +23,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from infra.common.google_sheets import SHEET_ID as SPREADSHEET_ID  # noqa: E402
+
 # ── Logging setup ──────────────────────────────────────────────────────────────
 LOG_DIR = Path(__file__).parent.parent.parent / "data" / "logs"
 LOG_DIR.mkdir(exist_ok=True)
@@ -45,7 +48,6 @@ USERNAME = os.getenv("VEILLE_INSTAGRAM_USERNAME", "antman.lass")
 PASSWORD = os.getenv("VEILLE_INSTAGRAM_PASSWORD", "Vald2003.INSTAGRAM")
 SESSION_FILE = Path(__file__).parent.parent.parent / "data" / "sessions" / f"{USERNAME}_session.json"
 
-SPREADSHEET_ID = "1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4"
 SHEET_NAME = "VeilleConcu"
 
 MAX_CONSECUTIVE_FAILURES = 3  # Stop after N consecutive failures (rate limit detected)

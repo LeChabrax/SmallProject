@@ -17,8 +17,11 @@ Usage:
 import argparse
 import os
 import sys
+from pathlib import Path
 
-SPREADSHEET_ID = "1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4"
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+from infra.common.google_sheets import SHEET_ID as SPREADSHEET_ID  # noqa: E402
+
 SHEET_NAME = "Analyses"
 DATA_SHEET = "Suivi_Amb"
 
