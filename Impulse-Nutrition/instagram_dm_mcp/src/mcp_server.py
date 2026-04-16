@@ -3,6 +3,8 @@ from instagrapi import Client
 import argparse
 from typing import Optional, List, Dict, Any
 import os
+import re
+from datetime import datetime, timezone
 from dotenv import load_dotenv
 import logging
 from pathlib import Path
@@ -44,6 +46,15 @@ def _compact_message(msg: dict) -> dict:
     return compact
 
 
+def _sort_messages_newest_first(messages: list) -> list:
+    """Sort message dicts by timestamp descending (newest first).
+
+    Works with both raw datetime objects and serialised strings — anything
+    that supports ``>`` comparison via ``sorted``.
+    """
+    return sorted(messages, key=lambda m: m.get("timestamp") or "", reverse=True)
+
+
 def _compact_user(user: dict) -> dict:
     """Strip a user dict to username, full_name, pk."""
     return {
@@ -51,6 +62,126 @@ def _compact_user(user: dict) -> dict:
         "full_name": user.get("full_name"),
         "pk": user.get("pk"),
     }
+
+
+# ── Smart scan helpers ────────────────────────────────────────
+# Pre-compute fields that the /instagram-dm skill always needs,
+# so Claude reads a flag instead of interpreting raw messages.
+
+_WELCOME_CODE_RE = re.compile(
+    r'\b([A-Z]{2,}25)\b'           # ACHAB25, PGAU25, any {NOM}25
+    r'|-25\s*%'                     # "-25%"
+    r'|code\s+(?:perso|welcome|exclusif)',  # "code perso", "code welcome"
+    re.IGNORECASE,
+)
+
+
+def _parse_timestamp(ts) -> datetime | None:
+    """Best-effort parse of an instagrapi timestamp (datetime or str)."""
+    if isinstance(ts, datetime):
+        return ts if ts.tzinfo else ts.replace(tzinfo=timezone.utc)
+    if isinstance(ts, str):
+        for fmt in ("%Y-%m-%dT%H:%M:%S.%f%z", "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%d %H:%M:%S"):
+            try:
+                return datetime.strptime(ts, fmt)
+            except ValueError:
+                continue
+    return None
+
+
+def _scan_messages(messages: list[dict]) -> dict:
+    """Scan a list of message dicts and return pre-computed signals.
+
+    Expects messages sorted newest-first (index 0 = most recent).
+    """
+    scan: dict = {
+        "welcome_code_found": None,
+        "welcome_code_date": None,
+        "welcome_code_sender": None,
+        "has_voice_media": False,
+        "has_raven_media": False,
+        "voice_media_count": 0,
+        "raven_media_count": 0,
+        "last_msg_is_from_viewer": None,
+        "last_msg_date": None,
+        "last_impulse_msg_date": None,
+        "days_since_last_impulse_msg": None,
+        "impulse_messages_count": 0,
+        "prospect_messages_count": 0,
+        "total_messages": len(messages),
+    }
+
+    now = datetime.now(timezone.utc)
+
+    for i, msg in enumerate(messages):
+        is_viewer = msg.get("is_sent_by_viewer")
+        item_type = msg.get("item_type", "text")
+        text = msg.get("text") or ""
+        ts = _parse_timestamp(msg.get("timestamp"))
+
+        # First message = most recent (newest-first ordering)
+        if i == 0:
+            scan["last_msg_is_from_viewer"] = bool(is_viewer)
+            scan["last_msg_date"] = str(msg.get("timestamp", ""))
+
+        # Count by sender
+        if is_viewer:
+            scan["impulse_messages_count"] += 1
+            if ts and scan["last_impulse_msg_date"] is None:
+                scan["last_impulse_msg_date"] = str(msg.get("timestamp", ""))
+                delta = now - ts
+                scan["days_since_last_impulse_msg"] = delta.days
+        else:
+            scan["prospect_messages_count"] += 1
+
+        # Voice / raven detection
+        if item_type == "voice_media":
+            scan["has_voice_media"] = True
+            scan["voice_media_count"] += 1
+        elif item_type == "raven_media":
+            scan["has_raven_media"] = True
+            scan["raven_media_count"] += 1
+
+        # Welcome code grep (scan ALL messages, oldest welcome code wins)
+        if text and _WELCOME_CODE_RE.search(text):
+            # Extract the actual code
+            code_match = re.search(r'\b([A-Z]{2,}25)\b', text)
+            if code_match:
+                scan["welcome_code_found"] = code_match.group(1)
+                scan["welcome_code_date"] = str(msg.get("timestamp", ""))
+                scan["welcome_code_sender"] = "impulse" if is_viewer else "prospect"
+
+    # Derived: needs_action = prospect sent last AND we haven't replied
+    scan["needs_action"] = (
+        scan["last_msg_is_from_viewer"] is False
+    )
+
+    return scan
+
+
+def _compute_thread_signals(last_msg: dict | None, last_activity_at) -> dict:
+    """Compute thread-level signals from the last message for list_chats summary."""
+    signals: dict = {
+        "last_msg_from_us": None,
+        "last_msg_from_us_date": None,
+        "days_since_last_impulse_msg": None,
+        "needs_action": None,
+    }
+    if not last_msg:
+        return signals
+
+    is_viewer = last_msg.get("is_sent_by_viewer")
+    signals["last_msg_from_us"] = bool(is_viewer)
+    signals["needs_action"] = not bool(is_viewer)
+
+    ts = _parse_timestamp(last_msg.get("timestamp"))
+    if ts:
+        signals["last_msg_from_us_date"] = ts.strftime("%d/%m/%Y")
+        delta = datetime.now(timezone.utc) - ts
+        if is_viewer:
+            signals["days_since_last_impulse_msg"] = delta.days
+
+    return signals
 
 
 mcp = FastMCP(
@@ -174,16 +305,20 @@ def list_chats(
         # Fetch the actual last message via dedicated API call.
         # thread.messages only contains the first N messages (Instagrapi default,
         # typically 10), so using [-1] on it returns an old opening message, not
-        # the real last message of the thread. Verified 2026-04-15 on 4 threads
-        # where last_activity_at was today but thread.messages[-1] was months old.
+        # the real last message of the thread.
+        # We fetch 3 messages and sort by timestamp desc as a defensive measure
+        # against inconsistent ordering from the Instagrapi API.
         thread_id = t.get("id")
         last_msg = None
         try:
-            messages = client.direct_messages(thread_id, amount=1)
+            messages = client.direct_messages(thread_id, amount=3)
             if messages:
-                msg = messages[0]
-                last_msg_dict = msg.dict() if hasattr(msg, 'dict') else (msg if isinstance(msg, dict) else {})
-                last_msg = _compact_message(last_msg_dict) if compact else last_msg_dict
+                msg_dicts = [
+                    m.dict() if hasattr(m, 'dict') else (m if isinstance(m, dict) else {})
+                    for m in messages
+                ]
+                msg_dicts = _sort_messages_newest_first(msg_dicts)
+                last_msg = _compact_message(msg_dicts[0]) if compact else msg_dicts[0]
         except Exception as e:
             logger.warning("thread_summary: failed to fetch last message for thread %s: %s", thread_id, e)
 
@@ -192,7 +327,8 @@ def list_chats(
             "thread_title": t.get("thread_title"),
             "users": user_summaries,
             "last_activity_at": t.get("last_activity_at"),
-            "last_message": last_msg
+            "last_message": last_msg,
+            "computed": _compute_thread_signals(last_msg, t.get("last_activity_at")),
         }
 
     def filter_fields(thread, fields):
@@ -208,12 +344,14 @@ def list_chats(
             for t in threads:
                 td = t.dict() if hasattr(t, 'dict') else t
                 td["users"] = [_compact_user(u) for u in td.get("users", [])]
-                td["messages"] = [_compact_message(m) for m in td.get("messages", [])]
+                td["messages"] = _sort_messages_newest_first(
+                    [_compact_message(m) for m in td.get("messages", [])]
+                )
                 # Remove heavy fields
                 for key in ["inviter", "items", "last_permanent_item", "direct_story"]:
                     td.pop(key, None)
                 result.append(td)
-            return {"success": True, "threads": result}
+            return {"success": True, "threads": result, "ordering": "newest_first"}
         elif fields:
             return {"success": True, "threads": [filter_fields(t, fields) for t in threads]}
         else:
@@ -265,7 +403,14 @@ def list_messages(thread_id: str, amount: int = 20, compact: bool = True) -> Dic
                 result_msgs.append(_compact_message(msg))
             else:
                 result_msgs.append(msg)
-        return {"success": True, "messages": result_msgs}
+        result_msgs = _sort_messages_newest_first(result_msgs)
+        scan = _scan_messages(result_msgs)
+        return {
+            "success": True,
+            "messages": result_msgs,
+            "ordering": "newest_first",
+            "scan": scan,
+        }
     except Exception as e:
         return {"success": False, "message": str(e)}
 
@@ -352,10 +497,12 @@ def get_thread_by_participants(user_ids: List[int]) -> Dict[str, Any]:
         td = thread.dict() if hasattr(thread, 'dict') else (thread if isinstance(thread, dict) else str(thread))
         if isinstance(td, dict):
             td["users"] = [_compact_user(u) for u in td.get("users", [])]
-            td["messages"] = [_compact_message(m) for m in td.get("messages", [])]
+            td["messages"] = _sort_messages_newest_first(
+                [_compact_message(m) for m in td.get("messages", [])]
+            )
             for key in ["inviter", "items", "last_permanent_item", "direct_story"]:
                 td.pop(key, None)
-        return {"success": True, "thread": td}
+        return {"success": True, "thread": td, "ordering": "newest_first"}
     except Exception as e:
         return {"success": False, "message": str(e)}
 
@@ -378,10 +525,14 @@ def get_thread_details(thread_id: str, amount: int = 20, compact: bool = True) -
         td = thread.dict() if hasattr(thread, 'dict') else (thread if isinstance(thread, dict) else str(thread))
         if compact and isinstance(td, dict):
             td["users"] = [_compact_user(u) for u in td.get("users", [])]
-            td["messages"] = [_compact_message(m) for m in td.get("messages", [])]
+            td["messages"] = _sort_messages_newest_first(
+                [_compact_message(m) for m in td.get("messages", [])]
+            )
             for key in ["inviter", "items", "last_permanent_item", "direct_story"]:
                 td.pop(key, None)
-        return {"success": True, "thread": td}
+        elif isinstance(td, dict):
+            td["messages"] = _sort_messages_newest_first(td.get("messages", []))
+        return {"success": True, "thread": td, "ordering": "newest_first"}
     except Exception as e:
         return {"success": False, "message": str(e)}
 

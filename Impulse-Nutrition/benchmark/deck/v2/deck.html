@@ -1,0 +1,3008 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Benchmark abonnement · Impulse Nutrition · Havea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ═════════════════════════════════════════════════════════════════
+     DESIGN SYSTEM HAVEA — palette mint, Source Sans 3, 16:9 1920×1080
+     ═════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --mint: #279989;
+    --mint-dark: #1F7A6D;
+    --mint-soft: #7FCFB4;
+    --teal-dark: #014F4F;
+    --teal-deep: #005555;
+    --beige: #FED992;
+    --salmon: #F08276;
+    --ink: #0A0F1E;
+    --ink-soft: #1E2433;
+    --grey-900: #2A3140;
+    --grey-700: #4A525E;
+    --grey-500: #6B6558;
+    --grey-300: #C7BFA9;
+    --grey-200: #E2DDCC;
+    --grey-100: #F5F1E8;
+    --cream: #FAF7EF;
+    --white: #FFFFFF;
+    --black: #000000;
+
+    --font-display: 'Source Sans 3', -apple-system, sans-serif;
+    --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: #1a1a1a;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Format slide 16:9 — 1920×1080 à l'écran */
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    background: white;
+    margin: 40px auto;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.4);
+    page-break-after: always;
+  }
+  .slide:last-child { page-break-after: auto; }
+
+  @media print {
+    @page { size: 1920px 1080px; margin: 0; }
+    html, body { background: white; }
+    .slide { margin: 0; box-shadow: none; }
+  }
+
+  /* ═════════════════════════════════════════════════════════════════
+     SLIDE 01 — COVER (photo hero + overlay + carré semi-transparent)
+     ═════════════════════════════════════════════════════════════════ */
+
+  .cover {
+    background: #0a0f1e;
+  }
+  .cover__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .cover__photo-darken {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(10,15,30,0.35) 0%,
+      rgba(10,15,30,0.15) 40%,
+      rgba(10,15,30,0.25) 100%
+    );
+  }
+  .cover__panel {
+    position: absolute;
+    left: 58%;
+    top: 24%;
+    width: 32%;
+    height: 56%;
+    background: rgba(10, 15, 30, 0.78);
+    backdrop-filter: blur(2px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 60px;
+  }
+  .cover__leaf {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 120px;
+    object-fit: contain;
+  }
+  .cover__title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 78px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 40px;
+  }
+  .cover__rule {
+    width: 60%;
+    height: 1px;
+    background: rgba(255,255,255,0.6);
+    margin: 40px auto 30px;
+  }
+  .cover__subtitle {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 26px;
+    color: var(--white);
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+  .cover__tag {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: 0.08em;
+  }
+  .cover__confidential {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
+    font-style: italic;
+    letter-spacing: 0.03em;
+  }
+  .cover__havea {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 260px;
+    height: 120px;
+    background: var(--mint);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .cover__havea-word {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 48px;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .cover__havea-sub {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--white);
+    letter-spacing: 0.35em;
+    margin-top: 6px;
+  }
+
+  /* ═════════════════════════════════════════════════════════════════
+     LAYOUT COMMUN SLIDES DATA (nav + titre + body + footer)
+     ═════════════════════════════════════════════════════════════════ */
+
+  .nav {
+    display: flex;
+    gap: 56px;
+    align-items: center;
+    margin-bottom: 36px;
+    line-height: 1.4;
+    flex-shrink: 0;
+  }
+  .nav__item {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--grey-500);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    padding-bottom: 8px;
+  }
+  .nav__item--active {
+    color: var(--mint);
+    font-weight: 700;
+    position: relative;
+  }
+  .nav__item--active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--mint);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1.28;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 16px;
+    max-width: 1600px;
+    flex-shrink: 0;
+  }
+  .title__rule {
+    width: 64px;
+    height: 4px;
+    background: var(--mint);
+    margin-bottom: 36px;
+    flex-shrink: 0;
+  }
+
+  .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .slide--page {
+    padding: 70px 90px 90px;
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    border-top: 5px solid var(--mint);
+    background: var(--cream);
+  }
+  .footer__confidential {
+    font-size: 13px;
+    color: var(--grey-500);
+    font-style: italic;
+  }
+  .footer__pagination {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--grey-500);
+    letter-spacing: 0.08em;
+  }
+  .footer__pagination strong {
+    color: var(--mint);
+  }
+
+  /* ═════════════════════════════════════════════════════════════════
+     SLIDE 02 — EXECUTIVE SUMMARY (3 colonnes narratives)
+     ═════════════════════════════════════════════════════════════════ */
+
+  .exec__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 20px;
+    flex: 1;
+  }
+  .exec__col {
+    padding: 32px 28px;
+    background: white;
+    position: relative;
+  }
+  .exec__col::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--mint);
+  }
+  .exec__col--alert::before {
+    background: var(--salmon);
+  }
+  .exec__col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 24px;
+  }
+  .exec__col--alert .exec__col-title {
+    color: var(--salmon);
+  }
+  .exec__col-items {
+    list-style: none;
+    padding: 0;
+  }
+  .exec__col-items li {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--grey-200);
+  }
+  .exec__col-items li:last-child {
+    border-bottom: none;
+  }
+  .exec__col-items li strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .exec__col-items li em {
+    display: block;
+    font-size: 13px;
+    color: var(--grey-500);
+    font-style: normal;
+    margin-top: 2px;
+  }
+  .exec__livraison {
+    margin-top: 28px;
+    padding: 16px 24px;
+    background: white;
+    font-size: 14px;
+    color: var(--grey-700);
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  .exec__livraison-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey-500);
+    white-space: nowrap;
+  }
+  .exec__livraison-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .exec__livraison-value strong {
+    font-weight: 700;
+    color: var(--mint-dark);
+  }
+
+  /* Keep old baseline classes for backward compat */
+  .baseline__grid {
+    display: grid;
+    grid-template-columns: 820px 1fr;
+    gap: 60px;
+    margin-top: 10px;
+    flex-shrink: 0;
+  }
+  .baseline__photo {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    object-position: center;
+  }
+  .baseline__photo-caption {
+    font-size: 14px;
+    color: var(--grey-500);
+    font-style: italic;
+    margin-top: 14px;
+    letter-spacing: 0.02em;
+  }
+  .baseline__kpis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .kpi {
+    padding: 0;
+    background: white;
+    box-shadow: 0 2px 12px rgba(10,15,30,0.06);
+    overflow: hidden;
+    position: relative;
+  }
+  .kpi__bar {
+    height: 4px;
+    background: var(--mint);
+    width: 100%;
+  }
+  .kpi--alert .kpi__bar {
+    background: var(--salmon);
+  }
+  .kpi__inner {
+    padding: 22px 26px 20px;
+  }
+  .kpi__label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--grey-500);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .kpi__value {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    margin-bottom: 8px;
+  }
+  .kpi--alert .kpi__value {
+    color: var(--salmon);
+  }
+  .kpi__value span.unit {
+    font-size: 20px;
+    color: var(--grey-500);
+    margin-left: 4px;
+  }
+  .kpi__detail {
+    font-size: 12px;
+    color: var(--grey-700);
+    line-height: 1.45;
+  }
+  .baseline__context {
+    margin-top: 30px;
+    padding: 24px 32px;
+    background: var(--ink);
+    color: var(--cream);
+    border-left: 5px solid var(--mint);
+    font-size: 15px;
+    line-height: 1.55;
+    flex-shrink: 0;
+  }
+  .baseline__context strong { color: var(--mint-soft); font-weight: 600; }
+
+  /* ═════════════════════════════════════════════════════════════════
+     SLIDE 03 — MÉTHODOLOGIE
+     ═════════════════════════════════════════════════════════════════ */
+
+  .methodo__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    margin-top: 10px;
+  }
+  .section-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--mint);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .brand-card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--grey-200);
+    align-items: baseline;
+  }
+  .brand-card:last-child { border-bottom: none; }
+  .brand-card__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ink);
+  }
+  .brand-card__role {
+    font-size: 15px;
+    color: var(--grey-700);
+    line-height: 1.4;
+  }
+  .axes {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 50px;
+  }
+  .axis {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 22px;
+    align-items: baseline;
+  }
+  .axis__num {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 40px;
+    color: var(--mint);
+    line-height: 1;
+  }
+  .axis__body {
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .axis__body strong { font-weight: 700; color: var(--ink); }
+  .axis__body em { font-style: normal; color: var(--grey-700); font-size: 14px; display: block; margin-top: 4px; }
+
+  .score-legend {
+    padding: 24px 28px;
+    background: var(--grey-100);
+    border-left: 4px solid var(--mint);
+  }
+  .score-legend__title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--mint);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .score-legend__body {
+    font-size: 14px;
+    color: var(--grey-700);
+    line-height: 1.5;
+  }
+
+  /* ═════════════════════════════════════════════════════════════════
+     SLIDES 04-11 — BRAND SLIDES (1 par marque, 8 au total)
+     ═════════════════════════════════════════════════════════════════ */
+
+  .brand__title-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+  }
+  .brand__title-name {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 42px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .brand__title-verdict {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 22px;
+    color: var(--grey-700);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+    margin-bottom: 8px;
+  }
+  .brand__title-verdict strong {
+    color: var(--mint);
+    font-weight: 600;
+  }
+  .brand__global-badge {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 8px 20px;
+    background: var(--mint);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .brand__global-badge .unit { font-size: 14px; opacity: 0.85; }
+  .brand__global-badge--no-sub { background: var(--grey-900); font-size: 14px; padding: 10px 18px; letter-spacing: 0.1em; }
+
+  .brand__grid {
+    display: grid;
+    grid-template-columns: 0.55fr 1fr;
+    gap: 24px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .brand__screen-wrap {
+    position: relative;
+    background: var(--ink);
+    overflow: hidden;
+    height: 100%;
+    max-height: 720px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .brand__screen {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .brand__screen-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 12px 20px;
+    background: rgba(10, 15, 30, 0.92);
+    color: var(--white);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 5;
+  }
+  .brand__screen-caption-url { color: var(--mint-soft); font-weight: 600; }
+  .brand__screen-caption-type { color: rgba(255,255,255,0.7); font-style: italic; }
+
+  /* Annotations désactivées en V3 — trop fragiles avec screenshots de tailles variables.
+     Les insights UX sont déjà dans la fiche à droite. */
+  .annot { display: none; }
+
+  .brand__right {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    height: 100%;
+    max-height: 720px;
+    overflow: hidden;
+  }
+  .brand__hero-stat {
+    padding: 22px 26px;
+    background: var(--ink);
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 5px solid var(--mint);
+    flex-shrink: 0;
+  }
+  .brand__hero-stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--mint-soft);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .brand__hero-stat-value {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 38px;
+    color: var(--white);
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+    text-align: right;
+    max-width: 60%;
+  }
+
+  /* Brand data — 2 panels side by side with visual hierarchy */
+  .brand__data {
+    width: 100%;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 0 20px;
+    overflow: hidden;
+  }
+  .brand__panel {
+    padding: 0;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .brand__panel:first-child {
+    border-right: 1px solid var(--grey-200);
+    padding-right: 20px;
+  }
+  .brand__panel-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--mint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--mint);
+  }
+  .brand__row {
+    display: flex;
+    align-items: first baseline;
+    padding: 5px 0;
+    border-bottom: 1px dotted var(--grey-200);
+    gap: 8px;
+  }
+  .brand__row:last-child { border-bottom: none; }
+  .brand__lbl {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--grey-500);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    width: 120px;
+    min-width: 120px;
+    line-height: 1.4;
+  }
+  .brand__val {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.45;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brand__val--warn { color: var(--salmon); font-weight: 700; }
+  .brand__val--muted { color: var(--grey-500); font-weight: 400; font-style: italic; }
+  /* Tags for short values */
+  .brand__tag {
+    display: inline-block;
+    padding: 1px 7px;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 2px;
+    line-height: 1.5;
+    vertical-align: baseline;
+  }
+  .brand__tag--yes { background: rgba(39,153,137,0.12); color: var(--mint-dark); }
+  .brand__tag--no { background: rgba(240,130,118,0.12); color: #A0453A; }
+  .brand__tag--freq {
+    background: var(--grey-100);
+    color: var(--ink);
+    margin-right: 3px;
+    margin-bottom: 2px;
+  }
+  /* Keep old classes for compat */
+  .brand__kpis { display: none; }
+  .brand__table { display: none; }
+
+  .brand__feedback {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .brand__feedback-item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 12px;
+    padding: 12px 16px;
+    background: white;
+    align-items: start;
+  }
+  .brand__feedback-item--plus { border-left: 4px solid var(--mint); }
+  .brand__feedback-item--minus { border-left: 4px solid var(--salmon); }
+  .brand__feedback-icon {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .brand__feedback-item--plus .brand__feedback-icon { color: var(--mint); }
+  .brand__feedback-item--minus .brand__feedback-icon { color: var(--salmon); }
+  .brand__feedback-text {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+
+  .brand__scores {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: auto;
+    flex-shrink: 0;
+  }
+  .brand__score {
+    padding: 12px 14px;
+    background: var(--grey-100);
+    text-align: center;
+  }
+  .brand__score-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--grey-700);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .brand__score-value {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.1;
+  }
+  .brand__score-value .unit { font-size: 12px; color: var(--grey-500); }
+  .brand__score--hi .brand__score-value { color: var(--mint); }
+  .brand__score--mid .brand__score-value { color: var(--teal-dark); }
+  .brand__score--lo .brand__score-value { color: var(--salmon); }
+  .brand__score--na .brand__score-value { color: var(--grey-500); }
+
+  .brand--no-sub .brand__hero-stat {
+    background: var(--grey-900);
+    border-left-color: var(--beige);
+  }
+  .brand--no-sub .brand__hero-stat-label { color: var(--beige); }
+
+  /* ═════════════════════════════════════════════════════════════════
+     SLIDE 12 — SYNTHÈSE (tableau comparatif + quadrant)
+     ═════════════════════════════════════════════════════════════════ */
+
+  .synth__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 50px;
+    flex-shrink: 0;
+  }
+  .synth__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .synth__table th {
+    text-align: left;
+    padding: 12px 10px 12px 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--grey-700);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--ink);
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+  .synth__table td {
+    padding: 11px 10px 11px 0;
+    border-bottom: 1px solid var(--grey-200);
+    vertical-align: middle;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .synth__table td.name { font-weight: 600; color: var(--ink); }
+  .synth__table td.num {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .synth__table td.hi { color: var(--mint); font-weight: 700; }
+  .synth__table td.lo { color: var(--salmon); }
+  .synth__table td.global {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--mint);
+    font-family: var(--font-display);
+  }
+  .synth__table tr.top-row td {
+    background: rgba(39, 153, 137, 0.06);
+  }
+  .synth__table td.yes { color: var(--mint); font-weight: 700; }
+  .synth__table td.no { color: var(--salmon); font-weight: 700; }
+  .synth__table td.partial { color: var(--beige); font-weight: 700; }
+
+  .synth__quadrant {
+    display: flex;
+    flex-direction: column;
+  }
+  .synth__quadrant-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--mint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .quadrant-svg {
+    width: 100%;
+    height: auto;
+  }
+  .synth__insight {
+    margin-top: 20px;
+    padding: 20px 24px;
+    background: var(--ink);
+    color: var(--cream);
+    border-left: 5px solid var(--mint);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .synth__insight strong { color: var(--mint-soft); }
+
+  /* ═════════════════════════════════════════════════════════════════
+     SLIDE 13 — RENTABILITÉ + HEATMAP PR
+     ═════════════════════════════════════════════════════════════════ */
+
+  .profit__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .heatmap-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--mint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .heatmap {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 5px;
+    padding: 16px;
+    background: var(--ink);
+    border-left: 4px solid var(--mint);
+  }
+  .heatmap__cell {
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 4px;
+    font-size: 9px;
+    text-align: center;
+    color: white;
+    line-height: 1.15;
+    position: relative;
+    overflow: hidden;
+  }
+  .heatmap__cell-title {
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 2px;
+    line-height: 1.3;
+  }
+  .heatmap__cell-score {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .heatmap__cell--go { background: var(--mint); }
+  .heatmap__cell--maybe { background: var(--beige); color: var(--ink); }
+  .heatmap__cell--nogo { background: var(--salmon); }
+
+  .heatmap__legend {
+    display: flex;
+    gap: 18px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--grey-700);
+  }
+  .heatmap__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .heatmap__legend-swatch {
+    width: 14px;
+    height: 14px;
+  }
+  .heatmap__legend-swatch--go { background: var(--mint); }
+  .heatmap__legend-swatch--maybe { background: var(--beige); }
+  .heatmap__legend-swatch--nogo { background: var(--salmon); }
+
+  /* ─── RENTABILITE TABLE — matrice livraison x remise ─── */
+  .rentab__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  .rentab__table thead th {
+    padding: 6px 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--ink);
+    border-bottom: 2px solid var(--ink);
+  }
+  .rentab__table thead th.group-pr { background: #E8D5B0; }
+  .rentab__table thead th.group-dom { background: var(--grey-100); }
+  .rentab__table thead th.group-exp { background: var(--grey-900); color: white; }
+  .rentab__table thead th.sub {
+    font-size: 9px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--grey-300);
+    padding: 3px 4px;
+  }
+  .rentab__table tbody td {
+    padding: 4px 6px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 11px;
+    border-bottom: 1px solid var(--grey-100);
+  }
+  .rentab__table tbody td.product-name {
+    text-align: left;
+    font-weight: 500;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+    color: var(--ink);
+  }
+  .rentab__legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--grey-700);
+    align-items: center;
+  }
+  .rentab__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .rentab__legend-sw {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+  }
+
+  /* ─── HEATMAP V2 — full-slide grouped by category ─── */
+  .hm2 {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .hm2__row {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .hm2__row-label {
+    width: 120px;
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 0;
+  }
+  .hm2__row-cat {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .hm2__row-count {
+    font-size: 11px;
+    color: var(--grey-500);
+    margin-top: 2px;
+  }
+  .hm2__row-cells {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    flex: 1;
+  }
+  .hm2__cell {
+    flex: 0 0 calc((100% - 8 * 3px) / 9);
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 4px 7px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .hm2__cell-title {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.3;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .hm2__cell-row {
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    margin-top: 1px;
+  }
+  .hm2__cell-score {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .hm2__cell-price {
+    font-size: 10px;
+    opacity: 0.85;
+    line-height: 1.3;
+  }
+  .hm2__cell-margin {
+    font-size: 10px;
+    opacity: 0.7;
+    line-height: 1.3;
+  }
+  .hm2__cell--go { background: var(--mint); }
+  .hm2__cell--maybe { background: var(--beige); color: var(--ink); }
+  .hm2__cell--nogo { background: var(--salmon); }
+
+  .hm2__bottom {
+    margin-top: 16px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .hm2__legend {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--grey-700);
+    flex-shrink: 0;
+  }
+  .hm2__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hm2__legend-sw {
+    width: 12px;
+    height: 12px;
+  }
+  .hm2__legend-sw--go { background: var(--mint); }
+  .hm2__legend-sw--maybe { background: var(--beige); }
+  .hm2__legend-sw--nogo { background: var(--salmon); }
+
+  .hm2__insight {
+    flex: 1;
+    padding: 14px 20px;
+    background: var(--ink);
+    color: var(--cream);
+    border-left: 4px solid var(--mint);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* ─── P&L grid — 3 cards side by side ─── */
+  .pnl__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .pnl-card--full {
+    background: white;
+    padding: 24px 28px;
+    border-left: 5px solid var(--mint);
+  }
+  .pnl-card__line--total {
+    border-bottom: none;
+    padding-top: 8px;
+    margin-top: 4px;
+    border-top: 2px solid var(--mint);
+  }
+  .pnl-card__verdict {
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 12px;
+    line-height: 1.3;
+  }
+  .pnl-card__verdict--ok {
+    background: rgba(39,153,137,0.12);
+    color: var(--mint-dark);
+  }
+  .pnl-card__verdict--warn {
+    background: rgba(254,217,146,0.25);
+    color: #8B6914;
+  }
+
+  .profit__right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+  }
+  .pnl-card {
+    background: white;
+    padding: 14px 18px;
+    border-left: 4px solid var(--mint);
+  }
+  .pnl-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .pnl-card__title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--mint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .pnl-card__total {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--mint);
+    line-height: 1.1;
+  }
+  .pnl-card__total .unit { font-size: 11px; color: var(--grey-500); }
+  .pnl-card__subtitle {
+    font-size: 11px;
+    color: var(--grey-500);
+    font-style: italic;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .pnl-card__line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    border-bottom: 1px dotted var(--grey-300);
+    line-height: 1.4;
+  }
+  .pnl-card__line:last-child { border-bottom: none; }
+  .pnl-card__line-label { color: var(--grey-700); }
+  .pnl-card__line-value {
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  /* ═════════════════════════════════════════════════════════════════
+     SLIDES RECO 14-16 + VERDICT 17
+     ═════════════════════════════════════════════════════════════════ */
+
+  .reco-cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    flex-shrink: 0;
+    margin-bottom: 24px;
+  }
+  .reco-card {
+    background: white;
+    padding: 22px 20px 20px;
+    border-top: 4px solid var(--mint);
+    display: flex;
+    flex-direction: column;
+    min-height: 360px;
+  }
+  .reco-card__label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--mint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .reco-card__value {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 34px;
+    line-height: 1.3;
+    color: var(--ink);
+    letter-spacing: -0.018em;
+    margin-bottom: 6px;
+  }
+  .reco-card__sub {
+    font-size: 12px;
+    color: var(--grey-700);
+    font-style: italic;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+  .reco-card__note {
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-top: auto;
+  }
+
+  .reco-products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    flex-shrink: 0;
+  }
+  .reco-col__title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .reco-col--go .reco-col__title { color: var(--mint); }
+  .reco-col--maybe .reco-col__title { color: var(--beige); }
+  .reco-col--no .reco-col__title { color: var(--salmon); }
+  .reco-item {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--grey-200);
+    align-items: start;
+  }
+  .reco-item:last-child { border-bottom: none; }
+  .reco-item__icon {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .reco-col--go .reco-item__icon { color: var(--mint); }
+  .reco-col--maybe .reco-item__icon { color: var(--beige); }
+  .reco-col--no .reco-item__icon { color: var(--salmon); }
+  .reco-item__text { font-size: 13px; color: var(--ink); line-height: 1.45; }
+  .reco-item__text strong { font-weight: 700; }
+  .reco-item__text em { font-style: normal; color: var(--grey-700); font-size: 11px; display: block; margin-top: 2px; line-height: 1.4; }
+
+  /* Verdict 1-page slide */
+  .verdict-slide {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 80px 100px 100px;
+    display: flex;
+    flex-direction: column;
+  }
+  .verdict-slide .nav__item { color: rgba(245, 241, 232, 0.5); }
+  .verdict-slide .nav__item--active { color: var(--mint); }
+  .verdict-slide .nav__item--active::after { background: var(--mint); }
+  .verdict-slide .title { color: var(--white); max-width: none; }
+  .verdict-slide .title__rule { background: var(--mint); }
+  .verdict__big {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-size: 86px;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 30px;
+    flex-shrink: 0;
+  }
+  .verdict__big strong { color: var(--mint); font-weight: 300; }
+  .verdict__pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 20px;
+    flex-shrink: 0;
+  }
+  .verdict__pillar {
+    padding: 26px 24px;
+    background: rgba(255,255,255,0.04);
+    border-left: 4px solid var(--mint);
+  }
+  .verdict__pillar-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--mint);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .verdict__pillar-value {
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.3;
+    letter-spacing: -0.018em;
+    margin-bottom: 10px;
+  }
+  .verdict__pillar-text {
+    font-size: 13px;
+    color: rgba(245, 241, 232, 0.75);
+    line-height: 1.4;
+  }
+  .verdict-slide .footer { border-top-color: var(--mint); background: var(--ink); }
+  .verdict-slide .footer__confidential { color: rgba(245, 241, 232, 0.5); }
+  .verdict-slide .footer__pagination { color: rgba(245, 241, 232, 0.7); }
+
+  /* Next steps slide */
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+  .phase {
+    padding: 22px 24px;
+    background: white;
+    border-left: 5px solid var(--mint);
+  }
+  .phase__label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--mint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .phase__title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 10px;
+    letter-spacing: -0.012em;
+  }
+  .phase__dur {
+    font-size: 12px;
+    color: var(--grey-500);
+    font-style: italic;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .phase__body {
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .phase__body ul { list-style: none; padding: 0; }
+  .phase__body li {
+    padding: 6px 0 6px 18px;
+    position: relative;
+  }
+  .phase__body li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--mint);
+    font-weight: 700;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 40px;
+    padding: 22px 32px;
+    background: var(--ink);
+    color: var(--cream);
+    border-left: 5px solid var(--mint);
+    flex-shrink: 0;
+  }
+  .actions__title {
+    grid-column: 1 / -1;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--mint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .action {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 8px;
+    align-items: baseline;
+    font-size: 12px;
+    padding: 3px 0;
+  }
+  .action__n {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--mint);
+    line-height: 1.1;
+  }
+  .action__text { color: rgba(245, 241, 232, 0.9); line-height: 1.4; }
+
+  /* Decision slide */
+  .decision-slide .title { max-width: none; }
+  .decision-questions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+  .decision-q {
+    padding: 28px 36px;
+    background: white;
+    border-left: 5px solid var(--mint);
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .decision-q__num {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-size: 56px;
+    color: var(--mint);
+    line-height: 1;
+  }
+  .decision-q__text {
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .decision-q__text strong { font-weight: 700; }
+  .decision-q__boxes {
+    display: flex;
+    gap: 16px;
+  }
+  .decision-q__box {
+    width: 64px;
+    height: 64px;
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 01 — COVER
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide cover">
+  <img class="cover__photo" src="../assets/hero_1.jpeg" alt="">
+  <div class="cover__photo-darken"></div>
+
+  <div class="cover__panel">
+    <img class="cover__leaf" src="../assets/leaf_mint.png" alt="">
+    <div class="cover__title">Benchmark<br>abonnement</div>
+    <div class="cover__rule"></div>
+    <div class="cover__subtitle">Modèles du marché FR<br>Recommandation Impulse</div>
+    <div class="cover__tag">Comité projet</div>
+  </div>
+
+  <div class="cover__confidential">Internal document — Strictly confidential</div>
+
+  <div class="cover__havea">
+    <div class="cover__havea-word">Havea</div>
+    <div class="cover__havea-sub">— GROUP —</div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 02 — BASELINE IMPULSE
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav">
+    <span class="nav__item nav__item--active">Intro</span>
+    <span class="nav__item">Méthodologie</span>
+    <span class="nav__item">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+
+  <h1 class="title">Modèle d'abonnement pour Impulse : opportunité et faisabilité.</h1>
+  <div class="title__rule"></div>
+
+  <div class="body">
+    <div class="exec__grid">
+      <div class="exec__col">
+        <div class="exec__col-title">Constat</div>
+        <ul class="exec__col-items">
+          <li><strong>43 SKUs</strong> dont 17 santé a consommation récurrente<em>Compléments pris en cure de 1 a 3 mois</em></li>
+          <li><strong>0 abonnement</strong> a ce jour<em>Aucun mécanisme de rétention ou de récurrence</em></li>
+          <li><strong>6/8 concurrents</strong> ont déja un modele abo<em>Nutri&amp;Co, Nutrimuscle, Novoma, Cuure, Aqeelab, MyProtein</em></li>
+        </ul>
+      </div>
+      <div class="exec__col">
+        <div class="exec__col-title">Opportunité</div>
+        <ul class="exec__col-items">
+          <li><strong>25-28% de returning</strong> customers<em>Sans aucun mécanisme -- un socle naturel a capter</em></li>
+          <li><strong>Habitude existante</strong> a systématiser<em>Cycles de renouvellement 30-90 jours sur la gamme santé</em></li>
+          <li><strong>Couts logistiques bas</strong><em>3,90€ relais / 5,90€ domicile / 10,90€ express</em></li>
+        </ul>
+      </div>
+      <div class="exec__col exec__col--alert">
+        <div class="exec__col-title">Objectif de l'étude</div>
+        <ul class="exec__col-items">
+          <li><strong>Benchmarker</strong> les 8 modeles concurrents<em>Remise, livraison, engagement, UX, satisfaction</em></li>
+          <li><strong>Évaluer la rentabilité</strong> sur le catalogue Impulse<em>43 SKUs avec vrais prix de revient 2026</em></li>
+          <li><strong>Recommander</strong> un modele chiffré et actionnable<em>Produits, remise, fréquences, UX, roadmap</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="baseline__context">
+      L'enjeu n'est pas de créer un besoin mais de <strong>capter une habitude existante</strong>. Les clients reviennent déja -- l'abonnement leur donne une raison de <strong>ne pas aller voir ailleurs</strong>.
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>02</strong> / 21</div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 03 — MÉTHODOLOGIE
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav">
+    <span class="nav__item">Intro</span>
+    <span class="nav__item nav__item--active">Méthodologie</span>
+    <span class="nav__item">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+
+  <h1 class="title">8 marques auditées en live · 4 axes d'analyse · chaque citation tracée à sa source officielle.</h1>
+  <div class="title__rule"></div>
+
+  <div class="body">
+    <div class="methodo__grid">
+      <div>
+        <div class="section-label">Périmètre · 8 marques</div>
+        <div class="brand-card">
+          <div class="brand-card__name">Nutri&Co</div>
+          <div class="brand-card__role">Référence premium FR la plus proche d'Impulse <em>(même tech Shopify, même agence)</em></div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-card__name">Nutrimuscle</div>
+          <div class="brand-card__role">Leader volume muscu FR · catalogue 250+ SKUs</div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-card__name">Novoma</div>
+          <div class="brand-card__role">Santé-sport premium · modèle abo rentabilité prudente</div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-card__name">Nutripure</div>
+          <div class="brand-card__role">Contrôle · marque premium sans abonnement</div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-card__name">Cuure</div>
+          <div class="brand-card__role">Modèle 100% abo personnalisé avec quiz santé</div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-card__name">Decathlon</div>
+          <div class="brand-card__role">Grande distribution omnicanale · sous-domaine dédié</div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-card__name">Aqeelab</div>
+          <div class="brand-card__role">Pure player FR récent · remise la plus agressive (−20%)</div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-card__name">MyProtein (FR)</div>
+          <div class="brand-card__role">"Subscribe &amp; Save" international mature</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Structure d'analyse (brief)</div>
+        <div class="axes">
+          <div class="axis">
+            <div class="axis__num">01</div>
+            <div class="axis__body"><strong>Modèle commercial</strong><em>Remise, fréquences, livraison, engagement, stacking codes</em></div>
+          </div>
+          <div class="axis">
+            <div class="axis__num">02</div>
+            <div class="axis__body"><strong>Périmètre produit</strong><em>Scope, exclusions, ticket moyen estimé</em></div>
+          </div>
+          <div class="axis">
+            <div class="axis__num">03</div>
+            <div class="axis__body"><strong>UX / page produit</strong><em>Wording, placement du module, page dédiée, mention homepage &amp; nav</em></div>
+          </div>
+          <div class="axis">
+            <div class="axis__num">04</div>
+            <div class="axis__body"><strong>Évaluation</strong><em>Forces, faiblesses, scores /5 sur 4 dimensions (UX · Offre · Pertinence · Global)</em></div>
+          </div>
+        </div>
+
+        <div class="score-legend">
+          <div class="score-legend__title">Sources &amp; traçabilité</div>
+          <div class="score-legend__body">
+            Pour chaque marque : FAQ officielles + Zendesk Help Centers + WebFetch direct (avril 2026) + Trustpilot + articles blog. Chaque citation est archivée dans <code>benchmark/marques/&lt;brand&gt;/sources.md</code>. Corrections majeures loggées dans <code>notes.md</code>.<br><br>
+            <strong style="color:var(--mint)">Statut audit : 8/8 verified_live.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>03</strong> / 21</div>
+  </div>
+</section>
+
+<!-- BRAND_SLIDES_BEGIN -->
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 04 — AQEELAB NUTRITION
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav">
+    <span class="nav__item">Intro</span>
+    <span class="nav__item">Méthodologie</span>
+    <span class="nav__item nav__item--active">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+
+  <div class="brand__title-row">
+    <h1 class="brand__title-name">Aqeelab Nutrition</h1>
+    <div class="brand__global-badge">4.3<span class="unit">/5</span></div>
+  </div>
+  <div class="brand__title-verdict"><strong>Le plus agressif du panel</strong> · −20% flat à vie · seul pb = engagement 2 mois</div>
+  <div class="title__rule" style="margin-top:20px;margin-bottom:40px"></div>
+
+  <div class="body">
+    <div class="brand__grid">
+      <div class="brand__screen-wrap">
+        <img class="brand__screen" src="../../marques/aqeelab/screenshots/product_sub.png" alt="Aqeelab Nutrition screenshot">
+      <div class="annot" style="top:34%;left:24%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Toggle abo au-dessus du CTA</div>
+      </div>
+      <div class="annot" style="top:34%;left:48%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Montant économisé en €</div>
+      </div>
+        <div class="brand__screen-caption">
+          <span class="brand__screen-caption-url">www.aqeelab-nutrition.fr</span>
+          <span class="brand__screen-caption-type">product sub</span>
+        </div>
+      </div>
+
+      <div class="brand__right">
+        <div class="brand__data">
+          <div class="brand__panel">
+            <div class="brand__panel-title">Modèle commercial</div>
+            <div class="brand__row"><div class="brand__lbl">Remise</div><div class="brand__val"><strong>−20%</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Fréquences</div><div class="brand__val"><span class="brand__tag brand__tag--freq">1 mois</span> <span class="brand__tag brand__tag--freq">2 mois</span> <span class="brand__tag brand__tag--freq">3 mois</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Livraison</div><div class="brand__val">N/A</div></div>
+            <div class="brand__row"><div class="brand__lbl">Engagement</div><div class="brand__val">Aucun</div></div>
+            <div class="brand__row"><div class="brand__lbl">Flexibilité</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Pause</span> <span class="brand__tag brand__tag--yes">Modif</span> <span class="brand__tag brand__tag--yes">Annul.</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Scope</div><div class="brand__val">Tous les 23 produits du catalogue</div></div>
+            <div class="brand__row"><div class="brand__lbl">Exclusions</div><div class="brand__val brand__val--muted">—</div></div>
+          </div>
+          <div class="brand__panel">
+            <div class="brand__panel-title">UX &amp; Visibilité</div>
+            <div class="brand__row"><div class="brand__lbl">CTA</div><div class="brand__val"><strong>"S'abonner & économiser"</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Module</div><div class="brand__val">Toggle Achat unique / Abonnement, directement sur la fiche produit au-dessus du…</div></div>
+            <div class="brand__row"><div class="brand__lbl">Présence</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Page</span> <span class="brand__tag brand__tag--yes">Home</span> <span class="brand__tag brand__tag--yes">Nav</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Email</div><div class="brand__val">Non documenté</div></div>
+            <div class="brand__row"><div class="brand__lbl">Trustpilot</div><div class="brand__val"><strong>4.9</strong>/5 <span style="color:var(--grey-500)">(200 avis)</span></div></div>
+          </div>
+        </div>
+
+        <div class="brand__feedback">
+          <div class="brand__feedback-item brand__feedback-item--plus">
+            <div class="brand__feedback-icon">+</div>
+            <div class="brand__feedback-text">Remise -20% flat à vie : la plus haute du panel FR (vs -15% Nutri&Co/Nutrimuscle, -10% Novoma) — argument massue sur le CTA</div>
+          </div>
+          <div class="brand__feedback-item brand__feedback-item--minus">
+            <div class="brand__feedback-icon">−</div>
+            <div class="brand__feedback-text">Engagement minimum de 2 mois requis pour débuter l'abonnement — friction d'entrée importante (point vigilance Loi Chatel)</div>
+          </div>
+        </div>
+
+        <div class="brand__scores">
+          <div class="brand__score brand__score--hi">
+            <div class="brand__score-label">UX</div>
+            <div class="brand__score-value">4.5<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--hi">
+            <div class="brand__score-label">Offre</div>
+            <div class="brand__score-value">4.0<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--hi">
+            <div class="brand__score-label">Pertinence</div>
+            <div class="brand__score-value">4.5<span class="unit"> /5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>04</strong> / 21</div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 05 — NUTRI&CO
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav">
+    <span class="nav__item">Intro</span>
+    <span class="nav__item">Méthodologie</span>
+    <span class="nav__item nav__item--active">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+
+  <div class="brand__title-row">
+    <h1 class="brand__title-name">Nutri&Co</h1>
+    <div class="brand__global-badge">4.0<span class="unit">/5</span></div>
+  </div>
+  <div class="brand__title-verdict"><strong>La référence proche d'Impulse</strong> · −15% + email anti-churn 48h · module trop discret</div>
+  <div class="title__rule" style="margin-top:20px;margin-bottom:40px"></div>
+
+  <div class="body">
+    <div class="brand__grid">
+      <div class="brand__screen-wrap">
+        <img class="brand__screen" src="../../marques/nutriandco/screenshots/abonnement_page.png" alt="Nutri&Co screenshot">
+      <div class="annot" style="top:20%;left:30%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Page dédiée /pages/abonnement</div>
+      </div>
+      <div class="annot" style="top:60%;left:55%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Grid produits éligibles</div>
+      </div>
+        <div class="brand__screen-caption">
+          <span class="brand__screen-caption-url">nutriandco.com</span>
+          <span class="brand__screen-caption-type">abonnement page</span>
+        </div>
+      </div>
+
+      <div class="brand__right">
+        <div class="brand__data">
+          <div class="brand__panel">
+            <div class="brand__panel-title">Modèle commercial</div>
+            <div class="brand__row"><div class="brand__lbl">Remise</div><div class="brand__val"><strong>−15%</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Fréquences</div><div class="brand__val"><span class="brand__tag brand__tag--freq">1 mois</span> <span class="brand__tag brand__tag--freq">3 mois</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Livraison</div><div class="brand__val">Offerte sans seuil</div></div>
+            <div class="brand__row"><div class="brand__lbl">Engagement</div><div class="brand__val">Aucun</div></div>
+            <div class="brand__row"><div class="brand__lbl">Flexibilité</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Pause</span> <span class="brand__tag brand__tag--yes">Modif</span> <span class="brand__tag brand__tag--yes">Annul.</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Scope</div><div class="brand__val">Produits individuels uniquement — le modèle '1 produit = 1 abonnement' exclut les packs</div></div>
+            <div class="brand__row"><div class="brand__lbl">Exclusions</div><div class="brand__val">Packs de compléments (composition figée incompatible avec abo récurrent), Coffrets cadeaux</div></div>
+          </div>
+          <div class="brand__panel">
+            <div class="brand__panel-title">UX &amp; Visibilité</div>
+            <div class="brand__row"><div class="brand__lbl">CTA</div><div class="brand__val"><strong>"S'abonner"</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Module</div><div class="brand__val">Toggle Achat unique / Abonnement au-dessus du bouton Ajouter au panier</div></div>
+            <div class="brand__row"><div class="brand__lbl">Présence</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Page</span> <span class="brand__tag brand__tag--no">Home</span> <span class="brand__tag brand__tag--no">Nav</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Email</div><div class="brand__val">Oui — email de pré-expédition avec fenêtre de modification de 48h avant chaque …</div></div>
+            <div class="brand__row"><div class="brand__lbl">Trustpilot</div><div class="brand__val"><strong>4.45</strong>/5 <span style="color:var(--grey-500)">(4.4k avis)</span></div></div>
+          </div>
+        </div>
+
+        <div class="brand__feedback">
+          <div class="brand__feedback-item brand__feedback-item--plus">
+            <div class="brand__feedback-icon">+</div>
+            <div class="brand__feedback-text">Toggle clair sur la fiche produit</div>
+          </div>
+          <div class="brand__feedback-item brand__feedback-item--minus">
+            <div class="brand__feedback-icon">−</div>
+            <div class="brand__feedback-text">Pas de mise en avant homepage/navigation (module discret, peut passer inaperçu)</div>
+          </div>
+        </div>
+
+        <div class="brand__scores">
+          <div class="brand__score brand__score--mid">
+            <div class="brand__score-label">UX</div>
+            <div class="brand__score-value">3.5<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--hi">
+            <div class="brand__score-label">Offre</div>
+            <div class="brand__score-value">4.0<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--hi">
+            <div class="brand__score-label">Pertinence</div>
+            <div class="brand__score-value">4.5<span class="unit"> /5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>05</strong> / 21</div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 06 — NUTRIMUSCLE
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav">
+    <span class="nav__item">Intro</span>
+    <span class="nav__item">Méthodologie</span>
+    <span class="nav__item nav__item--active">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+
+  <div class="brand__title-row">
+    <h1 class="brand__title-name">Nutrimuscle</h1>
+    <div class="brand__global-badge">3.8<span class="unit">/5</span></div>
+  </div>
+  <div class="brand__title-verdict"><strong>La visibilité maximale</strong> · 6 fréquences + mention home/nav/newsletter</div>
+  <div class="title__rule" style="margin-top:20px;margin-bottom:40px"></div>
+
+  <div class="body">
+    <div class="brand__grid">
+      <div class="brand__screen-wrap">
+        <img class="brand__screen" src="../../marques/nutrimuscle/screenshots/abonnement_page.png" alt="Nutrimuscle screenshot">
+      <div class="annot" style="top:15%;left:20%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Pitch '−15% + livraison offerte'</div>
+      </div>
+      <div class="annot" style="top:50%;left:50%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Processus 3 étapes</div>
+      </div>
+        <div class="brand__screen-caption">
+          <span class="brand__screen-caption-url">www.nutrimuscle.com</span>
+          <span class="brand__screen-caption-type">abonnement page</span>
+        </div>
+      </div>
+
+      <div class="brand__right">
+        <div class="brand__data">
+          <div class="brand__panel">
+            <div class="brand__panel-title">Modèle commercial</div>
+            <div class="brand__row"><div class="brand__lbl">Remise</div><div class="brand__val"><strong>−15%</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Fréquences</div><div class="brand__val"><span class="brand__tag brand__tag--freq">1 mois</span> <span class="brand__tag brand__tag--freq">2 mois</span> <span class="brand__tag brand__tag--freq">3 mois</span> <span class="brand__tag brand__tag--freq">4 mois</span> <span class="brand__tag brand__tag--freq">5 mois</span> <span class="brand__tag brand__tag--freq">6 mois</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Livraison</div><div class="brand__val">Offerte sans seuil</div></div>
+            <div class="brand__row"><div class="brand__lbl">Engagement</div><div class="brand__val">Aucun</div></div>
+            <div class="brand__row"><div class="brand__lbl">Flexibilité</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Pause</span> <span class="brand__tag brand__tag--yes">Modif</span> <span class="brand__tag brand__tag--yes">Annul.</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Scope</div><div class="brand__val">Sélection de produits (250+ formats éligibles). Modèle '1 produit = 1 abonnement' (un abo…</div></div>
+            <div class="brand__row"><div class="brand__lbl">Exclusions</div><div class="brand__val">Packs (Pack Starter, Pack Muscu Sèche, Pack Prise de masse, packs collagène/vitamines) — …</div></div>
+          </div>
+          <div class="brand__panel">
+            <div class="brand__panel-title">UX &amp; Visibilité</div>
+            <div class="brand__row"><div class="brand__lbl">CTA</div><div class="brand__val"><strong>"S'abonner"</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Module</div><div class="brand__val">Toggle Achat unique / Abonnement intégré dans le sélecteur de prix</div></div>
+            <div class="brand__row"><div class="brand__lbl">Présence</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Page</span> <span class="brand__tag brand__tag--yes">Home</span> <span class="brand__tag brand__tag--yes">Nav</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Email</div><div class="brand__val">Oui, régulièrement dans les newsletters</div></div>
+            <div class="brand__row"><div class="brand__lbl">Trustpilot</div><div class="brand__val"><strong>4.05</strong>/5 <span style="color:var(--grey-500)">(28.0k avis)</span></div></div>
+          </div>
+        </div>
+
+        <div class="brand__feedback">
+          <div class="brand__feedback-item brand__feedback-item--plus">
+            <div class="brand__feedback-icon">+</div>
+            <div class="brand__feedback-text">Page dédiée complète (/pages/abonnement) avec pitch éditorial, 3 pictos clés, catalogue des produits éligibles et lien espace abonné</div>
+          </div>
+          <div class="brand__feedback-item brand__feedback-item--minus">
+            <div class="brand__feedback-icon">−</div>
+            <div class="brand__feedback-text">Ruptures de stock occasionnelles mentionnées dans les verbatims → peut retarder les livraisons abo</div>
+          </div>
+        </div>
+
+        <div class="brand__scores">
+          <div class="brand__score brand__score--hi">
+            <div class="brand__score-label">UX</div>
+            <div class="brand__score-value">4.0<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--hi">
+            <div class="brand__score-label">Offre</div>
+            <div class="brand__score-value">4.0<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--mid">
+            <div class="brand__score-label">Pertinence</div>
+            <div class="brand__score-value">3.5<span class="unit"> /5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>06</strong> / 21</div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 07 — NOVOMA
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav">
+    <span class="nav__item">Intro</span>
+    <span class="nav__item">Méthodologie</span>
+    <span class="nav__item nav__item--active">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+
+  <div class="brand__title-row">
+    <h1 class="brand__title-name">Novoma</h1>
+    <div class="brand__global-badge">3.7<span class="unit">/5</span></div>
+  </div>
+  <div class="brand__title-verdict"><strong>Le modèle prudent</strong> · −10% + livraison stepped · argument santé long terme</div>
+  <div class="title__rule" style="margin-top:20px;margin-bottom:40px"></div>
+
+  <div class="body">
+    <div class="brand__grid">
+      <div class="brand__screen-wrap">
+        <img class="brand__screen" src="../../marques/novoma/screenshots/abonnement_page.png" alt="Novoma screenshot">
+      <div class="annot" style="top:20%;left:22%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Argumentation santé long terme</div>
+      </div>
+      <div class="annot" style="top:55%;left:48%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Avantages chiffrés</div>
+      </div>
+        <div class="brand__screen-caption">
+          <span class="brand__screen-caption-url">novoma.com</span>
+          <span class="brand__screen-caption-type">abonnement page</span>
+        </div>
+      </div>
+
+      <div class="brand__right">
+        <div class="brand__data">
+          <div class="brand__panel">
+            <div class="brand__panel-title">Modèle commercial</div>
+            <div class="brand__row"><div class="brand__lbl">Remise</div><div class="brand__val"><strong>−10%</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Fréquences</div><div class="brand__val"><span class="brand__tag brand__tag--freq">1 mois</span> <span class="brand__tag brand__tag--freq">2 mois</span> <span class="brand__tag brand__tag--freq">3 mois</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Livraison</div><div class="brand__val">Stepped dès 50€</div></div>
+            <div class="brand__row"><div class="brand__lbl">Engagement</div><div class="brand__val">Aucun</div></div>
+            <div class="brand__row"><div class="brand__lbl">Flexibilité</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Pause</span> <span class="brand__tag brand__tag--yes">Modif</span> <span class="brand__tag brand__tag--yes">Annul.</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Scope</div><div class="brand__val">Tous les produits individuels du catalogue (aucune exclusion explicite documentée sur la …</div></div>
+            <div class="brand__row"><div class="brand__lbl">Exclusions</div><div class="brand__val">Packs probablement exclus — à confirmer navigation live (cohérent avec Nutri&Co et Nutrim…</div></div>
+          </div>
+          <div class="brand__panel">
+            <div class="brand__panel-title">UX &amp; Visibilité</div>
+            <div class="brand__row"><div class="brand__lbl">CTA</div><div class="brand__val"><strong>"S'abonner"</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Module</div><div class="brand__val">Toggle Achat unique / S'abonner, au-dessus du CTA</div></div>
+            <div class="brand__row"><div class="brand__lbl">Présence</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Page</span> <span class="brand__tag brand__tag--no">Home</span> <span class="brand__tag brand__tag--no">Nav</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Email</div><div class="brand__val">Non documenté</div></div>
+            <div class="brand__row"><div class="brand__lbl">Trustpilot</div><div class="brand__val"><strong>4.6</strong>/5 <span style="color:var(--grey-500)">(7.0k avis)</span></div></div>
+          </div>
+        </div>
+
+        <div class="brand__feedback">
+          <div class="brand__feedback-item brand__feedback-item--plus">
+            <div class="brand__feedback-icon">+</div>
+            <div class="brand__feedback-text">Page dédiée très bien structurée (/pages/abonnement) : processus 3 étapes illustré + 5 avantages + FAQ complète 6 questions</div>
+          </div>
+          <div class="brand__feedback-item brand__feedback-item--minus">
+            <div class="brand__feedback-icon">−</div>
+            <div class="brand__feedback-text">Remise faciale à −10% = plus faible que les -15% concurrents (Nutri&Co, Nutrimuscle) — moins 'sexy' sur le CTA</div>
+          </div>
+        </div>
+
+        <div class="brand__scores">
+          <div class="brand__score brand__score--mid">
+            <div class="brand__score-label">UX</div>
+            <div class="brand__score-value">3.5<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--mid">
+            <div class="brand__score-label">Offre</div>
+            <div class="brand__score-value">3.0<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--hi">
+            <div class="brand__score-label">Pertinence</div>
+            <div class="brand__score-value">4.5<span class="unit"> /5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>07</strong> / 21</div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 08 — CUURE
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav">
+    <span class="nav__item">Intro</span>
+    <span class="nav__item">Méthodologie</span>
+    <span class="nav__item nav__item--active">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+
+  <div class="brand__title-row">
+    <h1 class="brand__title-name">Cuure</h1>
+    <div class="brand__global-badge">3.0<span class="unit">/5</span></div>
+  </div>
+  <div class="brand__title-verdict"><strong>Le modèle 100% abo</strong> · quiz santé + box personnalisée · résiliation 2 temps anti-pattern</div>
+  <div class="title__rule" style="margin-top:20px;margin-bottom:40px"></div>
+
+  <div class="body">
+    <div class="brand__grid">
+      <div class="brand__screen-wrap">
+        <img class="brand__screen" src="../../marques/cuure/screenshots/produits.png" alt="Cuure screenshot">
+      <div class="annot" style="top:30%;left:30%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Quiz santé ~5 min</div>
+      </div>
+      <div class="annot" style="top:50%;left:55%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Box 100% personnalisée</div>
+      </div>
+        <div class="brand__screen-caption">
+          <span class="brand__screen-caption-url">cuure.com</span>
+          <span class="brand__screen-caption-type">produits</span>
+        </div>
+      </div>
+
+      <div class="brand__right">
+        <div class="brand__data">
+          <div class="brand__panel">
+            <div class="brand__panel-title">Modèle commercial</div>
+            <div class="brand__row"><div class="brand__lbl">Remise</div><div class="brand__val"><strong>—</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Fréquences</div><div class="brand__val"><span class="brand__tag brand__tag--freq">1 mois (mensuel uniquement)</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Livraison</div><div class="brand__val">Offerte dès 20€</div></div>
+            <div class="brand__row"><div class="brand__lbl">Engagement</div><div class="brand__val">Aucun</div></div>
+            <div class="brand__row"><div class="brand__lbl">Flexibilité</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Pause</span> <span class="brand__tag brand__tag--yes">Modif</span> <span class="brand__tag brand__tag--yes">Annul.</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Scope</div><div class="brand__val">Box personnalisée uniquement — aucun catalogue individuel public. 50+ ingrédients disponi…</div></div>
+            <div class="brand__row"><div class="brand__lbl">Exclusions</div><div class="brand__val">Pas d'achat one-shot possible — tout le parcours est orienté abonnement box personnalisée</div></div>
+          </div>
+          <div class="brand__panel">
+            <div class="brand__panel-title">UX &amp; Visibilité</div>
+            <div class="brand__row"><div class="brand__lbl">CTA</div><div class="brand__val"><strong>"Découvrir ma formule"</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Module</div><div class="brand__val">N/A — le modèle est 100% abonnement (box personnalisée)</div></div>
+            <div class="brand__row"><div class="brand__lbl">Présence</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Page</span> <span class="brand__tag brand__tag--yes">Home</span> <span class="brand__tag brand__tag--yes">Nav</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Email</div><div class="brand__val">Non documenté</div></div>
+            <div class="brand__row"><div class="brand__lbl">Trustpilot</div><div class="brand__val"><strong>4.5</strong>/5 <span style="color:var(--grey-500)">(4.4k avis)</span></div></div>
+          </div>
+        </div>
+
+        <div class="brand__feedback">
+          <div class="brand__feedback-item brand__feedback-item--plus">
+            <div class="brand__feedback-icon">+</div>
+            <div class="brand__feedback-text">UX 100% orientée abonnement (absence totale de parcours one-shot = pas de dilution du message commercial)</div>
+          </div>
+          <div class="brand__feedback-item brand__feedback-item--minus">
+            <div class="brand__feedback-icon">−</div>
+            <div class="brand__feedback-text">Pas de possibilité d'achat one-shot — barrière d'essai haute, le client doit s'engager dès le départ</div>
+          </div>
+        </div>
+
+        <div class="brand__scores">
+          <div class="brand__score brand__score--hi">
+            <div class="brand__score-label">UX</div>
+            <div class="brand__score-value">4.0<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--mid">
+            <div class="brand__score-label">Offre</div>
+            <div class="brand__score-value">3.0<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--lo">
+            <div class="brand__score-label">Pertinence</div>
+            <div class="brand__score-value">2.0<span class="unit"> /5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>08</strong> / 21</div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 09 — MYPROTEIN
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav">
+    <span class="nav__item">Intro</span>
+    <span class="nav__item">Méthodologie</span>
+    <span class="nav__item nav__item--active">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+
+  <div class="brand__title-row">
+    <h1 class="brand__title-name">MyProtein</h1>
+    <div class="brand__global-badge">2.8<span class="unit">/5</span></div>
+  </div>
+  <div class="brand__title-verdict"><strong>Le volume international</strong> · jusqu'à −45% mais remise illisible sur prix volatils</div>
+  <div class="title__rule" style="margin-top:20px;margin-bottom:40px"></div>
+
+  <div class="body">
+    <div class="brand__grid">
+      <div class="brand__screen-wrap">
+        <img class="brand__screen" src="../../marques/myprotein/screenshots/product_sub.png" alt="MyProtein screenshot">
+      <div class="annot" style="top:25%;left:25%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Badge remise variable</div>
+      </div>
+      <div class="annot" style="top:55%;left:48%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Toggle abo</div>
+      </div>
+        <div class="brand__screen-caption">
+          <span class="brand__screen-caption-url">fr.myprotein.com</span>
+          <span class="brand__screen-caption-type">product sub</span>
+        </div>
+      </div>
+
+      <div class="brand__right">
+        <div class="brand__data">
+          <div class="brand__panel">
+            <div class="brand__panel-title">Modèle commercial</div>
+            <div class="brand__row"><div class="brand__lbl">Remise</div><div class="brand__val"><strong>Jusqu'à 45% (variable,</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Fréquences</div><div class="brand__val"><span class="brand__tag brand__tag--freq">1 mois</span> <span class="brand__tag brand__tag--freq">2 mois</span> <span class="brand__tag brand__tag--freq">3 mois</span> <span class="brand__tag brand__tag--freq">4 mois</span> <span class="brand__tag brand__tag--freq">5 mois</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Livraison</div><div class="brand__val">Offerte sans seuil</div></div>
+            <div class="brand__row"><div class="brand__lbl">Engagement</div><div class="brand__val">Aucun</div></div>
+            <div class="brand__row"><div class="brand__lbl">Flexibilité</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Pause</span> <span class="brand__tag brand__tag--yes">Modif</span> <span class="brand__tag brand__tag--yes">Annul.</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Scope</div><div class="brand__val">Quasi tous les produits (1000+ références)</div></div>
+            <div class="brand__row"><div class="brand__lbl">Exclusions</div><div class="brand__val brand__val--muted">—</div></div>
+          </div>
+          <div class="brand__panel">
+            <div class="brand__panel-title">UX &amp; Visibilité</div>
+            <div class="brand__row"><div class="brand__lbl">CTA</div><div class="brand__val"><strong>"S'abonner (FR) — 'Abonnez-vous' dans la nav"</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Module</div><div class="brand__val">Toggle sous le sélecteur de taille/saveur, au-dessus du bouton Ajouter au panie…</div></div>
+            <div class="brand__row"><div class="brand__lbl">Présence</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Page</span> <span class="brand__tag brand__tag--yes">Home</span> <span class="brand__tag brand__tag--yes">Nav</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Email</div><div class="brand__val">Non documenté</div></div>
+            <div class="brand__row"><div class="brand__lbl">Trustpilot</div><div class="brand__val"><strong>3.1</strong>/5 <span style="color:var(--grey-500)">(31.0k avis)</span></div></div>
+          </div>
+        </div>
+
+        <div class="brand__feedback">
+          <div class="brand__feedback-item brand__feedback-item--plus">
+            <div class="brand__feedback-icon">+</div>
+            <div class="brand__feedback-text">Remise la plus agressive du panel en valeur brute (jusqu'à -45% voire -50%) — argument commercial massue pour l'acquisition</div>
+          </div>
+          <div class="brand__feedback-item brand__feedback-item--minus">
+            <div class="brand__feedback-icon">−</div>
+            <div class="brand__feedback-text">Prix de base instables (promos permanentes sitewide) : la remise -30% abo affichée sur un prix-barré déjà volatil rend la vraie économie pe…</div>
+          </div>
+        </div>
+
+        <div class="brand__scores">
+          <div class="brand__score brand__score--mid">
+            <div class="brand__score-label">UX</div>
+            <div class="brand__score-value">3.5<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--mid">
+            <div class="brand__score-label">Offre</div>
+            <div class="brand__score-value">3.5<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--lo">
+            <div class="brand__score-label">Pertinence</div>
+            <div class="brand__score-value">1.5<span class="unit"> /5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>09</strong> / 21</div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 10 — DECATHLON (ABONNEMENT NUTRITION)
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav">
+    <span class="nav__item">Intro</span>
+    <span class="nav__item">Méthodologie</span>
+    <span class="nav__item nav__item--active">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+
+  <div class="brand__title-row">
+    <h1 class="brand__title-name">Decathlon (Abonnement Nutrition)</h1>
+    <div class="brand__global-badge">2.5<span class="unit">/5</span></div>
+  </div>
+  <div class="brand__title-verdict"><strong>Le contre-modèle UX</strong> · sous-domaine séparé + '1 produit = 1 abo'</div>
+  <div class="title__rule" style="margin-top:20px;margin-bottom:40px"></div>
+
+  <div class="body">
+    <div class="brand__grid">
+      <div class="brand__screen-wrap">
+        <img class="brand__screen" src="../../marques/decathlon/screenshots/homepage.png" alt="Decathlon (Abonnement Nutrition) screenshot">
+      <div class="annot" style="top:20%;left:25%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Sous-domaine dédié séparé</div>
+      </div>
+      <div class="annot" style="top:55%;left:50%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Processus 4 étapes</div>
+      </div>
+        <div class="brand__screen-caption">
+          <span class="brand__screen-caption-url">abonnement.decathlon.fr</span>
+          <span class="brand__screen-caption-type">homepage</span>
+        </div>
+      </div>
+
+      <div class="brand__right">
+        <div class="brand__data">
+          <div class="brand__panel">
+            <div class="brand__panel-title">Modèle commercial</div>
+            <div class="brand__row"><div class="brand__lbl">Remise</div><div class="brand__val"><strong>10-15% (stepped par pr</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Fréquences</div><div class="brand__val"><span class="brand__tag brand__tag--freq">1 mois</span> <span class="brand__tag brand__tag--freq">2 mois</span> <span class="brand__tag brand__tag--freq">3 mois</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Livraison</div><div class="brand__val">Relais uniquement</div></div>
+            <div class="brand__row"><div class="brand__lbl">Engagement</div><div class="brand__val">Aucun</div></div>
+            <div class="brand__row"><div class="brand__lbl">Flexibilité</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Pause</span> <span class="brand__tag brand__tag--yes">Annul.</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Scope</div><div class="brand__val">Scope plus large que prévu (vérifié 2026-04-15). Catégorie nutrition complète : whey (sta…</div></div>
+            <div class="brand__row"><div class="brand__lbl">Exclusions</div><div class="brand__val">Produits one-shot ou saisonniers du catalogue nutrition Decathlon (ex : matériel, textile…</div></div>
+          </div>
+          <div class="brand__panel">
+            <div class="brand__panel-title">UX &amp; Visibilité</div>
+            <div class="brand__row"><div class="brand__lbl">CTA</div><div class="brand__val"><strong>"S'abonner"</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Module</div><div class="brand__val">Sous-site dédié (abonnement.decathlon.fr) séparé du site principal</div></div>
+            <div class="brand__row"><div class="brand__lbl">Présence</div><div class="brand__val"><span class="brand__tag brand__tag--yes">Page</span> <span class="brand__tag brand__tag--yes">Home</span> <span class="brand__tag brand__tag--yes">Nav</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Email</div><div class="brand__val">Non documenté</div></div>
+            <div class="brand__row"><div class="brand__lbl">Trustpilot</div><div class="brand__val"><strong>2.5</strong>/5 <span style="color:var(--grey-500)">(3.0k avis)</span></div></div>
+          </div>
+        </div>
+
+        <div class="brand__feedback">
+          <div class="brand__feedback-item brand__feedback-item--plus">
+            <div class="brand__feedback-icon">+</div>
+            <div class="brand__feedback-text">Sous-site dédié (abonnement.decathlon.fr) avec processus en 4 étapes clair : Mon produit → Ma livraison → Mon paiement → Mes avantages</div>
+          </div>
+          <div class="brand__feedback-item brand__feedback-item--minus">
+            <div class="brand__feedback-icon">−</div>
+            <div class="brand__feedback-text">Sous-domaine séparé abonnement.decathlon.fr = friction (redirect depuis le site principal, parcours abonné isolé)</div>
+          </div>
+        </div>
+
+        <div class="brand__scores">
+          <div class="brand__score brand__score--lo">
+            <div class="brand__score-label">UX</div>
+            <div class="brand__score-value">2.5<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--mid">
+            <div class="brand__score-label">Offre</div>
+            <div class="brand__score-value">3.0<span class="unit"> /5</span></div>
+          </div>
+          <div class="brand__score brand__score--lo">
+            <div class="brand__score-label">Pertinence</div>
+            <div class="brand__score-value">2.0<span class="unit"> /5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>10</strong> / 21</div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 11 — NUTRIPURE
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page brand--no-sub">
+  <nav class="nav">
+    <span class="nav__item">Intro</span>
+    <span class="nav__item">Méthodologie</span>
+    <span class="nav__item nav__item--active">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+
+  <div class="brand__title-row">
+    <h1 class="brand__title-name">Nutripure</h1>
+    <div class="brand__global-badge brand__global-badge--no-sub">CONTRÔLE</div>
+  </div>
+  <div class="brand__title-verdict"><strong>Sans abonnement</strong> · mise sur packs permanents et fidélité plutôt que lock-in</div>
+  <div class="title__rule" style="margin-top:20px;margin-bottom:40px"></div>
+
+  <div class="body">
+    <div class="brand__grid">
+      <div class="brand__screen-wrap">
+        <img class="brand__screen" src="../../marques/nutripure/screenshots/homepage.png" alt="Nutripure screenshot">
+      <div class="annot" style="top:25%;left:28%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Aucun module abo</div>
+      </div>
+      <div class="annot" style="top:60%;left:45%">
+        <div class="annot__dot"></div>
+        <div class="annot__label">Packs multi-mois à la place</div>
+      </div>
+        <div class="brand__screen-caption">
+          <span class="brand__screen-caption-url">www.nutripure.fr</span>
+          <span class="brand__screen-caption-type">homepage</span>
+        </div>
+      </div>
+
+      <div class="brand__right">
+        <div class="brand__data">
+          <div class="brand__panel">
+            <div class="brand__panel-title">Modèle commercial</div>
+            <div class="brand__row"><div class="brand__lbl">Remise</div><div class="brand__val"><strong>—</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Fréquences</div><div class="brand__val">—</div></div>
+            <div class="brand__row"><div class="brand__lbl">Livraison</div><div class="brand__val">—</div></div>
+            <div class="brand__row"><div class="brand__lbl">Engagement</div><div class="brand__val">—</div></div>
+            <div class="brand__row"><div class="brand__lbl">Flexibilité</div><div class="brand__val">—</div></div>
+            <div class="brand__row"><div class="brand__lbl">Scope</div><div class="brand__val">N/A</div></div>
+            <div class="brand__row"><div class="brand__lbl">Exclusions</div><div class="brand__val brand__val--muted">—</div></div>
+          </div>
+          <div class="brand__panel">
+            <div class="brand__panel-title">UX &amp; Visibilité</div>
+            <div class="brand__row"><div class="brand__lbl">CTA</div><div class="brand__val"><strong>"N/A"</strong></div></div>
+            <div class="brand__row"><div class="brand__lbl">Module</div><div class="brand__val">Aucun module abonnement</div></div>
+            <div class="brand__row"><div class="brand__lbl">Présence</div><div class="brand__val"><span class="brand__tag brand__tag--no">Page</span> <span class="brand__tag brand__tag--no">Home</span> <span class="brand__tag brand__tag--no">Nav</span></div></div>
+            <div class="brand__row"><div class="brand__lbl">Email</div><div class="brand__val">Non documenté</div></div>
+            <div class="brand__row"><div class="brand__lbl">Trustpilot</div><div class="brand__val"><strong>4.75</strong>/5 <span style="color:var(--grey-500)">(2.0k avis)</span></div></div>
+          </div>
+        </div>
+
+        <div class="brand__feedback">
+          <div class="brand__feedback-item brand__feedback-item--plus">
+            <div class="brand__feedback-icon">+</div>
+            <div class="brand__feedback-text">UX produit très clean et premium, labels qualité bien mis en avant (Epax, Peptan, Creapure)</div>
+          </div>
+          <div class="brand__feedback-item brand__feedback-item--minus">
+            <div class="brand__feedback-icon">−</div>
+            <div class="brand__feedback-text">Pas d'abonnement = pas de revenus récurrents prévisibles (impossible de projeter une MRR fiable)</div>
+          </div>
+        </div>
+
+        <div class="brand__scores">
+          <div class="brand__score brand__score--na">
+            <div class="brand__score-label">UX</div>
+            <div class="brand__score-value">—</div>
+          </div>
+          <div class="brand__score brand__score--na">
+            <div class="brand__score-label">Offre</div>
+            <div class="brand__score-value">—</div>
+          </div>
+          <div class="brand__score brand__score--hi">
+            <div class="brand__score-label">Pertinence</div>
+            <div class="brand__score-value">4.5<span class="unit"> /5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>11</strong> / 21</div>
+  </div>
+</section>
+
+<!-- BRAND_SLIDES_END -->
+
+<!-- FINAL_SLIDES_BEGIN -->
+
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 12 — SYNTHÈSE COMPARATIVE + QUADRANT POSITIONNEMENT
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav"><span class="nav__item">Intro</span><span class="nav__item">Méthodologie</span><span class="nav__item">Benchmark</span><span class="nav__item nav__item--active">Synthèse</span><span class="nav__item">Rentabilité</span><span class="nav__item">Recommandation</span><span class="nav__item">Next steps</span></nav>
+  <h1 class="title">8 marques × 8 dimensions · deux patterns antagonistes visibles d'un coup d'œil.</h1>
+  <div class="title__rule"></div>
+  <div class="body">
+    <div class="synth__grid">
+      <div>
+        <table class="synth__table">
+          <thead><tr>
+            <th>Marque</th>
+            <th>Remise</th>
+            <th>Fréq.</th>
+            <th>Livraison abo</th>
+            <th>Engagement</th>
+            <th>UX</th>
+            <th>Offre</th>
+            <th>Pert.</th>
+            <th>Global</th>
+          </tr></thead>
+          <tbody>
+    <tr class="top-row">
+      <td class="name">Aqeelab Nutrition</td>
+      <td class="num">−20%</td>
+      <td class="num">3</td>
+      <td class="num">—</td>
+      <td class="num yes">Aucun</td>
+      <td class="num">4.5</td>
+      <td class="num">4.0</td>
+      <td class="num">4.5</td>
+      <td class="global">4.3</td>
+    </tr>
+    <tr class="top-row">
+      <td class="name">Nutri&Co</td>
+      <td class="num">−15%</td>
+      <td class="num">2</td>
+      <td class="num yes">Sans seuil</td>
+      <td class="num yes">Aucun</td>
+      <td class="num">3.5</td>
+      <td class="num">4.0</td>
+      <td class="num">4.5</td>
+      <td class="global">4.0</td>
+    </tr>
+    <tr class="top-row">
+      <td class="name">Nutrimuscle</td>
+      <td class="num">−15%</td>
+      <td class="num">6</td>
+      <td class="num yes">Sans seuil</td>
+      <td class="num yes">Aucun</td>
+      <td class="num">4.0</td>
+      <td class="num">4.0</td>
+      <td class="num">3.5</td>
+      <td class="global">3.8</td>
+    </tr>
+    <tr class="">
+      <td class="name">Novoma</td>
+      <td class="num">−10%</td>
+      <td class="num">3</td>
+      <td class="num partial">Stepped 50€</td>
+      <td class="num yes">Aucun</td>
+      <td class="num">3.5</td>
+      <td class="num">3.0</td>
+      <td class="num">4.5</td>
+      <td class="global">3.7</td>
+    </tr>
+    <tr class="">
+      <td class="name">Cuure</td>
+      <td class="num">—</td>
+      <td class="num">1</td>
+      <td class="num yes">Dès 20€</td>
+      <td class="num yes">Aucun</td>
+      <td class="num">4.0</td>
+      <td class="num">3.0</td>
+      <td class="num">2.0</td>
+      <td class="global">3.0</td>
+    </tr>
+    <tr class="">
+      <td class="name">MyProtein</td>
+      <td class="num">Jusqu'à 45% (v</td>
+      <td class="num">5</td>
+      <td class="num yes">Sans seuil</td>
+      <td class="num yes">Aucun</td>
+      <td class="num">3.5</td>
+      <td class="num">3.5</td>
+      <td class="num">1.5</td>
+      <td class="global">2.8</td>
+    </tr>
+    <tr class="">
+      <td class="name">Decathlon (Abonnement Nutrition)</td>
+      <td class="num">10-15% (steppe</td>
+      <td class="num">3</td>
+      <td class="num partial">Relais only</td>
+      <td class="num yes">Aucun</td>
+      <td class="num">2.5</td>
+      <td class="num">3.0</td>
+      <td class="num">2.0</td>
+      <td class="global">2.5</td>
+    </tr>
+    <tr class="">
+      <td class="name">Nutripure</td>
+      <td class="num">—</td>
+      <td class="num">—</td>
+      <td class="num">—</td>
+      <td class="num yes">Aucun</td>
+      <td class="num">—</td>
+      <td class="num">—</td>
+      <td class="num">4.5</td>
+      <td class="num">contrôle</td>
+    </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="synth__quadrant">
+        <div class="synth__quadrant-title">Positionnement · remise × livraison</div>
+        <svg class="quadrant-svg" viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="60" width="480" height="320" fill="none" stroke="#C7BFA9" stroke-width="0.8"/><line x1="320" y1="60" x2="320" y2="380" stroke="#4A525E" stroke-width="0.8" stroke-dasharray="6 4"/><line x1="80" y1="220" x2="560" y2="220" stroke="#4A525E" stroke-width="0.8" stroke-dasharray="6 4"/><line x1="240.0" y1="60" x2="240.0" y2="380" stroke="#C7BFA9" stroke-width="0.5" stroke-dasharray="3 5"/><line x1="400.0" y1="60" x2="400.0" y2="380" stroke="#C7BFA9" stroke-width="0.5" stroke-dasharray="3 5"/><text x="320" y="425" text-anchor="middle" font-size="13" fill="#0A0F1E" font-weight="700" letter-spacing="0.08em">REMISE ABO (%)</text><text x="20" y="220" text-anchor="middle" font-size="13" fill="#0A0F1E" font-weight="700" letter-spacing="0.08em" transform="rotate(-90, 20, 220)">LIVRAISON</text><line x1="80.0" y1="380" x2="80.0" y2="390" stroke="#0A0F1E" stroke-width="1.5"/><text x="80.0" y="406" text-anchor="middle" font-size="12" fill="#0A0F1E" font-weight="600">0%</text><line x1="240.0" y1="380" x2="240.0" y2="390" stroke="#0A0F1E" stroke-width="1.5"/><text x="240.0" y="406" text-anchor="middle" font-size="12" fill="#0A0F1E" font-weight="600">10%</text><line x1="400.0" y1="380" x2="400.0" y2="390" stroke="#0A0F1E" stroke-width="1.5"/><text x="400.0" y="406" text-anchor="middle" font-size="12" fill="#0A0F1E" font-weight="600">20%</text><line x1="560.0" y1="380" x2="560.0" y2="390" stroke="#0A0F1E" stroke-width="1.5"/><text x="560.0" y="406" text-anchor="middle" font-size="12" fill="#0A0F1E" font-weight="600">30%</text><text x="72" y="66" text-anchor="end" font-size="11" fill="#0A0F1E" font-weight="600">Offerte</text><text x="72" y="224" text-anchor="end" font-size="11" fill="#0A0F1E" font-weight="600">Stepped</text><text x="72" y="384" text-anchor="end" font-size="11" fill="#0A0F1E" font-weight="600">Payante</text><text x="440" y="100" text-anchor="middle" font-size="11" fill="#279989" font-weight="700" font-style="italic">ACQUISITION AGRESSIVE</text><text x="200" y="360" text-anchor="middle" font-size="11" fill="#C96E1F" font-weight="700" font-style="italic">RENTABILITÉ PRUDENTE</text><circle cx="400.0" cy="380" r="21.799999999999997" fill="#279989" opacity="0.7" stroke="white" stroke-width="2"/><circle cx="320.0" cy="60.0" r="20.0" fill="#279989" opacity="0.7" stroke="white" stroke-width="2"/><circle cx="320.0" cy="60.0" r="18.799999999999997" fill="#279989" opacity="0.7" stroke="white" stroke-width="2"/><circle cx="240.0" cy="380" r="18.200000000000003" fill="#279989" opacity="0.7" stroke="white" stroke-width="2"/><circle cx="80.0" cy="60.0" r="14.0" fill="#C96E1F" opacity="0.7" stroke="white" stroke-width="2"/><circle cx="560.0" cy="60.0" r="12.799999999999999" fill="#C96E1F" opacity="0.7" stroke="white" stroke-width="2"/><circle cx="240.0" cy="252.0" r="11.0" fill="#C96E1F" opacity="0.7" stroke="white" stroke-width="2"/><circle cx="80.0" cy="380" r="11.0" fill="#C96E1F" opacity="0.7" stroke="white" stroke-width="2"/><text x="427.8" y="384" text-anchor="start" font-size="11" fill="#0A0F1E" font-weight="700">Aqeelab Nutr</text><text x="346.0" y="64.0" text-anchor="start" font-size="11" fill="#0A0F1E" font-weight="700">Nutri&Co</text><text x="344.8" y="44.0" text-anchor="start" font-size="11" fill="#0A0F1E" font-weight="700">Nutrimuscle</text><text x="264.2" y="384" text-anchor="start" font-size="11" fill="#0A0F1E" font-weight="700">Novoma</text><text x="100.0" y="64.0" text-anchor="start" font-size="11" fill="#0A0F1E" font-weight="700">Cuure</text><text x="541.2" y="64.0" text-anchor="end" font-size="11" fill="#0A0F1E" font-weight="700">MyProtein</text><text x="257.0" y="256.0" text-anchor="start" font-size="11" fill="#0A0F1E" font-weight="700">Decathlon (A</text><text x="97.0" y="384" text-anchor="start" font-size="11" fill="#0A0F1E" font-weight="700">Nutripure</text></svg>
+        <div class="synth__insight">
+          <strong>Pattern A — Acquisition agressive</strong> (Aqeelab · Nutri&Co · Nutrimuscle · MyProtein) :
+          livraison offerte sans seuil + remise −15 à −45%. Sacrifie la marge logistique pour la conversion.
+          <br><br>
+          <strong>Pattern B — Rentabilité prudente</strong> (Novoma · Decathlon) :
+          livraison stepped + remise modérée. Protège la marge mais moins attractif en CTA.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>12</strong> / 21</div>
+  </div>
+</section>
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 13 — RENTABILITE SANTÉ
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav"><span class="nav__item">Intro</span><span class="nav__item">Méthodologie</span><span class="nav__item">Benchmark</span><span class="nav__item">Synthèse</span><span class="nav__item nav__item--active">Rentabilité</span><span class="nav__item">Recommandation</span><span class="nav__item">Next steps</span></nav>
+  <h1 class="title">Rentabilité Santé · contribution nette HT par produit × livraison × remise.</h1>
+  <div class="title__rule"></div>
+  <div class="body">
+    <div style="overflow:auto;flex:1">
+      <table class="rentab__table">
+        <thead>
+          <tr>
+            <th rowspan="2" style="text-align:left;min-width:170px">Produit</th>
+            <th colspan="3" class="group-pr">Point Relais (3,90€)</th>
+            <th colspan="3" class="group-dom">Domicile (5,90€)</th>
+            <th colspan="3" class="group-exp">Express (10,90€)</th>
+          </tr>
+          <tr>
+            <th class="sub">-10%</th><th class="sub">-15%</th><th class="sub">-20%</th>
+            <th class="sub">-10%</th><th class="sub">-15%</th><th class="sub">-20%</th>
+            <th class="sub">-10%</th><th class="sub">-15%</th><th class="sub">-20%</th>
+          </tr>
+        </thead>
+        <tbody><tr><td class="product-name">Multivitamines</td><td style="background:#dcfce7">69%</td><td style="background:#dcfce7">68%</td><td style="background:#dcfce7">66%</td><td style="background:#dcfce7">58%</td><td style="background:#dcfce7">55%</td><td style="background:#dcfce7">52%</td><td style="background:#bbf7d0">28%</td><td style="background:#bbf7d0">24%</td><td style="background:#bbf7d0">19%</td></tr><tr><td class="product-name">Sommeil +</td><td style="background:#dcfce7">69%</td><td style="background:#dcfce7">67%</td><td style="background:#dcfce7">65%</td><td style="background:#dcfce7">57%</td><td style="background:#dcfce7">54%</td><td style="background:#dcfce7">51%</td><td style="background:#bbf7d0">27%</td><td style="background:#bbf7d0">23%</td><td style="background:#bbf7d0">18%</td></tr><tr><td class="product-name">Pré-Probiotiques</td><td style="background:#dcfce7">65%</td><td style="background:#dcfce7">63%</td><td style="background:#dcfce7">61%</td><td style="background:#dcfce7">55%</td><td style="background:#dcfce7">53%</td><td style="background:#dcfce7">50%</td><td style="background:#dcfce7">31%</td><td style="background:#bbf7d0">27%</td><td style="background:#bbf7d0">23%</td></tr><tr><td class="product-name">Fer Bisglycinate</td><td style="background:#dcfce7">63%</td><td style="background:#dcfce7">61%</td><td style="background:#dcfce7">59%</td><td style="background:#dcfce7">50%</td><td style="background:#dcfce7">47%</td><td style="background:#dcfce7">44%</td><td style="background:#bbf7d0">17%</td><td style="background:#fef3c7">12%</td><td style="background:#fef3c7">7%</td></tr><tr><td class="product-name">Curcumine</td><td style="background:#dcfce7">60%</td><td style="background:#dcfce7">58%</td><td style="background:#dcfce7">55%</td><td style="background:#dcfce7">49%</td><td style="background:#dcfce7">46%</td><td style="background:#dcfce7">42%</td><td style="background:#bbf7d0">21%</td><td style="background:#bbf7d0">16%</td><td style="background:#fef3c7">11%</td></tr><tr><td class="product-name">Collagène marin Peptan® (2 parfums)</td><td style="background:#dcfce7">57%</td><td style="background:#dcfce7">55%</td><td style="background:#dcfce7">52%</td><td style="background:#dcfce7">51%</td><td style="background:#dcfce7">48%</td><td style="background:#dcfce7">45%</td><td style="background:#dcfce7">36%</td><td style="background:#dcfce7">32%</td><td style="background:#bbf7d0">28%</td></tr><tr><td class="product-name">Vitamine D3</td><td style="background:#dcfce7">57%</td><td style="background:#dcfce7">54%</td><td style="background:#dcfce7">51%</td><td style="background:#dcfce7">43%</td><td style="background:#dcfce7">40%</td><td style="background:#dcfce7">36%</td><td style="background:#fef3c7">8%</td><td style="background:#fef3c7">2%</td><td style="background:#fecaca">-4%</td></tr><tr><td class="product-name">Vitamine C</td><td style="background:#dcfce7">53%</td><td style="background:#dcfce7">50%</td><td style="background:#dcfce7">47%</td><td style="background:#dcfce7">36%</td><td style="background:#dcfce7">32%</td><td style="background:#bbf7d0">28%</td><td style="background:#fecaca">-7%</td><td style="background:#fecaca">-13%</td><td style="background:#fecaca">-21%</td></tr><tr><td class="product-name">Spiruline Biologique</td><td style="background:#dcfce7">52%</td><td style="background:#dcfce7">50%</td><td style="background:#dcfce7">46%</td><td style="background:#dcfce7">35%</td><td style="background:#dcfce7">31%</td><td style="background:#bbf7d0">27%</td><td style="background:#fecaca">-8%</td><td style="background:#fecaca">-14%</td><td style="background:#fecaca">-21%</td></tr><tr><td class="product-name">Peptides collagène Peptan® cacao</td><td style="background:#dcfce7">52%</td><td style="background:#dcfce7">49%</td><td style="background:#dcfce7">46%</td><td style="background:#dcfce7">44%</td><td style="background:#dcfce7">40%</td><td style="background:#dcfce7">37%</td><td style="background:#bbf7d0">22%</td><td style="background:#bbf7d0">18%</td><td style="background:#fef3c7">13%</td></tr><tr><td class="product-name">Peptides collagène Peptan® exotique</td><td style="background:#dcfce7">52%</td><td style="background:#dcfce7">49%</td><td style="background:#dcfce7">46%</td><td style="background:#dcfce7">44%</td><td style="background:#dcfce7">40%</td><td style="background:#dcfce7">37%</td><td style="background:#bbf7d0">22%</td><td style="background:#bbf7d0">18%</td><td style="background:#fef3c7">12%</td></tr><tr><td class="product-name">Collagène marin Peptan® nature</td><td style="background:#dcfce7">51%</td><td style="background:#dcfce7">48%</td><td style="background:#dcfce7">45%</td><td style="background:#dcfce7">44%</td><td style="background:#dcfce7">41%</td><td style="background:#dcfce7">37%</td><td style="background:#bbf7d0">27%</td><td style="background:#bbf7d0">23%</td><td style="background:#bbf7d0">18%</td></tr><tr><td class="product-name">Magnésium Bisglycinate</td><td style="background:#dcfce7">49%</td><td style="background:#dcfce7">46%</td><td style="background:#dcfce7">43%</td><td style="background:#dcfce7">35%</td><td style="background:#dcfce7">32%</td><td style="background:#bbf7d0">27%</td><td style="background:#fef3c7">1%</td><td style="background:#fecaca">-5%</td><td style="background:#fecaca">-12%</td></tr><tr><td class="product-name">Omega 3 EPAX®</td><td style="background:#dcfce7">49%</td><td style="background:#dcfce7">46%</td><td style="background:#dcfce7">43%</td><td style="background:#dcfce7">40%</td><td style="background:#dcfce7">36%</td><td style="background:#dcfce7">32%</td><td style="background:#bbf7d0">16%</td><td style="background:#fef3c7">11%</td><td style="background:#fef3c7">6%</td></tr><tr><td class="product-name">Peptides collagène Peptan® nature</td><td style="background:#dcfce7">43%</td><td style="background:#dcfce7">40%</td><td style="background:#dcfce7">36%</td><td style="background:#dcfce7">33%</td><td style="background:#bbf7d0">29%</td><td style="background:#bbf7d0">25%</td><td style="background:#fef3c7">8%</td><td style="background:#fef3c7">2%</td><td style="background:#fecaca">-4%</td></tr><tr><td class="product-name">Glycine cristallisée</td><td style="background:#bbf7d0">27%</td><td style="background:#bbf7d0">22%</td><td style="background:#bbf7d0">18%</td><td style="background:#fef3c7">6%</td><td style="background:#fef3c7">1%</td><td style="background:#fecaca">-5%</td><td style="background:#fecaca">-45%</td><td style="background:#fecaca">-53%</td><td style="background:#fecaca">-63%</td></tr></tbody>
+      </table>
+    </div>
+    <div class="rentab__legend">
+      <div class="rentab__legend-item"><div class="rentab__legend-sw" style="background:#dcfce7"></div>Rentable (≥ 30%)</div>
+      <div class="rentab__legend-item"><div class="rentab__legend-sw" style="background:#bbf7d0"></div>Correct (15-30%)</div>
+      <div class="rentab__legend-item"><div class="rentab__legend-sw" style="background:#fef3c7"></div>Marginal (0-15%)</div>
+      <div class="rentab__legend-item"><div class="rentab__legend-sw" style="background:#fecaca"></div>Déficitaire (&lt; 0%)</div>
+      <span style="margin-left:auto;font-size:10px;color:var(--grey-500)">% = contribution nette HT / prix abo HT · 16 lignes (17 SKUs)</span>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>13</strong> / 21</div>
+  </div>
+</section>
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 14 — RENTABILITE SPORT & AUTRES
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav"><span class="nav__item">Intro</span><span class="nav__item">Méthodologie</span><span class="nav__item">Benchmark</span><span class="nav__item">Synthèse</span><span class="nav__item nav__item--active">Rentabilité</span><span class="nav__item">Recommandation</span><span class="nav__item">Next steps</span></nav>
+  <h1 class="title">Rentabilité Sport & autres · contribution nette HT par produit × livraison × remise.</h1>
+  <div class="title__rule"></div>
+  <div class="body">
+    <div style="overflow:auto;flex:1">
+      <table class="rentab__table">
+        <thead>
+          <tr>
+            <th rowspan="2" style="text-align:left;min-width:170px">Produit</th>
+            <th colspan="3" class="group-pr">Point Relais (3,90€)</th>
+            <th colspan="3" class="group-dom">Domicile (5,90€)</th>
+            <th colspan="3" class="group-exp">Express (10,90€)</th>
+          </tr>
+          <tr>
+            <th class="sub">-10%</th><th class="sub">-15%</th><th class="sub">-20%</th>
+            <th class="sub">-10%</th><th class="sub">-15%</th><th class="sub">-20%</th>
+            <th class="sub">-10%</th><th class="sub">-15%</th><th class="sub">-20%</th>
+          </tr>
+        </thead>
+        <tbody><tr><td class="product-name">Preworkout citron</td><td style="background:#dcfce7">57%</td><td style="background:#dcfce7">54%</td><td style="background:#dcfce7">51%</td><td style="background:#dcfce7">51%</td><td style="background:#dcfce7">48%</td><td style="background:#dcfce7">45%</td><td style="background:#dcfce7">36%</td><td style="background:#dcfce7">32%</td><td style="background:#bbf7d0">28%</td></tr><tr><td class="product-name">Flasque 500ml</td><td style="background:#dcfce7">55%</td><td style="background:#dcfce7">52%</td><td style="background:#dcfce7">49%</td><td style="background:#dcfce7">44%</td><td style="background:#dcfce7">40%</td><td style="background:#dcfce7">37%</td><td style="background:#bbf7d0">16%</td><td style="background:#fef3c7">11%</td><td style="background:#fef3c7">5%</td></tr><tr><td class="product-name">Whey Recovery (2 parfums)</td><td style="background:#dcfce7">54%</td><td style="background:#dcfce7">51%</td><td style="background:#dcfce7">48%</td><td style="background:#dcfce7">48%</td><td style="background:#dcfce7">45%</td><td style="background:#dcfce7">42%</td><td style="background:#dcfce7">34%</td><td style="background:#dcfce7">30%</td><td style="background:#bbf7d0">26%</td></tr><tr><td class="product-name">BCAA 2.1.1 (2 parfums)</td><td style="background:#dcfce7">53%</td><td style="background:#dcfce7">50%</td><td style="background:#dcfce7">47%</td><td style="background:#dcfce7">43%</td><td style="background:#dcfce7">39%</td><td style="background:#dcfce7">36%</td><td style="background:#bbf7d0">19%</td><td style="background:#fef3c7">14%</td><td style="background:#fef3c7">8%</td></tr><tr><td class="product-name">Boisson effort (2 parfums)</td><td style="background:#dcfce7">50%</td><td style="background:#dcfce7">47%</td><td style="background:#dcfce7">44%</td><td style="background:#dcfce7">40%</td><td style="background:#dcfce7">37%</td><td style="background:#dcfce7">33%</td><td style="background:#fef3c7">15%</td><td style="background:#fef3c7">10%</td><td style="background:#fef3c7">4%</td></tr><tr><td class="product-name">Électrolytes poudre citron</td><td style="background:#dcfce7">47%</td><td style="background:#dcfce7">44%</td><td style="background:#dcfce7">41%</td><td style="background:#dcfce7">33%</td><td style="background:#bbf7d0">29%</td><td style="background:#bbf7d0">25%</td><td style="background:#fecaca">-2%</td><td style="background:#fecaca">-8%</td><td style="background:#fecaca">-14%</td></tr><tr><td class="product-name">Électrolytes poudre pêche</td><td style="background:#dcfce7">44%</td><td style="background:#dcfce7">41%</td><td style="background:#dcfce7">37%</td><td style="background:#dcfce7">30%</td><td style="background:#bbf7d0">26%</td><td style="background:#bbf7d0">22%</td><td style="background:#fecaca">-5%</td><td style="background:#fecaca">-11%</td><td style="background:#fecaca">-18%</td></tr><tr><td class="product-name">Électrolytes efferv. (3 parfums)</td><td style="background:#dcfce7">38%</td><td style="background:#dcfce7">35%</td><td style="background:#dcfce7">31%</td><td style="background:#bbf7d0">16%</td><td style="background:#fef3c7">11%</td><td style="background:#fef3c7">5%</td><td style="background:#fecaca">-40%</td><td style="background:#fecaca">-48%</td><td style="background:#fecaca">-58%</td></tr><tr><td class="product-name">Créatine Creapure®</td><td style="background:#dcfce7">33%</td><td style="background:#bbf7d0">29%</td><td style="background:#bbf7d0">25%</td><td style="background:#bbf7d0">16%</td><td style="background:#fef3c7">11%</td><td style="background:#fef3c7">5%</td><td style="background:#fecaca">-27%</td><td style="background:#fecaca">-35%</td><td style="background:#fecaca">-43%</td></tr><tr><td class="product-name">L-Glutamine Kyowa®</td><td style="background:#dcfce7">30%</td><td style="background:#bbf7d0">26%</td><td style="background:#bbf7d0">21%</td><td style="background:#fef3c7">14%</td><td style="background:#fef3c7">9%</td><td style="background:#fef3c7">3%</td><td style="background:#fecaca">-26%</td><td style="background:#fecaca">-33%</td><td style="background:#fecaca">-42%</td></tr><tr><td class="product-name">Maltodextrine</td><td style="background:#bbf7d0">28%</td><td style="background:#bbf7d0">24%</td><td style="background:#bbf7d0">20%</td><td style="background:#fef3c7">10%</td><td style="background:#fef3c7">5%</td><td style="background:#fecaca">-1%</td><td style="background:#fecaca">-37%</td><td style="background:#fecaca">-45%</td><td style="background:#fecaca">-54%</td></tr><tr><td class="product-name">Barre protéinée crispy choco-coco</td><td style="background:#bbf7d0">21%</td><td style="background:#bbf7d0">16%</td><td style="background:#fef3c7">11%</td><td style="background:#fef3c7">0%</td><td style="background:#fecaca">-5%</td><td style="background:#fecaca">-12%</td><td style="background:#fecaca">-51%</td><td style="background:#fecaca">-59%</td><td style="background:#fecaca">-69%</td></tr><tr><td class="product-name">Barre protéinée crispy chocolat</td><td style="background:#bbf7d0">19%</td><td style="background:#fef3c7">14%</td><td style="background:#fef3c7">9%</td><td style="background:#fecaca">-1%</td><td style="background:#fecaca">-7%</td><td style="background:#fecaca">-14%</td><td style="background:#fecaca">-52%</td><td style="background:#fecaca">-61%</td><td style="background:#fecaca">-71%</td></tr><tr><td class="product-name">Whey Isolate chocolat</td><td style="background:#bbf7d0">17%</td><td style="background:#fef3c7">12%</td><td style="background:#fef3c7">7%</td><td style="background:#fef3c7">12%</td><td style="background:#fef3c7">7%</td><td style="background:#fef3c7">1%</td><td style="background:#fecaca">-2%</td><td style="background:#fecaca">-8%</td><td style="background:#fecaca">-15%</td></tr><tr><td class="product-name">Whey Isolate vanille</td><td style="background:#fef3c7">14%</td><td style="background:#fef3c7">8%</td><td style="background:#fef3c7">3%</td><td style="background:#fef3c7">8%</td><td style="background:#fef3c7">3%</td><td style="background:#fecaca">-4%</td><td style="background:#fecaca">-6%</td><td style="background:#fecaca">-12%</td><td style="background:#fecaca">-19%</td></tr><tr><td class="product-name">Whey Isolate nature</td><td style="background:#fef3c7">13%</td><td style="background:#fef3c7">8%</td><td style="background:#fef3c7">3%</td><td style="background:#fef3c7">8%</td><td style="background:#fef3c7">2%</td><td style="background:#fecaca">-4%</td><td style="background:#fecaca">-7%</td><td style="background:#fecaca">-13%</td><td style="background:#fecaca">-20%</td></tr><tr><td class="product-name">Bidon 750ml</td><td style="background:#fef3c7">2%</td><td style="background:#fecaca">-4%</td><td style="background:#fecaca">-10%</td><td style="background:#fecaca">-26%</td><td style="background:#fecaca">-34%</td><td style="background:#fecaca">-42%</td><td style="background:#fecaca">-96%</td><td style="background:#fecaca">-108%</td><td style="background:#fecaca">-121%</td></tr><tr><td class="product-name">Shaker 750ml</td><td style="background:#fef3c7">1%</td><td style="background:#fecaca">-5%</td><td style="background:#fecaca">-11%</td><td style="background:#fecaca">-27%</td><td style="background:#fecaca">-35%</td><td style="background:#fecaca">-43%</td><td style="background:#fecaca">-97%</td><td style="background:#fecaca">-109%</td><td style="background:#fecaca">-122%</td></tr><tr><td class="product-name">Shaker 450ml</td><td style="background:#fecaca">-2%</td><td style="background:#fecaca">-7%</td><td style="background:#fecaca">-14%</td><td style="background:#fecaca">-34%</td><td style="background:#fecaca">-42%</td><td style="background:#fecaca">-50%</td><td style="background:#fecaca">-114%</td><td style="background:#fecaca">-127%</td><td style="background:#fecaca">-141%</td></tr></tbody>
+      </table>
+    </div>
+    <div class="rentab__legend">
+      <div class="rentab__legend-item"><div class="rentab__legend-sw" style="background:#dcfce7"></div>Rentable (≥ 30%)</div>
+      <div class="rentab__legend-item"><div class="rentab__legend-sw" style="background:#bbf7d0"></div>Correct (15-30%)</div>
+      <div class="rentab__legend-item"><div class="rentab__legend-sw" style="background:#fef3c7"></div>Marginal (0-15%)</div>
+      <div class="rentab__legend-item"><div class="rentab__legend-sw" style="background:#fecaca"></div>Déficitaire (&lt; 0%)</div>
+      <span style="margin-left:auto;font-size:10px;color:var(--grey-500)">% = contribution nette HT / prix abo HT · 19 lignes (24 SKUs)</span>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>14</strong> / 21</div>
+  </div>
+</section>
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 15 — RECO 1/3 · PRODUITS ÉLIGIBLES
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav"><span class="nav__item">Intro</span><span class="nav__item">Méthodologie</span><span class="nav__item">Benchmark</span><span class="nav__item">Synthèse</span><span class="nav__item">Rentabilité</span><span class="nav__item nav__item--active">Recommandation</span><span class="nav__item">Next steps</span></nav>
+  <h1 class="title">Recommandation 1/3 · 6 SKUs MVP à consommation récurrente naturelle.</h1>
+  <div class="title__rule"></div>
+  <div class="body">
+    <div class="reco-products-grid">
+      <div class="reco-col reco-col--go">
+        <div class="reco-col__title">✓ MVP Phase 1 · 6 SKUs</div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text"><strong>Magnésium Bisglycinate</strong><em>Santé · minéraux · 1-2 mois/pot · marge 76%</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text"><strong>Oméga-3 EPAX®</strong><em>Santé · acides gras · quotidien · SKU phare Impulse</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text"><strong>Multivitamines</strong><em>Santé · vitamines · panier d'entrée naturel · marge 92%</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text"><strong>Pré-Probiotiques</strong><em>Santé · digestion · cure 2-3 mois · marge 84%</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text"><strong>Sommeil +</strong><em>Santé · adaptogènes · quotidien le soir · marge 91%</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text"><strong>Créatine Monohydrate</strong><em>Sport · performance · 5g/jour · SKU acquisition sportive</em></div></div>
+      </div>
+      <div>
+        <div class="reco-col reco-col--maybe" style="margin-bottom:40px">
+          <div class="reco-col__title">⚠ Phase 2 · avec précaution</div>
+          <div class="reco-item"><div class="reco-item__icon">⚠</div><div class="reco-item__text"><strong>Whey</strong><em>Lock goût à la souscription · bouton "changer" dans espace abonné</em></div></div>
+          <div class="reco-item"><div class="reco-item__icon">⚠</div><div class="reco-item__text"><strong>Collagène Marin</strong><em>Selon format / goût après validation Phase 1</em></div></div>
+        </div>
+        <div class="reco-col reco-col--no">
+          <div class="reco-col__title">✗ Exclus du lancement</div>
+          <div class="reco-item"><div class="reco-item__icon">✗</div><div class="reco-item__text"><strong>Packs / coffrets / bundles</strong><em>Composition figée (pattern panel)</em></div></div>
+          <div class="reco-item"><div class="reco-item__icon">✗</div><div class="reco-item__text"><strong>Accessoires</strong><em>Shakers, doseurs · pas de récurrence</em></div></div>
+          <div class="reco-item"><div class="reco-item__icon">✗</div><div class="reco-item__text"><strong>Snacks &amp; électrolytes</strong><em>Consommation événementielle</em></div></div>
+          <div class="reco-item"><div class="reco-item__icon">✗</div><div class="reco-item__text"><strong>Produits en rupture de formule ou saisonniers</strong><em>Risque d'indisponibilité au renouvellement</em></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>15</strong> / 21</div>
+  </div>
+</section>
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 16 — RECO 2/3 · MODÈLE COMMERCIAL
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav"><span class="nav__item">Intro</span><span class="nav__item">Méthodologie</span><span class="nav__item">Benchmark</span><span class="nav__item">Synthèse</span><span class="nav__item">Rentabilité</span><span class="nav__item nav__item--active">Recommandation</span><span class="nav__item">Next steps</span></nav>
+  <h1 class="title">Recommandation 2/3 · −15% flat · sans engagement · livraison offerte dès 35€.</h1>
+  <div class="title__rule"></div>
+  <div class="body">
+    <div class="reco-cards">
+      <div class="reco-card">
+        <div class="reco-card__label">Remise</div>
+        <div class="reco-card__value">−15%</div>
+        <div class="reco-card__sub">flat · aligné Nutri&amp;Co / Nutrimuscle</div>
+        <div class="reco-card__note">Sous Aqeelab (−20%) mais compensé par zéro engagement. Soutenable avec marges brutes 62-92% HT.</div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card__label">Fréquences</div>
+        <div class="reco-card__value">1 · 2 · 3<span style="font-size:20px;color:var(--grey-500)"> mois</span></div>
+        <div class="reco-card__sub">point de différenciation</div>
+        <div class="reco-card__note">Le "2 mois" manque chez Nutri&amp;Co — sweet spot pot 60 gélules.</div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card__label">Livraison</div>
+        <div class="reco-card__value">dès 35€</div>
+        <div class="reco-card__sub">domicile offerte · seuil incitatif</div>
+        <div class="reco-card__note">Modèle hybride : protège la marge mono-produit et pousse à l'upsell.</div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card__label">Engagement</div>
+        <div class="reco-card__value">Aucun</div>
+        <div class="reco-card__sub">résiliation 1 clic · Loi Chatel</div>
+        <div class="reco-card__note">Leçon Aqeelab (2 mois = friction) + Cuure (2 temps = anti-pattern documenté).</div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card__label">Stacking</div>
+        <div class="reco-card__value">Partiel</div>
+        <div class="reco-card__sub">welcome OK · promos non cumul</div>
+        <div class="reco-card__note">Approche Nutrimuscle : booste l'acquisition sans diluer la marge abo sur les renouvellements.</div>
+      </div>
+    </div>
+    <div style="padding:24px 32px;background:var(--ink);color:var(--cream);border-left:5px solid var(--mint);font-size:16px;line-height:1.5">
+      <strong style="color:var(--mint-soft)">Verdict commercial :</strong> −15% flat est <strong>prudent</strong> (Impulse peut aller jusqu'à −30% en restant rentable sur un panier 35€) et aligné sur la référence marché FR. Le seuil 35€ est une <strong>incitation à l'upsell</strong> plutôt qu'une protection marge.
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>16</strong> / 21</div>
+  </div>
+</section>
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 17 — RECO 3/3 · UX · POSITIONNEMENT
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav"><span class="nav__item">Intro</span><span class="nav__item">Méthodologie</span><span class="nav__item">Benchmark</span><span class="nav__item">Synthèse</span><span class="nav__item">Rentabilité</span><span class="nav__item nav__item--active">Recommandation</span><span class="nav__item">Next steps</span></nav>
+  <h1 class="title">Recommandation 3/3 · 5 patterns à copier · 5 anti-patterns à éviter absolument.</h1>
+  <div class="title__rule"></div>
+  <div class="body">
+    <div class="reco-products-grid">
+      <div class="reco-col reco-col--go">
+        <div class="reco-col__title">À copier · patterns gagnants du panel</div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text">CTA <strong>"S'abonner &amp; économiser"</strong><em>Source Aqeelab · déclencheur psychologique sur le CTA</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text"><strong>Affichage du montant économisé en euros</strong> sur la fiche<em>Source Aqeelab · pattern persuasif unique (vs abstraction du %)</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text"><strong>Page dédiée /pages/abonnement</strong> avec pitch éditorial santé<em>Source Novoma · "Les compléments marchent mieux sur le long terme"</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text"><strong>Visibilité maximale</strong> : homepage + nav + newsletter<em>Source Nutrimuscle · le plus visible du panel</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">+</div><div class="reco-item__text"><strong>Email pré-expédition 48h</strong> avec fenêtre de modification<em>Source Nutri&amp;Co · seul mécanisme anti-churn documenté</em></div></div>
+      </div>
+      <div class="reco-col reco-col--no">
+        <div class="reco-col__title">À éviter · anti-patterns documentés</div>
+        <div class="reco-item"><div class="reco-item__icon">✗</div><div class="reco-item__text"><strong>Sous-domaine séparé</strong><em>Source Decathlon · friction redirect, parcours abonné isolé</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">✗</div><div class="reco-item__text"><strong>"1 produit = 1 abo"</strong><em>Source Decathlon · mauvaise UX multi-abos, pas de panier abo</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">✗</div><div class="reco-item__text"><strong>Résiliation en 2 temps</strong> (suspension vs email)<em>Source Cuure · dark pattern à la limite Loi Chatel</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">✗</div><div class="reco-item__text"><strong>Engagement minimum forcé</strong><em>Source Aqeelab · friction d'entrée tue la conversion</em></div></div>
+        <div class="reco-item"><div class="reco-item__icon">✗</div><div class="reco-item__text"><strong>Prix de base instables</strong><em>Source MyProtein · promos permanentes rendent la remise abo illisible</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>17</strong> / 21</div>
+  </div>
+</section>
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 18 — VERDICT 1 PAGE (synthèse one-look)
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide verdict-slide">
+  <nav class="nav">
+    <span class="nav__item">Intro</span>
+    <span class="nav__item">Méthodologie</span>
+    <span class="nav__item">Benchmark</span>
+    <span class="nav__item">Synthèse</span>
+    <span class="nav__item">Rentabilité</span>
+    <span class="nav__item nav__item--active">Recommandation</span>
+    <span class="nav__item">Next steps</span>
+  </nav>
+  <h1 class="title">Verdict en un coup d'œil · le modèle Impulse à valider par le comité.</h1>
+  <div class="title__rule"></div>
+  <div class="body">
+    <div class="verdict__big">
+      Lancer <strong>Subscribe &amp; Save −15% flat</strong><br>
+      sur <strong>6 SKUs MVP</strong>, <strong>sans engagement</strong>,<br>
+      livraison offerte dès <strong>35€</strong>.
+    </div>
+    <div class="verdict__pillars">
+      <div class="verdict__pillar">
+        <div class="verdict__pillar-label">Scope</div>
+        <div class="verdict__pillar-value">6 SKUs</div>
+        <div class="verdict__pillar-text">Santé récurrent : Magnésium, Oméga-3, Multivit, Pré-Probiotiques, Sommeil+, Créatine</div>
+      </div>
+      <div class="verdict__pillar">
+        <div class="verdict__pillar-label">Économie abo</div>
+        <div class="verdict__pillar-value">−15%</div>
+        <div class="verdict__pillar-text">Flat · aligné référence marché FR · laisse une marge de manœuvre pour promos ponctuelles</div>
+      </div>
+      <div class="verdict__pillar">
+        <div class="verdict__pillar-label">Rentabilité</div>
+        <div class="verdict__pillar-value">53%</div>
+        <div class="verdict__pillar-text">Taux de contribution nette HT sur un panier 35€ — break-even à 39 abonnés actifs</div>
+      </div>
+      <div class="verdict__pillar">
+        <div class="verdict__pillar-label">Timeline</div>
+        <div class="verdict__pillar-value">6 sem.</div>
+        <div class="verdict__pillar-text">Design + tech + soft launch · objectif MVP : 50-100 abonnés actifs à M3</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>18</strong> / 21</div>
+  </div>
+</section>
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 19 — ROADMAP + ACTIONS IMMÉDIATES
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page">
+  <nav class="nav"><span class="nav__item">Intro</span><span class="nav__item">Méthodologie</span><span class="nav__item">Benchmark</span><span class="nav__item">Synthèse</span><span class="nav__item">Rentabilité</span><span class="nav__item">Recommandation</span><span class="nav__item nav__item--active">Next steps</span></nav>
+  <h1 class="title">Roadmap 3 phases · 8 actions immédiates à lancer dès validation comité.</h1>
+  <div class="title__rule"></div>
+  <div class="body">
+    <div class="phases">
+      <div class="phase">
+        <div class="phase__label">Phase 1 · MVP</div>
+        <div class="phase__title">0–3 mois</div>
+        <div class="phase__dur">Fondations produit &amp; UX</div>
+        <div class="phase__body">
+          <ul>
+            <li>6 SKUs du Top GO scoring rentabilité</li>
+            <li>Toggle fiche produit + page dédiée + mention homepage</li>
+            <li>Engagement zéro · −15% flat · livraison offerte dès 35€</li>
+            <li>Email pré-expédition 48h actif</li>
+            <li><strong>Objectif</strong> : 50-100 abonnés actifs, mesurer churn 90j</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase__label">Phase 2 · OPT</div>
+        <div class="phase__title">3–6 mois</div>
+        <div class="phase__dur">Optimisation &amp; élargissement</div>
+        <div class="phase__body">
+          <ul>
+            <li>Ajout du Whey avec lock goût à la souscription</li>
+            <li>Test A/B wording "S'abonner" vs "S'abonner &amp; économiser"</li>
+            <li>Programme de fidélité cumulable</li>
+            <li>Analyse cohortes churn par SKU</li>
+            <li>Élargissement fréquences sur gros formats</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase__label">Phase 3 · SCALE</div>
+        <div class="phase__title">6–12 mois</div>
+        <div class="phase__dur">Scale &amp; différenciation</div>
+        <div class="phase__body">
+          <ul>
+            <li>Élargir à tous les SKUs éligibles (hors packs/accessoires)</li>
+            <li>Programme de parrainage abo cross-canal</li>
+            <li>Quiz d'onboarding léger (inspiré Cuure)</li>
+            <li>Intégration programme ambassadeurs</li>
+            <li>Optimisation algo upsell 2 → 3 produits</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="actions__title">8 actions immédiates · à lancer dès validation</div>
+      <div class="action"><div class="action__n">01</div><div class="action__text">Validation comité projet du modèle commercial</div></div>
+      <div class="action"><div class="action__n">02</div><div class="action__text">Audit Loi Chatel avec juriste <em style="opacity:0.6">(1-2 jours)</em></div></div>
+      <div class="action"><div class="action__n">03</div><div class="action__text">Choix tech Recharge / Shopify Native / Bold · devis</div></div>
+      <div class="action"><div class="action__n">04</div><div class="action__text">Export Shopify 90 jours · baseline potentiel abonnés</div></div>
+      <div class="action"><div class="action__n">05</div><div class="action__text">Design / maquettes : fiche + page abo + email 48h</div></div>
+      <div class="action"><div class="action__n">06</div><div class="action__text">Mise en place technique <em style="opacity:0.6">(2-3 semaines)</em></div></div>
+      <div class="action"><div class="action__n">07</div><div class="action__text">Lancement soft · 6 SKUs · mesure baseline 1 mois</div></div>
+      <div class="action"><div class="action__n">08</div><div class="action__text">Lancement officiel · après ajustements UX</div></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>19</strong> / 21</div>
+  </div>
+</section>
+<!-- ═════════════════════════════════════════════════════════════════
+     SLIDE 20 — DÉCISION ATTENDUE DU COMITÉ
+     ═════════════════════════════════════════════════════════════════ -->
+<section class="slide slide--page decision-slide">
+  <nav class="nav"><span class="nav__item">Intro</span><span class="nav__item">Méthodologie</span><span class="nav__item">Benchmark</span><span class="nav__item">Synthèse</span><span class="nav__item">Rentabilité</span><span class="nav__item">Recommandation</span><span class="nav__item nav__item--active">Next steps</span></nav>
+  <h1 class="title">Décision attendue du comité · 3 questions oui/non pour débloquer le lancement.</h1>
+  <div class="title__rule"></div>
+  <div class="body">
+    <div class="decision-questions">
+      <div class="decision-q">
+        <div class="decision-q__num">01</div>
+        <div class="decision-q__text">Validez-vous le <strong>modèle commercial</strong> : −15% flat, sans engagement, livraison offerte dès 35€, stacking partiel avec codes welcome et ambassadeurs ?</div>
+        <div class="decision-q__boxes">
+          <div class="decision-q__box">OUI</div>
+          <div class="decision-q__box">NON</div>
+        </div>
+      </div>
+      <div class="decision-q">
+        <div class="decision-q__num">02</div>
+        <div class="decision-q__text">Validez-vous le <strong>périmètre MVP Phase 1</strong> : 6 SKUs santé-récurrent (Magnésium, Oméga-3, Multivit, Pré-Probiotiques, Sommeil+, Créatine) ?</div>
+        <div class="decision-q__boxes">
+          <div class="decision-q__box">OUI</div>
+          <div class="decision-q__box">NON</div>
+        </div>
+      </div>
+      <div class="decision-q">
+        <div class="decision-q__num">03</div>
+        <div class="decision-q__text">Validez-vous le <strong>budget d'investissement</strong> : app abo (~500€/mois) + setup initial design/intégration (~5 000€) + audit juridique (~1 500€) ?</div>
+        <div class="decision-q__boxes">
+          <div class="decision-q__box">OUI</div>
+          <div class="decision-q__box">NON</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer__confidential">Internal document — Strictly confidential</div>
+    <div class="footer__pagination"><strong>20</strong> / 21</div>
+  </div>
+</section>
+<!-- FINAL_SLIDES_END -->
+
+</body>
+</html>

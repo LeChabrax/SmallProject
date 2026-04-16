@@ -1,8 +1,9 @@
-# DM Decision Tree — Bibliothèque procédurale Instagram
+# DM Decision Tree -- Bibliotheque procedurale Instagram
 
-Decision tree + bibliothèque de templates **réels** pour répondre aux DMs
-Instagram en respectant le ton d'Antoine. Source unique pour drafter une
-réponse DM.
+> **Source machine-readable des templates** : [`docs/templates.yaml`](templates.yaml) -- 20 templates structures avec 3 modes (verbatim, pick_from_list, semi_structured). Le YAML est la source de verite pour le skill `/instagram-dm`. Ce fichier reste la reference humaine lisible.
+
+Decision tree + bibliotheque de templates **reels** pour repondre aux DMs
+Instagram en respectant le ton d'Antoine.
 
 > Sources combinées :
 > - Onglet `Message_type` du Sheet (templates curés à la main par Antoine)
@@ -281,17 +282,14 @@ Quand tu vois un de ces codes (ou toute variante `{NOM}25`) dans un thread, **ç
 ## 5.5 Commande validée + envoi du code affilié (CRITIQUE)
 
 **Template canonique** à utiliser quand la draft Shopify est créée et qu'on
-envoie le code affilié à l'ambassadeur. Ne JAMAIS omettre les 3 points clés
-en gras ci-dessous : cumulabilité produits, cumulabilité expédition,
-livraison gratuite dès 69 €.
+envoie le code affilié à l'ambassadeur. Ne JAMAIS omettre le point clé
+en gras ci-dessous : cumulabilité produits.
 
 > La commande est validée et sera expédiée très prochainement !
 >
 > Je t'ai créé un code affilié perso ({CODE}) qui permettra à ta communauté
 > de bénéficier de -15% sur tout le site (sans minimum d'achat). **Le code
-> est cumulable avec toutes les autres réductions sur les produits ET avec
-> les réductions sur l'expédition. La livraison est également gratuite dès
-> 69 € d'achat.**
+> est cumulable avec toutes les autres réductions sur les produits.**
 >
 > Si les produits te plaisent et que tu en parles autour de toi, tu
 > cumuleras 20€ de crédit à chaque commande passée avec ton code,
@@ -309,8 +307,8 @@ livraison gratuite dès 69 €.
 
 - ~~« avec un shaker offert dès 59 € d'achats »~~ : promo historique supprimée.
 - ~~« -15% sur leur première commande »~~ : le code marche sur TOUTES les commandes.
-- Oublier la mention « cumulable avec les autres réductions produits ET expédition ».
-- Oublier la mention « livraison gratuite dès 69 € ».
+- ~~« cumulable avec les réductions sur l'expédition »~~ : plus de remise livraison.
+- ~~« livraison gratuite dès 69 € »~~ : ne plus mentionner dans les DMs ambassadeur.
 
 ---
 

@@ -12,8 +12,9 @@
 > - Création des codes Shopify (4 patterns) → [`docs/process_create_codes.md`](./docs/process_create_codes.md)
 > - Création des draft orders + tags (impact CA) → [`docs/process_create_orders.md`](./docs/process_create_orders.md)
 > - Calcul du crédit ambassadeur `(O−Q)×20€` → [`docs/process_calculate_credits.md`](./docs/process_calculate_credits.md)
-> - **Instagram DM workflow (protocole 9 étapes bloquant)** → skill `/instagram-dm`
-> - Decision tree DM Instagram (templates réels, référence humaine) → [`docs/dm_decision_tree.md`](./docs/dm_decision_tree.md)
+> - **Instagram DM workflow (protocole 9 etapes bloquant)** -> skill `/instagram-dm`
+> - **Bibliotheque de templates DM (YAML structure, 20 templates, 3 modes)** -> [`docs/templates.yaml`](./docs/templates.yaml)
+> - Decision tree DM Instagram (reference humaine) -> [`docs/dm_decision_tree.md`](./docs/dm_decision_tree.md)
 > - Architecture / carte codebase → [`LLM.md`](./LLM.md)
 
 ## Qui sommes-nous

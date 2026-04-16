@@ -1,0 +1,631 @@
+# =============================================================================
+# Bibliotheque de templates DM Instagram — Impulse Nutrition
+# =============================================================================
+#
+# Source unique machine-readable des messages a envoyer aux ambassadeurs.
+# Reference humaine : docs/dm_decision_tree.md
+#
+# MODES :
+#   verbatim         → Claude copie-colle le body, remplace les {vars} uniquement
+#   pick_from_list   → Claude choisit dans la liste, n'invente JAMAIS
+#   semi_structured  → Parties fixes verbatim + remplir les slots declares
+#
+# REGLE D'OR : aucune reformulation en mode verbatim. Le texte dans body:
+# est le texte final (variables substituees). Toute divergence = RED FLAG.
+# =============================================================================
+
+version: 1
+generated_from: "docs/dm_decision_tree.md"
+last_updated: "2026-04-16"
+
+# -----------------------------------------------------------------------------
+# Regles de tone globales
+# -----------------------------------------------------------------------------
+personality:
+  tutoiement: true
+  signature_long: "Sportivement,\nAntoine"
+  signature_medium: "Antoine"
+  signature_alt: "Antoine - Impulse Nutrition"
+  signature_threshold: 3  # nb phrases minimum pour signer
+  emoji_max: 2
+  emoji_favorites: ["😉", "🔥", "😄", "😊", "😍", "☺️"]
+  emoji_banned: ["🙏", "✨", "💖"]
+  no_em_dash: true
+  no_final_period_micro: true
+  double_exclamation_micro: true
+  no_hello_active_conv: true
+  banned_terms: ["ROI", "KPI", "reach", "conversion", "collab"]
+  preferred_terms:
+    collab: "partenariat"
+
+# -----------------------------------------------------------------------------
+# Variables disponibles (remplies par le skill depuis thread/Sheet/profil)
+# -----------------------------------------------------------------------------
+variables:
+  prenom:
+    description: "Prenom (Sheet col AE ou contexte thread)"
+    source: "sheet.AE ou thread_user.full_name.split()[0]"
+  username:
+    description: "Compte Instagram @"
+    source: "thread_user.username"
+  CODE:
+    description: "Code affilie Shopify (ex: FLORINE, ALEXTV)"
+    source: "sheet.N (code_affilie) ou Shopify"
+  CODE25:
+    description: "Code welcome -25% (ACHAB25 par defaut)"
+    source: "detection thread ou ACHAB25"
+  envelope:
+    description: "Montant dotation (80 EUR ou 100 EUR)"
+    source: "regle: <20k followers = 80, >=20k = 100"
+  credit_value:
+    description: "Montant credit disponible en euros"
+    source: "(sheet.O - sheet.Q) * 20"
+  solde:
+    description: "Nombre d'utilisations de credit restantes"
+    source: "sheet.O - sheet.Q"
+  N:
+    description: "Nombre generique (followers, utilisations...)"
+    source: "contexte"
+  accroche:
+    description: "Accroche contextuelle projet/bio"
+    source: "extraction manuelle du thread/bio"
+
+# =============================================================================
+# TEMPLATES
+# =============================================================================
+templates:
+
+  # ---------------------------------------------------------------------------
+  # S2 — Premier message ambassadeur
+  # ---------------------------------------------------------------------------
+  s2_pitch_standard:
+    id: "s2"
+    section: "2"
+    name: "Premier message ambassadeur - standard"
+    category: "new_prospect_outbound"
+    mode: "verbatim"
+    needs_signature: true
+    variables: [prenom]
+    body: |
+      Hello {prenom},
+
+      Je suis Antoine d'Impulse Nutrition, une marque de nutrition sportive premium qui developpe des produits fabriques en France de tres grande qualite, penses par et pour les besoins reels des sportifs.
+
+      Nous lancons un programme ambassadeur et recherchons des athletes qui souhaitent tester nos produits. Ton profil nous a semble particulierement coherent, tant pour ton approche du sport que pour la qualite de ton contenu ainsi que credibilite et l'engagement que tu degages.
+
+      Je voulais donc savoir si ca t'interesserait de recevoir des produits a tester, et, s'ils te plaisent, de faire partie de notre programme ambassadeur ? Je peux te donner plus de details si tu veux !
+
+      Sportivement,
+      Antoine
+    example_filled: |
+      Hello Florine,
+
+      Je suis Antoine d'Impulse Nutrition, une marque de nutrition sportive premium qui developpe des produits fabriques en France de tres grande qualite, penses par et pour les besoins reels des sportifs.
+
+      Nous lancons un programme ambassadeur et recherchons des athletes qui souhaitent tester nos produits. Ton profil nous a semble particulierement coherent, tant pour ton approche du sport que pour la qualite de ton contenu ainsi que credibilite et l'engagement que tu degages.
+
+      Je voulais donc savoir si ca t'interesserait de recevoir des produits a tester, et, s'ils te plaisent, de faire partie de notre programme ambassadeur ? Je peux te donner plus de details si tu veux !
+
+      Sportivement,
+      Antoine
+
+  s2_pitch_impressionne:
+    id: "s2v"
+    section: "2"
+    name: "Premier message ambassadeur - impressionne par le profil"
+    category: "new_prospect_outbound"
+    mode: "verbatim"
+    needs_signature: true
+    variables: [envelope]
+    envelope_rules:
+      - condition: "followers < 20000"
+        value: "80 €"
+      - condition: "followers >= 20000"
+        value: "100 €"
+    body: |
+      On est tres impressionnes par ton parcours ! C'est tres inspirant et tu partages vraiment les valeurs du sport et du depassement de soi, donc deja bravo !!
+
+      Travailler avec toi sera un plaisir ! Ce que je te propose :
+
+      Dans un premier temps, on t'envoie pour {envelope} de produits, tu choisis ce que tu preferes ou on te fait un pack, c'est comme tu preferes, dans tous les cas c'est gratuit pour toi !
+
+      Dans un deuxieme temps, si les produits te plaisent, on te cree un code affiliation que tu pourras partager en story avec ta review des produits.
+
+      Et dans un troisieme temps, si ton code affiliation fonctionne bien, on te passera dans le programme ambassadeur et a chaque fois qu'une commande sera passee avec ton code, tu recevras 20 € de credit a utiliser sur notre site, comme ca tu pourras avoir autant de complements que necessaire pour ta pratique !
+
+      Je le redis, encore bravo, ton profil est vraiment impressionnant !
+
+      N'hesite pas si tu as des questions,
+      Antoine
+    example_filled: |
+      On est tres impressionnes par ton parcours ! C'est tres inspirant et tu partages vraiment les valeurs du sport et du depassement de soi, donc deja bravo !!
+
+      Travailler avec toi sera un plaisir ! Ce que je te propose :
+
+      Dans un premier temps, on t'envoie pour 100 € de produits, tu choisis ce que tu preferes ou on te fait un pack, c'est comme tu preferes, dans tous les cas c'est gratuit pour toi !
+
+      Dans un deuxieme temps, si les produits te plaisent, on te cree un code affiliation que tu pourras partager en story avec ta review des produits.
+
+      Et dans un troisieme temps, si ton code affiliation fonctionne bien, on te passera dans le programme ambassadeur et a chaque fois qu'une commande sera passee avec ton code, tu recevras 20 € de credit a utiliser sur notre site, comme ca tu pourras avoir autant de complements que necessaire pour ta pratique !
+
+      Je le redis, encore bravo, ton profil est vraiment impressionnant !
+
+      N'hesite pas si tu as des questions,
+      Antoine
+
+  # ---------------------------------------------------------------------------
+  # S3 — Refus (personne deja prise)
+  # ---------------------------------------------------------------------------
+  s3_0_refus_neutre:
+    id: "s3.0"
+    section: "3.0"
+    name: "Refus poli neutre (sponsor non identifie)"
+    category: "already_taken_flou"
+    mode: "verbatim"
+    needs_signature: true
+    variables: []
+    sheet_update:
+      statut: "Out"
+      priorite: "good"
+    body: |
+      On comprend tout a fait, merci d'avoir pris le temps de nous repondre ! On te souhaite une tres belle continuation dans tes projets avec ta marque actuelle. Une future collaboration serait avec grand plaisir, n'hesite surtout pas a revenir vers nous si l'occasion se presente !
+
+      Sportivement,
+      Antoine
+
+  s3_1_sponsor_exclusif_effort:
+    id: "s3.1"
+    section: "3.1"
+    name: "Refus - sponsor exclusif effort/perfo (TA Energy, Nutripure, Overstim...)"
+    category: "already_taken_exclusif_effort"
+    mode: "verbatim"
+    needs_signature: true
+    variables: []
+    note: "Identique a s3.0. Statut Out, on n'insiste plus."
+    sheet_update:
+      statut: "Out"
+      priorite: "good"
+    body: |
+      On comprend tout a fait, merci d'avoir pris le temps de nous repondre ! On te souhaite une tres belle continuation dans tes projets avec ta marque actuelle. Une future collaboration serait avec grand plaisir, n'hesite surtout pas a revenir vers nous si l'occasion se presente !
+
+      Sportivement,
+      Antoine
+
+  s3_2_sponsor_bienetre:
+    id: "s3.2"
+    section: "3.2"
+    name: "Refus - sponsor bien-etre global (porte ouverte effort)"
+    category: "already_taken_bienetre"
+    mode: "verbatim"
+    needs_signature: true
+    variables: []
+    body: |
+      Merci d'avoir pris le temps de nous repondre ! On comprend tout a fait et l'on te souhaite une tres belle continuation dans tes projets avec ta marque actuelle. Si jamais tu cherches des complements alimentaires plus axes sur l'effort, et vraiment specialises sur la performance, on pense vraiment qu'Impulse Nutrition pourrait te plaire. Si ca t'interesse, n'hesite surtout pas, on reste disponibles pour une future collaboration !
+
+      Sportivement,
+      Antoine - Impulse Nutrition
+
+  s3_3_sponsor_effort_ouverture_recup:
+    id: "s3.3"
+    section: "3.3"
+    name: "Refus - sponsor effort mais ouverture recuperation"
+    category: "already_taken_effort_ouverture_recup"
+    mode: "verbatim"
+    needs_signature: true
+    variables: []
+    body: |
+      Merci d'avoir pris le temps de nous repondre ! On comprend tout a fait et l'on te souhaite une tres belle continuation dans tes projets avec ta marque actuelle. Si jamais tu cherches a trouver des complements alimentaires plus axes sur la recuperation et les moments avant et apres l'effort, on pense vraiment qu'Impulse Nutrition pourrait te plaire. On sait qu'il nous manque quelques produits pour la partie effort, mais on y travaille ! En revanche, on a vraiment de super produits pour la recup, donc si ca t'interesse, n'hesite surtout pas, on reste disponibles pour une future collaboration !
+
+      Sportivement,
+      Antoine - Impulse Nutrition
+
+  s3_4_communaute_trop_petite:
+    id: "s3.4"
+    section: "3.4"
+    name: "Refus - communaute trop petite + code welcome"
+    category: "community_too_small"
+    mode: "verbatim"
+    needs_signature: true
+    variables: [prenom, accroche, CODE25]
+    note: "Apres envoi, le prospect est 'parque'. CODE25 = ACHAB25 par defaut."
+    sheet_update:
+      statut: "Out"
+      priorite: "good"
+    body: |
+      Merci pour ton message {prenom} et pour le partage de ton projet, {accroche} 🔥
+
+      Pour etre transparent avec toi, on travaille avec des profils qui ont une communaute deja bien etablie sur les reseaux, et pour l'instant ton compte ne correspond pas encore aux criteres qu'on recherche pour nos partenariats. Ce n'est absolument pas un jugement sur la qualite de ton contenu ou de ton projet, mais c'est notre critere actuel.
+
+      Ce qu'on peut faire en revanche : je te laisse un code perso {CODE25} pour que tu puisses decouvrir nos produits avec -25% sur ta commande. Et si dans le futur ta communaute se developpe, n'hesite pas a revenir vers nous, ce sera avec plaisir !
+
+      Sportivement,
+      Antoine
+    example_filled: |
+      Merci pour ton message Lucas et pour le partage de ton projet, ta prepa marathon ca a l'air solide 🔥
+
+      Pour etre transparent avec toi, on travaille avec des profils qui ont une communaute deja bien etablie sur les reseaux, et pour l'instant ton compte ne correspond pas encore aux criteres qu'on recherche pour nos partenariats. Ce n'est absolument pas un jugement sur la qualite de ton contenu ou de ton projet, mais c'est notre critere actuel.
+
+      Ce qu'on peut faire en revanche : je te laisse un code perso ACHAB25 pour que tu puisses decouvrir nos produits avec -25% sur ta commande. Et si dans le futur ta communaute se developpe, n'hesite pas a revenir vers nous, ce sera avec plaisir !
+
+      Sportivement,
+      Antoine
+
+  # ---------------------------------------------------------------------------
+  # S4 — Presentation detaillee du programme
+  # ---------------------------------------------------------------------------
+  s4_explication_programme:
+    id: "s4"
+    section: "4"
+    name: "Presentation detaillee du programme ambassadeur"
+    category: "in_hot_needs_reply"
+    mode: "verbatim"
+    needs_signature: true
+    variables: []
+    body: |
+      On est ravis !
+
+      Pour t'expliquer plus en details, l'objectif du programme ambassadeur est que tu representes la marque en realisant des posts, stories ou tout autre format de ton choix, afin que ton code d'affiliation soit utilise un maximum. En tant qu'ambassadeur, tu recois un credit de 20€ a utiliser sur Impulse Nutrition a chaque fois qu'une commande est realisee avec ton code. Ca te permet de commander autant de complements alimentaires que necessaire pour ta pratique !
+
+      Par la suite, si tout se passe vraiment bien, on pourra naturellement evoluer vers un partenariat remunere.
+
+      Si tu veux plus d'infos, n'hesite pas. En tout cas, ton profil nous interesse beaucoup et on a des produits sympas a te faire tester !
+
+      Sportivement,
+      Antoine
+
+  # ---------------------------------------------------------------------------
+  # S5 — Acceptation : demande infos commande
+  # ---------------------------------------------------------------------------
+  s5_demande_infos:
+    id: "s5"
+    section: "5"
+    name: "Acceptation - demande infos commande (standard)"
+    category: "accepted_needs_info"
+    mode: "verbatim"
+    needs_signature: true
+    variables: []
+    body: |
+      C'est parfait pour nous aussi ! On te laisse choisir et revenir vers nous avec ta selection. N'oublie pas de nous transmettre dans le meme temps une adresse mail et postale. Si tu as besoin d'aide ou d'infos sur les produits n'hesite pas !
+
+      Sportivement,
+      Antoine - Impulse Nutrition
+
+  s5_demande_infos_enthousiaste:
+    id: "s5v"
+    section: "5"
+    name: "Acceptation - demande infos commande (enthousiaste)"
+    category: "accepted_needs_info"
+    mode: "verbatim"
+    needs_signature: true
+    variables: []
+    body: |
+      Trop bien, on est ravi ! 😄
+
+      Pour tester les produits, est-ce que tu preferes selectionner toi-meme les produits qui t'interessent sur notre site ou qu'on te concocte un pack personnalise ? Dans les deux cas c'est gratuit pour toi ! Il me faudra egalement une adresse (avec nom + prenom), un email et un numero, je te prepare la commande en suivant !
+
+      Sportivement,
+      Antoine
+
+  # ---------------------------------------------------------------------------
+  # S5.5 — Commande validee + envoi code affilie (CRITIQUE)
+  # ---------------------------------------------------------------------------
+  s5_5_envoi_code:
+    id: "s5.5"
+    section: "5.5"
+    name: "Commande validee + envoi code affilie"
+    category: "order_confirmed_send_code"
+    mode: "verbatim"
+    needs_signature: true
+    variables: [CODE]
+    critical_rule: "DOIT inclure : code cumulable avec toutes les autres reductions"
+    obsolete_mentions:
+      - "shaker offert des 59 EUR"
+      - "-15% sur leur premiere commande (le code marche sur TOUTES les commandes)"
+      - "cumulable avec les reductions sur l'expedition"
+      - "livraison gratuite des 69 EUR"
+    body: |
+      La commande est validee et sera expediee tres prochainement !
+
+      Je t'ai cree un code affilie perso ({CODE}) qui permettra a ta communaute de beneficier de -15% sur tout le site (sans minimum d'achat). Le code est cumulable avec toutes les autres reductions sur les produits.
+
+      Si les produits te plaisent et que tu en parles autour de toi, tu cumuleras 20€ de credit a chaque commande passee avec ton code, utilisables pour renouveler tes stocks quand tu veux.
+
+      Code : {CODE}
+      Lien : https://impulse-nutrition.fr/discount/{CODE}
+
+      N'hesite pas si tu as des questions, a tres vite !
+
+      Sportivement,
+      Antoine
+    example_filled: |
+      La commande est validee et sera expediee tres prochainement !
+
+      Je t'ai cree un code affilie perso (FLORINE15) qui permettra a ta communaute de beneficier de -15% sur tout le site (sans minimum d'achat). Le code est cumulable avec toutes les autres reductions sur les produits.
+
+      Si les produits te plaisent et que tu en parles autour de toi, tu cumuleras 20€ de credit a chaque commande passee avec ton code, utilisables pour renouveler tes stocks quand tu veux.
+
+      Code : FLORINE15
+      Lien : https://impulse-nutrition.fr/discount/FLORINE15
+
+      N'hesite pas si tu as des questions, a tres vite !
+
+      Sportivement,
+      Antoine
+
+  # ---------------------------------------------------------------------------
+  # S6 — Message envoi commande
+  # ---------------------------------------------------------------------------
+  s6_envoi_commande:
+    id: "s6"
+    section: "6"
+    name: "Message post-envoi commande"
+    category: "order_sent"
+    mode: "verbatim"
+    needs_signature: false
+    variables: []
+    note: "Court, simple, pas de signature. Suit l'envoi du tracking."
+    body: "Hate d'avoir tes retours et bonne degustation !!"
+
+  # ---------------------------------------------------------------------------
+  # S7 — Reaction au contenu
+  # ---------------------------------------------------------------------------
+  s7_1_stories_manquees:
+    id: "s7.1"
+    section: "7.1"
+    name: "Stories manquees (reaction tardive)"
+    category: "content_reaction"
+    mode: "verbatim"
+    needs_signature: false
+    variables: []
+    body: |
+      Hello ! J'ai pas eu le temps de voir tes stories, tu as ete trop rapide pour moi !
+      Les produits t'ont plu ? ☺️
+
+  s7_2_conseils_code:
+    id: "s7.2"
+    section: "7.2"
+    name: "Conseils pour optimiser le code (post-publication)"
+    category: "content_optimization"
+    mode: "verbatim"
+    needs_signature: true
+    variables: [prenom]
+    body: |
+      Hello {prenom},
+
+      J'espere que tu vas bien ! J'ai vu tes derniers contenus, c'est vraiment top !
+
+      Petit retour de ce qui fonctionne bien chez nos ambassadeurs :
+      - la mention d'Impulse et du code affilie en bio et Story a la une. Cela permet aux sportifs qui te suivent de retrouver facilement le code s'ils le cherchent 😉
+      - le partage de ton lien affilie en story qui permet d'acceder directement sur le site
+
+      Encore merci pour ton travail et ta confiance, on est tres heureux que les produits te plaisent 🙏
+
+      Sportivement,
+      Antoine
+
+  # ---------------------------------------------------------------------------
+  # S8 — Demande utilisation credits
+  # ---------------------------------------------------------------------------
+  s8_utilisation_credits:
+    id: "s8"
+    section: "8"
+    name: "Reponse demande utilisation credits"
+    category: "use_credits"
+    mode: "verbatim"
+    needs_signature: true
+    variables: [prenom, credit_value, solde]
+    note: "credit_value = (col_O - col_Q) * 20. solde = col_O - col_Q."
+    body: |
+      Avec plaisir {prenom} ! Tu as actuellement {credit_value} € de credit disponible (soit {solde} utilisations x 20€). Tu veux que je te cree le code maintenant ? Tu pourras le passer en une seule commande sur le site.
+
+      Sportivement,
+      Antoine
+    example_filled: |
+      Avec plaisir Brianne ! Tu as actuellement 60 € de credit disponible (soit 3 utilisations x 20€). Tu veux que je te cree le code maintenant ? Tu pourras le passer en une seule commande sur le site.
+
+      Sportivement,
+      Antoine
+
+  # ---------------------------------------------------------------------------
+  # S12 — Micro-messages (pick_from_list)
+  # ---------------------------------------------------------------------------
+  s12_micro:
+    id: "s12"
+    section: "12"
+    name: "Catalogue micro-messages"
+    category: "micro_response"
+    mode: "pick_from_list"
+    needs_signature: false
+    variables: []
+    note: "Choisir UN message dans la sous-categorie appropriee. NE JAMAIS inventer."
+    subcategories:
+      validation:
+        - "Trop bien, on est ravi !!"
+        - "Au top !!"
+        - "Super !!"
+        - "Yes au top !"
+        - "C'est note je te dis comment je procede !"
+      remerciement:
+        - "Avec plaisir !!"
+        - "Merci a toi !!"
+        - "Merci beaucoup !!"
+      reaction_contenu:
+        - "Trop bien merci !! 🔥"
+        - "Au top, merci beaucoup !! 😍"
+        - "Trop cool merci a toi !! 🔥🔥"
+        - "Bravo c'est enorme !! 🔥"
+      accuse_reception:
+        - "Bien recu merci !"
+        - "C'est bien note !"
+        - "Aucun soucis c'est bien note !"
+        - "Entendu ! 😉"
+      rassurance:
+        - "Aucun souci !"
+        - "Prends ton temps !"
+        - "All good"
+      post_commande:
+        - "Hate d'avoir tes retours et bonne degustation !!"
+        - "Let's go c'est bon c'est modifie !"
+      cloture:
+        - "Tres bonne soiree !!"
+        - "Tres bon weekend !!"
+        - "A tres vite !"
+      felicitations:
+        - "Bravo c'est enorme !! 🔥"
+        - "Trop bien bravo !!"
+      feedback_positif:
+        - "Trop content que ca te plaise !!"
+        - "Ca fait plaisir !!"
+
+  # ---------------------------------------------------------------------------
+  # S13 — FAQ (pick_from_list)
+  # ---------------------------------------------------------------------------
+  s13_faq:
+    id: "s13"
+    section: "13"
+    name: "FAQ - Reponses types"
+    category: "faq"
+    mode: "pick_from_list"
+    needs_signature: false
+    variables: [N]
+    note: "Matcher les triggers, utiliser le body exact. [N] = nombre a remplir."
+    entries:
+      comment_utiliser_credit:
+        triggers: ["utiliser mon credit", "mes credits", "comment utiliser"]
+        body: "Tu m'envoies un message avec ce que tu veux commander, et je te fais un code du montant correspondant. Sinon on peut prevoir un call si tu preferes !"
+      combien_utilisations_code:
+        triggers: ["combien de personnes", "utilise mon code", "stats du code"]
+        body: "[N] utilisation(s) de ton code, bien joue !!"
+      code_ne_marche_pas:
+        triggers: ["code ne marche pas", "lien ne marche", "ne fonctionne pas"]
+        body: "Je check ca tout de suite ! [verifier et corriger, puis] C'est regle, tu peux reessayer !"
+      depasser_budget:
+        triggers: ["depasser", "budget", "plus que 80"]
+        body: "Le budget c'est 80€ mais ca peut depasser un petit peu, pas de souci !"
+      quand_comment_prendre:
+        triggers: ["quand prendre", "comment prendre", "posologie"]
+        body: "Whey : 30min-1h apres l'entrainement. Magnesium : le soir. Creatine : dans ton shaker avec le collagene."
+        note: "Adapter selon les produits commandes"
+      effets_secondaires_preworkout:
+        triggers: ["effets secondaires", "preworkout", "picotements", "flush"]
+        body: "C'est normal si c'est ta premiere prise ! Essaie avec 1/3 ou 1/2 scoop pour commencer, et augmente progressivement. N'hesite pas a me dire comment ca se passe !"
+      liberte_contenu:
+        triggers: ["libre sur le contenu", "quel format", "quoi poster"]
+        body: "Oui totalement ! Le format est libre, c'est toi qui geres selon ce qui colle le mieux a ta facon de communiquer. L'essentiel c'est de glisser ton code et ton lien pour que tes abonnes puissent en profiter !"
+      duree_partenariat:
+        triggers: ["ponctuel ou long terme", "combien de temps", "duree"]
+        body: "L'idee c'est vraiment de bosser sur le long terme ! On commence par un envoi de produits, si les produits te plaisent on te cree un code affilie, et a chaque commande passee avec ton code tu recois 20€ de credit chez nous. Et si la collab fonctionne vraiment bien, on peut envisager d'aller plus loin ensemble."
+      affiliatly_connexion:
+        triggers: ["affiliatly", "connexion", "me connecter"]
+        body: "Je check ca ! [Reset mot de passe ou renvoi du mail d'inscription]"
+      mail_avis:
+        triggers: ["mail d'avis", "avis", "judge.me"]
+        body: "Je vais voir si je peux te le renvoyer. Sinon, on travaille sur une solution pour laisser un avis directement depuis le site !"
+      difference_whey:
+        triggers: ["difference", "whey isolate", "whey recovery"]
+        body: "La Whey Recovery c'est une formule 3-en-1 : whey concentrate + creatine + collagene, pensee pour une recuperation complete (musculaire, articulaire et performance). La Whey Isolate c'est de la proteine pure et plus concentree, ideale si tu veux juste l'apport proteique. Les deux contiennent de la lactase donc pas de souci de digestion !"
+      lactose:
+        triggers: ["lactose", "intolerant", "digestion"]
+        body: "Nos whey contiennent de la lactase, une enzyme qui aide a digerer le lactose, donc pas de souci de digestion !"
+
+  # ---------------------------------------------------------------------------
+  # S14 — Gestion retards de reponse
+  # ---------------------------------------------------------------------------
+  s14_retard_leger:
+    id: "s14a"
+    section: "14"
+    name: "Excuse retard leger (> 4 jours)"
+    category: "excuse_retard"
+    mode: "verbatim"
+    needs_signature: false
+    variables: []
+    condition: "dernier_message_impulse > 4 jours"
+    note: "A prepender au debut du message principal"
+    body: "Excuse-moi pour le temps de reponse !"
+
+  s14_retard_appuye:
+    id: "s14b"
+    section: "14"
+    name: "Excuse retard appuye (> 10 jours)"
+    category: "excuse_retard"
+    mode: "verbatim"
+    needs_signature: false
+    variables: []
+    condition: "dernier_message_impulse > 10 jours"
+    note: "A prepender au debut du message principal"
+    body: "Je suis vraiment desole pour ce temps de reponse, c'est inadmissible de mon cote, c'etait un peu la course !"
+
+  # ---------------------------------------------------------------------------
+  # S16 — Relance prospect parque (semi_structured)
+  # ---------------------------------------------------------------------------
+  s16_relance_parque:
+    id: "s16"
+    section: "16"
+    name: "Relance prospect parque (code welcome detecte)"
+    category: "welcome_parque"
+    mode: "semi_structured"
+    needs_signature: true
+    variables: [prenom]
+    note: "JAMAIS utiliser s2 dans ce cas. Toujours acknowledger le passe."
+    slots:
+      accroche:
+        description: "Acknowledgment explicite du contexte nouveau du prospect"
+        contrainte: "Base sur des faits reels du thread, JAMAIS invente"
+        exemples:
+          - "Tu as bien grandi depuis notre dernier echange, {stats reelles}"
+          - "C'etait sympa d'echanger avec toi sur le stand du salon Run Experience"
+          - "Ta prepa pour l'Ultra Marin approche, ca a l'air solide"
+          - "Les stats que tu nous as partagees sont tres solides, bravo"
+      proposition:
+        description: "Offre adaptee au contexte"
+        si_justifie: "Ca fait tout a fait sens qu'on reprenne cette discussion maintenant. {offre}"
+        si_doute: "Je regarde ca de pres et je reviens vers toi tres vite pour te proposer quelque chose qui ait du sens."
+    body: |
+      Salut {prenom}, merci de revenir vers nous !
+
+      {accroche}
+
+      {proposition}
+
+      Sportivement,
+      Antoine
+    example_filled: |
+      Salut Maxime, merci de revenir vers nous !
+
+      Tu as bien grandi depuis notre dernier echange, 12k abonnes et un taux d'engagement a 6% c'est vraiment solide, bravo !
+
+      Ca fait tout a fait sens qu'on reprenne cette discussion maintenant. Je te propose qu'on s'appelle pour voir comment on peut bosser ensemble, qu'est-ce que tu en dis ?
+
+      Sportivement,
+      Antoine
+
+# =============================================================================
+# Categories non-draftables (action manuelle Antoine)
+# =============================================================================
+non_draftable:
+  voice_media:
+    description: "Message vocal - inaccessible via API"
+    action: "Signaler a Antoine, L=high"
+  raven_media:
+    description: "Media ephemere - inaccessible via API"
+    action: "Signaler a Antoine, L=medium"
+  club_orga_paid:
+    description: "Club/orga/projet evenement - hors Suivi_Amb"
+    action: "Router vers Suivi_Paid, signaler a Antoine"
+  contacter_manager:
+    description: "Profil avec agent/manager"
+    action: "Pas de DM, contacter l'agence par email"
+
+# =============================================================================
+# Regles d'improvisation (S9) — quand aucun template ne match
+# =============================================================================
+improvisation:
+  id: "s9"
+  section: "9"
+  rules:
+    - "Reste court : 1-2 phrases max si tu doutes"
+    - "Reponds a la derniere question explicitement avant d'ajouter quoi que ce soit"
+    - "Pas de 'Bonjour' si conversation deja ouverte"
+    - "Pas de signature si moins de 3 phrases"
+    - "Pas plus de 2 emojis"
+    - "Si tu proposes une action, confirme avec la personne avant de l'executer"

@@ -1,0 +1,33 @@
+{
+  "raw_theme_colors": [
+    "3E6F92",
+    "014F4F",
+    "67A7C0",
+    "009CA0",
+    "FED992",
+    "F08276",
+    "E2B3C4",
+    "675982",
+    "005555",
+    "279989",
+    "000000",
+    "07331D",
+    "A9BAC4",
+    "B2D0DB"
+  ],
+  "palette": {
+    "mint_primary": "#279989",
+    "teal_dark": "#014F4F",
+    "teal_deep": "#005555",
+    "green_very_dark": "#07331D",
+    "teal_clear": "#009CA0",
+    "blue_soft": "#3E6F92",
+    "blue_light": "#67A7C0",
+    "beige_gold": "#FED992",
+    "salmon": "#F08276",
+    "violet_muted": "#675982",
+    "ink": "#0A0F1E",
+    "black": "#000000",
+    "white": "#FFFFFF"
+  }
+}
