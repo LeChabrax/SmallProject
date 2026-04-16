@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
+<title>Preview B - KPI hero + colonnes compactes</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--mint:#279989;--mint-dark:#1F7A6D;--mint-soft:#7FCFB4;--salmon:#F08276;--ink:#0A0F1E;--grey-700:#4A525E;--grey-500:#6B6558;--grey-200:#E2DDCC;--grey-100:#F5F1E8;--cream:#FAF7EF;--white:#FFF;--font-display:'Source Sans 3',-apple-system,sans-serif;--font-body:'Source Sans 3',-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:var(--font-body);color:var(--ink);background:#1a1a1a;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:var(--cream);margin:40px auto;box-shadow:0 20px 80px rgba(0,0,0,.4);padding:70px 90px 90px;display:flex;flex-direction:column}
+.label{font-size:14px;font-weight:700;color:var(--mint);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+.title{font-family:var(--font-display);font-weight:700;font-size:38px;line-height:1.28;letter-spacing:-.015em;color:var(--ink);margin-bottom:16px}
+.rule{width:64px;height:4px;background:var(--mint);margin-bottom:32px}
+
+/* Hero KPIs band */
+.hero-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:32px;flex-shrink:0}
+.hero-kpi{padding:28px 32px;background:var(--ink);color:white;border-right:1px solid rgba(255,255,255,.1)}
+.hero-kpi:last-child{border-right:none}
+.hero-kpi:nth-child(4){background:var(--salmon)}
+.hero-kpi__value{font-family:var(--font-display);font-weight:300;font-size:48px;line-height:1;letter-spacing:-.03em;margin-bottom:6px}
+.hero-kpi__value .unit{font-size:18px;opacity:.6;margin-left:2px}
+.hero-kpi__label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+
+/* Columns below */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;flex:1}
+.col{padding:28px 28px;background:white;position:relative}
+.col::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--mint)}
+.col--alert::before{background:var(--salmon)}
+.col-title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:20px}
+.col--alert .col-title{color:var(--salmon)}
+.items{list-style:none;padding:0}
+.items li{font-size:16px;line-height:1.5;color:var(--ink);padding:12px 0;border-bottom:1px solid var(--grey-200)}
+.items li:last-child{border-bottom:none}
+.items li strong{font-weight:700}
+.items li em{display:block;font-size:13px;color:var(--grey-500);font-style:normal;margin-top:3px}
+
+.quote{margin-top:auto;padding:20px 32px;border-left:4px solid var(--mint);font-size:16px;line-height:1.5;color:var(--grey-700);font-style:italic;flex-shrink:0}
+.quote strong{color:var(--mint-dark);font-weight:700;font-style:normal}
+</style></head><body>
+<div style="text-align:center;color:white;font-size:28px;font-weight:700;padding:30px;letter-spacing:.05em">OPTION B -- Bandeau KPIs hero + colonnes fines</div>
+<div class="slide">
+  <div class="label">Preview B</div>
+  <h1 class="title">Modele d'abonnement pour Impulse : opportunite et faisabilite.</h1>
+  <div class="rule"></div>
+
+  <div class="hero-kpis">
+    <div class="hero-kpi"><div class="hero-kpi__value">43<span class="unit">SKUs</span></div><div class="hero-kpi__label">Dont 17 sante recurrente</div></div>
+    <div class="hero-kpi"><div class="hero-kpi__value">25-28<span class="unit">%</span></div><div class="hero-kpi__label">Returning customers</div></div>
+    <div class="hero-kpi"><div class="hero-kpi__value">6<span class="unit">/8</span></div><div class="hero-kpi__label">Concurrents avec abo</div></div>
+    <div class="hero-kpi"><div class="hero-kpi__value">0</div><div class="hero-kpi__label">Abonnement Impulse</div></div>
+  </div>
+
+  <div class="grid">
+    <div class="col">
+      <div class="col-title">Constat</div>
+      <ul class="items">
+        <li><strong>43 SKUs</strong> dont 17 sante a consommation recurrente<em>Complements pris en cure de 1 a 3 mois</em></li>
+        <li><strong>0 abonnement</strong> a ce jour<em>Aucun mecanisme de retention</em></li>
+        <li><strong>6/8 concurrents</strong> ont deja un abo<em>Nutri&Co, Nutrimuscle, Novoma, Cuure, Aqeelab, MyProtein</em></li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-title">Opportunite</div>
+      <ul class="items">
+        <li><strong>25-28% returning</strong> customers<em>Un socle naturel a capter</em></li>
+        <li><strong>Habitude existante</strong> a systematiser<em>Cycles 30-90 jours gamme sante</em></li>
+        <li><strong>Couts logistiques bas</strong><em>3,90&#8364; / 5,90&#8364; / 10,90&#8364;</em></li>
+      </ul>
+    </div>
+    <div class="col col--alert">
+      <div class="col-title">Objectif de l'etude</div>
+      <ul class="items">
+        <li><strong>Benchmarker</strong> 8 modeles concurrents<em>Remise, livraison, engagement, UX</em></li>
+        <li><strong>Evaluer la rentabilite</strong> catalogue Impulse<em>43 SKUs, prix de revient 2026</em></li>
+        <li><strong>Recommander</strong> un modele actionnable<em>Produits, remise, frequences, roadmap</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote">L'enjeu n'est pas de creer un besoin mais de <strong>capter une habitude existante</strong>. Les clients reviennent deja -- l'abonnement leur donne une raison de <strong>ne pas aller voir ailleurs</strong>.</div>
+</div>
+</body></html>

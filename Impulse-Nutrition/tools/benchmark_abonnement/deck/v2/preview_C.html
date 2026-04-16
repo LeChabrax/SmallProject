@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
+<title>Preview C - Split gauche/droite + accent mint</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--mint:#279989;--mint-dark:#1F7A6D;--mint-soft:#7FCFB4;--salmon:#F08276;--ink:#0A0F1E;--grey-700:#4A525E;--grey-500:#6B6558;--grey-200:#E2DDCC;--grey-100:#F5F1E8;--cream:#FAF7EF;--white:#FFF;--font-display:'Source Sans 3',-apple-system,sans-serif;--font-body:'Source Sans 3',-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:var(--font-body);color:var(--ink);background:#1a1a1a;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:var(--cream);margin:40px auto;box-shadow:0 20px 80px rgba(0,0,0,.4);display:flex}
+.label{font-size:14px;font-weight:700;color:var(--mint);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+
+/* Left panel - dark */
+.left{width:580px;background:var(--ink);color:white;padding:70px 50px 90px;display:flex;flex-direction:column;flex-shrink:0}
+.left .title{font-family:var(--font-display);font-weight:700;font-size:34px;line-height:1.3;letter-spacing:-.015em;color:white;margin-bottom:20px}
+.left .rule{width:48px;height:4px;background:var(--mint);margin-bottom:36px}
+.kpi-stack{display:flex;flex-direction:column;gap:20px;flex:1}
+.kpi-item{padding:20px 24px;border-left:4px solid var(--mint);background:rgba(255,255,255,.04)}
+.kpi-item--alert{border-left-color:var(--salmon)}
+.kpi-item__value{font-family:var(--font-display);font-weight:300;font-size:42px;line-height:1;letter-spacing:-.02em;color:white;margin-bottom:4px}
+.kpi-item__value .unit{font-size:16px;opacity:.5;margin-left:3px}
+.kpi-item__label{font-size:13px;color:rgba(255,255,255,.6);font-weight:400}
+.left-quote{margin-top:auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:1.55;color:rgba(255,255,255,.7);font-style:italic}
+.left-quote strong{color:var(--mint-soft);font-weight:600;font-style:normal}
+
+/* Right panel */
+.right{flex:1;padding:70px 60px 90px;display:flex;flex-direction:column}
+.right .nav{display:flex;gap:40px;margin-bottom:28px}
+.nav__item{font-size:13px;font-weight:400;color:var(--grey-500);letter-spacing:.1em;text-transform:uppercase;padding-bottom:8px}
+.nav__item--active{color:var(--mint);font-weight:700;border-bottom:3px solid var(--mint)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1}
+.col{padding:28px 28px;background:white;border-left:4px solid var(--mint);display:flex;flex-direction:column}
+.col--alert{border-left-color:var(--salmon)}
+.col--full{grid-column:1/-1}
+.col-title{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);margin-bottom:20px}
+.col--alert .col-title{color:var(--salmon)}
+.items{list-style:none;padding:0;flex:1}
+.items li{font-size:16px;line-height:1.5;color:var(--ink);padding:12px 0;border-bottom:1px solid var(--grey-200)}
+.items li:last-child{border-bottom:none}
+.items li strong{font-weight:700}
+.items li em{display:block;font-size:13px;color:var(--grey-500);font-style:normal;margin-top:3px}
+.items--horiz{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.items--horiz li{border-bottom:none;padding:8px 0}
+</style></head><body>
+<div style="text-align:center;color:white;font-size:28px;font-weight:700;padding:30px;letter-spacing:.05em">OPTION C -- Split dark/light + KPIs a gauche</div>
+<div class="slide">
+  <div class="left">
+    <div class="label">Preview C</div>
+    <div class="title">Modele d'abonnement pour Impulse : opportunite et faisabilite.</div>
+    <div class="rule"></div>
+    <div class="kpi-stack">
+      <div class="kpi-item"><div class="kpi-item__value">43<span class="unit">SKUs</span></div><div class="kpi-item__label">dont 17 sante a consommation recurrente</div></div>
+      <div class="kpi-item"><div class="kpi-item__value">25-28<span class="unit">%</span></div><div class="kpi-item__label">returning customers sans mecanisme</div></div>
+      <div class="kpi-item"><div class="kpi-item__value">6<span class="unit">/8</span></div><div class="kpi-item__label">concurrents ont deja un abo</div></div>
+      <div class="kpi-item kpi-item--alert"><div class="kpi-item__value">0</div><div class="kpi-item__label">abonnement Impulse a ce jour</div></div>
+    </div>
+    <div class="left-quote">L'enjeu : <strong>capter une habitude existante</strong>. Les clients reviennent deja -- l'abo leur donne une raison de <strong>ne pas aller voir ailleurs</strong>.</div>
+  </div>
+  <div class="right">
+    <nav class="nav">
+      <span class="nav__item nav__item--active">Intro</span>
+      <span class="nav__item">Methodologie</span>
+      <span class="nav__item">Benchmark</span>
+      <span class="nav__item">Synthese</span>
+      <span class="nav__item">Rentabilite</span>
+      <span class="nav__item">Reco</span>
+    </nav>
+    <div class="grid">
+      <div class="col">
+        <div class="col-title">Constat</div>
+        <ul class="items">
+          <li><strong>43 SKUs</strong> dont 17 sante recurrente<em>Cure de 1 a 3 mois</em></li>
+          <li><strong>0 abonnement</strong> a ce jour<em>Aucun mecanisme de retention</em></li>
+          <li><strong>6/8 concurrents</strong> avec abo<em>Nutri&Co, Nutrimuscle, Novoma, Cuure, Aqeelab, MyProtein</em></li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="col-title">Opportunite</div>
+        <ul class="items">
+          <li><strong>25-28% returning</strong> customers<em>Socle naturel a capter</em></li>
+          <li><strong>Habitude</strong> a systematiser<em>Cycles 30-90 jours gamme sante</em></li>
+          <li><strong>Couts logistiques bas</strong><em>3,90/5,90/10,90&#8364;</em></li>
+        </ul>
+      </div>
+      <div class="col col--alert col--full">
+        <div class="col-title">Objectif de l'etude</div>
+        <ul class="items items--horiz">
+          <li><strong>Benchmarker</strong> 8 modeles concurrents<em>Remise, livraison, engagement, UX, satisfaction</em></li>
+          <li><strong>Evaluer la rentabilite</strong> catalogue Impulse<em>43 SKUs, vrais prix de revient 2026</em></li>
+          <li><strong>Recommander</strong> un modele actionnable<em>Produits, remise, frequences, UX, roadmap</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

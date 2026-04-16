@@ -15,11 +15,11 @@ agency (contrat payant potentiel).
 
 Usage :
     python kolsquare_to_sheet.py \\
-        --csv ../KolSquare/filtered_prospects_042026.csv \\
+        --csv ../tools/veille_kolsquare/filtered_prospects_042026.csv \\
         --dry-run              # print what would be inserted, write nothing
 
     python kolsquare_to_sheet.py \\
-        --csv ../KolSquare/filtered_prospects_042026.csv \\
+        --csv ../tools/veille_kolsquare/filtered_prospects_042026.csv \\
         --priorities P1,P2,P3  # which priority buckets to insert (default all)
 
     python kolsquare_to_sheet.py --csv ... --limit 10   # first N only (test)

@@ -1,0 +1,190 @@
+{
+  "brand": "Nutri&Co",
+  "slug": "nutriandco",
+  "url": "https://nutriandco.com",
+  "has_subscription": true,
+  "modele_commercial": {
+    "remise_pct": 15,
+    "remise_note": "-15% flat, valeur identique mensuel et trimestriel (vérifié sur /fr/pages/page-abonnement). Non cumulable avec les codes welcome ni les codes promo ponctuels (le client doit choisir entre code et abo).",
+    "frequencies": [
+      "1 mois",
+      "3 mois"
+    ],
+    "flexibility": {
+      "pause": true,
+      "modify": true,
+      "cancel_anytime": true
+    },
+    "engagement_min": "Aucun",
+    "livraison_abo": {
+      "offerte": true,
+      "seuil_eur": 0,
+      "note": "Livraison domicile gratuite pour tous les abonnés, sans seuil minimum. En one-shot, livraison domicile gratuite seulement à partir de 89€ et relais à partir de 69€."
+    }
+  },
+  "perimetre_produit": {
+    "scope": "Produits individuels uniquement — le modèle '1 produit = 1 abonnement' exclut les packs",
+    "exclusions": [
+      "Packs de compléments (composition figée incompatible avec abo récurrent)",
+      "Coffrets cadeaux"
+    ],
+    "produits_sample": [
+      {
+        "name": "Collagène Marin",
+        "category": "Santé articulaire",
+        "price_oneshot": 29.9,
+        "price_sub": 25.42,
+        "discount_pct": 15,
+        "weight": "200g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Magnésium Bisglycinate",
+        "category": "Minéraux",
+        "price_oneshot": 19.9,
+        "price_sub": 16.92,
+        "discount_pct": 15,
+        "weight": "90 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "Oméga-3 Epax",
+        "category": "Acides gras",
+        "price_oneshot": 22.9,
+        "price_sub": 19.47,
+        "discount_pct": 15,
+        "weight": "60 capsules",
+        "format": "Capsules"
+      },
+      {
+        "name": "Multivitamines",
+        "category": "Vitamines",
+        "price_oneshot": 26.9,
+        "price_sub": 22.87,
+        "discount_pct": 15,
+        "weight": "60 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "Zinc Bisglycinate",
+        "category": "Minéraux",
+        "price_oneshot": 12.9,
+        "price_sub": 10.97,
+        "discount_pct": 15,
+        "weight": "60 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "Probiotiques",
+        "category": "Digestion",
+        "price_oneshot": 24.9,
+        "price_sub": 21.17,
+        "discount_pct": 15,
+        "weight": "60 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "Vitamine D3 + K2",
+        "category": "Vitamines",
+        "price_oneshot": 14.9,
+        "price_sub": 12.67,
+        "discount_pct": 15,
+        "weight": "60 gélules",
+        "format": "Gélules"
+      }
+    ],
+    "ticket_moyen_estime_eur": 35
+  },
+  "ux_page_produit": {
+    "wording_cta": "S'abonner",
+    "wording_pitch": "Abonnez-vous & économisez 15%",
+    "placement_module": "Toggle Achat unique / Abonnement au-dessus du bouton Ajouter au panier",
+    "toggle_style": "Radio buttons (Achat unique vs S'abonner)",
+    "frequency_selector": "Dropdown (1 ou 3 mois)",
+    "price_display": "Prix barré + prix abonné affiché en vert",
+    "dedicated_page": true,
+    "dedicated_page_url": "https://nutriandco.com/fr/pages/page-abonnement",
+    "homepage_mention": false,
+    "navigation_mention": false,
+    "email_mention": "Oui — email de pré-expédition avec fenêtre de modification de 48h avant chaque renouvellement",
+    "screenshots_files": [
+      "homepage.png",
+      "product_sub.png",
+      "collection.png",
+      "abonnement_page.png"
+    ]
+  },
+  "evaluation": {
+    "strengths": [
+      "Toggle clair sur la fiche produit",
+      "Prix abonné bien visible",
+      "Sans engagement mis en avant",
+      "Livraison domicile offerte sur tous les abonnements, sans seuil (alors qu'elle coûte ~6,50€ en one-shot sous 89€)",
+      "Email de pré-expédition avec fenêtre de modification de 48h (anti-pattern churn bien exécuté)",
+      "Page dédiée /fr/pages/page-abonnement avec pitch éditorial",
+      "Programme fidélité global (1€ = 1 point) — non spécifique à l'abo mais les points se cumulent sur les achats abo"
+    ],
+    "weaknesses": [
+      "Pas de mise en avant homepage/navigation (module discret, peut passer inaperçu)",
+      "Codes welcome et codes promo non cumulables avec l'abo (friction conversion : le client doit choisir entre son -15% welcome et la souscription)",
+      "Seulement 2 fréquences (1 mois / 3 mois) — pas de 2 mois qui serait le sweet spot pour un pot de 60 gélules"
+    ],
+    "score_ux": 4.0,
+    "score_offre_commerciale": 4.0,
+    "score_pertinence_vs_impulse": 4.5,
+    "score_global": 4.2,
+    "note": "Scores calibrés en fin de revue pass 1 (2026-04-15) après vérif live homogène des 8 marques. Grille : UX / Offre / Pertinence vs Impulse + Global = moyenne arithmétique.",
+    "rationale": {
+      "ux": "Toggle clair + prix abonné visible + page dédiée + email pré-expédition avec fenêtre modif 48h. Mais pas de mention homepage, pas de mention navigation, seulement 2 fréquences (1/3 mois), CTA basique 'S'abonner'.",
+      "offre": "−15% flat + livraison domicile offerte sans seuil + zéro engagement + programme fidélité cumulable. Pénalisé par seulement 2 fréquences et zéro stacking codes.",
+      "pertinence": "LA référence à benchmarker pour Impulse. Positionnement premium FR santé quasiment identique, même tech Shopify (même agence Axome), même catalogue compléments gélules/capsules/poudres. Score maximal justifié."
+    }
+  },
+  "logistique": {
+    "transporteurs": [
+      "Mondial Relay",
+      "Colissimo",
+      "Chronopost"
+    ],
+    "frais_relais": 4.5,
+    "seuil_gratuit_relais": 69,
+    "frais_domicile": 6.5,
+    "seuil_gratuit_domicile": 89,
+    "frais_express": "Variable",
+    "delai_standard": "2-3 jours ouvrés"
+  },
+  "tech": {
+    "platform": "Shopify",
+    "confidence": "high",
+    "source": "Axome agency (Shopify Platinum Partner) — refonte Nutri&Co confirmée",
+    "subscription_app": "Probablement Recharge ou Shopify Native Subscriptions",
+    "psp": "Shopify Payments (Stripe)",
+    "agency": "Axome"
+  },
+  "avis": {
+    "trustpilot_score": 4.45,
+    "trustpilot_nb_avis": 4400,
+    "trustpilot_url": "https://fr.trustpilot.com/review/nutriandco.com",
+    "points_forts": [
+      "Qualité des ingrédients",
+      "Transparence (certificats d'analyse)",
+      "Service client réactif",
+      "Marque française"
+    ],
+    "points_faibles": [
+      "Prix jugé élevé par certains",
+      "Quelques retards de livraison"
+    ],
+    "verbatims_abo": []
+  },
+  "_extras": {
+    "catalogue": {},
+    "ux_deep": {},
+    "subscription_ux": {}
+  },
+  "_meta": {
+    "last_updated": "2026-04-15",
+    "audit_status": "verified_live",
+    "source_format": "split from master_data.json + vérif live 2026-04-15 via FAQ Nutri&Co Zendesk"
+  }
+}

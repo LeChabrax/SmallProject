@@ -1,0 +1,2206 @@
+{
+  "meta": {
+    "description": "Benchmark consolidé — Abonnement Nutrition FR 2026",
+    "last_updated": "2026-04-15",
+    "brands_analyzed": 8,
+    "phases_completed": [
+      "catalogues",
+      "logistique",
+      "tech_stack",
+      "avis_clients",
+      "marche",
+      "rentabilite",
+      "ux_deep"
+    ],
+    "phases_pending": [],
+    "source_of_truth": "benchmark/marques/<brand>/data.json",
+    "generator": "benchmark/build_master.py",
+    "audit_statuses": {
+      "nutriandco": "verified_live",
+      "nutrimuscle": "verified_live",
+      "novoma": "verified_live",
+      "nutripure": "verified_live",
+      "cuure": "verified_live",
+      "decathlon": "verified_live",
+      "aqeelab": "verified_live",
+      "myprotein": "verified_live"
+    }
+  },
+  "brands": {
+    "nutriandco": {
+      "catalogue": {
+        "name": "Nutri&Co",
+        "url": "https://nutriandco.com",
+        "has_subscription": true,
+        "subscription_discount_pct": 15,
+        "subscription_model": "-15% flat, valeur identique mensuel et trimestriel (vérifié sur /fr/pages/page-abonnement). Non cumulable avec les codes welcome ni les codes promo ponctuels (le client doit choisir entre code et abo).",
+        "frequencies_available": [
+          "1 mois",
+          "3 mois"
+        ],
+        "flexibility": {
+          "pause": true,
+          "modify": true,
+          "cancel_anytime": true,
+          "minimum_commitment": "Aucun"
+        },
+        "products": [
+          {
+            "name": "Collagène Marin",
+            "category": "Santé articulaire",
+            "price_oneshot": 29.9,
+            "price_sub": 25.42,
+            "discount_pct": 15,
+            "weight": "200g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Magnésium Bisglycinate",
+            "category": "Minéraux",
+            "price_oneshot": 19.9,
+            "price_sub": 16.92,
+            "discount_pct": 15,
+            "weight": "90 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Oméga-3 Epax",
+            "category": "Acides gras",
+            "price_oneshot": 22.9,
+            "price_sub": 19.47,
+            "discount_pct": 15,
+            "weight": "60 capsules",
+            "format": "Capsules"
+          },
+          {
+            "name": "Multivitamines",
+            "category": "Vitamines",
+            "price_oneshot": 26.9,
+            "price_sub": 22.87,
+            "discount_pct": 15,
+            "weight": "60 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Zinc Bisglycinate",
+            "category": "Minéraux",
+            "price_oneshot": 12.9,
+            "price_sub": 10.97,
+            "discount_pct": 15,
+            "weight": "60 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Probiotiques",
+            "category": "Digestion",
+            "price_oneshot": 24.9,
+            "price_sub": 21.17,
+            "discount_pct": 15,
+            "weight": "60 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Vitamine D3 + K2",
+            "category": "Vitamines",
+            "price_oneshot": 14.9,
+            "price_sub": 12.67,
+            "discount_pct": 15,
+            "weight": "60 gélules",
+            "format": "Gélules"
+          }
+        ],
+        "subscription_scope": "Produits individuels uniquement — le modèle '1 produit = 1 abonnement' exclut les packs",
+        "estimated_avg_basket_sub": 35,
+        "subscription_shipping": {
+          "offerte": true,
+          "seuil_eur": 0,
+          "note": "Livraison domicile gratuite pour tous les abonnés, sans seuil minimum. En one-shot, livraison domicile gratuite seulement à partir de 89€ et relais à partir de 69€."
+        },
+        "subscription_exclusions": [
+          "Packs de compléments (composition figée incompatible avec abo récurrent)",
+          "Coffrets cadeaux"
+        ]
+      },
+      "logistique": {
+        "transporteurs": [
+          "Mondial Relay",
+          "Colissimo",
+          "Chronopost"
+        ],
+        "frais_relais": 4.5,
+        "seuil_gratuit_relais": 69,
+        "frais_domicile": 6.5,
+        "seuil_gratuit_domicile": 89,
+        "frais_express": "Variable",
+        "delai_standard": "2-3 jours ouvrés"
+      },
+      "tech": {
+        "platform": "Shopify",
+        "confidence": "high",
+        "source": "Axome agency (Shopify Platinum Partner) — refonte Nutri&Co confirmée",
+        "subscription_app": "Probablement Recharge ou Shopify Native Subscriptions",
+        "psp": "Shopify Payments (Stripe)",
+        "agency": "Axome"
+      },
+      "avis": {
+        "trustpilot_score": 4.45,
+        "trustpilot_nb_avis": 4400,
+        "trustpilot_url": "https://fr.trustpilot.com/review/nutriandco.com",
+        "points_forts": [
+          "Qualité des ingrédients",
+          "Transparence (certificats d'analyse)",
+          "Service client réactif",
+          "Marque française"
+        ],
+        "points_faibles": [
+          "Prix jugé élevé par certains",
+          "Quelques retards de livraison"
+        ],
+        "verbatims_abo": []
+      },
+      "ux_deep": {
+        "screenshots": [
+          "homepage.png",
+          "product_sub.png",
+          "collection.png",
+          "abonnement_page.png"
+        ],
+        "subscription_ux": {
+          "wording_cta": "S'abonner",
+          "wording_pitch": "Abonnez-vous & économisez 15%",
+          "placement_on_product_page": "Toggle Achat unique / Abonnement au-dessus du bouton Ajouter au panier",
+          "toggle_style": "Radio buttons (Achat unique vs S'abonner)",
+          "frequency_selector": "Dropdown (1 ou 3 mois)",
+          "price_display": "Prix barré + prix abonné affiché en vert",
+          "dedicated_page": true,
+          "homepage_mention": false,
+          "navigation_mention": false,
+          "email_mention": "Oui — email de pré-expédition avec fenêtre de modification de 48h avant chaque renouvellement"
+        },
+        "overall_ux_score": 3.5,
+        "strengths": [
+          "Toggle clair sur la fiche produit",
+          "Prix abonné bien visible",
+          "Sans engagement mis en avant",
+          "Livraison domicile offerte sur tous les abonnements, sans seuil (alors qu'elle coûte ~6,50€ en one-shot sous 89€)",
+          "Email de pré-expédition avec fenêtre de modification de 48h (anti-pattern churn bien exécuté)",
+          "Page dédiée /fr/pages/page-abonnement avec pitch éditorial",
+          "Programme fidélité global (1€ = 1 point) — non spécifique à l'abo mais les points se cumulent sur les achats abo"
+        ],
+        "weaknesses": [
+          "Pas de mise en avant homepage/navigation (module discret, peut passer inaperçu)",
+          "Codes welcome et codes promo non cumulables avec l'abo (friction conversion : le client doit choisir entre son -15% welcome et la souscription)",
+          "Seulement 2 fréquences (1 mois / 3 mois) — pas de 2 mois qui serait le sweet spot pour un pot de 60 gélules"
+        ],
+        "scores": {
+          "ux": 3.5,
+          "offre_commerciale": 4.0,
+          "pertinence_vs_impulse": 4.5,
+          "global": 4.0
+        }
+      }
+    },
+    "nutrimuscle": {
+      "catalogue": {
+        "name": "Nutrimuscle",
+        "url": "https://www.nutrimuscle.com",
+        "has_subscription": true,
+        "subscription_discount_pct": 15,
+        "subscription_model": "-15% flat dès la première livraison (vérifié sur /pages/abonnement et article blog officiel). La mécanique progressive 5% → 15% listée dans l'ancien master_data semble obsolète — Nutrimuscle a vraisemblablement simplifié son modèle.",
+        "frequencies_available": [
+          "1 mois",
+          "2 mois",
+          "3 mois",
+          "4 mois",
+          "5 mois",
+          "6 mois"
+        ],
+        "flexibility": {
+          "pause": true,
+          "modify": true,
+          "cancel_anytime": true,
+          "minimum_commitment": "Aucun"
+        },
+        "products": [
+          {
+            "name": "Créatine Creapure",
+            "category": "Performance",
+            "price_oneshot": 16.95,
+            "price_sub": 14.41,
+            "discount_pct": 15,
+            "weight": "350g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Whey Native Biologique",
+            "category": "Protéines",
+            "price_oneshot": 19.95,
+            "price_sub": 16.96,
+            "discount_pct": 15,
+            "weight": "500g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Oméga-3 Epax",
+            "category": "Acides gras",
+            "price_oneshot": 19.95,
+            "price_sub": 16.96,
+            "discount_pct": 15,
+            "weight": "120 capsules",
+            "format": "Capsules"
+          },
+          {
+            "name": "Collagène Peptan",
+            "category": "Santé articulaire",
+            "price_oneshot": 14.95,
+            "price_sub": 12.71,
+            "discount_pct": 15,
+            "weight": "200g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Multivitamines",
+            "category": "Vitamines",
+            "price_oneshot": 12.95,
+            "price_sub": 11.01,
+            "discount_pct": 15,
+            "weight": "120 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Magnésium",
+            "category": "Minéraux",
+            "price_oneshot": 9.95,
+            "price_sub": 8.46,
+            "discount_pct": 15,
+            "weight": "120 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "BCAA 2.1.1",
+            "category": "Acides aminés",
+            "price_oneshot": 21.95,
+            "price_sub": 18.66,
+            "discount_pct": 15,
+            "weight": "500g",
+            "format": "Poudre"
+          }
+        ],
+        "subscription_scope": "Sélection de produits (250+ formats éligibles). Modèle '1 produit = 1 abonnement' (un abo par SKU, plusieurs abos possibles en parallèle).",
+        "estimated_avg_basket_sub": 45,
+        "subscription_shipping": {
+          "offerte": true,
+          "seuil_eur": 0,
+          "note": "Livraison domicile offerte pour tous les abonnés, sans seuil. En one-shot, seuil domicile à 100€ et relais à 60€ — l'abo débloque la gratuité même sur un panier de 17€."
+        },
+        "subscription_exclusions": [
+          "Packs (Pack Starter, Pack Muscu Sèche, Pack Prise de masse, packs collagène/vitamines) — composition figée",
+          "Gros formats (4 kg et plus, 800 gélules et plus) — probable, à confirmer navigation live",
+          "Textile et accessoires — non consommable, pas de récurrence naturelle",
+          "Native Whey — à confirmer, source secondaire l'indiquait comme exclue"
+        ],
+        "note": "Catalogue très large, 250+ produits. Remise -15% flat dès la 1ère livraison (corrigé 2026-04-15 — l'ancienne mention '5% 1ère puis 15%' est obsolète)."
+      },
+      "logistique": {
+        "transporteurs": [
+          "Mondial Relay",
+          "Colissimo",
+          "Chronopost"
+        ],
+        "frais_relais": 5.3,
+        "seuil_gratuit_relais": 60,
+        "frais_domicile": 7.5,
+        "seuil_gratuit_domicile": 100,
+        "delai_standard": "2-3 jours ouvrés"
+      },
+      "tech": {
+        "platform": "Shopify Plus",
+        "confidence": "confirmed",
+        "source": "Axome agency case study — migration vers Shopify Plus",
+        "subscription_app": "Probablement Recharge (Shopify Plus)",
+        "psp": "Shopify Payments (Stripe)",
+        "agency": "Axome"
+      },
+      "avis": {
+        "trustpilot_score": 4.05,
+        "trustpilot_nb_avis": 28000,
+        "trustpilot_url": "https://fr.trustpilot.com/review/nutrimuscle.com",
+        "points_forts": [
+          "Catalogue très large",
+          "Bon rapport qualité/prix",
+          "Livraison rapide"
+        ],
+        "points_faibles": [
+          "Ruptures de stock fréquentes",
+          "SAV parfois lent",
+          "Emballage perfectible"
+        ],
+        "verbatims_abo": [
+          "Abonnement pratique pour les produits récurrents",
+          "Parfois rupture de stock = livraison décalée"
+        ]
+      },
+      "ux_deep": {
+        "screenshots": [
+          "homepage.png",
+          "product_sub.png",
+          "abonnement_page.png",
+          "blog_offre_abonnement.png",
+          "nos_offres.png"
+        ],
+        "subscription_ux": {
+          "wording_cta": "S'abonner",
+          "wording_pitch": "Abonnez-vous et économisez sur vos produits préférés",
+          "placement_on_product_page": "Toggle Achat unique / Abonnement intégré dans le sélecteur de prix",
+          "toggle_style": "Radio buttons avec picto",
+          "frequency_selector": "Dropdown (1 à 6 mois)",
+          "price_display": "Double affichage : prix normal et prix abonné avec badge -15%",
+          "dedicated_page": true,
+          "homepage_mention": true,
+          "navigation_mention": true,
+          "email_mention": "Oui, régulièrement dans les newsletters",
+          "wording_details": "-15% sur vos produits en abonnement. Livraison gratuite avec l'abonnement. Sans engagement.",
+          "dedicated_page_url": "https://www.nutrimuscle.com/pages/abonnement",
+          "dedicated_page_content": "Page complète avec avantages (3 pictos), catalogue produits éligibles, lien vers espace abonné"
+        },
+        "overall_ux_score": 4.0,
+        "strengths": [
+          "Page dédiée complète (/pages/abonnement) avec pitch éditorial, 3 pictos clés, catalogue des produits éligibles et lien espace abonné",
+          "Livraison domicile offerte sur l'abo sans seuil (argument massue vs le seuil one-shot de 100€)",
+          "6 fréquences disponibles (1 à 6 mois) — le plus flexible du panel, couvre les SKUs à rotation rapide (créatine, Oméga-3) comme les rotations lentes (gros pots)",
+          "Grand catalogue éligible (250+ formats) — couvre sport + santé",
+          "Espace abonné dédié pour gérer les abonnements",
+          "Mention dans la homepage, la navigation et les newsletters = visibilité maximale",
+          "-15% flat dès la 1ère livraison (simplicité du message)",
+          "Programme fidélité Nm Club couplé (points → produits gratuits)"
+        ],
+        "weaknesses": [
+          "Ruptures de stock occasionnelles mentionnées dans les verbatims → peut retarder les livraisons abo",
+          "Pas de mécanisme publique d'anti-churn (email pré-expédition non confirmé) — à vérifier",
+          "Stacking avec codes welcome/promos non trivial (certains codes influenceurs cumulables, d'autres non — manque de clarté pour le client)"
+        ],
+        "scores": {
+          "ux": 4.0,
+          "offre_commerciale": 4.0,
+          "pertinence_vs_impulse": 3.5,
+          "global": 3.8
+        }
+      }
+    },
+    "novoma": {
+      "catalogue": {
+        "name": "Novoma",
+        "url": "https://novoma.com",
+        "has_subscription": true,
+        "subscription_discount_pct": 10,
+        "subscription_model": "-10% à vie sur chaque commande abo (vérifié 2026-04-15 sur /pages/abonnement). Modèle hybride : remise plus modérée que Nutri&Co/Nutrimuscle (-15%) mais compensé par un avantage livraison chiffré (3,50€ vs 4,90€) et un seuil de gratuité abaissé (50€ vs 90€). Codes promo cumulables uniquement sur la 1ère livraison de l'abo.",
+        "frequencies_available": [
+          "1 mois",
+          "2 mois",
+          "3 mois"
+        ],
+        "flexibility": {
+          "pause": true,
+          "modify": true,
+          "cancel_anytime": true,
+          "minimum_commitment": "Aucun (annulation jusqu'à la veille du renouvellement)"
+        },
+        "products": [
+          {
+            "name": "Collagène Marin Peptan",
+            "category": "Santé articulaire",
+            "price_oneshot": 31.9,
+            "price_sub": 28.71,
+            "discount_pct": 10,
+            "weight": "300g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Magnésium Bisglycinate",
+            "category": "Minéraux",
+            "price_oneshot": 14.9,
+            "price_sub": 13.41,
+            "discount_pct": 10,
+            "weight": "90 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Vitamine C Liposomale",
+            "category": "Vitamines",
+            "price_oneshot": 27.9,
+            "price_sub": 25.11,
+            "discount_pct": 10,
+            "weight": "60 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Multivitamines",
+            "category": "Vitamines",
+            "price_oneshot": 25.9,
+            "price_sub": 23.31,
+            "discount_pct": 10,
+            "weight": "60 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Probiotiques Lacto",
+            "category": "Digestion",
+            "price_oneshot": 21.9,
+            "price_sub": 19.71,
+            "discount_pct": 10,
+            "weight": "60 gélules",
+            "format": "Gélules"
+          }
+        ],
+        "subscription_scope": "Tous les produits individuels du catalogue (aucune exclusion explicite documentée sur la page abo). Modèle '1 produit = 1 abonnement'.",
+        "estimated_avg_basket_sub": 30,
+        "subscription_shipping": {
+          "offerte": false,
+          "seuil_eur": 50,
+          "note": "Modèle stepped : 3,50€ en Colissimo domicile (vs 4,90€ standard), offerte dès 50€ d'achat (vs 90€ standard). Seule option disponible pour l'abo = Colissimo domicile (pas de point relais ni DPD). 2 jours ouvrés."
+        },
+        "subscription_exclusions": [
+          "Packs probablement exclus — à confirmer navigation live (cohérent avec Nutri&Co et Nutrimuscle qui excluent aussi les packs pour la même raison)"
+        ],
+        "subscription_shipping_advantage": "Domicile 3.50€ au lieu de 4.90€, gratuit dès 50€ (vs 90€ standard)"
+      },
+      "logistique": {
+        "transporteurs": [
+          "Shop2Shop/Mondial Relay",
+          "Colissimo",
+          "DPD"
+        ],
+        "frais_relais": 3.9,
+        "seuil_gratuit_relais": 65,
+        "frais_domicile": 4.9,
+        "seuil_gratuit_domicile": 90,
+        "frais_dpd": 6.9,
+        "seuil_reduit_dpd": 90,
+        "frais_dpd_reduit": 2.9,
+        "delai_standard": "2-4 jours ouvrés",
+        "avantage_abonnement": {
+          "frais_domicile_abo": 3.5,
+          "seuil_gratuit_domicile_abo": 50
+        }
+      },
+      "tech": {
+        "platform": "Shopify",
+        "confidence": "confirmed",
+        "source": "Axome agency case study — refonte sous Shopify confirmée",
+        "subscription_app": "Probablement Recharge ou Bold Subscriptions",
+        "psp": "Shopify Payments (Stripe)",
+        "agency": "Axome"
+      },
+      "avis": {
+        "trustpilot_score": 4.6,
+        "trustpilot_nb_avis": 7000,
+        "trustpilot_url": "https://fr.trustpilot.com/review/novoma.com",
+        "points_forts": [
+          "Formules clean sans additifs",
+          "Transparence fabrication française",
+          "Livraison rapide et soignée",
+          "SAV réactif et bienveillant"
+        ],
+        "points_faibles": [
+          "Quelques retards ponctuels",
+          "Rares cas de non-efficacité"
+        ],
+        "verbatims_abo": []
+      },
+      "ux_deep": {
+        "screenshots": [
+          "homepage.png",
+          "product_sub.png",
+          "abonnement_page.png"
+        ],
+        "subscription_ux": {
+          "wording_cta": "S'abonner",
+          "wording_pitch": "Passez à l'abonnement",
+          "placement_on_product_page": "Toggle Achat unique / S'abonner, au-dessus du CTA",
+          "toggle_style": "Radio buttons",
+          "frequency_selector": "Dropdown (1, 2, 3 mois)",
+          "price_display": "Prix abonné affiché à côté du prix normal",
+          "dedicated_page": true,
+          "homepage_mention": false,
+          "navigation_mention": false,
+          "email_mention": null,
+          "wording_sub_pitch": "Recevez votre cure préférée automatiquement chez vous, à la fréquence de votre choix, tout en bénéficiant de 10% de réduction !",
+          "wording_rationale": "Les compléments alimentaires fonctionnent mieux s'ils sont pris de manière régulière et sur le long terme.",
+          "dedicated_page_url": "novoma.com/pages/abonnement",
+          "dedicated_page_content": "Processus en 3 étapes illustré, 5 avantages listés, FAQ complète (6 questions)",
+          "faq_items": [
+            "Comment sera livrée ma commande par abonnement ? → Colissimo domicile uniquement, 3.50€ (vs 4.90€), gratuit dès 50€ (vs 90€)",
+            "Code de réduction ? → Oui sur la 1ère livraison uniquement",
+            "Points fidélité ? → Pas utilisables mais cumulables",
+            "Annulation ? → À tout moment, jusqu'à la veille du renouvellement"
+          ]
+        },
+        "overall_ux_score": 3.5,
+        "strengths": [
+          "Page dédiée très bien structurée (/pages/abonnement) : processus 3 étapes illustré + 5 avantages + FAQ complète 6 questions",
+          "Argumentation santé unique : 'Les compléments alimentaires fonctionnent mieux s'ils sont pris de manière régulière et sur le long terme' — justifie l'abo par la conviction, pas juste la remise",
+          "Avantages livraison chiffrés et concrets : 3,50€ vs 4,90€ (−1,40€), gratuit dès 50€ vs 90€ (−40€ de seuil)",
+          "FAQ très transparente (6 questions couvrant tous les sujets sensibles)",
+          "Sans engagement clairement affiché (annulation jusqu'à la veille du renouvellement)",
+          "Points fidélité toujours cumulés sur l'abo (même si non dépensables sur abo) — le client ne perd pas sa récompense long terme",
+          "Trustpilot 4.6 / 5 sur 7 000 avis — le meilleur score du panel"
+        ],
+        "weaknesses": [
+          "Remise faciale à −10% = plus faible que les -15% concurrents (Nutri&Co, Nutrimuscle) — moins 'sexy' sur le CTA",
+          "Livraison Colissimo domicile uniquement (pas de point relais ni DPD pour l'abo) — friction pour clients qui préfèrent le relais",
+          "Points fidélité non utilisables sur abo — friction : un pure subscriber accumule mais ne peut jamais dépenser ses points (doit faire au moins 1 commande one-shot pour convertir)",
+          "Codes promo applicables uniquement sur la 1ère livraison abo — pas de cumul sur les renouvellements",
+          "Pas mis en avant dans la homepage ni la navigation principale"
+        ],
+        "scores": {
+          "ux": 3.5,
+          "offre_commerciale": 3.0,
+          "pertinence_vs_impulse": 4.5,
+          "global": 3.7
+        }
+      }
+    },
+    "nutripure": {
+      "catalogue": {
+        "name": "Nutripure",
+        "url": "https://www.nutripure.fr",
+        "has_subscription": false,
+        "subscription_discount_pct": null,
+        "subscription_model": "Aucun système d'abonnement récurrent (confirmé 2026-04-15). Modèle de récurrence alternatif basé sur 3 leviers : (1) packs multi-mois permanents à -10% minimum (jusqu'à -25% sur certains), (2) programme fidélité qui crédite 10% du montant de chaque commande (convertible en produits offerts uniquement, pas en déduction cash), (3) programme de parrainage qui crédite 10% des commandes du filleul. L'économie client approche celle d'un abo -15% mais sans friction contractuelle.",
+        "frequencies_available": [],
+        "flexibility": {
+          "pause": null,
+          "modify": null,
+          "cancel_anytime": null,
+          "minimum_commitment": null
+        },
+        "products": [
+          {
+            "name": "Whey Isolate Native",
+            "category": "Protéines",
+            "price_oneshot": 46.9,
+            "weight": "750g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Whey Isolate Native 1.5kg",
+            "category": "Protéines",
+            "price_oneshot": 84.9,
+            "weight": "1.5kg",
+            "format": "Poudre"
+          },
+          {
+            "name": "Créatine Creapure",
+            "category": "Performance",
+            "price_oneshot": 25.9,
+            "weight": "300g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Oméga-3 Epax (3 mois)",
+            "category": "Acides gras",
+            "price_oneshot": 69.9,
+            "weight": "180 capsules",
+            "format": "Capsules"
+          },
+          {
+            "name": "Oméga-3 Epax (1 mois)",
+            "category": "Acides gras",
+            "price_oneshot": 27.9,
+            "weight": "60 capsules",
+            "format": "Capsules"
+          },
+          {
+            "name": "Magnésium Bisglycinate (3 mois)",
+            "category": "Minéraux",
+            "price_oneshot": 39.9,
+            "weight": "180 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Magnésium Bisglycinate (1 mois)",
+            "category": "Minéraux",
+            "price_oneshot": 18.9,
+            "weight": "60 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Multivitamines",
+            "category": "Vitamines",
+            "price_oneshot": 24.9,
+            "weight": "60 gélules",
+            "format": "Gélules"
+          }
+        ],
+        "subscription_scope": "N/A",
+        "estimated_avg_basket_sub": null,
+        "subscription_shipping": {
+          "offerte": null,
+          "seuil_eur": null,
+          "note": "N/A — pas d'abonnement. Seuils standard : relais gratuit dès 49,90€, domicile gratuit dès 99€. Les formats 3 mois (~70€) et packs 6 mois (~130€) franchissent naturellement ces seuils."
+        },
+        "estimated_avg_basket": 55,
+        "why_no_subscription": "Positionnement ultra-premium, vente par lots (1 mois / 3 mois), stratégie de fidélisation par la qualité plutôt que par le lock-in. Formats 3 mois encouragent implicitement la récurrence."
+      },
+      "logistique": {
+        "transporteurs": [
+          "Point relais",
+          "Colissimo"
+        ],
+        "frais_relais": 4.9,
+        "seuil_gratuit_relais": 49.9,
+        "frais_domicile_standard": 5.9,
+        "seuil_gratuit_domicile": 99,
+        "frais_domicile_colissimo": 7.5,
+        "seuil_reduit_colissimo": 99,
+        "frais_colissimo_reduit": 1.6,
+        "delai_standard": "2-5 jours ouvrés"
+      },
+      "tech": {
+        "platform": "PrestaShop",
+        "confidence": "confirmed",
+        "source": "URL structure (/fr/29-gamme-produits) + Zendesk support",
+        "subscription_app": "N/A (pas d'abonnement)",
+        "psp": "Non confirmé (probablement Stripe ou Mollie)",
+        "note": "PrestaShop = pas de module abo natif mature, pourrait expliquer l'absence d'abonnement"
+      },
+      "avis": {
+        "trustpilot_score": 4.75,
+        "trustpilot_nb_avis": 2000,
+        "trustpilot_url": "https://fr.trustpilot.com/review/nutripure.fr",
+        "points_forts": [
+          "Labels premium (Epax, Peptan, Creapure)",
+          "Transparence maximale",
+          "Digestibilité",
+          "Livraison 48-72h"
+        ],
+        "points_faibles": [
+          "Goûts neutres (whey)",
+          "Prix plus élevé que concurrents étrangers",
+          "Quelques ruptures de stock"
+        ],
+        "verbatims_abo": [
+          "N/A — pas d'abonnement"
+        ]
+      },
+      "ux_deep": {
+        "screenshots": [
+          "homepage.png",
+          "product.png"
+        ],
+        "subscription_ux": {
+          "wording_cta": "N/A",
+          "wording_pitch": "N/A",
+          "placement_on_product_page": "Aucun module abonnement",
+          "toggle_style": "N/A",
+          "frequency_selector": null,
+          "price_display": null,
+          "dedicated_page": false,
+          "homepage_mention": null,
+          "navigation_mention": null,
+          "email_mention": null,
+          "strategy_alternative": "Formats 1 mois / 3 mois encouragent implicitement la récurrence. Programme fidélité classique."
+        },
+        "overall_ux_score": null,
+        "strengths": [
+          "UX produit très clean et premium, labels qualité bien mis en avant (Epax, Peptan, Creapure)",
+          "Stratégie anti-churn implicite via formats 3 mois et packs 6 mois (pack 6 mois ≈ 130€ vs 25€ × 6 = 150€, soit ~13% d'économie)",
+          "Programme fidélité généreux : 10% du montant de chaque commande crédité sur compte récompenses (valable 12 mois)",
+          "Programme de parrainage cumulable : 10% des commandes filleuls → compte fidélité illimité",
+          "Trustpilot 4.75 / 5 sur 2 000 avis — meilleur score en pourcentage du panel (signale un vrai fit qualité/client)",
+          "Pas de lock-in contractuel = zéro friction conversion et zéro risque de churn négatif",
+          "Labels premium (Epax, Peptan, Creapure) justifient des tickets élevés sans besoin d'abo"
+        ],
+        "weaknesses": [
+          "Pas d'abonnement = pas de revenus récurrents prévisibles (impossible de projeter une MRR fiable)",
+          "Récompenses fidélité non déductibles du panier — convertibles en produits offerts uniquement (friction perçue : 'je gagne 10% mais je ne peux pas les dépenser cash')",
+          "PrestaShop = frein technique à l'intégration d'un module abo moderne (vs Shopify natif chez les 3 concurrents premium)",
+          "Pas d'engagement forcé du client à acheter de nouveau — compte sur la qualité produit seule pour la rétention",
+          "Volume d'avis Trustpilot plus faible (2 000 vs 7 000 Novoma, 28 000 Nutrimuscle) — moins de signal social"
+        ],
+        "why_no_subscription": "1) PrestaShop = pas de module abo natif mature. 2) Stratégie de fidélisation par la qualité premium plutôt que le lock-in. 3) Formats 3 mois compensent partiellement.",
+        "scores": {
+          "ux": null,
+          "offre_commerciale": null,
+          "pertinence_vs_impulse": 4.5,
+          "global": null
+        }
+      }
+    },
+    "cuure": {
+      "catalogue": {
+        "name": "Cuure",
+        "url": "https://cuure.com",
+        "has_subscription": true,
+        "subscription_discount_pct": null,
+        "subscription_model": "Modèle 100% abonnement (pas de one-shot possible). Box personnalisée mensuelle générée par l'algorithme à partir d'un quiz santé (~5 min). Prix variable selon la composition : 18-40€/mois pour une cure moyenne de 3 compléments, ~40€/mois pour une cure complète (programme standard Cuure). La remise théorique de ~10% vs 'acheter les mêmes ingrédients un par un' est une comparaison marketing, pas contractuelle — il n'y a pas de one-shot équivalent chez Cuure.",
+        "frequencies_available": [
+          "1 mois (mensuel uniquement)"
+        ],
+        "flexibility": {
+          "pause": true,
+          "modify": true,
+          "cancel_anytime": "partiel — suspension self-serve OK, résiliation définitive nécessite email au support",
+          "minimum_commitment": "Aucun mais friction UX documentée : suspendre est self-serve (dashboard onglet Commandes), résilier définitivement nécessite d'écrire à support@cuure.com. Annuler une commande déjà enregistrée = fenêtre de 1h seulement. Cette architecture en 2 temps explique vraisemblablement les verbatims 'surpris par la reconduction automatique'."
+        },
+        "products": [
+          {
+            "name": "Box personnalisée (3-8 compléments)",
+            "category": "Multi",
+            "price_range": "24-40€/mois",
+            "format": "30 sachets quotidiens"
+          },
+          {
+            "name": "Probiotiques",
+            "category": "Digestion",
+            "note": "4.4/5, 2063 avis"
+          },
+          {
+            "name": "Magnésium",
+            "category": "Minéraux",
+            "note": "4.5/5, 3348 avis"
+          },
+          {
+            "name": "Oméga-3",
+            "category": "Acides gras"
+          },
+          {
+            "name": "Vitamine D",
+            "category": "Vitamines"
+          },
+          {
+            "name": "Fer",
+            "category": "Minéraux"
+          },
+          {
+            "name": "Zinc",
+            "category": "Minéraux"
+          }
+        ],
+        "subscription_scope": "Box personnalisée uniquement — aucun catalogue individuel public. 50+ ingrédients disponibles, 2M+ combinaisons possibles. Algorithme de recommandation (2 à 8 compléments par personne) développé avec un comité de pros : médecins nutritionnistes, pharmaciens, naturopathes, biologistes. 30 sachets quotidiens pré-dosés, prénom imprimé sur les sachets + messages de motivation.",
+        "estimated_avg_basket_sub": 35,
+        "subscription_shipping": {
+          "offerte": true,
+          "seuil_eur": 20,
+          "note": "Frais standard 6,50€, gratuite dès 20€ d'achat. Le programme standard à ~40€/mois dépasse naturellement ce seuil → livraison offerte pour ~100% des abonnés. Certaines sources mentionnent un seuil à 39€ — la vérité officielle Cuure est 20€ (page d'accueil)."
+        },
+        "subscription_exclusions": [
+          "Pas d'achat one-shot possible — tout le parcours est orienté abonnement box personnalisée"
+        ],
+        "unique_selling_point": "Personnalisation via questionnaire, sachets quotidiens pré-dosés, comité scientifique"
+      },
+      "logistique": {
+        "transporteurs": [
+          "Non précisé (box personnalisée)"
+        ],
+        "frais_standard": 6.5,
+        "seuil_gratuit": "20-39€ selon offres",
+        "delai_standard": "3-5 jours ouvrés",
+        "note": "Livraison quasi systématiquement incluse dans le prix de l'abo"
+      },
+      "tech": {
+        "platform": "Custom (initialement Bubble, puis stack propriétaire)",
+        "confidence": "high",
+        "source": "Bubble.io case study — MVP initialement sur Bubble. Probablement migré vers stack custom avec croissance",
+        "subscription_app": "Custom / Stripe Billing",
+        "psp": "Stripe",
+        "note": "Modèle box personnalisée nécessite stack custom (algorithme de recommandation)"
+      },
+      "avis": {
+        "trustpilot_score": 4.5,
+        "trustpilot_nb_avis": 4400,
+        "trustpilot_url": "https://fr.trustpilot.com/review/cuure.com",
+        "points_forts": [
+          "Personnalisation poussée",
+          "Praticité sachets quotidiens",
+          "Comité scientifique",
+          "Application mobile"
+        ],
+        "points_faibles": [
+          "Reconduction automatique pas toujours transparente",
+          "Coût qui monte vite avec beaucoup de compléments",
+          "Goût oméga-3",
+          "Résultats longs (3+ mois)"
+        ],
+        "verbatims_abo": [
+          "Surprise par la reconduction automatique",
+          "Très pratique au quotidien",
+          "Personnalisation top"
+        ]
+      },
+      "ux_deep": {
+        "screenshots": [
+          "homepage.png",
+          "quiz.png",
+          "produits.png"
+        ],
+        "subscription_ux": {
+          "wording_cta": "Découvrir ma formule",
+          "wording_pitch": "Des compléments alimentaires sur-mesure",
+          "placement_on_product_page": "N/A — le modèle est 100% abonnement (box personnalisée)",
+          "toggle_style": "N/A — tout le parcours est orienté abonnement",
+          "frequency_selector": null,
+          "price_display": null,
+          "dedicated_page": true,
+          "homepage_mention": true,
+          "navigation_mention": true,
+          "email_mention": null,
+          "onboarding_flow": "Quiz santé → Recommandation personnalisée → Box mensuelle",
+          "dedicated_page_url": "cuure.com (le site entier est la page abo)",
+          "app_mobile": true,
+          "personalization_depth": "50+ ingrédients, 2M+ combinaisons, comité scientifique"
+        },
+        "overall_ux_score": 4.0,
+        "strengths": [
+          "UX 100% orientée abonnement (absence totale de parcours one-shot = pas de dilution du message commercial)",
+          "Quiz engageant ~5 min → 4-6 min d'engagement client avant même l'achat = barrière psychologique à l'annulation",
+          "Algorithme de recommandation validé par un comité scientifique (médecins, pharmaciens, naturopathes, biologistes)",
+          "Sachets quotidiens pré-dosés avec prénom imprimé + messages motivation = expérience physique différenciante",
+          "App mobile pour suivi quotidien de la prise → engagement long terme",
+          "Téléconsultations avec experts nutrition pour les abonnés = valeur ajoutée rétention",
+          "Livraison offerte dès 20€ → quasi systématique sur l'abo (programme standard ~40€/mois)",
+          "Trustpilot 4.5 / 5 sur 4 400 avis (solide pour une marque avec un modèle aussi atypique)"
+        ],
+        "weaknesses": [
+          "Pas de possibilité d'achat one-shot — barrière d'essai haute, le client doit s'engager dès le départ",
+          "Résiliation en 2 temps (suspension self-serve vs résiliation définitive par email au support) = friction UX documentée",
+          "Verbatims explicites : 'Surprise par la reconduction automatique' → signal fort que la communication du cycle n'est pas claire",
+          "Fenêtre d'annulation de commande de 1h seulement après enregistrement = timing serré pour les clients qui changent d'avis",
+          "Prix qui monte vite avec beaucoup de compléments (18€ à 40€+ selon composition) — le client peut se sentir piégé par un prix variable",
+          "Résultats longs (3+ mois) — perception valeur décalée par rapport au paiement mensuel, risque de churn avant l'effet ressenti",
+          "Modèle technique nécessite une stack custom (initialement Bubble, puis propriétaire) — pas reproductible simplement"
+        ],
+        "scores": {
+          "ux": 4.0,
+          "offre_commerciale": 3.0,
+          "pertinence_vs_impulse": 2.0,
+          "global": 3.0
+        }
+      }
+    },
+    "decathlon": {
+      "catalogue": {
+        "name": "Decathlon (Abonnement Nutrition)",
+        "url": "https://abonnement.decathlon.fr",
+        "has_subscription": true,
+        "subscription_discount_pct": "10-15% (stepped par produit, pas flat)",
+        "subscription_model": "Remise variable selon le SKU : -10% sur les whey (900g, 1.5kg, 2kg), -15% sur la créatine 300g, -10% sur les packs combinés (whey + créatine). Pattern rare — c'est une remise par produit, pas flat. Modèle '1 produit = 1 abonnement' (un pack compté comme 1 SKU est possible ; mais pas de panier multi-produits à la carte dans une même commande abo).",
+        "frequencies_available": [
+          "1 mois",
+          "2 mois",
+          "3 mois"
+        ],
+        "flexibility": {
+          "pause": true,
+          "modify": false,
+          "cancel_anytime": true,
+          "minimum_commitment": "Aucun",
+          "modify_note": "Pour modifier → résilier et recréer"
+        },
+        "products": [
+          {
+            "name": "Whey Isolate 2kg",
+            "category": "Protéines",
+            "price_oneshot": 79.99,
+            "price_sub": 71.99,
+            "discount_pct": 10,
+            "weight": "2kg",
+            "format": "Poudre"
+          },
+          {
+            "name": "Whey 1.5kg",
+            "category": "Protéines",
+            "price_oneshot": 44.99,
+            "price_sub": 39.99,
+            "discount_pct": 11,
+            "weight": "1.5kg",
+            "format": "Poudre"
+          },
+          {
+            "name": "Whey 900g",
+            "category": "Protéines",
+            "price_oneshot": 28.99,
+            "price_sub": 25.99,
+            "discount_pct": 10,
+            "weight": "900g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Créatine monohydrate 300g",
+            "category": "Performance",
+            "price_oneshot": 14.99,
+            "price_sub": 12.74,
+            "discount_pct": 15,
+            "weight": "300g",
+            "format": "Poudre"
+          }
+        ],
+        "subscription_scope": "Scope plus large que prévu (vérifié 2026-04-15). Catégorie nutrition complète : whey (standard, isolate, concentré), gainers, créatine, BCAA, ISO drinks (boissons isotoniques), électrolytes, gels énergétiques, compotes, barres, pâtes de fruits, préparations énergétiques. Plus packs 'développement musculaire' (whey + créatine combinés). Plus catégorie à part : croquettes pour chien (37,01€/mois de plancher). Ce n'est PAS tout le catalogue nutrition Decathlon — c'est une sélection curée pour les SKUs à consommation récurrente.",
+        "estimated_avg_basket_sub": 40,
+        "subscription_shipping": {
+          "offerte": "relais uniquement",
+          "seuil_eur": 0,
+          "note": "Livraison offerte en point relais (Mondial Relay) sans seuil pour les abonnés. Livraison domicile reste payante (3-4,50€ variable). C'est un modèle stepped comme Novoma (relais inclus seulement), pas flat comme Nutri&Co/Nutrimuscle (domicile inclus)."
+        },
+        "subscription_exclusions": [
+          "Produits one-shot ou saisonniers du catalogue nutrition Decathlon (ex : matériel, textile, accessoires fitness)",
+          "Probables : promotions ponctuelles et packs événementiels — à confirmer navigation live"
+        ],
+        "loyalty_program": "10 points fidélité par euro dépensé en abonnement"
+      },
+      "logistique": {
+        "transporteurs": [
+          "Mondial Relay",
+          "Colissimo",
+          "Chronopost"
+        ],
+        "livraison_abo": "Offerte en point relais",
+        "frais_domicile": "3-4.50€",
+        "seuil_gratuit_domicile": "Variable",
+        "delai_standard": "3-5 jours ouvrés",
+        "note": "Livraison offerte sur abonnements nutrition en point relais"
+      },
+      "tech": {
+        "platform": "Custom (plateforme unifiée propriétaire) + Shopify pour certains marchés internationaux",
+        "confidence": "confirmed",
+        "source": "Presse e-commerce + Shopify case study (ShopifyQL Notebooks pour US). abonnement.decathlon.fr = sous-domaine dédié, probablement microservice interne",
+        "subscription_app": "Custom interne",
+        "psp": "Multi-PSP (Adyen probable pour FR)",
+        "note": "Décathlon = géant omnicanal, architecture modulaire en microservices"
+      },
+      "avis": {
+        "trustpilot_score": 2.5,
+        "trustpilot_nb_avis": 2950,
+        "trustpilot_url": "https://fr.trustpilot.com/review/www.decathlon.fr",
+        "site_interne_score": 4.47,
+        "site_interne_nb_avis": 1700000,
+        "points_forts": [
+          "Rapport qualité/prix imbattable",
+          "Réseau physique 1700+ magasins",
+          "Programme fidélité",
+          "Nutrition sportive basique efficace"
+        ],
+        "points_faibles": [
+          "SAV critiqué en ligne",
+          "Problèmes de livraison",
+          "Qualité inégale selon produits",
+          "Peu de choix premium"
+        ],
+        "verbatims_abo": [
+          "Peu de retours spécifiques sur l'abonnement nutrition"
+        ],
+        "note": "Écart important entre avis internes (4.47/5) et Trustpilot (2.5/5). Le Trustpilot reflète surtout les problèmes logistiques e-commerce."
+      },
+      "ux_deep": {
+        "screenshots": [
+          "homepage.png",
+          "proteines.png",
+          "faq.png"
+        ],
+        "subscription_ux": {
+          "wording_cta": "S'abonner",
+          "wording_pitch": "Faites des économies en cas d'abonnement par rapport à un achat unitaire et profitez d'un confort maximal. Plus besoin de vous soucier du réassort, on s'occupe de tout !",
+          "placement_on_product_page": "Sous-site dédié (abonnement.decathlon.fr) séparé du site principal",
+          "toggle_style": "N/A — site dédié, pas de toggle sur fiche produit classique",
+          "frequency_selector": null,
+          "price_display": null,
+          "dedicated_page": true,
+          "homepage_mention": true,
+          "navigation_mention": "Oui via lien footer + pages nutrition",
+          "email_mention": null,
+          "onboarding_flow": "4 étapes : Mon produit → Ma livraison → Mon paiement → Mes avantages",
+          "dedicated_page_url": "abonnement.decathlon.fr",
+          "pricing_display": "À partir de 12.74€/mois",
+          "loyalty": "10 points fidélité par euro dépensé",
+          "limitations": "1 produit par commande, commandes distinctes pour multi-produits"
+        },
+        "overall_ux_score": 2.5,
+        "strengths": [
+          "Sous-site dédié (abonnement.decathlon.fr) avec processus en 4 étapes clair : Mon produit → Ma livraison → Mon paiement → Mes avantages",
+          "Programme fidélité **Decat'Club** cumulable : 10 points par euro dépensé, points crédités sur le compte global Decathlon, échangeables contre cartes cadeaux / coaching nutrition / livraison offerte / dons",
+          "Catalogue plus large que prévu (confirmé 2026) : whey, créatine, BCAA, gainers, ISO drinks, électrolytes, gels, compotes, barres, pâtes de fruits + packs combinés + croquettes chien",
+          "Livraison offerte en point relais Mondial Relay sans seuil",
+          "Prix plancher le plus bas du panel : 12,74€/mois (créatine 300g) — permet un entry-point très accessible",
+          "Sans engagement, annulation à tout moment",
+          "Pouvoir de feu omnicanal : 1700+ magasins physiques + app mobile + programme fidélité global = ambassadeur marketing gratuit du sous-site abo"
+        ],
+        "weaknesses": [
+          "Sous-domaine séparé abonnement.decathlon.fr = friction (redirect depuis le site principal, parcours abonné isolé)",
+          "Modèle '1 produit = 1 abonnement' : pour plusieurs produits, il faut créer plusieurs abos distincts (pas de panier multi-produits abo)",
+          "Modification = résiliation + recréation (friction majeure — pas de changement de SKU ou de fréquence in-place)",
+          "Livraison domicile reste payante (3-4,50€), contrairement aux concurrents premium qui l'offrent",
+          "UX basique comparée aux marques premium — pas d'optimisation conversion poussée (pas de badge '% économisé', pas de témoignages clients, pas de FAQ contextuelle)",
+          "Trustpilot 2,5/5 sur 2 950 avis (écart énorme avec site interne 4,47/5 sur 1,7M avis — les avis négatifs concernent surtout la logistique e-commerce Decathlon, pas l'abo spécifiquement)",
+          "Aucun champ 'pause' ou 'skip' documenté dans l'UX — le mécanisme de pause existe mais sans visibilité marketing"
+        ],
+        "scores": {
+          "ux": 2.5,
+          "offre_commerciale": 3.0,
+          "pertinence_vs_impulse": 2.0,
+          "global": 2.5
+        }
+      }
+    },
+    "aqeelab": {
+      "catalogue": {
+        "name": "Aqeelab Nutrition",
+        "url": "https://www.aqeelab-nutrition.fr",
+        "has_subscription": true,
+        "subscription_discount_pct": 20,
+        "subscription_model": "-20% flat à vie sur chaque commande en abonnement (confirmé 2026-04-15 sur /collections/abonnement : '20% A VIE' et '-20% TOUS LES MOIS'). C'est la remise la plus agressive du panel (vs -15% Nutri&Co/Nutrimuscle, -10% Novoma). Codes promo NON cumulables avec l'abo : un seul code par commande.",
+        "frequencies_available": [
+          "1 mois",
+          "2 mois",
+          "3 mois"
+        ],
+        "flexibility": {
+          "pause": true,
+          "modify": true,
+          "cancel_anytime": "après 2 mois minimum",
+          "minimum_commitment": "2 mois minimum requis pour débuter un abonnement (correction 2026-04-15 — le master_data disait à tort 'Aucun'). C'est une friction d'entrée documentée sur la page abo officielle. Le client ne peut pas résilier dès la 1ère commande pour bénéficier ponctuellement du -20% — il doit maintenir l'abo au moins 2 cycles. Point à surveiller pour la conformité Loi Chatel."
+        },
+        "products": [
+          {
+            "name": "Better Protein (Whey)",
+            "category": "Protéines",
+            "price_oneshot": 45.95,
+            "price_sub": 36.76,
+            "discount_pct": 20,
+            "weight": "750g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Créatine Monohydrate Poudre",
+            "category": "Performance",
+            "price_oneshot": 36.95,
+            "price_sub": 29.56,
+            "discount_pct": 20,
+            "weight": "500g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Créatine Gélules",
+            "category": "Performance",
+            "price_oneshot": 24.95,
+            "price_sub": 19.96,
+            "discount_pct": 20,
+            "weight": "180 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Oméga-3 Wild",
+            "category": "Acides gras",
+            "price_oneshot": 49.95,
+            "price_sub": 39.96,
+            "discount_pct": 20,
+            "weight": "120 capsules",
+            "format": "Capsules"
+          },
+          {
+            "name": "Ashwagandha KSM-66",
+            "category": "Adaptogènes",
+            "price_oneshot": 28.95,
+            "price_sub": 23.16,
+            "discount_pct": 20,
+            "weight": "90 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "BCAA 8.1.1",
+            "category": "Acides aminés",
+            "price_oneshot": 29.95,
+            "price_sub": 23.96,
+            "discount_pct": 20,
+            "weight": "300g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Magnésium Bisglycinate",
+            "category": "Minéraux",
+            "price_oneshot": 19.95,
+            "price_sub": 15.96,
+            "discount_pct": 20,
+            "weight": "90 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Multivitamines",
+            "category": "Vitamines",
+            "price_oneshot": 24.95,
+            "price_sub": 19.96,
+            "discount_pct": 20,
+            "weight": "60 gélules",
+            "format": "Gélules"
+          },
+          {
+            "name": "Collagène Marin Peptan",
+            "category": "Santé articulaire",
+            "price_oneshot": 28.95,
+            "price_sub": 23.16,
+            "discount_pct": 20,
+            "weight": "200g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Pre-Workout",
+            "category": "Performance",
+            "price_oneshot": 34.95,
+            "price_sub": 27.96,
+            "discount_pct": 20,
+            "weight": "300g",
+            "format": "Poudre"
+          }
+        ],
+        "subscription_scope": "Tous les 23 produits du catalogue",
+        "estimated_avg_basket_sub": 45,
+        "subscription_shipping": {
+          "offerte": null,
+          "seuil_eur": null,
+          "note": "Mentionné par sources secondaires comme 'reduced delivery shipping' pour les abonnés, mais la page /collections/abonnement officielle n'explicite pas de conditions spécifiques. Seuils standard : relais gratuit dès 69€, domicile gratuit dès 100€. À confirmer par navigation parcours abonné live."
+        },
+        "note": "Plus haute remise abo du marché FR (20%). Catalogue petit mais ultra-ciblé."
+      },
+      "logistique": {
+        "transporteurs": [
+          "Mondial Relay",
+          "DPD",
+          "Chronopost"
+        ],
+        "frais_relais": "3.95-6.95€",
+        "seuil_gratuit_relais": 69,
+        "frais_domicile": 6.45,
+        "seuil_gratuit_domicile": 100,
+        "delai_standard": "1-3 jours ouvrés",
+        "note": "Expédition depuis Bordeaux, sous 24-48h"
+      },
+      "tech": {
+        "platform": "Shopify",
+        "confidence": "confirmed",
+        "source": "BuiltWith.com + StoresData.com — aqeelab-nutrition.fr = Shopify",
+        "subscription_app": "Probablement Recharge ou Shopify Native",
+        "psp": "Shopify Payments (Stripe)"
+      },
+      "avis": {
+        "trustpilot_score": 4.9,
+        "trustpilot_nb_avis": 200,
+        "trustpilot_url": "https://fr.trustpilot.com/review/aqeelab-nutrition.fr",
+        "site_propre_score": 4.85,
+        "site_propre_nb_avis": "Plusieurs milliers",
+        "points_forts": [
+          "Qualité exceptionnelle",
+          "Transparence ingrédients",
+          "Livraison ultra-rapide (24-48h)",
+          "SAV français réactif",
+          "Éco-responsable"
+        ],
+        "points_faibles": [
+          "Peu d'avis Trustpilot (marque jeune)",
+          "Quelques écarts emballage/site"
+        ],
+        "verbatims_abo": []
+      },
+      "ux_deep": {
+        "screenshots": [
+          "homepage.png",
+          "product_sub.png",
+          "collection.png"
+        ],
+        "subscription_ux": {
+          "wording_cta": "S'abonner & économiser",
+          "wording_pitch": "Économisez 20% en vous abonnant",
+          "placement_on_product_page": "Toggle Achat unique / Abonnement, directement sur la fiche produit au-dessus du CTA",
+          "toggle_style": "Radio buttons avec économie affichée (€ économisés)",
+          "frequency_selector": "Dropdown (1, 2, 3 mois)",
+          "price_display": "Prix barré + prix abonné + montant économisé en clair",
+          "dedicated_page": true,
+          "homepage_mention": true,
+          "navigation_mention": true,
+          "email_mention": null,
+          "savings_display": "Montant économisé en euros affiché dynamiquement"
+        },
+        "overall_ux_score": 4.5,
+        "strengths": [
+          "Remise -20% flat à vie : la plus haute du panel FR (vs -15% Nutri&Co/Nutrimuscle, -10% Novoma) — argument massue sur le CTA",
+          "Wording puissant et explicite : CTA 'S'abonner & économiser' + badge '20% A VIE 🔥' sur la page dédiée",
+          "Affichage du montant économisé en euros sur la fiche produit = pattern UX très persuasif (tangible vs abstraction du %)",
+          "Toggle clair et intégré directement sur la fiche produit au-dessus du CTA principal",
+          "Tous les produits éligibles (23/23) — catalogue petit mais 100% abonnable, cohérent et simple à communiquer",
+          "Page dédiée /collections/abonnement avec pitch éditorial '20% A VIE' + liste catalogue éligible",
+          "Fabrication et expédition depuis Bordeaux, livraison 24-48h (la plus rapide du panel)",
+          "Programme de fidélité RePoints / Club AqeeLab (détails partiels non accessibles)",
+          "Trustpilot 4.9 / 5 (sur 200 avis — volume faible mais meilleur score % du panel)",
+          "Positionnement premium cohérent : prix one-shot élevés (ex Whey 45,95€, Oméga-3 49,95€) = marge suffisante pour soutenir le -20%"
+        ],
+        "weaknesses": [
+          "Engagement minimum de 2 mois requis pour débuter l'abonnement — friction d'entrée importante (point vigilance Loi Chatel)",
+          "Codes promo et programmes de fidélité NON cumulables entre eux ni avec l'abonnement — un seul code par commande",
+          "Livraison offerte ou non sur l'abo : non explicité officiellement, signal de communication faible",
+          "Marque jeune (~200 avis Trustpilot) = notoriété limitée malgré un score de 4.9",
+          "Programme RePoints mentionné mais détails des conditions non accessibles publiquement = opacité"
+        ],
+        "scores": {
+          "ux": 4.5,
+          "offre_commerciale": 4.0,
+          "pertinence_vs_impulse": 4.5,
+          "global": 4.3
+        }
+      }
+    },
+    "myprotein": {
+      "catalogue": {
+        "name": "MyProtein",
+        "url": "https://fr.myprotein.com",
+        "has_subscription": true,
+        "subscription_discount_pct": "Jusqu'à 45% (variable, 30% standard en moyenne)",
+        "subscription_model": "Programme 'Subscribe and Gain' (nom officiel interne), affiché côté user comme 'S'abonner' en FR. Remise variable : point standard autour de -30%, pouvant monter jusqu'à -45% voire -50% en périodes promo. C'est une mécanique variable bien différente des remises flat des concurrents FR (-15% Nutri&Co/Nutrimuscle, -10% Novoma, -20% Aqeelab). Point d'attention : les prix de base MyProtein sont eux-mêmes instables (promos permanentes sitewide) donc la remise abo affichée s'applique sur un prix-barré déjà volatil — la vraie économie perçue par le client est difficile à lire.",
+        "frequencies_available": [
+          "1 mois",
+          "2 mois",
+          "3 mois",
+          "4 mois",
+          "5 mois"
+        ],
+        "flexibility": {
+          "pause": true,
+          "modify": true,
+          "cancel_anytime": true,
+          "minimum_commitment": "Aucun (confirmé 2026-04-15 : 'Annulez à tout moment - pas d'engagement'). Pause possible à tout moment avec reprise quand le client est prêt."
+        },
+        "products": [
+          {
+            "name": "Impact Whey Protein 1kg",
+            "category": "Protéines",
+            "price_oneshot": 30.49,
+            "price_sub": 21.34,
+            "discount_pct": 30,
+            "weight": "1kg",
+            "format": "Poudre"
+          },
+          {
+            "name": "Impact Whey Protein 2.5kg",
+            "category": "Protéines",
+            "price_oneshot": 59.99,
+            "price_sub": 41.99,
+            "discount_pct": 30,
+            "weight": "2.5kg",
+            "format": "Poudre"
+          },
+          {
+            "name": "Creatine Monohydrate 250g",
+            "category": "Performance",
+            "price_oneshot": 7.99,
+            "price_sub": 5.59,
+            "discount_pct": 30,
+            "weight": "250g",
+            "format": "Poudre"
+          },
+          {
+            "name": "Omega 3 90 capsules",
+            "category": "Acides gras",
+            "price_oneshot": 8.9,
+            "price_sub": 6.23,
+            "discount_pct": 30,
+            "weight": "90 capsules",
+            "format": "Capsules"
+          },
+          {
+            "name": "Multivitamines Alpha Men",
+            "category": "Vitamines",
+            "price_oneshot": 14.99,
+            "price_sub": 10.49,
+            "discount_pct": 30,
+            "weight": "120 comprimés",
+            "format": "Comprimés"
+          },
+          {
+            "name": "BCAA 250g",
+            "category": "Acides aminés",
+            "price_oneshot": 12.99,
+            "price_sub": 9.09,
+            "discount_pct": 30,
+            "weight": "250g",
+            "format": "Poudre"
+          }
+        ],
+        "subscription_scope": "Quasi tous les produits (1000+ références)",
+        "estimated_avg_basket_sub": 35,
+        "subscription_shipping": {
+          "offerte": true,
+          "seuil_eur": 0,
+          "note": "Livraison gratuite sur TOUTES les commandes récurrentes, sans seuil (citation officielle fr.myprotein.com : 'Livraison gratuite sur toutes les commandes récurrentes'). En one-shot, le seuil gratuit est à 55€ (sinon 3,99€ relais ou 4,99€ domicile). Pattern flat comme Nutri&Co/Nutrimuscle : livraison abo offerte sans contrepartie de panier."
+        },
+        "note": "Remise la plus agressive du marché (30% standard, jusqu'à 45% en promo). Modèle volume international."
+      },
+      "logistique": {
+        "transporteurs": [
+          "DPD",
+          "Colissimo"
+        ],
+        "frais_relais": 3.99,
+        "seuil_gratuit_relais": 60,
+        "frais_domicile": 4.99,
+        "seuil_gratuit_domicile": 60,
+        "frais_express": 11.99,
+        "frais_express_reduit": 6.99,
+        "delai_standard": "2-4 jours ouvrés",
+        "note": "Seuil gratuit identique relais et domicile (60€)"
+      },
+      "tech": {
+        "platform": "Custom (THG/The Hut Group proprietary — Ingenuity Commerce)",
+        "confidence": "confirmed",
+        "source": "Connu dans l'industrie — THG Ingenuity est la plateforme propriétaire du groupe",
+        "subscription_app": "Custom / Ingenuity Commerce",
+        "psp": "Multi-PSP (Adyen, PayPal, Klarna)",
+        "note": "THG = tech company, plateforme blanche vendable à d'autres marques"
+      },
+      "avis": {
+        "trustpilot_score": 3.1,
+        "trustpilot_nb_avis": 31000,
+        "trustpilot_url": "https://fr.trustpilot.com/review/myprotein.com",
+        "points_forts": [
+          "Prix les plus bas du marché",
+          "Catalogue gigantesque",
+          "Promos permanentes",
+          "Remise abo 30-45%"
+        ],
+        "points_faibles": [
+          "SAV très critiqué",
+          "Retours coûteux",
+          "Qualité variable selon produits",
+          "Livraison parfois longue (UK warehouse)"
+        ],
+        "verbatims_abo": [
+          "Subscribe & save pratique mais attention aux prix qui changent",
+          "Livraison parfois décalée sans prévenir"
+        ]
+      },
+      "ux_deep": {
+        "screenshots": [
+          "homepage.png",
+          "product_sub.png"
+        ],
+        "subscription_ux": {
+          "wording_cta": "S'abonner (FR) — 'Abonnez-vous' dans la nav",
+          "wording_pitch": "Progressez à moindre coût grâce à nos avantages exclusifs + 'Annulez à tout moment - pas d'engagement' + 'Changez à la fréquence qui vous convient'",
+          "placement_on_product_page": "Toggle sous le sélecteur de taille/saveur, au-dessus du bouton Ajouter au panier. Bannière dédiée avec CTA 'Souscrire' sur la homepage.",
+          "toggle_style": "Radio buttons avec badge remise (%)",
+          "frequency_selector": "Dropdown (1 à 5 mois)",
+          "price_display": "Prix barré + prix abonné + badge de remise (% variable selon le produit et la promo en cours)",
+          "dedicated_page": true,
+          "homepage_mention": true,
+          "navigation_mention": true,
+          "email_mention": null,
+          "promo_stacking": "Promos régulières jusqu'à -45% sur subscribe & save"
+        },
+        "overall_ux_score": 3.5,
+        "strengths": [
+          "Remise la plus agressive du panel en valeur brute (jusqu'à -45% voire -50%) — argument commercial massue pour l'acquisition",
+          "Livraison gratuite sur TOUTES les commandes récurrentes, sans seuil",
+          "Catalogue gigantesque éligible (1000+ références — le plus grand du panel)",
+          "Modèle mature et éprouvé internationalement (décennies d'itérations sur Subscribe and Gain)",
+          "5 fréquences possibles (1 à 5 mois) — flexibilité proche de Nutrimuscle",
+          "Page dédiée /c/subscribe/ avec pitch éditorial + bannière homepage avec CTA direct",
+          "Engagement 'zéro' confirmé : pause et reprise à tout moment",
+          "Prix plancher très bas (créatine 250g à 5,59€ abo) — entry-point le plus accessible après Decathlon",
+          "Programme de parrainage : filleul obtient -25% + livraison gratuite pendant 3 mois (incentive fort)"
+        ],
+        "weaknesses": [
+          "Prix de base instables (promos permanentes sitewide) : la remise -30% abo affichée sur un prix-barré déjà volatil rend la vraie économie perçue difficile à lire. Le client ne sait jamais exactement combien il 'gagne' vraiment.",
+          "UX parfois confuse (promos empilées, prix changeants, codes cumulables ou non selon le produit)",
+          "Trustpilot 3,1 / 5 sur 31 000 avis — **pire score du panel** (signal volume important)",
+          "SAV très critiqué = risque sur l'expérience abonné (points faibles récurrents dans les verbatims)",
+          "UK warehouse = livraisons parfois longues (2-4 jours) et retours coûteux vers l'UK",
+          "Verbatim abo : *'Subscribe & save pratique mais attention aux prix qui changent'* → confirme l'instabilité du prix de référence",
+          "Verbatim abo : *'Livraison parfois décalée sans prévenir'* → pas d'email pré-expédition clair",
+          "Positionnement mass-market volume international très éloigné d'Impulse (premium FR) — pertinence reco faible"
+        ],
+        "scores": {
+          "ux": 3.5,
+          "offre_commerciale": 3.5,
+          "pertinence_vs_impulse": 1.5,
+          "global": 2.8
+        }
+      }
+    }
+  },
+  "transversal": {
+    "marche": {
+      "meta": {
+        "phase": 5,
+        "description": "Données marché nutrition sportive FR + économie abonnement",
+        "last_updated": "2026-04-07"
+      },
+      "marche_nutrition_sportive_fr": {
+        "taille_marche_total_eur": "~1 milliard €",
+        "taille_segment_specialise_eur": "210 M€ (2023)",
+        "evolution": {
+          "2016": "110 M€",
+          "2021": "152 M€",
+          "2023": "210 M€"
+        },
+        "cagr_pct": 8.3,
+        "segmentation": {
+          "proteines_pct": 85,
+          "gms_distribution_pct": 66,
+          "online_growing": true
+        },
+        "tendances": [
+          "Montée du premium / clean label",
+          "Explosion DTC (direct to consumer)",
+          "Convergence sport / bien-être / santé",
+          "Demande transparence et traçabilité",
+          "Nutrition personnalisée (Cuure, etc.)"
+        ],
+        "sources": [
+          "Xerfi",
+          "Euromonitor",
+          "Grand View Research"
+        ]
+      },
+      "economie_abonnement": {
+        "penetration_subscription_ecommerce_fr": "Croissante mais encore faible vs US/UK",
+        "churn_mensuel_supplements_pct": "8-12%",
+        "retention_annuelle_pct": "25-40%",
+        "ltv_abonnes_eur": "300-800€",
+        "ltv_multiplier_vs_oneshot": "3-5x",
+        "flexibilite_impact": "Pause/skip réduit les annulations de 15-18%",
+        "discount_sweet_spot_pct": "10-15% (au-delà érode la marge)",
+        "sources": [
+          "McKinsey Subscription Economy",
+          "Recharge Benchmarks",
+          "Bold Commerce"
+        ]
+      },
+      "comportement_consommateur": {
+        "frequence_achat_moyenne": "Toutes les 4-6 semaines",
+        "panier_moyen_nutrition_online_eur": "35-55€",
+        "motivations_abonnement": [
+          "Commodité (ne plus penser à commander)",
+          "Économies (remise abonné)",
+          "Régularité de prise (compliance)",
+          "Livraison automatique"
+        ],
+        "freins_abonnement": [
+          "Peur de l'engagement",
+          "Crainte de recevoir un produit non voulu",
+          "Difficulté à annuler (friction perçue)",
+          "Accumulation de stock",
+          "Variantes de goût (risque mauvaise surprise)"
+        ]
+      },
+      "ecommerce_fr_global": {
+        "ca_total_2024_eur": "175 milliards €",
+        "croissance_annuelle_pct": 8
+      }
+    },
+    "grilles_transporteurs": {
+      "colissimo": {
+        "domicile": {
+          "250g": 5.49,
+          "500g": 7.59,
+          "1kg": 9.59,
+          "2kg": 11.19,
+          "5kg": 17.39
+        },
+        "point_retrait": {
+          "250g": 4.79,
+          "500g": 6.89,
+          "1kg": 8.89,
+          "2kg": 10.49
+        },
+        "note": "Tarifs publics TTC, professionnels bénéficient de -30 à -50%"
+      },
+      "mondial_relay": {
+        "relais_public": {
+          "250g": 4.1,
+          "1kg": 5.99,
+          "2kg": 7.99,
+          "5kg": 15.99
+        },
+        "pro_ht": {
+          "500g": 3.42,
+          "1kg": 3.76,
+          "2kg": 5.27,
+          "4kg": 5.59
+        },
+        "note": "Tarifs pro HT très compétitifs, réseau 10 000+ points relais"
+      },
+      "chronopost": {
+        "shop2shop": {
+          "1kg": 4.5,
+          "4kg": 6.95,
+          "10kg": 13.9
+        },
+        "express_chrono13": {
+          "2kg": "28-36€",
+          "5kg": "33-38€"
+        },
+        "note": "Express J+1, prix élevé sauf Shop2Shop"
+      },
+      "dpd": {
+        "relais": {
+          "1kg": "6-8€",
+          "5kg": "9-12€"
+        },
+        "domicile": {
+          "1kg": "8-11€",
+          "5kg": "12-14€"
+        },
+        "note": "DPD Predict avec créneau SMS"
+      },
+      "colis_prive": {
+        "pro": {
+          "1kg": "from 5€",
+          "5kg": "8-10€"
+        },
+        "note": "Peu utilisé en nutrition, surtout retail"
+      }
+    },
+    "poids_moyen_colis": {
+      "complement_gelules_1_boite": "100-200g",
+      "whey_1kg": "1.1-1.3kg",
+      "creatine_300g": "350-400g",
+      "commande_type_2_3_produits": "400g-1.5kg",
+      "commande_type_abo_mensuel": "200g-800g"
+    },
+    "rentabilite": {
+      "discount_rate": 0.1,
+      "recommended_threshold": 12.35,
+      "recommended_threshold_rounded": 25,
+      "full_matrix": [
+        {
+          "price": 15,
+          "m40_l4": {
+            "price": 15,
+            "discount_pct": 10.0,
+            "net_price": 13.5,
+            "gross_margin": 5.4,
+            "logistics_cost": 4.0,
+            "contribution_nette": 1.4,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 15,
+            "discount_pct": 10.0,
+            "net_price": 13.5,
+            "gross_margin": 6.08,
+            "logistics_cost": 5.0,
+            "contribution_nette": 1.08,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 15,
+            "discount_pct": 10.0,
+            "net_price": 13.5,
+            "gross_margin": 6.75,
+            "logistics_cost": 7.0,
+            "contribution_nette": -0.25,
+            "is_profitable": false,
+            "margin_rate_on_original": 45.0
+          }
+        },
+        {
+          "price": 20,
+          "m40_l4": {
+            "price": 20,
+            "discount_pct": 10.0,
+            "net_price": 18.0,
+            "gross_margin": 7.2,
+            "logistics_cost": 4.0,
+            "contribution_nette": 3.2,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 20,
+            "discount_pct": 10.0,
+            "net_price": 18.0,
+            "gross_margin": 8.1,
+            "logistics_cost": 5.0,
+            "contribution_nette": 3.1,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 20,
+            "discount_pct": 10.0,
+            "net_price": 18.0,
+            "gross_margin": 9.0,
+            "logistics_cost": 7.0,
+            "contribution_nette": 2.0,
+            "is_profitable": true,
+            "margin_rate_on_original": 45.0
+          }
+        },
+        {
+          "price": 25,
+          "m40_l4": {
+            "price": 25,
+            "discount_pct": 10.0,
+            "net_price": 22.5,
+            "gross_margin": 9.0,
+            "logistics_cost": 4.0,
+            "contribution_nette": 5.0,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 25,
+            "discount_pct": 10.0,
+            "net_price": 22.5,
+            "gross_margin": 10.12,
+            "logistics_cost": 5.0,
+            "contribution_nette": 5.12,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 25,
+            "discount_pct": 10.0,
+            "net_price": 22.5,
+            "gross_margin": 11.25,
+            "logistics_cost": 7.0,
+            "contribution_nette": 4.25,
+            "is_profitable": true,
+            "margin_rate_on_original": 45.0
+          }
+        },
+        {
+          "price": 30,
+          "m40_l4": {
+            "price": 30,
+            "discount_pct": 10.0,
+            "net_price": 27.0,
+            "gross_margin": 10.8,
+            "logistics_cost": 4.0,
+            "contribution_nette": 6.8,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 30,
+            "discount_pct": 10.0,
+            "net_price": 27.0,
+            "gross_margin": 12.15,
+            "logistics_cost": 5.0,
+            "contribution_nette": 7.15,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 30,
+            "discount_pct": 10.0,
+            "net_price": 27.0,
+            "gross_margin": 13.5,
+            "logistics_cost": 7.0,
+            "contribution_nette": 6.5,
+            "is_profitable": true,
+            "margin_rate_on_original": 45.0
+          }
+        },
+        {
+          "price": 35,
+          "m40_l4": {
+            "price": 35,
+            "discount_pct": 10.0,
+            "net_price": 31.5,
+            "gross_margin": 12.6,
+            "logistics_cost": 4.0,
+            "contribution_nette": 8.6,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 35,
+            "discount_pct": 10.0,
+            "net_price": 31.5,
+            "gross_margin": 14.18,
+            "logistics_cost": 5.0,
+            "contribution_nette": 9.18,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 35,
+            "discount_pct": 10.0,
+            "net_price": 31.5,
+            "gross_margin": 15.75,
+            "logistics_cost": 7.0,
+            "contribution_nette": 8.75,
+            "is_profitable": true,
+            "margin_rate_on_original": 45.0
+          }
+        },
+        {
+          "price": 40,
+          "m40_l4": {
+            "price": 40,
+            "discount_pct": 10.0,
+            "net_price": 36.0,
+            "gross_margin": 14.4,
+            "logistics_cost": 4.0,
+            "contribution_nette": 10.4,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 40,
+            "discount_pct": 10.0,
+            "net_price": 36.0,
+            "gross_margin": 16.2,
+            "logistics_cost": 5.0,
+            "contribution_nette": 11.2,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 40,
+            "discount_pct": 10.0,
+            "net_price": 36.0,
+            "gross_margin": 18.0,
+            "logistics_cost": 7.0,
+            "contribution_nette": 11.0,
+            "is_profitable": true,
+            "margin_rate_on_original": 45.0
+          }
+        },
+        {
+          "price": 45,
+          "m40_l4": {
+            "price": 45,
+            "discount_pct": 10.0,
+            "net_price": 40.5,
+            "gross_margin": 16.2,
+            "logistics_cost": 4.0,
+            "contribution_nette": 12.2,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 45,
+            "discount_pct": 10.0,
+            "net_price": 40.5,
+            "gross_margin": 18.23,
+            "logistics_cost": 5.0,
+            "contribution_nette": 13.23,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 45,
+            "discount_pct": 10.0,
+            "net_price": 40.5,
+            "gross_margin": 20.25,
+            "logistics_cost": 7.0,
+            "contribution_nette": 13.25,
+            "is_profitable": true,
+            "margin_rate_on_original": 45.0
+          }
+        },
+        {
+          "price": 50,
+          "m40_l4": {
+            "price": 50,
+            "discount_pct": 10.0,
+            "net_price": 45.0,
+            "gross_margin": 18.0,
+            "logistics_cost": 4.0,
+            "contribution_nette": 14.0,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 50,
+            "discount_pct": 10.0,
+            "net_price": 45.0,
+            "gross_margin": 20.25,
+            "logistics_cost": 5.0,
+            "contribution_nette": 15.25,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 50,
+            "discount_pct": 10.0,
+            "net_price": 45.0,
+            "gross_margin": 22.5,
+            "logistics_cost": 7.0,
+            "contribution_nette": 15.5,
+            "is_profitable": true,
+            "margin_rate_on_original": 45.0
+          }
+        },
+        {
+          "price": 60,
+          "m40_l4": {
+            "price": 60,
+            "discount_pct": 10.0,
+            "net_price": 54.0,
+            "gross_margin": 21.6,
+            "logistics_cost": 4.0,
+            "contribution_nette": 17.6,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 60,
+            "discount_pct": 10.0,
+            "net_price": 54.0,
+            "gross_margin": 24.3,
+            "logistics_cost": 5.0,
+            "contribution_nette": 19.3,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 60,
+            "discount_pct": 10.0,
+            "net_price": 54.0,
+            "gross_margin": 27.0,
+            "logistics_cost": 7.0,
+            "contribution_nette": 20.0,
+            "is_profitable": true,
+            "margin_rate_on_original": 45.0
+          }
+        },
+        {
+          "price": 75,
+          "m40_l4": {
+            "price": 75,
+            "discount_pct": 10.0,
+            "net_price": 67.5,
+            "gross_margin": 27.0,
+            "logistics_cost": 4.0,
+            "contribution_nette": 23.0,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 75,
+            "discount_pct": 10.0,
+            "net_price": 67.5,
+            "gross_margin": 30.38,
+            "logistics_cost": 5.0,
+            "contribution_nette": 25.38,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 75,
+            "discount_pct": 10.0,
+            "net_price": 67.5,
+            "gross_margin": 33.75,
+            "logistics_cost": 7.0,
+            "contribution_nette": 26.75,
+            "is_profitable": true,
+            "margin_rate_on_original": 45.0
+          }
+        },
+        {
+          "price": 90,
+          "m40_l4": {
+            "price": 90,
+            "discount_pct": 10.0,
+            "net_price": 81.0,
+            "gross_margin": 32.4,
+            "logistics_cost": 4.0,
+            "contribution_nette": 28.4,
+            "is_profitable": true,
+            "margin_rate_on_original": 36.0
+          },
+          "m45_l5": {
+            "price": 90,
+            "discount_pct": 10.0,
+            "net_price": 81.0,
+            "gross_margin": 36.45,
+            "logistics_cost": 5.0,
+            "contribution_nette": 31.45,
+            "is_profitable": true,
+            "margin_rate_on_original": 40.5
+          },
+          "m50_l7": {
+            "price": 90,
+            "discount_pct": 10.0,
+            "net_price": 81.0,
+            "gross_margin": 40.5,
+            "logistics_cost": 7.0,
+            "contribution_nette": 33.5,
+            "is_profitable": true,
+            "margin_rate_on_original": 45.0
+          }
+        }
+      ],
+      "narrative_scenarios": [
+        {
+          "price": 15,
+          "discount_pct": 10.0,
+          "net_price": 13.5,
+          "gross_margin": 6.08,
+          "logistics_cost": 5.0,
+          "contribution_nette": 1.08,
+          "is_profitable": true,
+          "margin_rate_on_original": 40.5,
+          "label": "Produit solo (ex: créatine 300g)"
+        },
+        {
+          "price": 35,
+          "discount_pct": 10.0,
+          "net_price": 31.5,
+          "gross_margin": 14.18,
+          "logistics_cost": 5.0,
+          "contribution_nette": 9.18,
+          "is_profitable": true,
+          "margin_rate_on_original": 40.5,
+          "label": "Produit mid-range (ex: oméga-3 60 caps)"
+        },
+        {
+          "price": 55,
+          "discount_pct": 10.0,
+          "net_price": 49.5,
+          "gross_margin": 22.28,
+          "logistics_cost": 5.0,
+          "contribution_nette": 17.28,
+          "is_profitable": true,
+          "margin_rate_on_original": 40.5,
+          "label": "Pack 2-3 produits"
+        }
+      ],
+      "thresholds": {
+        "m40": {
+          "l4": 11.11,
+          "l5": 13.89,
+          "l7": 19.44
+        },
+        "m45": {
+          "l4": 9.88,
+          "l5": 12.35,
+          "l7": 17.28
+        },
+        "m50": {
+          "l4": 8.89,
+          "l5": 11.11,
+          "l7": 15.56
+        }
+      }
+    },
+    "ux_comparative": {
+      "best_dedicated_page": "Nutrimuscle (page la plus complète : 3 pictos + catalogue + espace abonné)",
+      "best_product_toggle": "Aqeelab (montant économisé en € affiché dynamiquement)",
+      "best_onboarding": "Cuure (quiz personnalisé → box sur-mesure)",
+      "most_aggressive_discount": "MyProtein (30-45%)",
+      "best_shipping_incentive": "Nutrimuscle (livraison gratuite incluse dans l'abo)",
+      "best_frequency_flexibility": "Nutrimuscle (1-6 mois)",
+      "worst_ux": "Decathlon (site séparé, 1 produit/commande, modification = résiliation)",
+      "wording_patterns": {
+        "most_common": "S'abonner / S'abonner & économiser",
+        "unique_cuure": "Découvrir ma formule",
+        "argumentaire_sante": "Novoma ('les compléments marchent mieux sur le long terme')",
+        "argumentaire_prix": "Aqeelab (montant € économisé) / MyProtein (badge % remise)",
+        "argumentaire_confort": "Decathlon ('Plus besoin de vous soucier du réassort')"
+      },
+      "ux_ranking": [
+        {
+          "brand": "Nutrimuscle",
+          "score": 4.5,
+          "reason": "Page dédiée + livraison gratuite + 6 fréquences"
+        },
+        {
+          "brand": "Cuure",
+          "score": 4.5,
+          "reason": "100% abo, quiz personnalisé, app mobile"
+        },
+        {
+          "brand": "Novoma",
+          "score": 4.0,
+          "reason": "Page dédiée bien structurée + avantages livraison"
+        },
+        {
+          "brand": "Aqeelab",
+          "score": 4.0,
+          "reason": "Toggle persuasif + 20% remise"
+        },
+        {
+          "brand": "Nutri&Co",
+          "score": 3.5,
+          "reason": "Toggle correct mais discret, pas de page dédiée"
+        },
+        {
+          "brand": "MyProtein",
+          "score": 3.5,
+          "reason": "Modèle mature mais UX confuse avec promos"
+        },
+        {
+          "brand": "Decathlon",
+          "score": 3.0,
+          "reason": "Site séparé, UX basique, limitation 1 produit"
+        }
+      ]
+    }
+  },
+  "comparative": {
+    "subscription_discount_ranking": [
+      {
+        "brand": "MyProtein",
+        "discount": "30-45%",
+        "model": "Subscribe & Save agressif"
+      },
+      {
+        "brand": "Aqeelab",
+        "discount": "20%",
+        "model": "Subscribe & Save fixe"
+      },
+      {
+        "brand": "Nutri&Co",
+        "discount": "15%",
+        "model": "Subscribe & Save"
+      },
+      {
+        "brand": "Nutrimuscle",
+        "discount": "5% → 15%",
+        "model": "Progressif"
+      },
+      {
+        "brand": "Decathlon",
+        "discount": "10-15%",
+        "model": "Par produit"
+      },
+      {
+        "brand": "Novoma",
+        "discount": "10%",
+        "model": "Subscribe & Save + avantages livraison"
+      },
+      {
+        "brand": "Cuure",
+        "discount": "~10%",
+        "model": "Box personnalisée"
+      },
+      {
+        "brand": "Nutripure",
+        "discount": "N/A",
+        "model": "Pas d abonnement"
+      }
+    ],
+    "free_shipping_thresholds": [
+      {
+        "brand": "Nutripure",
+        "relais": 49.9,
+        "domicile": 99
+      },
+      {
+        "brand": "MyProtein",
+        "relais": 60,
+        "domicile": 60
+      },
+      {
+        "brand": "Nutrimuscle",
+        "relais": 60,
+        "domicile": 100
+      },
+      {
+        "brand": "Novoma",
+        "relais": 65,
+        "domicile": 90,
+        "abo_domicile": 50
+      },
+      {
+        "brand": "Nutri&Co",
+        "relais": 69,
+        "domicile": 89
+      },
+      {
+        "brand": "Aqeelab",
+        "relais": 69,
+        "domicile": 100
+      },
+      {
+        "brand": "Decathlon",
+        "relais": "Offert abo",
+        "domicile": "Variable"
+      },
+      {
+        "brand": "Cuure",
+        "relais": "Inclus abo",
+        "domicile": "Inclus abo"
+      }
+    ],
+    "trustpilot_ranking": [
+      {
+        "brand": "Aqeelab",
+        "score": 4.9,
+        "nb_avis": 200
+      },
+      {
+        "brand": "Nutripure",
+        "score": 4.75,
+        "nb_avis": 2000
+      },
+      {
+        "brand": "Novoma",
+        "score": 4.6,
+        "nb_avis": 7000
+      },
+      {
+        "brand": "Cuure",
+        "score": 4.5,
+        "nb_avis": 4400
+      },
+      {
+        "brand": "Nutri&Co",
+        "score": 4.45,
+        "nb_avis": 4400
+      },
+      {
+        "brand": "Nutrimuscle",
+        "score": 4.05,
+        "nb_avis": 28000
+      },
+      {
+        "brand": "MyProtein",
+        "score": 3.1,
+        "nb_avis": 31000
+      },
+      {
+        "brand": "Decathlon",
+        "score": 2.5,
+        "nb_avis": 2950
+      }
+    ],
+    "tech_stack_summary": {
+      "shopify_dominant": true,
+      "shopify_brands": [
+        "Nutri&Co",
+        "Nutrimuscle",
+        "Novoma",
+        "Aqeelab"
+      ],
+      "custom_brands": [
+        "Cuure",
+        "Decathlon",
+        "MyProtein"
+      ],
+      "prestashop_brands": [
+        "Nutripure"
+      ],
+      "common_agency": "Axome (Nutri&Co, Nutrimuscle, Novoma)",
+      "insight": "4/8 marques sur Shopify (dont 3 via la même agence Axome). PrestaShop = frein potentiel à l'abonnement (Nutripure). Les gros acteurs (Decathlon, MyProtein) ont du custom."
+    },
+    "platform_distribution": {
+      "Shopify": [
+        "Nutri&Co",
+        "Nutrimuscle (Plus)",
+        "Novoma",
+        "Aqeelab"
+      ],
+      "Custom": [
+        "Cuure",
+        "Decathlon",
+        "MyProtein (THG Ingenuity)"
+      ],
+      "PrestaShop": [
+        "Nutripure"
+      ]
+    }
+  }
+}

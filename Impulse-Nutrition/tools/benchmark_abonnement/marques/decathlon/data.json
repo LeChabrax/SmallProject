@@ -1,0 +1,183 @@
+{
+  "brand": "Decathlon (Abonnement Nutrition)",
+  "slug": "decathlon",
+  "url": "https://abonnement.decathlon.fr",
+  "has_subscription": true,
+  "modele_commercial": {
+    "remise_pct": "10-15% (stepped par produit, pas flat)",
+    "remise_note": "Remise variable selon le SKU : -10% sur les whey (900g, 1.5kg, 2kg), -15% sur la créatine 300g, -10% sur les packs combinés (whey + créatine). Pattern rare — c'est une remise par produit, pas flat. Modèle '1 produit = 1 abonnement' (un pack compté comme 1 SKU est possible ; mais pas de panier multi-produits à la carte dans une même commande abo).",
+    "frequencies": [
+      "1 mois",
+      "2 mois",
+      "3 mois"
+    ],
+    "flexibility": {
+      "pause": true,
+      "modify": false,
+      "cancel_anytime": true
+    },
+    "engagement_min": "Aucun",
+    "livraison_abo": {
+      "offerte": "relais uniquement",
+      "seuil_eur": 0,
+      "note": "Livraison offerte en point relais (Mondial Relay) sans seuil pour les abonnés. Livraison domicile reste payante (3-4,50€ variable). C'est un modèle stepped comme Novoma (relais inclus seulement), pas flat comme Nutri&Co/Nutrimuscle (domicile inclus)."
+    }
+  },
+  "perimetre_produit": {
+    "scope": "Scope plus large que prévu (vérifié 2026-04-15). Catégorie nutrition complète : whey (standard, isolate, concentré), gainers, créatine, BCAA, ISO drinks (boissons isotoniques), électrolytes, gels énergétiques, compotes, barres, pâtes de fruits, préparations énergétiques. Plus packs 'développement musculaire' (whey + créatine combinés). Plus catégorie à part : croquettes pour chien (37,01€/mois de plancher). Ce n'est PAS tout le catalogue nutrition Decathlon — c'est une sélection curée pour les SKUs à consommation récurrente.",
+    "exclusions": [
+      "Produits one-shot ou saisonniers du catalogue nutrition Decathlon (ex : matériel, textile, accessoires fitness)",
+      "Probables : promotions ponctuelles et packs événementiels — à confirmer navigation live"
+    ],
+    "produits_sample": [
+      {
+        "name": "Whey Isolate 2kg",
+        "category": "Protéines",
+        "price_oneshot": 79.99,
+        "price_sub": 71.99,
+        "discount_pct": 10,
+        "weight": "2kg",
+        "format": "Poudre"
+      },
+      {
+        "name": "Whey 1.5kg",
+        "category": "Protéines",
+        "price_oneshot": 44.99,
+        "price_sub": 39.99,
+        "discount_pct": 11,
+        "weight": "1.5kg",
+        "format": "Poudre"
+      },
+      {
+        "name": "Whey 900g",
+        "category": "Protéines",
+        "price_oneshot": 28.99,
+        "price_sub": 25.99,
+        "discount_pct": 10,
+        "weight": "900g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Créatine monohydrate 300g",
+        "category": "Performance",
+        "price_oneshot": 14.99,
+        "price_sub": 12.74,
+        "discount_pct": 15,
+        "weight": "300g",
+        "format": "Poudre"
+      }
+    ],
+    "ticket_moyen_estime_eur": 40
+  },
+  "ux_page_produit": {
+    "wording_cta": "S'abonner",
+    "wording_pitch": "Faites des économies en cas d'abonnement par rapport à un achat unitaire et profitez d'un confort maximal. Plus besoin de vous soucier du réassort, on s'occupe de tout !",
+    "placement_module": "Sous-site dédié (abonnement.decathlon.fr) séparé du site principal",
+    "toggle_style": "N/A — site dédié, pas de toggle sur fiche produit classique",
+    "frequency_selector": null,
+    "price_display": null,
+    "dedicated_page": true,
+    "homepage_mention": true,
+    "navigation_mention": "Oui via lien footer + pages nutrition",
+    "email_mention": null,
+    "screenshots_files": [
+      "homepage.png",
+      "proteines.png",
+      "faq.png"
+    ]
+  },
+  "evaluation": {
+    "strengths": [
+      "Sous-site dédié (abonnement.decathlon.fr) avec processus en 4 étapes clair : Mon produit → Ma livraison → Mon paiement → Mes avantages",
+      "Programme fidélité **Decat'Club** cumulable : 10 points par euro dépensé, points crédités sur le compte global Decathlon, échangeables contre cartes cadeaux / coaching nutrition / livraison offerte / dons",
+      "Catalogue plus large que prévu (confirmé 2026) : whey, créatine, BCAA, gainers, ISO drinks, électrolytes, gels, compotes, barres, pâtes de fruits + packs combinés + croquettes chien",
+      "Livraison offerte en point relais Mondial Relay sans seuil",
+      "Prix plancher le plus bas du panel : 12,74€/mois (créatine 300g) — permet un entry-point très accessible",
+      "Sans engagement, annulation à tout moment",
+      "Pouvoir de feu omnicanal : 1700+ magasins physiques + app mobile + programme fidélité global = ambassadeur marketing gratuit du sous-site abo"
+    ],
+    "weaknesses": [
+      "Sous-domaine séparé abonnement.decathlon.fr = friction (redirect depuis le site principal, parcours abonné isolé)",
+      "Modèle '1 produit = 1 abonnement' : pour plusieurs produits, il faut créer plusieurs abos distincts (pas de panier multi-produits abo)",
+      "Modification = résiliation + recréation (friction majeure — pas de changement de SKU ou de fréquence in-place)",
+      "Livraison domicile reste payante (3-4,50€), contrairement aux concurrents premium qui l'offrent",
+      "UX basique comparée aux marques premium — pas d'optimisation conversion poussée (pas de badge '% économisé', pas de témoignages clients, pas de FAQ contextuelle)",
+      "Trustpilot 2,5/5 sur 2 950 avis (écart énorme avec site interne 4,47/5 sur 1,7M avis — les avis négatifs concernent surtout la logistique e-commerce Decathlon, pas l'abo spécifiquement)",
+      "Aucun champ 'pause' ou 'skip' documenté dans l'UX — le mécanisme de pause existe mais sans visibilité marketing"
+    ],
+    "score_ux": 3.0,
+    "score_offre_commerciale": 3.0,
+    "score_pertinence_vs_impulse": 2.5,
+    "score_global": 2.8,
+    "note": "Scores calibrés en fin de revue pass 1 (2026-04-15) après vérif live homogène des 8 marques. Grille : UX / Offre / Pertinence vs Impulse + Global = moyenne arithmétique.",
+    "rationale": {
+      "ux": "Sous-domaine séparé (friction redirect), 1 produit = 1 abo (mauvaise UX multi-abos), modification = résiliation + recréation (anti-pattern), UX basique. Compensé partiellement par la page dédiée + processus 4 étapes + mention homepage + prix plancher très bas 12,74€.",
+      "offre": "−10 à −15% stepped par produit (pattern rare), livraison offerte en relais uniquement, programme fidélité Decat'Club cumulable (vrai atout, points sur compte global échangeables contre cartes cadeaux/services/livraison), engagement zéro. Pénalisé par modification = résiliation + recréation.",
+      "pertinence": "Grande distribution omnicanale, positionnement opposé à Impulse (volume vs premium). Decathlon = contre-modèle UX à exposer dans le deck, pas une inspiration. Seul atout reproductible : le programme fidélité cumulable cross-canal."
+    }
+  },
+  "logistique": {
+    "transporteurs": [
+      "Mondial Relay",
+      "Colissimo",
+      "Chronopost"
+    ],
+    "livraison_abo": "Offerte en point relais",
+    "frais_domicile": "3-4.50€",
+    "seuil_gratuit_domicile": "Variable",
+    "delai_standard": "3-5 jours ouvrés",
+    "note": "Livraison offerte sur abonnements nutrition en point relais"
+  },
+  "tech": {
+    "platform": "Custom (plateforme unifiée propriétaire) + Shopify pour certains marchés internationaux",
+    "confidence": "confirmed",
+    "source": "Presse e-commerce + Shopify case study (ShopifyQL Notebooks pour US). abonnement.decathlon.fr = sous-domaine dédié, probablement microservice interne",
+    "subscription_app": "Custom interne",
+    "psp": "Multi-PSP (Adyen probable pour FR)",
+    "note": "Décathlon = géant omnicanal, architecture modulaire en microservices"
+  },
+  "avis": {
+    "trustpilot_score": 2.5,
+    "trustpilot_nb_avis": 2950,
+    "trustpilot_url": "https://fr.trustpilot.com/review/www.decathlon.fr",
+    "site_interne_score": 4.47,
+    "site_interne_nb_avis": 1700000,
+    "points_forts": [
+      "Rapport qualité/prix imbattable",
+      "Réseau physique 1700+ magasins",
+      "Programme fidélité",
+      "Nutrition sportive basique efficace"
+    ],
+    "points_faibles": [
+      "SAV critiqué en ligne",
+      "Problèmes de livraison",
+      "Qualité inégale selon produits",
+      "Peu de choix premium"
+    ],
+    "verbatims_abo": [
+      "Peu de retours spécifiques sur l'abonnement nutrition"
+    ],
+    "note": "Écart important entre avis internes (4.47/5) et Trustpilot (2.5/5). Le Trustpilot reflète surtout les problèmes logistiques e-commerce."
+  },
+  "_extras": {
+    "catalogue": {
+      "loyalty_program": "10 points fidélité par euro dépensé en abonnement"
+    },
+    "ux_deep": {},
+    "subscription_ux": {
+      "onboarding_flow": "4 étapes : Mon produit → Ma livraison → Mon paiement → Mes avantages",
+      "dedicated_page_url": "abonnement.decathlon.fr",
+      "pricing_display": "À partir de 12.74€/mois",
+      "loyalty": "10 points fidélité par euro dépensé",
+      "limitations": "1 produit par commande, commandes distinctes pour multi-produits"
+    },
+    "flexibility": {
+      "modify_note": "Pour modifier → résilier et recréer"
+    }
+  },
+  "_meta": {
+    "last_updated": "2026-04-15",
+    "audit_status": "verified_live",
+    "source_format": "split from master_data.json + vérif live 2026-04-15 via abonnement.decathlon.fr (WebFetch direct) + Decat'Club + decathlon.fr/lp/c/abonnement-decathlon + recherche catalogue packs"
+  }
+}

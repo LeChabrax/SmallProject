@@ -1,0 +1,207 @@
+{
+  "brand": "Nutrimuscle",
+  "slug": "nutrimuscle",
+  "url": "https://www.nutrimuscle.com",
+  "has_subscription": true,
+  "modele_commercial": {
+    "remise_pct": 15,
+    "remise_note": "-15% flat dès la première livraison (vérifié sur /pages/abonnement et article blog officiel). La mécanique progressive 5% → 15% listée dans l'ancien master_data semble obsolète — Nutrimuscle a vraisemblablement simplifié son modèle.",
+    "frequencies": [
+      "1 mois",
+      "2 mois",
+      "3 mois",
+      "4 mois",
+      "5 mois",
+      "6 mois"
+    ],
+    "flexibility": {
+      "pause": true,
+      "modify": true,
+      "cancel_anytime": true
+    },
+    "engagement_min": "Aucun",
+    "livraison_abo": {
+      "offerte": true,
+      "seuil_eur": 0,
+      "note": "Livraison domicile offerte pour tous les abonnés, sans seuil. En one-shot, seuil domicile à 100€ et relais à 60€ — l'abo débloque la gratuité même sur un panier de 17€."
+    }
+  },
+  "perimetre_produit": {
+    "scope": "Sélection de produits (250+ formats éligibles). Modèle '1 produit = 1 abonnement' (un abo par SKU, plusieurs abos possibles en parallèle).",
+    "exclusions": [
+      "Packs (Pack Starter, Pack Muscu Sèche, Pack Prise de masse, packs collagène/vitamines) — composition figée",
+      "Gros formats (4 kg et plus, 800 gélules et plus) — probable, à confirmer navigation live",
+      "Textile et accessoires — non consommable, pas de récurrence naturelle",
+      "Native Whey — à confirmer, source secondaire l'indiquait comme exclue"
+    ],
+    "produits_sample": [
+      {
+        "name": "Créatine Creapure",
+        "category": "Performance",
+        "price_oneshot": 16.95,
+        "price_sub": 14.41,
+        "discount_pct": 15,
+        "weight": "350g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Whey Native Biologique",
+        "category": "Protéines",
+        "price_oneshot": 19.95,
+        "price_sub": 16.96,
+        "discount_pct": 15,
+        "weight": "500g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Oméga-3 Epax",
+        "category": "Acides gras",
+        "price_oneshot": 19.95,
+        "price_sub": 16.96,
+        "discount_pct": 15,
+        "weight": "120 capsules",
+        "format": "Capsules"
+      },
+      {
+        "name": "Collagène Peptan",
+        "category": "Santé articulaire",
+        "price_oneshot": 14.95,
+        "price_sub": 12.71,
+        "discount_pct": 15,
+        "weight": "200g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Multivitamines",
+        "category": "Vitamines",
+        "price_oneshot": 12.95,
+        "price_sub": 11.01,
+        "discount_pct": 15,
+        "weight": "120 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "Magnésium",
+        "category": "Minéraux",
+        "price_oneshot": 9.95,
+        "price_sub": 8.46,
+        "discount_pct": 15,
+        "weight": "120 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "BCAA 2.1.1",
+        "category": "Acides aminés",
+        "price_oneshot": 21.95,
+        "price_sub": 18.66,
+        "discount_pct": 15,
+        "weight": "500g",
+        "format": "Poudre"
+      }
+    ],
+    "ticket_moyen_estime_eur": 45
+  },
+  "ux_page_produit": {
+    "wording_cta": "S'abonner",
+    "wording_pitch": "Abonnez-vous et économisez sur vos produits préférés",
+    "placement_module": "Toggle Achat unique / Abonnement intégré dans le sélecteur de prix",
+    "toggle_style": "Radio buttons avec picto",
+    "frequency_selector": "Dropdown (1 à 6 mois)",
+    "price_display": "Double affichage : prix normal et prix abonné avec badge -15%",
+    "dedicated_page": true,
+    "homepage_mention": true,
+    "navigation_mention": true,
+    "email_mention": "Oui, régulièrement dans les newsletters",
+    "dedicated_page_url": "https://www.nutrimuscle.com/pages/abonnement",
+    "screenshots_files": [
+      "homepage.png",
+      "product_sub.png",
+      "abonnement_page.png",
+      "blog_offre_abonnement.png",
+      "nos_offres.png"
+    ]
+  },
+  "evaluation": {
+    "strengths": [
+      "Page dédiée complète (/pages/abonnement) avec pitch éditorial, 3 pictos clés, catalogue des produits éligibles et lien espace abonné",
+      "Livraison domicile offerte sur l'abo sans seuil (argument massue vs le seuil one-shot de 100€)",
+      "6 fréquences disponibles (1 à 6 mois) — le plus flexible du panel, couvre les SKUs à rotation rapide (créatine, Oméga-3) comme les rotations lentes (gros pots)",
+      "Grand catalogue éligible (250+ formats) — couvre sport + santé",
+      "Espace abonné dédié pour gérer les abonnements",
+      "Mention dans la homepage, la navigation et les newsletters = visibilité maximale",
+      "-15% flat dès la 1ère livraison (simplicité du message)",
+      "Programme fidélité Nm Club couplé (points → produits gratuits)"
+    ],
+    "weaknesses": [
+      "Ruptures de stock occasionnelles mentionnées dans les verbatims → peut retarder les livraisons abo",
+      "Pas de mécanisme publique d'anti-churn (email pré-expédition non confirmé) — à vérifier",
+      "Stacking avec codes welcome/promos non trivial (certains codes influenceurs cumulables, d'autres non — manque de clarté pour le client)"
+    ],
+    "score_ux": 4.5,
+    "score_offre_commerciale": 4.5,
+    "score_pertinence_vs_impulse": 4.0,
+    "score_global": 4.3,
+    "note": "Scores calibrés en fin de revue pass 1 (2026-04-15) après vérif live homogène des 8 marques. Grille : UX / Offre / Pertinence vs Impulse + Global = moyenne arithmétique.",
+    "rationale": {
+      "ux": "Page dédiée complète + mention homepage + mention navigation + mention emails + 6 fréquences + toggle clair + badge remise. Pas d'affichage € économisé et email pré-expédition non confirmé.",
+      "offre": "−15% flat + livraison domicile offerte + zéro engagement + 6 fréquences flexibles + stacking partiel sélectif (codes influenceurs OK) + Nm Club fidélité. Très solide.",
+      "pertinence": "Positionnement muscu/perf plus que santé mix. Même tech (Shopify), catalogue 250+ SKUs. Bonne pertinence mais moins proche d'Impulse qui touche santé + sport."
+    }
+  },
+  "logistique": {
+    "transporteurs": [
+      "Mondial Relay",
+      "Colissimo",
+      "Chronopost"
+    ],
+    "frais_relais": 5.3,
+    "seuil_gratuit_relais": 60,
+    "frais_domicile": 7.5,
+    "seuil_gratuit_domicile": 100,
+    "delai_standard": "2-3 jours ouvrés"
+  },
+  "tech": {
+    "platform": "Shopify Plus",
+    "confidence": "confirmed",
+    "source": "Axome agency case study — migration vers Shopify Plus",
+    "subscription_app": "Probablement Recharge (Shopify Plus)",
+    "psp": "Shopify Payments (Stripe)",
+    "agency": "Axome"
+  },
+  "avis": {
+    "trustpilot_score": 4.05,
+    "trustpilot_nb_avis": 28000,
+    "trustpilot_url": "https://fr.trustpilot.com/review/nutrimuscle.com",
+    "points_forts": [
+      "Catalogue très large",
+      "Bon rapport qualité/prix",
+      "Livraison rapide"
+    ],
+    "points_faibles": [
+      "Ruptures de stock fréquentes",
+      "SAV parfois lent",
+      "Emballage perfectible"
+    ],
+    "verbatims_abo": [
+      "Abonnement pratique pour les produits récurrents",
+      "Parfois rupture de stock = livraison décalée"
+    ]
+  },
+  "_extras": {
+    "catalogue": {
+      "note": "Catalogue très large, 250+ produits. Remise -15% flat dès la 1ère livraison (corrigé 2026-04-15 — l'ancienne mention '5% 1ère puis 15%' est obsolète)."
+    },
+    "ux_deep": {},
+    "subscription_ux": {
+      "wording_details": "-15% sur vos produits en abonnement. Livraison gratuite avec l'abonnement. Sans engagement.",
+      "dedicated_page_url": "https://www.nutrimuscle.com/pages/abonnement",
+      "dedicated_page_content": "Page complète avec avantages (3 pictos), catalogue produits éligibles, lien vers espace abonné"
+    },
+    "flexibility": {}
+  },
+  "_meta": {
+    "last_updated": "2026-04-15",
+    "audit_status": "verified_live",
+    "source_format": "split from master_data.json + vérif live 2026-04-15 via FAQ + blog Nutrimuscle"
+  }
+}

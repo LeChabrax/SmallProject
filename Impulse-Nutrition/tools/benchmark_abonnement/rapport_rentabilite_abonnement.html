@@ -1,0 +1,2370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impulse Nutrition — Analyse Rentabilité Abonnement</title>
+<style>
+:root {
+    --marine: #1B2B4B;
+    --orange: #F05A28;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --muted: #64748b;
+    --green: #22c55e;
+    --amber: #f59e0b;
+    --red: #ef4444;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height:1.5; }
+.container { max-width:1400px; margin:0 auto; padding:20px; }
+header { background: var(--marine); color:white; padding:32px 0; margin-bottom:24px; }
+header .container { display:flex; justify-content:space-between; align-items:center; }
+header h1 { font-size:24px; font-weight:700; }
+header .subtitle { color: var(--orange); font-size:14px; margin-top:4px; }
+header .date { font-size:12px; opacity:0.7; }
+
+.kpi-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:32px; }
+.kpi-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; }
+.kpi-card .value { font-size:28px; font-weight:800; color:var(--marine); }
+.kpi-card .label { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-top:4px; }
+.kpi-card.highlight { border-color: var(--orange); border-width:2px; }
+.kpi-card.highlight .value { color: var(--orange); }
+
+section { margin-bottom:32px; }
+h2 { font-size:20px; font-weight:700; color:var(--marine); margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--orange); display:inline-block; }
+h3 { font-size:16px; font-weight:600; color:var(--marine); margin:16px 0 8px; }
+
+.card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; }
+
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th { background:var(--marine); color:white; padding:10px 8px; text-align:left; font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; position:sticky; top:0; }
+td { padding:8px; border-bottom:1px solid var(--border); }
+tr:hover { background:#f1f5f9; }
+tr.go { background: #f0fdf4; }
+tr.maybe { background: #fffbeb; }
+tr.nogo { background: #fef2f2; }
+
+.tag { display:inline-block; padding:2px 6px; border-radius:4px; font-size:11px; font-weight:600; }
+.tag-go { background:#dcfce7; color:#166534; }
+.tag-maybe { background:#fef3c7; color:#92400e; }
+.tag-nogo { background:#fecaca; color:#991b1b; }
+.tag-rentable { background:#dcfce7; color:#166534; }
+.tag-marginal { background:#fef3c7; color:#92400e; }
+.tag-deficitaire { background:#fecaca; color:#991b1b; }
+
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+@media (max-width:768px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+
+.bar { height:20px; border-radius:4px; display:flex; align-items:center; padding:0 8px; font-size:11px; font-weight:600; color:white; min-width:30px; }
+.cohort-chart { display:flex; align-items:flex-end; gap:2px; height:200px; padding:10px 0; }
+.cohort-bar { flex:1; background:var(--marine); border-radius:2px 2px 0 0; position:relative; min-width:20px; }
+.cohort-bar span { position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); font-size:10px; color:var(--muted); }
+
+.methodology { background: #f1f5f9; border-radius:8px; padding:16px; font-size:13px; color:var(--muted); }
+.methodology h4 { color:var(--marine); margin-bottom:8px; }
+.methodology ul { padding-left:20px; }
+.methodology li { margin-bottom:4px; }
+
+/* Panneaux pédagogiques : format distinctif, fond chaud, bordure orange */
+.edu-panel {
+    background: #fff8f0;
+    border-left: 4px solid var(--orange);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 13px;
+    color: #4a3a2a;
+}
+.edu-panel h4 { color: var(--orange); margin-bottom: 8px; font-weight: 700; font-size: 14px; }
+.edu-panel .formula { background: rgba(240,90,40,0.08); padding: 8px 12px; border-radius: 4px; font-family: 'SF Mono', Menlo, monospace; font-size: 12px; margin: 8px 0; }
+.edu-panel .example { margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(240,90,40,0.3); }
+.edu-panel .takeaway { margin-top: 8px; font-weight: 600; color: var(--marine); }
+
+/* Badge ILLUSTRATIF : avertissement sur les sections basées sur des valeurs non prédictives */
+.badge-illustrative {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border: 1px solid #fcd34d;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* Scenario cards : 3 colonnes Lean/Standard/Full */
+.scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+@media (max-width:968px) { .scenario-grid { grid-template-columns: 1fr; } }
+.scenario-card {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+}
+.scenario-card.standard { border-color: var(--orange); }
+.scenario-card h3 { color: var(--marine); margin-bottom: 4px; }
+.scenario-card .scenario-desc { font-size: 12px; color: var(--muted); margin-bottom: 12px; line-height: 1.4; }
+.scenario-card .scenario-kpi { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; }
+.scenario-card .scenario-kpi strong { color: var(--marine); }
+.scenario-card .scenario-kpi.big { font-size: 15px; padding: 10px 0; border-top: 1px solid var(--border); margin-top: 8px; }
+.scenario-card .scenario-kpi.big .value { font-size: 22px; font-weight: 800; color: var(--orange); }
+
+.heatmap-cell { text-align:center; font-weight:700; font-size:12px; padding:6px 4px !important; }
+
+.source { font-size:11px; color:var(--muted); font-style:italic; }
+
+.recommendation { background: linear-gradient(135deg, var(--marine) 0%, #2d3f5e 100%); color:white; border-radius:12px; padding:32px; margin-bottom:16px; }
+.recommendation h3 { color: var(--orange); margin-top:0; }
+.recommendation p { color: rgba(255,255,255,0.85); }
+.recommendation .highlight-box { background: rgba(255,255,255,0.1); border-radius:8px; padding:16px; margin-top:12px; }
+
+.nav { position:sticky; top:0; background:white; border-bottom:1px solid var(--border); padding:8px 0; z-index:100; margin-bottom:24px; }
+.nav .container { display:flex; gap:16px; flex-wrap:wrap; }
+.nav a { color:var(--marine); text-decoration:none; font-size:13px; font-weight:500; padding:4px 8px; border-radius:4px; }
+.nav a:hover { background:var(--marine); color:white; }
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+    <div>
+        <h1>🔬 Analyse Rentabilité Abonnement</h1>
+        <div class="subtitle">Impulse Nutrition — Étude interne</div>
+    </div>
+    <div class="date">Généré le 15/04/2026 19:39</div>
+</div>
+</header>
+
+<nav class="nav">
+<div class="container">
+    <a href="#dashboard">📊 Dashboard</a>
+    <a href="#scenarios">🎯 Scénarios</a>
+    <a href="#products">📦 Produits</a>
+    <a href="#heatmap">🔥 Heatmap</a>
+    <a href="#scoring">🏆 Scoring</a>
+    <a href="#ltv">📈 LTV</a>
+    <a href="#cohort">👥 Cohortes</a>
+    <a href="#crosssell">🔗 Cross-sell</a>
+    <a href="#basket">🛒 Paniers</a>
+    <a href="#cannibalization">⚠️ Cannibalis.</a>
+    <a href="#breakeven">💰 Break-even</a>
+    <a href="#competitors">🏁 Concurrents</a>
+    <a href="#reco">✅ Recommandation</a>
+    <a href="#methodology">📋 Méthodologie</a>
+</div>
+</nav>
+
+<div class="container">
+
+<!-- ═══ DASHBOARD KPI ═══ -->
+<section id="dashboard">
+<h2>📊 Dashboard</h2>
+<div class="kpi-grid">
+    <div class="kpi-card highlight">
+        <div class="value">18</div>
+        <div class="label">Produits éligibles (GO)</div>
+    </div>
+    <div class="kpi-card">
+        <div class="value">18</div>
+        <div class="label">Produits à étudier (MAYBE)</div>
+    </div>
+    <div class="kpi-card">
+        <div class="value">75%</div>
+        <div class="label">Marge brute HT moy. (GO)</div>
+    </div>
+    <div class="kpi-card highlight">
+        <div class="value">8.59€</div>
+        <div class="label">Contribution nette HT moy./abo (-15%, PR)</div>
+    </div>
+    <div class="kpi-card">
+        <div class="value">378€</div>
+        <div class="label">LTV HT (2 prod, churn baseline)</div>
+    </div>
+    <div class="kpi-card">
+        <div class="value">14</div>
+        <div class="label">Abonnés min (couvrir app Standard)</div>
+    </div>
+</div>
+</section>
+
+<!-- ═══ SCÉNARIOS COMPOSITES ═══ -->
+<section id="scenarios">
+<h2>🎯 3 Scénarios de Programme — Vue d'ensemble</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Chaque scénario bundle tous les paramètres cohérents (coûts infra, courbe de churn, mix d'acquisition). Les métriques clés sont calculées de bout en bout pour chaque scénario. Le <strong>Standard</strong> (bordure orange) est le cas de référence affiché ailleurs dans le rapport.</p>
+<div class="scenario-grid">
+<div class="scenario-card">
+    <h3>🚀 Lean MVP</h3>
+    <div class="scenario-desc">Test rapide du marché avec infrastructure minimale. Objectif : prouver le concept en 3-6 mois avec 50-100 abonnés avant d'investir dans du tooling custom.</div>
+    <div class="scenario-kpi"><span>Courbe de churn</span><strong>optimiste</strong></div>
+    <div class="scenario-kpi"><span>Durée de vie moyenne</span><strong>13.8 mois</strong></div>
+    <div class="scenario-kpi"><span>LTV abo HT (2 prod)</span><strong>481€</strong></div>
+    <div class="scenario-kpi"><span>App + setup HT</span><strong>20€/mo + 1500€</strong></div>
+    <div class="scenario-kpi"><span>Running break-even</span><strong>3 abonnés actifs</strong></div>
+    <div class="scenario-kpi"><span>Setup break-even</span><strong>13 nouveaux abos</strong></div>
+    <div class="scenario-kpi big"><span>Net / abo / an</span><span class="value" style="color:var(--green)">+25€</span></div>
+</div>
+<div class="scenario-card standard">
+    <h3>⚖️ Standard DTC</h3>
+    <div class="scenario-desc">Launch propre avec stack standard DTC compléments. Ce qu'on présenterait au COMEX comme business case crédible. Cible : 100-500 abonnés en 12 mois.</div>
+    <div class="scenario-kpi"><span>Courbe de churn</span><strong>baseline</strong></div>
+    <div class="scenario-kpi"><span>Durée de vie moyenne</span><strong>10.8 mois</strong></div>
+    <div class="scenario-kpi"><span>LTV abo HT (2 prod)</span><strong>378€</strong></div>
+    <div class="scenario-kpi"><span>App + setup HT</span><strong>120€/mo + 4000€</strong></div>
+    <div class="scenario-kpi"><span>Running break-even</span><strong>14 abonnés actifs</strong></div>
+    <div class="scenario-kpi"><span>Setup break-even</span><strong>44 nouveaux abos</strong></div>
+    <div class="scenario-kpi big"><span>Net / abo / an</span><span class="value" style="color:var(--green)">+28€</span></div>
+</div>
+<div class="scenario-card">
+    <h3>🏎️ Full retention</h3>
+    <div class="scenario-desc">Stack complète avec retention tooling. Pour scaler au-delà de 500 abonnés, avec cohort analytics, dunning avancé, email lifecycle. Rentable à partir de ~300 abonnés actifs.</div>
+    <div class="scenario-kpi"><span>Courbe de churn</span><strong>pessimiste</strong></div>
+    <div class="scenario-kpi"><span>Durée de vie moyenne</span><strong>7.6 mois</strong></div>
+    <div class="scenario-kpi"><span>LTV abo HT (2 prod)</span><strong>267€</strong></div>
+    <div class="scenario-kpi"><span>App + setup HT</span><strong>350€/mo + 7000€</strong></div>
+    <div class="scenario-kpi"><span>Running break-even</span><strong>41 abonnés actifs</strong></div>
+    <div class="scenario-kpi"><span>Setup break-even</span><strong>107 nouveaux abos</strong></div>
+    <div class="scenario-kpi big"><span>Net / abo / an</span><span class="value" style="color:var(--green)">+32€</span></div>
+</div>
+</div>
+<p style="font-size:12px;color:var(--muted);margin-top:12px">💡 <strong>Lecture actionnable</strong> : démarrer en <strong>Lean</strong> pour prouver le concept (break-even à 3 abonnés, risque minimal), migrer vers <strong>Standard</strong> à partir de 100 abonnés actifs, envisager <strong>Full</strong> seulement au-dessus de 500 abonnés. Ces seuils tombent des calculs de running break-even ci-dessus.</p>
+</section>
+
+<!-- ═══ PRODUCT TABLE ═══ -->
+<section id="products">
+<h2>📦 Analyse Produit par Produit</h2>
+<p class="source" style="margin-bottom:12px">Sources : Shopify MCP (prix retail TTC, stock) + Prix de Cession 2026 HT (COGS image fournie). <strong>Toutes les marges et contributions nettes sont en HT</strong> (TVA 20% déduite du prix retail, TVA récupérable sur COGS et logistique).</p>
+<div class="card" style="overflow-x:auto">
+<table>
+<thead>
+<tr>
+    <th>SKU</th>
+    <th>Produit</th>
+    <th>Catég.</th>
+    <th style="text-align:right">Prix TTC</th>
+    <th style="text-align:right">Prix HT</th>
+    <th style="text-align:right">COGS HT</th>
+    <th style="text-align:right">Marge € HT</th>
+    <th style="text-align:right">Marge % HT</th>
+    <th style="text-align:right">-10% HT</th>
+    <th style="text-align:right">-15% HT</th>
+    <th style="text-align:right">-20% HT</th>
+    <th style="text-align:right">Net PR (-15%)</th>
+    <th style="text-align:center">Score</th>
+    <th style="text-align:center">Verdict</th>
+    <th style="text-align:right">Stock</th>
+</tr>
+</thead>
+<tbody>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSMVIT</td>
+    <td style="font-weight:500">Multivitamines</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">18.90€</td>
+    <td style="text-align:right">15.75€</td>
+    <td style="text-align:right;color:var(--muted)">1.22€</td>
+    <td style="text-align:right;font-weight:600">14.53€</td>
+    <td style="text-align:right">92.3%</td>
+    <td style="text-align:right">12.96€</td>
+    <td style="text-align:right">12.17€</td>
+    <td style="text-align:right">11.38€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">8.92€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:89.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">89</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">650</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSSOM</td>
+    <td style="font-weight:500">Sommeil +</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">18.90€</td>
+    <td style="text-align:right">15.75€</td>
+    <td style="text-align:right;color:var(--muted)">1.37€</td>
+    <td style="text-align:right;font-weight:600">14.38€</td>
+    <td style="text-align:right">91.3%</td>
+    <td style="text-align:right">12.81€</td>
+    <td style="text-align:right">12.02€</td>
+    <td style="text-align:right">11.23€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">8.77€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:86.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">86</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">377</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSPBIOT</td>
+    <td style="font-weight:500">Pré-Probiotiques</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">22.90€</td>
+    <td style="text-align:right">19.08€</td>
+    <td style="text-align:right;color:var(--muted)">3.13€</td>
+    <td style="text-align:right;font-weight:600">15.95€</td>
+    <td style="text-align:right">83.6%</td>
+    <td style="text-align:right">14.04€</td>
+    <td style="text-align:right">13.09€</td>
+    <td style="text-align:right">12.13€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">9.84€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:83.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">83</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">143</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSOME</td>
+    <td style="font-weight:500">Omega 3 EPAX®</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">23.90€</td>
+    <td style="text-align:right">19.92€</td>
+    <td style="text-align:right;color:var(--muted)">6.71€</td>
+    <td style="text-align:right;font-weight:600">13.21€</td>
+    <td style="text-align:right">66.3%</td>
+    <td style="text-align:right">11.22€</td>
+    <td style="text-align:right">10.22€</td>
+    <td style="text-align:right">9.23€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">6.97€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:81.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">81</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">421</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSVITC</td>
+    <td style="font-weight:500">Vitamine C</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">12.90€</td>
+    <td style="text-align:right">10.75€</td>
+    <td style="text-align:right;color:var(--muted)">1.46€</td>
+    <td style="text-align:right;font-weight:600">9.29€</td>
+    <td style="text-align:right">86.4%</td>
+    <td style="text-align:right">8.22€</td>
+    <td style="text-align:right">7.68€</td>
+    <td style="text-align:right">7.14€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">4.43€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:79.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">79</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">570</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSMAG</td>
+    <td style="font-weight:500">Magnésium Bisglycinate</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">15.90€</td>
+    <td style="text-align:right">13.25€</td>
+    <td style="text-align:right;color:var(--muted)">3.16€</td>
+    <td style="text-align:right;font-weight:600">10.09€</td>
+    <td style="text-align:right">76.2%</td>
+    <td style="text-align:right">8.77€</td>
+    <td style="text-align:right">8.10€</td>
+    <td style="text-align:right">7.44€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">4.85€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:79.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">79</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">532</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSCOLBC</td>
+    <td style="font-weight:500">Peptides collagène Peptan® cacao</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">25.90€</td>
+    <td style="text-align:right">21.58€</td>
+    <td style="text-align:right;color:var(--muted)">6.84€</td>
+    <td style="text-align:right;font-weight:600">14.74€</td>
+    <td style="text-align:right">68.3%</td>
+    <td style="text-align:right">12.58€</td>
+    <td style="text-align:right">11.50€</td>
+    <td style="text-align:right">10.42€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">8.25€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:79.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">79</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">491</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSCOLBE</td>
+    <td style="font-weight:500">Peptides collagène Peptan® exotique</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">25.90€</td>
+    <td style="text-align:right">21.58€</td>
+    <td style="text-align:right;color:var(--muted)">6.87€</td>
+    <td style="text-align:right;font-weight:600">14.71€</td>
+    <td style="text-align:right">68.2%</td>
+    <td style="text-align:right">12.55€</td>
+    <td style="text-align:right">11.47€</td>
+    <td style="text-align:right">10.39€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">8.22€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:79.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">79</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">340</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSCOLMC</td>
+    <td style="font-weight:500">Collagène marin Peptan® cacao</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">36.90€</td>
+    <td style="text-align:right">30.75€</td>
+    <td style="text-align:right;color:var(--muted)">9.81€</td>
+    <td style="text-align:right;font-weight:600">20.94€</td>
+    <td style="text-align:right">68.1%</td>
+    <td style="text-align:right">17.87€</td>
+    <td style="text-align:right">16.33€</td>
+    <td style="text-align:right">14.79€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">13.08€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:79.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">79</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">338</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSCOLME</td>
+    <td style="font-weight:500">Collagène marin Peptan® exotique</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">36.90€</td>
+    <td style="text-align:right">30.75€</td>
+    <td style="text-align:right;color:var(--muted)">9.82€</td>
+    <td style="text-align:right;font-weight:600">20.93€</td>
+    <td style="text-align:right">68.1%</td>
+    <td style="text-align:right">17.86€</td>
+    <td style="text-align:right">16.32€</td>
+    <td style="text-align:right">14.78€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">13.07€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:79.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">79</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">416</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSCUR</td>
+    <td style="font-weight:500">Curcumine</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">19.90€</td>
+    <td style="text-align:right">16.58€</td>
+    <td style="text-align:right;color:var(--muted)">3.10€</td>
+    <td style="text-align:right;font-weight:600">13.48€</td>
+    <td style="text-align:right">81.3%</td>
+    <td style="text-align:right">11.82€</td>
+    <td style="text-align:right">10.99€</td>
+    <td style="text-align:right">10.16€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">7.74€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:78.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">78</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">120</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSPREWC</td>
+    <td style="font-weight:500">Preworkout citron</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">37.90€</td>
+    <td style="text-align:right">31.58€</td>
+    <td style="text-align:right;color:var(--muted)">10.36€</td>
+    <td style="text-align:right;font-weight:600">21.22€</td>
+    <td style="text-align:right">67.2%</td>
+    <td style="text-align:right">18.06€</td>
+    <td style="text-align:right">16.48€</td>
+    <td style="text-align:right">14.90€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">13.23€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:78.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">78</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">336</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSFER</td>
+    <td style="font-weight:500">Fer Bisglycinate</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">16.90€</td>
+    <td style="text-align:right">14.08€</td>
+    <td style="text-align:right;color:var(--muted)">1.60€</td>
+    <td style="text-align:right;font-weight:600">12.48€</td>
+    <td style="text-align:right">88.6%</td>
+    <td style="text-align:right">11.07€</td>
+    <td style="text-align:right">10.37€</td>
+    <td style="text-align:right">9.66€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">7.12€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:76.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">76</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">72</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSCOLMN</td>
+    <td style="font-weight:500">Collagène marin Peptan® nature</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">32.90€</td>
+    <td style="text-align:right">27.42€</td>
+    <td style="text-align:right;color:var(--muted)">10.03€</td>
+    <td style="text-align:right;font-weight:600">17.39€</td>
+    <td style="text-align:right">63.4%</td>
+    <td style="text-align:right">14.65€</td>
+    <td style="text-align:right">13.28€</td>
+    <td style="text-align:right">11.91€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">10.03€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:76.0%;height:100%;background:#22c55e"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#22c55e">76</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">208</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSCOLBN</td>
+    <td style="font-weight:500">Peptides collagène Peptan® nature</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">21.90€</td>
+    <td style="text-align:right">18.25€</td>
+    <td style="text-align:right;color:var(--muted)">6.94€</td>
+    <td style="text-align:right;font-weight:600">11.31€</td>
+    <td style="text-align:right">62.0%</td>
+    <td style="text-align:right">9.49€</td>
+    <td style="text-align:right">8.57€</td>
+    <td style="text-align:right">7.66€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">5.32€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:74.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">74</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">470</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSBCAAP</td>
+    <td style="font-weight:500">BCAA 2.1.1 pêche</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">22.90€</td>
+    <td style="text-align:right">19.08€</td>
+    <td style="text-align:right;color:var(--muted)">5.58€</td>
+    <td style="text-align:right;font-weight:600">13.50€</td>
+    <td style="text-align:right">70.8%</td>
+    <td style="text-align:right">11.59€</td>
+    <td style="text-align:right">10.64€</td>
+    <td style="text-align:right">9.68€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">7.39€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:72.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">72</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">772</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSRECMV</td>
+    <td style="font-weight:500">Whey Recovery vanille</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">39.90€</td>
+    <td style="text-align:right">33.25€</td>
+    <td style="text-align:right;color:var(--muted)">12.05€</td>
+    <td style="text-align:right;font-weight:600">21.20€</td>
+    <td style="text-align:right">63.8%</td>
+    <td style="text-align:right">17.88€</td>
+    <td style="text-align:right">16.21€</td>
+    <td style="text-align:right">14.55€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">12.96€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:71.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">71</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">300</td>
+</tr>
+<tr class="go">
+    <td style="font-family:monospace;font-size:11px">VSSPI</td>
+    <td style="font-weight:500">Spiruline Biologique</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">12.90€</td>
+    <td style="text-align:right">10.75€</td>
+    <td style="text-align:right;color:var(--muted)">1.54€</td>
+    <td style="text-align:right;font-weight:600">9.21€</td>
+    <td style="text-align:right">85.7%</td>
+    <td style="text-align:right">8.14€</td>
+    <td style="text-align:right">7.60€</td>
+    <td style="text-align:right">7.06€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">4.35€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:70.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">70</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+    <td style="text-align:right;color:var(--muted)">198</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSBCAAC</td>
+    <td style="font-weight:500">BCAA 2.1.1 citron</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">22.90€</td>
+    <td style="text-align:right">19.08€</td>
+    <td style="text-align:right;color:var(--muted)">5.58€</td>
+    <td style="text-align:right;font-weight:600">13.50€</td>
+    <td style="text-align:right">70.8%</td>
+    <td style="text-align:right">11.59€</td>
+    <td style="text-align:right">10.64€</td>
+    <td style="text-align:right">9.68€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">7.39€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:69.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">69</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">343</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSCREAC</td>
+    <td style="font-weight:500">Créatine Creapure®</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">12.90€</td>
+    <td style="text-align:right">10.75€</td>
+    <td style="text-align:right;color:var(--muted)">3.66€</td>
+    <td style="text-align:right;font-weight:600">7.09€</td>
+    <td style="text-align:right">66.0%</td>
+    <td style="text-align:right">6.02€</td>
+    <td style="text-align:right">5.48€</td>
+    <td style="text-align:right">4.94€</td>
+    <td style="text-align:right"><span class="tag tag-marginal">2.23€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:68.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">68</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">633</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSRECMC</td>
+    <td style="font-weight:500">Whey Recovery chocolat</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">39.90€</td>
+    <td style="text-align:right">33.25€</td>
+    <td style="text-align:right;color:var(--muted)">12.05€</td>
+    <td style="text-align:right;font-weight:600">21.20€</td>
+    <td style="text-align:right">63.8%</td>
+    <td style="text-align:right">17.88€</td>
+    <td style="text-align:right">16.21€</td>
+    <td style="text-align:right">14.55€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">12.96€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:68.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">68</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">178</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSELECP</td>
+    <td style="font-weight:500">Électrolytes poudre pêche</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">15.90€</td>
+    <td style="text-align:right">13.25€</td>
+    <td style="text-align:right;color:var(--muted)">3.86€</td>
+    <td style="text-align:right;font-weight:600">9.39€</td>
+    <td style="text-align:right">70.9%</td>
+    <td style="text-align:right">8.07€</td>
+    <td style="text-align:right">7.40€</td>
+    <td style="text-align:right">6.74€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">4.15€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:64.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">64</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">738</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSBOISM</td>
+    <td style="font-weight:500">Boisson effort menthe</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">21.90€</td>
+    <td style="text-align:right">18.25€</td>
+    <td style="text-align:right;color:var(--muted)">5.57€</td>
+    <td style="text-align:right;font-weight:600">12.68€</td>
+    <td style="text-align:right">69.5%</td>
+    <td style="text-align:right">10.86€</td>
+    <td style="text-align:right">9.94€</td>
+    <td style="text-align:right">9.03€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">6.69€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:63.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">63</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">385</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSBOISF</td>
+    <td style="font-weight:500">Boisson effort fruits rouges</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">21.90€</td>
+    <td style="text-align:right">18.25€</td>
+    <td style="text-align:right;color:var(--muted)">5.58€</td>
+    <td style="text-align:right;font-weight:600">12.67€</td>
+    <td style="text-align:right">69.4%</td>
+    <td style="text-align:right">10.85€</td>
+    <td style="text-align:right">9.93€</td>
+    <td style="text-align:right">9.02€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">6.68€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:63.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">63</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">387</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSELECC</td>
+    <td style="font-weight:500">Électrolytes poudre citron</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">15.90€</td>
+    <td style="text-align:right">13.25€</td>
+    <td style="text-align:right;color:var(--muted)">3.46€</td>
+    <td style="text-align:right;font-weight:600">9.79€</td>
+    <td style="text-align:right">73.9%</td>
+    <td style="text-align:right">8.47€</td>
+    <td style="text-align:right">7.80€</td>
+    <td style="text-align:right">7.14€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">4.55€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:61.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">61</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">438</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSLGLU</td>
+    <td style="font-weight:500">L-Glutamine Kyowa®</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">13.90€</td>
+    <td style="text-align:right">11.58€</td>
+    <td style="text-align:right;color:var(--muted)">4.59€</td>
+    <td style="text-align:right;font-weight:600">6.99€</td>
+    <td style="text-align:right">60.4%</td>
+    <td style="text-align:right">5.83€</td>
+    <td style="text-align:right">5.25€</td>
+    <td style="text-align:right">4.67€</td>
+    <td style="text-align:right"><span class="tag tag-marginal">2.00€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:61.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">61</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">492</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSGLY</td>
+    <td style="font-weight:500">Glycine cristallisée</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">10.90€</td>
+    <td style="text-align:right">9.08€</td>
+    <td style="text-align:right;color:var(--muted)">3.11€</td>
+    <td style="text-align:right;font-weight:600">5.97€</td>
+    <td style="text-align:right">65.7%</td>
+    <td style="text-align:right">5.06€</td>
+    <td style="text-align:right">4.61€</td>
+    <td style="text-align:right">4.15€</td>
+    <td style="text-align:right"><span class="tag tag-marginal">1.36€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:60.0%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">60</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">149</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSMAL</td>
+    <td style="font-weight:500">Maltodextrine</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">11.90€</td>
+    <td style="text-align:right">9.92€</td>
+    <td style="text-align:right;color:var(--muted)">3.56€</td>
+    <td style="text-align:right;font-weight:600">6.36€</td>
+    <td style="text-align:right">64.1%</td>
+    <td style="text-align:right">5.37€</td>
+    <td style="text-align:right">4.87€</td>
+    <td style="text-align:right">4.38€</td>
+    <td style="text-align:right"><span class="tag tag-marginal">1.62€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:57.99999999999999%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">58</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">238</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSWHEYC</td>
+    <td style="font-weight:500">Whey Isolate chocolat</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">39.90€</td>
+    <td style="text-align:right">33.25€</td>
+    <td style="text-align:right;color:var(--muted)">24.46€</td>
+    <td style="text-align:right;font-weight:600">8.79€</td>
+    <td style="text-align:right">26.4%</td>
+    <td style="text-align:right">5.47€</td>
+    <td style="text-align:right">3.80€</td>
+    <td style="text-align:right">2.14€</td>
+    <td style="text-align:right"><span class="tag tag-marginal">0.55€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:57.99999999999999%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">58</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">389</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSVITD</td>
+    <td style="font-weight:500">Vitamine D3</td>
+    <td>💊 sante</td>
+    <td style="text-align:right;font-weight:600">15.90€</td>
+    <td style="text-align:right">13.25€</td>
+    <td style="text-align:right;color:var(--muted)">2.16€</td>
+    <td style="text-align:right;font-weight:600">11.09€</td>
+    <td style="text-align:right">83.7%</td>
+    <td style="text-align:right">9.77€</td>
+    <td style="text-align:right">9.10€</td>
+    <td style="text-align:right">8.44€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">5.85€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:56.00000000000001%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">56</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">137</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSWHEYCECH</td>
+    <td style="font-weight:500">Whey Isolate chocolat - portion</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">2.95€</td>
+    <td style="text-align:right">2.46€</td>
+    <td style="text-align:right;color:var(--muted)">1.20€</td>
+    <td style="text-align:right;font-weight:600">1.26€</td>
+    <td style="text-align:right">51.2%</td>
+    <td style="text-align:right">1.01€</td>
+    <td style="text-align:right">0.89€</td>
+    <td style="text-align:right">0.77€</td>
+    <td style="text-align:right"><span class="tag tag-deficitaire">-2.36€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:56.00000000000001%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">56</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">726</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSWHEYVECH</td>
+    <td style="font-weight:500">Whey Isolate vanille - portion</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">2.95€</td>
+    <td style="text-align:right">2.46€</td>
+    <td style="text-align:right;color:var(--muted)">1.20€</td>
+    <td style="text-align:right;font-weight:600">1.26€</td>
+    <td style="text-align:right">51.2%</td>
+    <td style="text-align:right">1.01€</td>
+    <td style="text-align:right">0.89€</td>
+    <td style="text-align:right">0.77€</td>
+    <td style="text-align:right"><span class="tag tag-deficitaire">-2.36€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:56.00000000000001%;height:100%;background:#f59e0b"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#f59e0b">56</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">823</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSELEFC</td>
+    <td style="font-weight:500">Électrolytes efferv. cerise</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">9.90€</td>
+    <td style="text-align:right">8.25€</td>
+    <td style="text-align:right;color:var(--muted)">1.50€</td>
+    <td style="text-align:right;font-weight:600">6.75€</td>
+    <td style="text-align:right">81.8%</td>
+    <td style="text-align:right">5.92€</td>
+    <td style="text-align:right">5.51€</td>
+    <td style="text-align:right">5.10€</td>
+    <td style="text-align:right"><span class="tag tag-marginal">2.26€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:54.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">54</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">556</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSELEFCV</td>
+    <td style="font-weight:500">Électrolytes efferv. citron</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">9.90€</td>
+    <td style="text-align:right">8.25€</td>
+    <td style="text-align:right;color:var(--muted)">1.50€</td>
+    <td style="text-align:right;font-weight:600">6.75€</td>
+    <td style="text-align:right">81.8%</td>
+    <td style="text-align:right">5.92€</td>
+    <td style="text-align:right">5.51€</td>
+    <td style="text-align:right">5.10€</td>
+    <td style="text-align:right"><span class="tag tag-marginal">2.26€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:54.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">54</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">558</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSELEFP</td>
+    <td style="font-weight:500">Électrolytes efferv. pêche</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">9.90€</td>
+    <td style="text-align:right">8.25€</td>
+    <td style="text-align:right;color:var(--muted)">1.50€</td>
+    <td style="text-align:right;font-weight:600">6.75€</td>
+    <td style="text-align:right">81.8%</td>
+    <td style="text-align:right">5.92€</td>
+    <td style="text-align:right">5.51€</td>
+    <td style="text-align:right">5.10€</td>
+    <td style="text-align:right"><span class="tag tag-marginal">2.26€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:54.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">54</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">554</td>
+</tr>
+<tr class="maybe">
+    <td style="font-family:monospace;font-size:11px">VSWHEYV</td>
+    <td style="font-weight:500">Whey Isolate vanille</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">39.90€</td>
+    <td style="text-align:right">33.25€</td>
+    <td style="text-align:right;color:var(--muted)">25.73€</td>
+    <td style="text-align:right;font-weight:600">7.52€</td>
+    <td style="text-align:right">22.6%</td>
+    <td style="text-align:right">4.20€</td>
+    <td style="text-align:right">2.53€</td>
+    <td style="text-align:right">0.87€</td>
+    <td style="text-align:right"><span class="tag tag-deficitaire">-0.72€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:50.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">50</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+    <td style="text-align:right;color:var(--muted)">435</td>
+</tr>
+<tr class="nogo">
+    <td style="font-family:monospace;font-size:11px">VSWHEYN</td>
+    <td style="font-weight:500">Whey Isolate nature</td>
+    <td>🏋️ sport</td>
+    <td style="text-align:right;font-weight:600">37.90€</td>
+    <td style="text-align:right">31.58€</td>
+    <td style="text-align:right;color:var(--muted)">24.30€</td>
+    <td style="text-align:right;font-weight:600">7.28€</td>
+    <td style="text-align:right">23.1%</td>
+    <td style="text-align:right">4.12€</td>
+    <td style="text-align:right">2.54€</td>
+    <td style="text-align:right">0.96€</td>
+    <td style="text-align:right"><span class="tag tag-deficitaire">-0.71€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:47.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">47</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-nogo">NO-GO</span></td>
+    <td style="text-align:right;color:var(--muted)">204</td>
+</tr>
+<tr class="nogo">
+    <td style="font-family:monospace;font-size:11px">VSFLASK500</td>
+    <td style="font-weight:500">Flasque 500ml</td>
+    <td>🔧 accessoire</td>
+    <td style="text-align:right;font-weight:600">19.90€</td>
+    <td style="text-align:right">16.58€</td>
+    <td style="text-align:right;color:var(--muted)">3.50€</td>
+    <td style="text-align:right;font-weight:600">13.08€</td>
+    <td style="text-align:right">78.9%</td>
+    <td style="text-align:right">11.42€</td>
+    <td style="text-align:right">10.59€</td>
+    <td style="text-align:right">9.76€</td>
+    <td style="text-align:right"><span class="tag tag-rentable">7.34€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:41.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">41</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-nogo">NO-GO</span></td>
+    <td style="text-align:right;color:var(--muted)">1628</td>
+</tr>
+<tr class="nogo">
+    <td style="font-family:monospace;font-size:11px">VSBARLCC</td>
+    <td style="font-weight:500">Barre protéinée crispy choco-coco</td>
+    <td>🍫 snack</td>
+    <td style="text-align:right;font-weight:600">10.90€</td>
+    <td style="text-align:right">9.08€</td>
+    <td style="text-align:right;color:var(--muted)">3.67€</td>
+    <td style="text-align:right;font-weight:600">5.41€</td>
+    <td style="text-align:right">59.6%</td>
+    <td style="text-align:right">4.50€</td>
+    <td style="text-align:right">4.05€</td>
+    <td style="text-align:right">3.59€</td>
+    <td style="text-align:right"><span class="tag tag-marginal">0.80€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:36.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">36</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-nogo">NO-GO</span></td>
+    <td style="text-align:right;color:var(--muted)">319</td>
+</tr>
+<tr class="nogo">
+    <td style="font-family:monospace;font-size:11px">VSBARLC</td>
+    <td style="font-weight:500">Barre protéinée crispy chocolat</td>
+    <td>🍫 snack</td>
+    <td style="text-align:right;font-weight:600">10.90€</td>
+    <td style="text-align:right">9.08€</td>
+    <td style="text-align:right;color:var(--muted)">3.81€</td>
+    <td style="text-align:right;font-weight:600">5.27€</td>
+    <td style="text-align:right">58.0%</td>
+    <td style="text-align:right">4.36€</td>
+    <td style="text-align:right">3.91€</td>
+    <td style="text-align:right">3.45€</td>
+    <td style="text-align:right"><span class="tag tag-marginal">0.66€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:36.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">36</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-nogo">NO-GO</span></td>
+    <td style="text-align:right;color:var(--muted)">485</td>
+</tr>
+<tr class="nogo">
+    <td style="font-family:monospace;font-size:11px">VSSHAK450</td>
+    <td style="font-weight:500">Shaker 450ml</td>
+    <td>🔧 accessoire</td>
+    <td style="text-align:right;font-weight:600">6.90€</td>
+    <td style="text-align:right">5.75€</td>
+    <td style="text-align:right;color:var(--muted)">2.00€</td>
+    <td style="text-align:right;font-weight:600">3.75€</td>
+    <td style="text-align:right">65.2%</td>
+    <td style="text-align:right">3.17€</td>
+    <td style="text-align:right">2.89€</td>
+    <td style="text-align:right">2.60€</td>
+    <td style="text-align:right"><span class="tag tag-deficitaire">-0.36€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:21.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">21</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-nogo">NO-GO</span></td>
+    <td style="text-align:right;color:var(--muted)">601</td>
+</tr>
+<tr class="nogo">
+    <td style="font-family:monospace;font-size:11px">VSGOURDE</td>
+    <td style="font-weight:500">Bidon 750ml</td>
+    <td>🔧 accessoire</td>
+    <td style="text-align:right;font-weight:600">7.90€</td>
+    <td style="text-align:right">6.58€</td>
+    <td style="text-align:right;color:var(--muted)">2.55€</td>
+    <td style="text-align:right;font-weight:600">4.03€</td>
+    <td style="text-align:right">61.2%</td>
+    <td style="text-align:right">3.37€</td>
+    <td style="text-align:right">3.04€</td>
+    <td style="text-align:right">2.71€</td>
+    <td style="text-align:right"><span class="tag tag-deficitaire">-0.21€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:18.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">18</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-nogo">NO-GO</span></td>
+    <td style="text-align:right;color:var(--muted)">384</td>
+</tr>
+<tr class="nogo">
+    <td style="font-family:monospace;font-size:11px">VSSHAK750</td>
+    <td style="font-weight:500">Shaker 750ml</td>
+    <td>🔧 accessoire</td>
+    <td style="text-align:right;font-weight:600">7.90€</td>
+    <td style="text-align:right">6.58€</td>
+    <td style="text-align:right;color:var(--muted)">2.60€</td>
+    <td style="text-align:right;font-weight:600">3.98€</td>
+    <td style="text-align:right">60.5%</td>
+    <td style="text-align:right">3.32€</td>
+    <td style="text-align:right">2.99€</td>
+    <td style="text-align:right">2.66€</td>
+    <td style="text-align:right"><span class="tag tag-deficitaire">-0.26€</span></td>
+    <td style="text-align:center"><div style="display:flex;align-items:center;gap:6px">
+        <div style="width:60px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="width:18.0%;height:100%;background:#ef4444"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:#ef4444">18</span>
+    </div></td>
+    <td style="text-align:center"><span class="tag tag-nogo">NO-GO</span></td>
+    <td style="text-align:right;color:var(--muted)">374</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:12px;color:var(--muted);margin-top:8px">
+    <strong>Net PR (-15%)</strong> = Marge HT après remise 15% − frais Point Relais HT (3.25€ HT, 3.90€ TTC).
+    <span class="tag tag-rentable">rentable</span> ≥ 3€ HT &nbsp;
+    <span class="tag tag-marginal">marginal</span> 0-3€ HT &nbsp;
+    <span class="tag tag-deficitaire">déficitaire</span> &lt; 0€ HT
+</p>
+</section>
+
+<!-- ═══ HEATMAP ═══ -->
+<section id="heatmap">
+<h2>🔥 Matrice de Rentabilité (Contribution Nette HT)</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Contribution nette HT = Prix abonné HT − COGS HT − Frais de port HT. Vert ≥ 5€, Jaune 0-5€, Rouge &lt; 0€. <strong>Tous les chiffres sont en HT</strong> (TVA 20% déduite du prix et des frais de port).</p>
+<div class="card" style="overflow-x:auto">
+<table>
+<thead>
+<tr>
+    <th>Produit</th>
+    <th colspan="3" style="text-align:center;background:var(--orange)">Point Relais (3.90€)</th>
+    <th colspan="3" style="text-align:center">Domicile (5.90€)</th>
+    <th colspan="3" style="text-align:center;background:#374151">Express (10.90€)</th>
+</tr>
+<tr>
+    <th></th>
+    <th style="text-align:center;font-size:10px">-10%</th>
+    <th style="text-align:center;font-size:10px">-15%</th>
+    <th style="text-align:center;font-size:10px">-20%</th>
+    <th style="text-align:center;font-size:10px">-10%</th>
+    <th style="text-align:center;font-size:10px">-15%</th>
+    <th style="text-align:center;font-size:10px">-20%</th>
+    <th style="text-align:center;font-size:10px">-10%</th>
+    <th style="text-align:center;font-size:10px">-15%</th>
+    <th style="text-align:center;font-size:10px">-20%</th>
+</tr>
+</thead>
+<tbody><tr><td style="font-size:12px;font-weight:500">Multivitamines</td><td class="heatmap-cell" style="background:#dcfce7">9.7€</td><td class="heatmap-cell" style="background:#dcfce7">8.9€</td><td class="heatmap-cell" style="background:#dcfce7">8.1€</td><td class="heatmap-cell" style="background:#dcfce7">8.0€</td><td class="heatmap-cell" style="background:#dcfce7">7.2€</td><td class="heatmap-cell" style="background:#dcfce7">6.5€</td><td class="heatmap-cell" style="background:#bbf7d0">3.9€</td><td class="heatmap-cell" style="background:#bbf7d0">3.1€</td><td class="heatmap-cell" style="background:#fef3c7">2.3€</td></tr><tr><td style="font-size:12px;font-weight:500">Sommeil +</td><td class="heatmap-cell" style="background:#dcfce7">9.6€</td><td class="heatmap-cell" style="background:#dcfce7">8.8€</td><td class="heatmap-cell" style="background:#dcfce7">8.0€</td><td class="heatmap-cell" style="background:#dcfce7">7.9€</td><td class="heatmap-cell" style="background:#dcfce7">7.1€</td><td class="heatmap-cell" style="background:#dcfce7">6.3€</td><td class="heatmap-cell" style="background:#bbf7d0">3.7€</td><td class="heatmap-cell" style="background:#fef3c7">2.9€</td><td class="heatmap-cell" style="background:#fef3c7">2.1€</td></tr><tr><td style="font-size:12px;font-weight:500">Pré-Probiotiques</td><td class="heatmap-cell" style="background:#dcfce7">10.8€</td><td class="heatmap-cell" style="background:#dcfce7">9.8€</td><td class="heatmap-cell" style="background:#dcfce7">8.9€</td><td class="heatmap-cell" style="background:#dcfce7">9.1€</td><td class="heatmap-cell" style="background:#dcfce7">8.2€</td><td class="heatmap-cell" style="background:#dcfce7">7.2€</td><td class="heatmap-cell" style="background:#bbf7d0">5.0€</td><td class="heatmap-cell" style="background:#bbf7d0">4.0€</td><td class="heatmap-cell" style="background:#bbf7d0">3.0€</td></tr><tr><td style="font-size:12px;font-weight:500">Omega 3 EPAX®</td><td class="heatmap-cell" style="background:#dcfce7">8.0€</td><td class="heatmap-cell" style="background:#dcfce7">7.0€</td><td class="heatmap-cell" style="background:#dcfce7">6.0€</td><td class="heatmap-cell" style="background:#dcfce7">6.3€</td><td class="heatmap-cell" style="background:#dcfce7">5.3€</td><td class="heatmap-cell" style="background:#bbf7d0">4.3€</td><td class="heatmap-cell" style="background:#fef3c7">2.1€</td><td class="heatmap-cell" style="background:#fef3c7">1.1€</td><td class="heatmap-cell" style="background:#fef3c7">0.1€</td></tr><tr><td style="font-size:12px;font-weight:500">Vitamine C</td><td class="heatmap-cell" style="background:#bbf7d0">5.0€</td><td class="heatmap-cell" style="background:#bbf7d0">4.4€</td><td class="heatmap-cell" style="background:#bbf7d0">3.9€</td><td class="heatmap-cell" style="background:#bbf7d0">3.3€</td><td class="heatmap-cell" style="background:#fef3c7">2.8€</td><td class="heatmap-cell" style="background:#fef3c7">2.2€</td><td class="heatmap-cell" style="background:#fecaca">-0.9€</td><td class="heatmap-cell" style="background:#fecaca">-1.4€</td><td class="heatmap-cell" style="background:#fecaca">-1.9€</td></tr><tr><td style="font-size:12px;font-weight:500">Magnésium Bisglycinate</td><td class="heatmap-cell" style="background:#dcfce7">5.5€</td><td class="heatmap-cell" style="background:#bbf7d0">4.8€</td><td class="heatmap-cell" style="background:#bbf7d0">4.2€</td><td class="heatmap-cell" style="background:#bbf7d0">3.9€</td><td class="heatmap-cell" style="background:#bbf7d0">3.2€</td><td class="heatmap-cell" style="background:#fef3c7">2.5€</td><td class="heatmap-cell" style="background:#fecaca">-0.3€</td><td class="heatmap-cell" style="background:#fecaca">-1.0€</td><td class="heatmap-cell" style="background:#fecaca">-1.6€</td></tr><tr><td style="font-size:12px;font-weight:500">Peptides collagène Peptan® cac</td><td class="heatmap-cell" style="background:#dcfce7">9.3€</td><td class="heatmap-cell" style="background:#dcfce7">8.2€</td><td class="heatmap-cell" style="background:#dcfce7">7.2€</td><td class="heatmap-cell" style="background:#dcfce7">7.7€</td><td class="heatmap-cell" style="background:#dcfce7">6.6€</td><td class="heatmap-cell" style="background:#dcfce7">5.5€</td><td class="heatmap-cell" style="background:#bbf7d0">3.5€</td><td class="heatmap-cell" style="background:#fef3c7">2.4€</td><td class="heatmap-cell" style="background:#fef3c7">1.3€</td></tr><tr><td style="font-size:12px;font-weight:500">Peptides collagène Peptan® exo</td><td class="heatmap-cell" style="background:#dcfce7">9.3€</td><td class="heatmap-cell" style="background:#dcfce7">8.2€</td><td class="heatmap-cell" style="background:#dcfce7">7.1€</td><td class="heatmap-cell" style="background:#dcfce7">7.6€</td><td class="heatmap-cell" style="background:#dcfce7">6.5€</td><td class="heatmap-cell" style="background:#dcfce7">5.5€</td><td class="heatmap-cell" style="background:#bbf7d0">3.5€</td><td class="heatmap-cell" style="background:#fef3c7">2.4€</td><td class="heatmap-cell" style="background:#fef3c7">1.3€</td></tr><tr><td style="font-size:12px;font-weight:500">Collagène marin Peptan® cacao</td><td class="heatmap-cell" style="background:#dcfce7">14.6€</td><td class="heatmap-cell" style="background:#dcfce7">13.1€</td><td class="heatmap-cell" style="background:#dcfce7">11.5€</td><td class="heatmap-cell" style="background:#dcfce7">12.9€</td><td class="heatmap-cell" style="background:#dcfce7">11.4€</td><td class="heatmap-cell" style="background:#dcfce7">9.9€</td><td class="heatmap-cell" style="background:#dcfce7">8.8€</td><td class="heatmap-cell" style="background:#dcfce7">7.2€</td><td class="heatmap-cell" style="background:#dcfce7">5.7€</td></tr><tr><td style="font-size:12px;font-weight:500">Collagène marin Peptan® exotiq</td><td class="heatmap-cell" style="background:#dcfce7">14.6€</td><td class="heatmap-cell" style="background:#dcfce7">13.1€</td><td class="heatmap-cell" style="background:#dcfce7">11.5€</td><td class="heatmap-cell" style="background:#dcfce7">12.9€</td><td class="heatmap-cell" style="background:#dcfce7">11.4€</td><td class="heatmap-cell" style="background:#dcfce7">9.9€</td><td class="heatmap-cell" style="background:#dcfce7">8.8€</td><td class="heatmap-cell" style="background:#dcfce7">7.2€</td><td class="heatmap-cell" style="background:#dcfce7">5.7€</td></tr><tr><td style="font-size:12px;font-weight:500">Curcumine</td><td class="heatmap-cell" style="background:#dcfce7">8.6€</td><td class="heatmap-cell" style="background:#dcfce7">7.7€</td><td class="heatmap-cell" style="background:#dcfce7">6.9€</td><td class="heatmap-cell" style="background:#dcfce7">6.9€</td><td class="heatmap-cell" style="background:#dcfce7">6.1€</td><td class="heatmap-cell" style="background:#dcfce7">5.2€</td><td class="heatmap-cell" style="background:#fef3c7">2.7€</td><td class="heatmap-cell" style="background:#fef3c7">1.9€</td><td class="heatmap-cell" style="background:#fef3c7">1.1€</td></tr><tr><td style="font-size:12px;font-weight:500">Preworkout citron</td><td class="heatmap-cell" style="background:#dcfce7">14.8€</td><td class="heatmap-cell" style="background:#dcfce7">13.2€</td><td class="heatmap-cell" style="background:#dcfce7">11.7€</td><td class="heatmap-cell" style="background:#dcfce7">13.1€</td><td class="heatmap-cell" style="background:#dcfce7">11.6€</td><td class="heatmap-cell" style="background:#dcfce7">10.0€</td><td class="heatmap-cell" style="background:#dcfce7">9.0€</td><td class="heatmap-cell" style="background:#dcfce7">7.4€</td><td class="heatmap-cell" style="background:#dcfce7">5.8€</td></tr><tr><td style="font-size:12px;font-weight:500">Fer Bisglycinate</td><td class="heatmap-cell" style="background:#dcfce7">7.8€</td><td class="heatmap-cell" style="background:#dcfce7">7.1€</td><td class="heatmap-cell" style="background:#dcfce7">6.4€</td><td class="heatmap-cell" style="background:#dcfce7">6.2€</td><td class="heatmap-cell" style="background:#dcfce7">5.5€</td><td class="heatmap-cell" style="background:#bbf7d0">4.7€</td><td class="heatmap-cell" style="background:#fef3c7">2.0€</td><td class="heatmap-cell" style="background:#fef3c7">1.3€</td><td class="heatmap-cell" style="background:#fef3c7">0.6€</td></tr><tr><td style="font-size:12px;font-weight:500">Collagène marin Peptan® nature</td><td class="heatmap-cell" style="background:#dcfce7">11.4€</td><td class="heatmap-cell" style="background:#dcfce7">10.0€</td><td class="heatmap-cell" style="background:#dcfce7">8.7€</td><td class="heatmap-cell" style="background:#dcfce7">9.7€</td><td class="heatmap-cell" style="background:#dcfce7">8.4€</td><td class="heatmap-cell" style="background:#dcfce7">7.0€</td><td class="heatmap-cell" style="background:#dcfce7">5.6€</td><td class="heatmap-cell" style="background:#bbf7d0">4.2€</td><td class="heatmap-cell" style="background:#fef3c7">2.8€</td></tr><tr><td style="font-size:12px;font-weight:500">Peptides collagène Peptan® nat</td><td class="heatmap-cell" style="background:#dcfce7">6.2€</td><td class="heatmap-cell" style="background:#dcfce7">5.3€</td><td class="heatmap-cell" style="background:#bbf7d0">4.4€</td><td class="heatmap-cell" style="background:#bbf7d0">4.6€</td><td class="heatmap-cell" style="background:#bbf7d0">3.6€</td><td class="heatmap-cell" style="background:#fef3c7">2.7€</td><td class="heatmap-cell" style="background:#fef3c7">0.4€</td><td class="heatmap-cell" style="background:#fecaca">-0.5€</td><td class="heatmap-cell" style="background:#fecaca">-1.4€</td></tr><tr><td style="font-size:12px;font-weight:500">BCAA 2.1.1 pêche</td><td class="heatmap-cell" style="background:#dcfce7">8.3€</td><td class="heatmap-cell" style="background:#dcfce7">7.4€</td><td class="heatmap-cell" style="background:#dcfce7">6.4€</td><td class="heatmap-cell" style="background:#dcfce7">6.7€</td><td class="heatmap-cell" style="background:#dcfce7">5.7€</td><td class="heatmap-cell" style="background:#bbf7d0">4.8€</td><td class="heatmap-cell" style="background:#fef3c7">2.5€</td><td class="heatmap-cell" style="background:#fef3c7">1.6€</td><td class="heatmap-cell" style="background:#fef3c7">0.6€</td></tr><tr><td style="font-size:12px;font-weight:500">Whey Recovery vanille</td><td class="heatmap-cell" style="background:#dcfce7">14.6€</td><td class="heatmap-cell" style="background:#dcfce7">13.0€</td><td class="heatmap-cell" style="background:#dcfce7">11.3€</td><td class="heatmap-cell" style="background:#dcfce7">13.0€</td><td class="heatmap-cell" style="background:#dcfce7">11.3€</td><td class="heatmap-cell" style="background:#dcfce7">9.6€</td><td class="heatmap-cell" style="background:#dcfce7">8.8€</td><td class="heatmap-cell" style="background:#dcfce7">7.1€</td><td class="heatmap-cell" style="background:#dcfce7">5.5€</td></tr><tr><td style="font-size:12px;font-weight:500">Spiruline Biologique</td><td class="heatmap-cell" style="background:#bbf7d0">4.9€</td><td class="heatmap-cell" style="background:#bbf7d0">4.3€</td><td class="heatmap-cell" style="background:#bbf7d0">3.8€</td><td class="heatmap-cell" style="background:#bbf7d0">3.2€</td><td class="heatmap-cell" style="background:#fef3c7">2.7€</td><td class="heatmap-cell" style="background:#fef3c7">2.1€</td><td class="heatmap-cell" style="background:#fecaca">-0.9€</td><td class="heatmap-cell" style="background:#fecaca">-1.5€</td><td class="heatmap-cell" style="background:#fecaca">-2.0€</td></tr><tr><td style="font-size:12px;font-weight:500">BCAA 2.1.1 citron</td><td class="heatmap-cell" style="background:#dcfce7">8.3€</td><td class="heatmap-cell" style="background:#dcfce7">7.4€</td><td class="heatmap-cell" style="background:#dcfce7">6.4€</td><td class="heatmap-cell" style="background:#dcfce7">6.7€</td><td class="heatmap-cell" style="background:#dcfce7">5.7€</td><td class="heatmap-cell" style="background:#bbf7d0">4.8€</td><td class="heatmap-cell" style="background:#fef3c7">2.5€</td><td class="heatmap-cell" style="background:#fef3c7">1.6€</td><td class="heatmap-cell" style="background:#fef3c7">0.6€</td></tr><tr><td style="font-size:12px;font-weight:500">Créatine Creapure®</td><td class="heatmap-cell" style="background:#fef3c7">2.8€</td><td class="heatmap-cell" style="background:#fef3c7">2.2€</td><td class="heatmap-cell" style="background:#fef3c7">1.7€</td><td class="heatmap-cell" style="background:#fef3c7">1.1€</td><td class="heatmap-cell" style="background:#fef3c7">0.6€</td><td class="heatmap-cell" style="background:#fef3c7">0.0€</td><td class="heatmap-cell" style="background:#fecaca">-3.1€</td><td class="heatmap-cell" style="background:#fecaca">-3.6€</td><td class="heatmap-cell" style="background:#fecaca">-4.1€</td></tr><tr><td style="font-size:12px;font-weight:500">Whey Recovery chocolat</td><td class="heatmap-cell" style="background:#dcfce7">14.6€</td><td class="heatmap-cell" style="background:#dcfce7">13.0€</td><td class="heatmap-cell" style="background:#dcfce7">11.3€</td><td class="heatmap-cell" style="background:#dcfce7">13.0€</td><td class="heatmap-cell" style="background:#dcfce7">11.3€</td><td class="heatmap-cell" style="background:#dcfce7">9.6€</td><td class="heatmap-cell" style="background:#dcfce7">8.8€</td><td class="heatmap-cell" style="background:#dcfce7">7.1€</td><td class="heatmap-cell" style="background:#dcfce7">5.5€</td></tr><tr><td style="font-size:12px;font-weight:500">Électrolytes poudre pêche</td><td class="heatmap-cell" style="background:#bbf7d0">4.8€</td><td class="heatmap-cell" style="background:#bbf7d0">4.2€</td><td class="heatmap-cell" style="background:#bbf7d0">3.5€</td><td class="heatmap-cell" style="background:#bbf7d0">3.1€</td><td class="heatmap-cell" style="background:#fef3c7">2.5€</td><td class="heatmap-cell" style="background:#fef3c7">1.8€</td><td class="heatmap-cell" style="background:#fecaca">-1.0€</td><td class="heatmap-cell" style="background:#fecaca">-1.7€</td><td class="heatmap-cell" style="background:#fecaca">-2.3€</td></tr><tr><td style="font-size:12px;font-weight:500">Boisson effort menthe</td><td class="heatmap-cell" style="background:#dcfce7">7.6€</td><td class="heatmap-cell" style="background:#dcfce7">6.7€</td><td class="heatmap-cell" style="background:#dcfce7">5.8€</td><td class="heatmap-cell" style="background:#dcfce7">5.9€</td><td class="heatmap-cell" style="background:#dcfce7">5.0€</td><td class="heatmap-cell" style="background:#bbf7d0">4.1€</td><td class="heatmap-cell" style="background:#fef3c7">1.8€</td><td class="heatmap-cell" style="background:#fef3c7">0.9€</td><td class="heatmap-cell" style="background:#fecaca">-0.1€</td></tr><tr><td style="font-size:12px;font-weight:500">Boisson effort fruits rouges</td><td class="heatmap-cell" style="background:#dcfce7">7.6€</td><td class="heatmap-cell" style="background:#dcfce7">6.7€</td><td class="heatmap-cell" style="background:#dcfce7">5.8€</td><td class="heatmap-cell" style="background:#dcfce7">5.9€</td><td class="heatmap-cell" style="background:#dcfce7">5.0€</td><td class="heatmap-cell" style="background:#bbf7d0">4.1€</td><td class="heatmap-cell" style="background:#fef3c7">1.8€</td><td class="heatmap-cell" style="background:#fef3c7">0.8€</td><td class="heatmap-cell" style="background:#fecaca">-0.1€</td></tr><tr><td style="font-size:12px;font-weight:500">Électrolytes poudre citron</td><td class="heatmap-cell" style="background:#dcfce7">5.2€</td><td class="heatmap-cell" style="background:#bbf7d0">4.5€</td><td class="heatmap-cell" style="background:#bbf7d0">3.9€</td><td class="heatmap-cell" style="background:#bbf7d0">3.5€</td><td class="heatmap-cell" style="background:#fef3c7">2.9€</td><td class="heatmap-cell" style="background:#fef3c7">2.2€</td><td class="heatmap-cell" style="background:#fecaca">-0.6€</td><td class="heatmap-cell" style="background:#fecaca">-1.3€</td><td class="heatmap-cell" style="background:#fecaca">-1.9€</td></tr><tr><td style="font-size:12px;font-weight:500">L-Glutamine Kyowa®</td><td class="heatmap-cell" style="background:#fef3c7">2.6€</td><td class="heatmap-cell" style="background:#fef3c7">2.0€</td><td class="heatmap-cell" style="background:#fef3c7">1.4€</td><td class="heatmap-cell" style="background:#fef3c7">0.9€</td><td class="heatmap-cell" style="background:#fef3c7">0.3€</td><td class="heatmap-cell" style="background:#fecaca">-0.2€</td><td class="heatmap-cell" style="background:#fecaca">-3.2€</td><td class="heatmap-cell" style="background:#fecaca">-3.8€</td><td class="heatmap-cell" style="background:#fecaca">-4.4€</td></tr><tr><td style="font-size:12px;font-weight:500">Glycine cristallisée</td><td class="heatmap-cell" style="background:#fef3c7">1.8€</td><td class="heatmap-cell" style="background:#fef3c7">1.4€</td><td class="heatmap-cell" style="background:#fef3c7">0.9€</td><td class="heatmap-cell" style="background:#fef3c7">0.1€</td><td class="heatmap-cell" style="background:#fecaca">-0.3€</td><td class="heatmap-cell" style="background:#fecaca">-0.8€</td><td class="heatmap-cell" style="background:#fecaca">-4.0€</td><td class="heatmap-cell" style="background:#fecaca">-4.5€</td><td class="heatmap-cell" style="background:#fecaca">-4.9€</td></tr><tr><td style="font-size:12px;font-weight:500">Maltodextrine</td><td class="heatmap-cell" style="background:#fef3c7">2.1€</td><td class="heatmap-cell" style="background:#fef3c7">1.6€</td><td class="heatmap-cell" style="background:#fef3c7">1.1€</td><td class="heatmap-cell" style="background:#fef3c7">0.5€</td><td class="heatmap-cell" style="background:#fecaca">-0.1€</td><td class="heatmap-cell" style="background:#fecaca">-0.5€</td><td class="heatmap-cell" style="background:#fecaca">-3.7€</td><td class="heatmap-cell" style="background:#fecaca">-4.2€</td><td class="heatmap-cell" style="background:#fecaca">-4.7€</td></tr><tr><td style="font-size:12px;font-weight:500">Whey Isolate chocolat</td><td class="heatmap-cell" style="background:#fef3c7">2.2€</td><td class="heatmap-cell" style="background:#fef3c7">0.6€</td><td class="heatmap-cell" style="background:#fecaca">-1.1€</td><td class="heatmap-cell" style="background:#fef3c7">0.6€</td><td class="heatmap-cell" style="background:#fecaca">-1.1€</td><td class="heatmap-cell" style="background:#fecaca">-2.8€</td><td class="heatmap-cell" style="background:#fecaca">-3.6€</td><td class="heatmap-cell" style="background:#fecaca">-5.3€</td><td class="heatmap-cell" style="background:#fecaca">-6.9€</td></tr><tr><td style="font-size:12px;font-weight:500">Vitamine D3</td><td class="heatmap-cell" style="background:#dcfce7">6.5€</td><td class="heatmap-cell" style="background:#dcfce7">5.8€</td><td class="heatmap-cell" style="background:#dcfce7">5.2€</td><td class="heatmap-cell" style="background:#bbf7d0">4.8€</td><td class="heatmap-cell" style="background:#bbf7d0">4.2€</td><td class="heatmap-cell" style="background:#bbf7d0">3.5€</td><td class="heatmap-cell" style="background:#fef3c7">0.7€</td><td class="heatmap-cell" style="background:#fef3c7">0.0€</td><td class="heatmap-cell" style="background:#fecaca">-0.6€</td></tr><tr><td style="font-size:12px;font-weight:500">Électrolytes efferv. cerise</td><td class="heatmap-cell" style="background:#fef3c7">2.7€</td><td class="heatmap-cell" style="background:#fef3c7">2.3€</td><td class="heatmap-cell" style="background:#fef3c7">1.9€</td><td class="heatmap-cell" style="background:#fef3c7">1.0€</td><td class="heatmap-cell" style="background:#fef3c7">0.6€</td><td class="heatmap-cell" style="background:#fef3c7">0.2€</td><td class="heatmap-cell" style="background:#fecaca">-3.2€</td><td class="heatmap-cell" style="background:#fecaca">-3.6€</td><td class="heatmap-cell" style="background:#fecaca">-4.0€</td></tr><tr><td style="font-size:12px;font-weight:500">Électrolytes efferv. citron</td><td class="heatmap-cell" style="background:#fef3c7">2.7€</td><td class="heatmap-cell" style="background:#fef3c7">2.3€</td><td class="heatmap-cell" style="background:#fef3c7">1.9€</td><td class="heatmap-cell" style="background:#fef3c7">1.0€</td><td class="heatmap-cell" style="background:#fef3c7">0.6€</td><td class="heatmap-cell" style="background:#fef3c7">0.2€</td><td class="heatmap-cell" style="background:#fecaca">-3.2€</td><td class="heatmap-cell" style="background:#fecaca">-3.6€</td><td class="heatmap-cell" style="background:#fecaca">-4.0€</td></tr><tr><td style="font-size:12px;font-weight:500">Électrolytes efferv. pêche</td><td class="heatmap-cell" style="background:#fef3c7">2.7€</td><td class="heatmap-cell" style="background:#fef3c7">2.3€</td><td class="heatmap-cell" style="background:#fef3c7">1.9€</td><td class="heatmap-cell" style="background:#fef3c7">1.0€</td><td class="heatmap-cell" style="background:#fef3c7">0.6€</td><td class="heatmap-cell" style="background:#fef3c7">0.2€</td><td class="heatmap-cell" style="background:#fecaca">-3.2€</td><td class="heatmap-cell" style="background:#fecaca">-3.6€</td><td class="heatmap-cell" style="background:#fecaca">-4.0€</td></tr><tr><td style="font-size:12px;font-weight:500">Whey Isolate vanille</td><td class="heatmap-cell" style="background:#fef3c7">0.9€</td><td class="heatmap-cell" style="background:#fecaca">-0.7€</td><td class="heatmap-cell" style="background:#fecaca">-2.4€</td><td class="heatmap-cell" style="background:#fecaca">-0.7€</td><td class="heatmap-cell" style="background:#fecaca">-2.4€</td><td class="heatmap-cell" style="background:#fecaca">-4.0€</td><td class="heatmap-cell" style="background:#fecaca">-4.9€</td><td class="heatmap-cell" style="background:#fecaca">-6.5€</td><td class="heatmap-cell" style="background:#fecaca">-8.2€</td></tr><tr><td style="font-size:12px;font-weight:500">Whey Isolate nature</td><td class="heatmap-cell" style="background:#fef3c7">0.9€</td><td class="heatmap-cell" style="background:#fecaca">-0.7€</td><td class="heatmap-cell" style="background:#fecaca">-2.3€</td><td class="heatmap-cell" style="background:#fecaca">-0.8€</td><td class="heatmap-cell" style="background:#fecaca">-2.4€</td><td class="heatmap-cell" style="background:#fecaca">-4.0€</td><td class="heatmap-cell" style="background:#fecaca">-5.0€</td><td class="heatmap-cell" style="background:#fecaca">-6.5€</td><td class="heatmap-cell" style="background:#fecaca">-8.1€</td></tr><tr><td style="font-size:12px;font-weight:500">Barre protéinée crispy choco-c</td><td class="heatmap-cell" style="background:#fef3c7">1.2€</td><td class="heatmap-cell" style="background:#fef3c7">0.8€</td><td class="heatmap-cell" style="background:#fef3c7">0.3€</td><td class="heatmap-cell" style="background:#fecaca">-0.4€</td><td class="heatmap-cell" style="background:#fecaca">-0.9€</td><td class="heatmap-cell" style="background:#fecaca">-1.3€</td><td class="heatmap-cell" style="background:#fecaca">-4.6€</td><td class="heatmap-cell" style="background:#fecaca">-5.0€</td><td class="heatmap-cell" style="background:#fecaca">-5.5€</td></tr><tr><td style="font-size:12px;font-weight:500">Barre protéinée crispy chocola</td><td class="heatmap-cell" style="background:#fef3c7">1.1€</td><td class="heatmap-cell" style="background:#fef3c7">0.7€</td><td class="heatmap-cell" style="background:#fef3c7">0.2€</td><td class="heatmap-cell" style="background:#fecaca">-0.6€</td><td class="heatmap-cell" style="background:#fecaca">-1.0€</td><td class="heatmap-cell" style="background:#fecaca">-1.5€</td><td class="heatmap-cell" style="background:#fecaca">-4.7€</td><td class="heatmap-cell" style="background:#fecaca">-5.2€</td><td class="heatmap-cell" style="background:#fecaca">-5.6€</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ═══ SCORING DETAIL ═══ -->
+<section id="scoring">
+<h2>🏆 Détail du Scoring Abonnement</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Score composite /100 basé sur 6 critères pondérés.</p>
+<div class="card" style="overflow-x:auto">
+<table>
+<thead>
+<tr>
+    <th>Produit</th>
+    <th style="text-align:center">Récurrence<br><span style="font-weight:400;font-size:9px">/30 pts</span></th>
+    <th style="text-align:center">Marge viable<br><span style="font-weight:400;font-size:9px">/25 pts</span></th>
+    <th style="text-align:center">Complexité SKU<br><span style="font-weight:400;font-size:9px">/15 pts</span></th>
+    <th style="text-align:center">Concurrents<br><span style="font-weight:400;font-size:9px">/15 pts</span></th>
+    <th style="text-align:center">Demande<br><span style="font-weight:400;font-size:9px">/10 pts</span></th>
+    <th style="text-align:center">Catégorie<br><span style="font-weight:400;font-size:9px">/5 pts</span></th>
+    <th style="text-align:center">Total</th>
+    <th style="text-align:center">Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td style="font-weight:500;font-size:12px">Multivitamines</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">89</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Sommeil +</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">86</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Pré-Probiotiques</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">83</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Omega 3 EPAX®</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">20</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">81</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Vitamine C</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">15</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">79</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Magnésium Bisglycinate</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">15</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">79</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Peptides collagène Peptan® cacao</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">79</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Peptides collagène Peptan® exotique</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">79</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Collagène marin Peptan® cacao</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">79</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Collagène marin Peptan® exotique</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">79</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Curcumine</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">20</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">78</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Preworkout citron</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">78</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Fer Bisglycinate</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">20</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">2</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">76</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Collagène marin Peptan® nature</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">76</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Peptides collagène Peptan® nature</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">20</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">74</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">BCAA 2.1.1 pêche</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">20</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">72</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Whey Recovery vanille</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">71</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Spiruline Biologique</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">15</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">70</td>
+    <td style="text-align:center"><span class="tag tag-go">GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">BCAA 2.1.1 citron</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">20</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">69</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Créatine Creapure®</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">8</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">11</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">68</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Whey Recovery chocolat</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">25</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">68</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Électrolytes poudre pêche</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">15</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">64</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Boisson effort menthe</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">20</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">1</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">63</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Boisson effort fruits rouges</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">20</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">1</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">63</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Électrolytes poudre citron</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">15</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">61</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">L-Glutamine Kyowa®</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">8</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">61</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Glycine cristallisée</td>
+    <td style="text-align:center">32</td>
+    <td style="text-align:center">8</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">1</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">60</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Maltodextrine</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">8</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">58</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Whey Isolate chocolat</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">8</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">11</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">58</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Vitamine D3</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">20</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center;font-weight:700">56</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Whey Isolate chocolat - portion</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">0</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">11</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">56</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Whey Isolate vanille - portion</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">0</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">11</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">56</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Électrolytes efferv. cerise</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">8</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">54</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Électrolytes efferv. citron</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">8</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">54</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Électrolytes efferv. pêche</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">8</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">10</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">54</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Whey Isolate vanille</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">0</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">11</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">50</td>
+    <td style="text-align:center"><span class="tag tag-maybe">MAYBE</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Whey Isolate nature</td>
+    <td style="text-align:center">26</td>
+    <td style="text-align:center">0</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center">11</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">3</td>
+    <td style="text-align:center;font-weight:700">47</td>
+    <td style="text-align:center"><span class="tag tag-nogo">NO-GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Barre protéinée crispy choco-coco</td>
+    <td style="text-align:center">14</td>
+    <td style="text-align:center">8</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">1</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">0</td>
+    <td style="text-align:center;font-weight:700">36</td>
+    <td style="text-align:center"><span class="tag tag-nogo">NO-GO</span></td>
+</tr>
+<tr>
+    <td style="font-weight:500;font-size:12px">Barre protéinée crispy chocolat</td>
+    <td style="text-align:center">14</td>
+    <td style="text-align:center">8</td>
+    <td style="text-align:center">6</td>
+    <td style="text-align:center">1</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">0</td>
+    <td style="text-align:center;font-weight:700">36</td>
+    <td style="text-align:center"><span class="tag tag-nogo">NO-GO</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="edu-panel">
+<h4>🎓 Comment on classe un produit en GO / MAYBE / NO-GO</h4>
+<p>Chaque produit reçoit un score composite /100 basé sur 6 critères pondérés, documentés dans <code>constants.py</code> → <code>SCORING_WEIGHTS</code>. Les poids ont été calibrés d'après les drivers de succès observés en DTC compléments :</p>
+<table style="font-size:12px;margin:8px 0">
+<tr><td style="padding:4px 12px"><strong>Récurrence</strong></td><td style="padding:4px 12px">35 pts</td><td style="padding:4px 12px;color:var(--muted)">Le #1 driver : un produit qui se consomme en 1 mois est un candidat abo naturel, un accessoire ne l'est pas.</td></tr>
+<tr><td style="padding:4px 12px"><strong>Marge viable</strong></td><td style="padding:4px 12px">25 pts</td><td style="padding:4px 12px;color:var(--muted)">Contribution nette HT à ≥3€ (seuil Standard) = programme rentable.</td></tr>
+<tr><td style="padding:4px 12px"><strong>Validation concurrents</strong></td><td style="padding:4px 12px">15 pts</td><td style="padding:4px 12px;color:var(--muted)">Gradient : si 75%+ des benchmarkés ont la catégorie en abo, forte validation marché.</td></tr>
+<tr><td style="padding:4px 12px"><strong>Complexité SKU</strong></td><td style="padding:4px 12px">10 pts</td><td style="padding:4px 12px;color:var(--muted)">Moins de variants = moins de risque d'erreur en prep.</td></tr>
+<tr><td style="padding:4px 12px"><strong>Signal de demande</strong></td><td style="padding:4px 12px">10 pts</td><td style="padding:4px 12px;color:var(--muted)">Vélocité réelle si disponible, sinon fallback sur stock (proxy imparfait).</td></tr>
+<tr><td style="padding:4px 12px"><strong>Fit catégorie</strong></td><td style="padding:4px 12px">5 pts</td><td style="padding:4px 12px;color:var(--muted)">Santé quotidienne &gt; sport &gt; accessoire/snack.</td></tr>
+</table>
+<div class="example"><strong>Seuils de verdict :</strong> score ≥ 70 → <span class="tag tag-go">GO</span>, score ≥ 50 → <span class="tag tag-maybe">MAYBE</span>, sinon <span class="tag tag-nogo">NO-GO</span>.</div>
+<div class="takeaway">👉 Les seuils ont été baissés par rapport à la V1 (75/55 → 70/50) pour faire basculer plus de produits en MAYBE et forcer une revue humaine plutôt qu'un rejet automatique. Un produit MAYBE (50-69) a un ou deux critères fragiles mais peut devenir GO avec des ajustements (amélioration logistique, packaging, etc.).</div>
+</div>
+</section>
+<section id="ltv">
+<h2>📈 Projections LTV (Lifetime Value) — HT</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">
+LTV = Panier HT × (1 − remise) × durée de vie moyenne.
+La durée de vie est calculée à partir d'une <strong>courbe de churn multi-phases</strong>
+(pas un taux plat) : cliff M1, décroissance M2-M3, plateau M4+.
+Horizon de projection : <strong>24 mois</strong>. Remise 15% appliquée. Chiffres en HT.
+</p>
+<div class="grid-3"><div class="card"><h3>1 Produit</h3><table style="font-size:12px"><tr><th>Scénario</th><th style="text-align:right">Durée moy.</th><th style="text-align:right">LTV plein tarif HT</th><th style="text-align:right">LTV abo HT (-15%)</th></tr><tr><td>🟢 Optimiste</td><td style="text-align:right">13.8 mois</td><td style="text-align:right">283€</td><td style="text-align:right;font-weight:600;color:var(--orange)">240€</td></tr><tr><td>🟡 Baseline</td><td style="text-align:right">10.8 mois</td><td style="text-align:right">222€</td><td style="text-align:right;font-weight:600;color:var(--orange)">189€</td></tr><tr><td>🔴 Pessimiste</td><td style="text-align:right">7.6 mois</td><td style="text-align:right">157€</td><td style="text-align:right;font-weight:600;color:var(--orange)">134€</td></tr></table></div><div class="card"><h3>2 Produits</h3><table style="font-size:12px"><tr><th>Scénario</th><th style="text-align:right">Durée moy.</th><th style="text-align:right">LTV plein tarif HT</th><th style="text-align:right">LTV abo HT (-15%)</th></tr><tr><td>🟢 Optimiste</td><td style="text-align:right">13.8 mois</td><td style="text-align:right">566€</td><td style="text-align:right;font-weight:600;color:var(--orange)">481€</td></tr><tr><td>🟡 Baseline</td><td style="text-align:right">10.8 mois</td><td style="text-align:right">445€</td><td style="text-align:right;font-weight:600;color:var(--orange)">378€</td></tr><tr><td>🔴 Pessimiste</td><td style="text-align:right">7.6 mois</td><td style="text-align:right">314€</td><td style="text-align:right;font-weight:600;color:var(--orange)">267€</td></tr></table></div><div class="card"><h3>3 Produits</h3><table style="font-size:12px"><tr><th>Scénario</th><th style="text-align:right">Durée moy.</th><th style="text-align:right">LTV plein tarif HT</th><th style="text-align:right">LTV abo HT (-15%)</th></tr><tr><td>🟢 Optimiste</td><td style="text-align:right">13.8 mois</td><td style="text-align:right">849€</td><td style="text-align:right;font-weight:600;color:var(--orange)">722€</td></tr><tr><td>🟡 Baseline</td><td style="text-align:right">10.8 mois</td><td style="text-align:right">667€</td><td style="text-align:right;font-weight:600;color:var(--orange)">567€</td></tr><tr><td>🔴 Pessimiste</td><td style="text-align:right">7.6 mois</td><td style="text-align:right">471€</td><td style="text-align:right;font-weight:600;color:var(--orange)">401€</td></tr></table></div></div><div class="card" style="margin-top:16px"><h3>Courbes de churn utilisées</h3><p style="font-size:12px;color:var(--muted);margin-bottom:8px">Taux de churn mensuel appliqué à chaque phase du cycle de vie de l'abonné. Le cliff M1 est le plus violent en DTC compléments (20-35%).</p><table style="font-size:12px"><thead><tr><th>Phase</th><th style="text-align:right">🟢 Optimiste</th><th style="text-align:right">🟡 Baseline</th><th style="text-align:right">🔴 Pessimiste</th></tr></thead><tbody><tr><td>M1 (cliff d'essai)</td><td style="text-align:right;color:#ef4444;font-weight:600">15%/mois</td><td style="text-align:right;color:#ef4444;font-weight:600">25%/mois</td><td style="text-align:right;color:#ef4444;font-weight:600">35%/mois</td></tr><tr><td>M2</td><td style="text-align:right;color:#f59e0b;font-weight:600">8%/mois</td><td style="text-align:right;color:#f59e0b;font-weight:600">12%/mois</td><td style="text-align:right;color:#ef4444;font-weight:600">18%/mois</td></tr><tr><td>M3</td><td style="text-align:right;color:#22c55e;font-weight:600">6%/mois</td><td style="text-align:right;color:#f59e0b;font-weight:600">8%/mois</td><td style="text-align:right;color:#f59e0b;font-weight:600">12%/mois</td></tr><tr><td>M4-M12 (plateau)</td><td style="text-align:right;color:#22c55e;font-weight:600">4%/mois</td><td style="text-align:right;color:#22c55e;font-weight:600">5%/mois</td><td style="text-align:right;color:#22c55e;font-weight:600">7%/mois</td></tr><tr><td>M13+ (long-tail)</td><td style="text-align:right;color:#22c55e;font-weight:600">2%/mois</td><td style="text-align:right;color:#22c55e;font-weight:600">3%/mois</td><td style="text-align:right;color:#22c55e;font-weight:600">5%/mois</td></tr><tr style="border-top:2px solid var(--border);font-weight:700"><td>Durée de vie moyenne</td><td style="text-align:right">13.8 mois</td><td style="text-align:right">10.8 mois</td><td style="text-align:right">7.6 mois</td></tr></tbody></table></div>
+<div class="edu-panel">
+<h4>🎓 Pourquoi la LTV chute avec le cliff M1</h4>
+<p>La Lifetime Value, c'est combien d'argent tu encaisses en moyenne par abonné sur toute sa durée de vie :</p>
+<div class="formula">LTV_HT = panier_HT × (1 − remise) × durée_vie_moyenne</div>
+<div class="example">
+<strong>Exemple avec un panier de 2 produits (41.13€ HT), remise 15%, scénario baseline :</strong><br>
+LTV = 41.13 × 0.85 × 10.8 = <strong>378€ HT</strong><br>
+<br>
+Avec un cliff M1 plus violent (pessimiste 35% vs baseline 25%), la durée de vie passe de 10.8 à 7.6 mois → LTV tombe à <strong>267€ HT</strong> (29% de revenus en moins).
+</div>
+<div class="takeaway">👉 Le M1 est le mois le plus critique. Un onboarding raté multiplie par 2 le churn du premier mois et divise la LTV de 30%. C'est pourquoi soigner le welcome email + le packaging + la clarté de l'annulation sont les investissements les plus rentables.</div>
+</div>
+</section>
+<section id="cohort">
+<h2>👥 Simulation Cohorte (100 abonnés, 24 mois) — HT</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Évolution d'une cohorte de 100 abonnés démarrant en M1, panier = 2 produits GO moyen, remise 15%. Les barres montrent la recette HT mensuelle — le <strong>cliff M1-M3 est le vrai enjeu</strong> du programme.</p>
+<div class="grid-3"><div class="card">
+<h3>🟢 Optimiste</h3>
+<p style="font-size:11px;color:var(--muted);margin-bottom:8px">Durée de vie moyenne : <strong>13.8 mois</strong></p>
+<div class="cohort-chart"><div class="cohort-bar" style="height:180.0px" title="M1: 85 abo, 3496€ HT"><span>M1</span></div><div class="cohort-bar" style="height:152.99987128330542px" title="M2: 78 abo, 2972€ HT"><span>M2</span></div><div class="cohort-bar" style="height:140.75994336465436px" title="M3: 74 abo, 2734€ HT"><span>M3</span></div><div class="cohort-bar" style="height:132.31818766894065px" title="M4: 71 abo, 2570€ HT"><span>M4</span></div><div class="cohort-bar" style="height:127.0258720556056px" title="M5: 68 abo, 2467€ HT"><span>M5</span></div><div class="cohort-bar" style="height:121.93178015188569px" title="M6: 65 abo, 2368€ HT"><span>M6</span></div><div class="cohort-bar" style="height:117.07195263225638px" title="M7: 62 abo, 2274€ HT"><span>M7</span></div><div class="cohort-bar" style="height:112.37379328098852px" title="M8: 60 abo, 2183€ HT"><span>M8</span></div><div class="cohort-bar" style="height:107.89187797657357px" title="M9: 58 abo, 2096€ HT"><span>M9</span></div><div class="cohort-bar" style="height:103.57214570729823px" title="M10: 55 abo, 2012€ HT"><span>M10</span></div><div class="cohort-bar" style="height:99.43210194362209px" title="M11: 53 abo, 1931€ HT"><span>M11</span></div><div class="cohort-bar" style="height:95.45424121508559px" title="M12: 51 abo, 1854€ HT"><span>M12</span></div><div class="cohort-bar" style="height:91.63804865491053px" title="M13: 50 abo, 1780€ HT"><span>M13</span></div><div class="cohort-bar" style="height:89.80203372377397px" title="M14: 49 abo, 1744€ HT"><span>M14</span></div><div class="cohort-bar" style="height:88.00205946711289px" title="M15: 48 abo, 1709€ HT"><span>M15</span></div><div class="cohort-bar" style="height:86.23812588492727px" title="M16: 47 abo, 1675€ HT"><span>M16</span></div><div class="cohort-bar" style="height:84.51023297721714px" title="M17: 46 abo, 1641€ HT"><span>M17</span></div><div class="cohort-bar" style="height:82.83588621444201px" title="M18: 45 abo, 1609€ HT"><span>M18</span></div><div class="cohort-bar" style="height:81.18007465568284px" title="M19: 44 abo, 1577€ HT"><span>M19</span></div><div class="cohort-bar" style="height:79.54176856738319px" title="M20: 43 abo, 1545€ HT"><span>M20</span></div><div class="cohort-bar" style="height:77.95803835757498px" title="M21: 42 abo, 1514€ HT"><span>M21</span></div><div class="cohort-bar" style="height:76.39181361822628px" title="M22: 42 abo, 1484€ HT"><span>M22</span></div><div class="cohort-bar" style="height:74.86214442013129px" title="M23: 41 abo, 1454€ HT"><span>M23</span></div><div class="cohort-bar" style="height:73.36800102973355px" title="M24: 40 abo, 1425€ HT"><span>M24</span></div></div>
+<table style="font-size:11px;margin-top:24px">
+<tr><td>Abonnés restants M12</td><td style="text-align:right;font-weight:600">51</td></tr>
+<tr><td>Abonnés restants M24</td><td style="text-align:right;font-weight:600">40</td></tr>
+<tr><td>CA HT cumulé M12</td><td style="text-align:right;font-weight:600;color:var(--orange)">28956€</td></tr>
+<tr><td>CA HT cumulé M24</td><td style="text-align:right;font-weight:700;color:var(--orange)">48113€</td></tr>
+</table>
+</div><div class="card">
+<h3>🟡 Baseline</h3>
+<p style="font-size:11px;color:var(--muted);margin-bottom:8px">Durée de vie moyenne : <strong>10.8 mois</strong></p>
+<div class="cohort-chart"><div class="cohort-bar" style="height:180.0px" title="M1: 75 abo, 3496€ HT"><span>M1</span></div><div class="cohort-bar" style="height:135.00012871669455px" title="M2: 66 abo, 2622€ HT"><span>M2</span></div><div class="cohort-bar" style="height:118.79984553996653px" title="M3: 61 abo, 2307€ HT"><span>M3</span></div><div class="cohort-bar" style="height:109.29591968078259px" title="M4: 58 abo, 2123€ HT"><span>M4</span></div><div class="cohort-bar" style="height:103.82391556184837px" title="M5: 55 abo, 2017€ HT"><span>M5</span></div><div class="cohort-bar" style="height:98.64023683871797px" title="M6: 52 abo, 1916€ HT"><span>M6</span></div><div class="cohort-bar" style="height:93.70781310335951px" title="M7: 49 abo, 1820€ HT"><span>M7</span></div><div class="cohort-bar" style="height:89.02818895610761px" title="M8: 47 abo, 1729€ HT"><span>M8</span></div><div class="cohort-bar" style="height:84.56377912215214px" title="M9: 45 abo, 1642€ HT"><span>M9</span></div><div class="cohort-bar" style="height:80.33414853906551px" title="M10: 42 abo, 1560€ HT"><span>M10</span></div><div class="cohort-bar" style="height:76.32024713605354px" title="M11: 40 abo, 1482€ HT"><span>M11</span></div><div class="cohort-bar" style="height:72.50405457587848px" title="M12: 38 abo, 1408€ HT"><span>M12</span></div><div class="cohort-bar" style="height:68.88608572531857px" title="M13: 37 abo, 1338€ HT"><span>M13</span></div><div class="cohort-bar" style="height:66.81580641009138px" title="M14: 36 abo, 1298€ HT"><span>M14</span></div><div class="cohort-bar" style="height:64.81812331059338px" title="M15: 35 abo, 1259€ HT"><span>M15</span></div><div class="cohort-bar" style="height:62.87398635603038px" title="M16: 34 abo, 1221€ HT"><span>M16</span></div><div class="cohort-bar" style="height:60.98391041318059px" title="M17: 33 abo, 1184€ HT"><span>M17</span></div><div class="cohort-bar" style="height:59.14789548204402px" title="M18: 32 abo, 1149€ HT"><span>M18</span></div><div class="cohort-bar" style="height:57.383961899858406px" title="M19: 31 abo, 1115€ HT"><span>M19</span></div><div class="cohort-bar" style="height:55.65606899214828px" title="M20: 30 abo, 1081€ HT"><span>M20</span></div><div class="cohort-bar" style="height:53.98223709615137px" title="M21: 29 abo, 1048€ HT"><span>M21</span></div><div class="cohort-bar" style="height:52.36195134508946px" title="M22: 28 abo, 1017€ HT"><span>M22</span></div><div class="cohort-bar" style="height:50.79624147251898px" title="M23: 27 abo, 987€ HT"><span>M23</span></div><div class="cohort-bar" style="height:49.26605740764577px" title="M24: 27 abo, 957€ HT"><span>M24</span></div></div>
+<table style="font-size:11px;margin-top:24px">
+<tr><td>Abonnés restants M12</td><td style="text-align:right;font-weight:600">38</td></tr>
+<tr><td>Abonnés restants M24</td><td style="text-align:right;font-weight:600">27</td></tr>
+<tr><td>CA HT cumulé M12</td><td style="text-align:right;font-weight:600;color:var(--orange)">24123€</td></tr>
+<tr><td>CA HT cumulé M24</td><td style="text-align:right;font-weight:700;color:var(--orange)">37777€</td></tr>
+</table>
+</div><div class="card">
+<h3>🔴 Pessimiste</h3>
+<p style="font-size:11px;color:var(--muted);margin-bottom:8px">Durée de vie moyenne : <strong>7.6 mois</strong></p>
+<div class="cohort-chart"><div class="cohort-bar" style="height:180.0px" title="M1: 65 abo, 3496€ HT"><span>M1</span></div><div class="cohort-bar" style="height:116.99987128330542px" title="M2: 53 abo, 2272€ HT"><span>M2</span></div><div class="cohort-bar" style="height:95.93976058694813px" title="M3: 47 abo, 1863€ HT"><span>M3</span></div><div class="cohort-bar" style="height:84.42013129102844px" title="M4: 44 abo, 1640€ HT"><span>M4</span></div><div class="cohort-bar" style="height:78.51615394516668px" title="M5: 41 abo, 1525€ HT"><span>M5</span></div><div class="cohort-bar" style="height:73.02612948899471px" title="M6: 38 abo, 1418€ HT"><span>M6</span></div><div class="cohort-bar" style="height:67.91401724803707px" title="M7: 35 abo, 1319€ HT"><span>M7</span></div><div class="cohort-bar" style="height:63.161796885055985px" title="M8: 33 abo, 1227€ HT"><span>M8</span></div><div class="cohort-bar" style="height:58.73394259235423px" title="M9: 30 abo, 1141€ HT"><span>M9</span></div><div class="cohort-bar" style="height:54.62993950315356px" title="M10: 28 abo, 1061€ HT"><span>M10</span></div><div class="cohort-bar" style="height:50.79624147251898px" title="M11: 26 abo, 987€ HT"><span>M11</span></div><div class="cohort-bar" style="height:47.2498391041318px" title="M12: 24 abo, 918€ HT"><span>M12</span></div><div class="cohort-bar" style="height:43.938215986613464px" title="M13: 23 abo, 853€ HT"><span>M13</span></div><div class="cohort-bar" style="height:41.7417943107221px" title="M14: 22 abo, 811€ HT"><span>M14</span></div><div class="cohort-bar" style="height:39.65400952503539px" title="M15: 21 abo, 770€ HT"><span>M15</span></div><div class="cohort-bar" style="height:37.67383189599691px" title="M16: 20 abo, 732€ HT"><span>M16</span></div><div class="cohort-bar" style="height:35.78375595314712px" title="M17: 19 abo, 695€ HT"><span>M17</span></div><div class="cohort-bar" style="height:34.00180203372377px" title="M18: 18 abo, 660€ HT"><span>M18</span></div><div class="cohort-bar" style="height:32.291929463251385px" title="M19: 17 abo, 627€ HT"><span>M19</span></div><div class="cohort-bar" style="height:30.690178916205433px" title="M20: 16 abo, 596€ HT"><span>M20</span></div><div class="cohort-bar" style="height:29.14197451409448px" title="M21: 15 abo, 566€ HT"><span>M21</span></div><div class="cohort-bar" style="height:27.683871798172223px" title="M22: 15 abo, 538€ HT"><span>M22</span></div><div class="cohort-bar" style="height:26.297850431200924px" title="M23: 14 abo, 511€ HT"><span>M23</span></div><div class="cohort-bar" style="height:24.98391041318059px" title="M24: 13 abo, 485€ HT"><span>M24</span></div></div>
+<table style="font-size:11px;margin-top:24px">
+<tr><td>Abonnés restants M12</td><td style="text-align:right;font-weight:600">24</td></tr>
+<tr><td>Abonnés restants M24</td><td style="text-align:right;font-weight:600">13</td></tr>
+<tr><td>CA HT cumulé M12</td><td style="text-align:right;font-weight:600;color:var(--orange)">18867€</td></tr>
+<tr><td>CA HT cumulé M24</td><td style="text-align:right;font-weight:700;color:var(--orange)">26711€</td></tr>
+</table>
+</div></div></section>
+<section id="crosssell">
+<h2>🔗 Cross-sell : Bundles Recommandés pour Abonnement</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Basé sur les packs existants Shopify. Remise 15% + Point Relais (3.25€ HT). Prix affichés TTC, marges et contribution nette HT.</p>
+<div class="grid-2"><div class="card">
+<h3>💪 Pack Musculation</h3>
+<p style="font-size:12px;color:var(--muted);margin-bottom:8px">Produits : VSWHEYN, VSCREAC, VSBCAAC, VSPREWC, VSLGLU</p>
+<table style="font-size:12px">
+<tr><td>Prix plein tarif TTC</td><td style="text-align:right">125.50€</td></tr>
+<tr><td>Prix abo TTC (-15%)</td><td style="text-align:right;font-weight:600;color:var(--orange)">106.67€</td></tr>
+<tr><td>COGS total HT</td><td style="text-align:right;color:var(--muted)">48.49€</td></tr>
+<tr><td>Marge HT après remise</td><td style="text-align:right;font-weight:600">40.39€</td></tr>
+<tr><td>Net HT après port (PR)</td><td style="text-align:right"><span class="tag tag-rentable">37.14€</span></td></tr>
+<tr><td>Marge nette %</td><td style="text-align:right">45.4%</td></tr>
+</table>
+</div><div class="card">
+<h3>🏃 Pack Endurance</h3>
+<p style="font-size:12px;color:var(--muted);margin-bottom:8px">Produits : VSBOISM, VSELECC, VSMAL, VSBCAAC, VSMAG</p>
+<table style="font-size:12px">
+<tr><td>Prix plein tarif TTC</td><td style="text-align:right">88.50€</td></tr>
+<tr><td>Prix abo TTC (-15%)</td><td style="text-align:right;font-weight:600;color:var(--orange)">75.22€</td></tr>
+<tr><td>COGS total HT</td><td style="text-align:right;color:var(--muted)">21.33€</td></tr>
+<tr><td>Marge HT après remise</td><td style="text-align:right;font-weight:600">41.36€</td></tr>
+<tr><td>Net HT après port (PR)</td><td style="text-align:right"><span class="tag tag-rentable">38.11€</span></td></tr>
+<tr><td>Marge nette %</td><td style="text-align:right">66.0%</td></tr>
+</table>
+</div><div class="card">
+<h3>💊 Pack Santé Quotidien</h3>
+<p style="font-size:12px;color:var(--muted);margin-bottom:8px">Produits : VSMVIT, VSOME, VSMAG, VSVITD, VSVITC</p>
+<table style="font-size:12px">
+<tr><td>Prix plein tarif TTC</td><td style="text-align:right">87.50€</td></tr>
+<tr><td>Prix abo TTC (-15%)</td><td style="text-align:right;font-weight:600;color:var(--orange)">74.38€</td></tr>
+<tr><td>COGS total HT</td><td style="text-align:right;color:var(--muted)">14.71€</td></tr>
+<tr><td>Marge HT après remise</td><td style="text-align:right;font-weight:600">47.27€</td></tr>
+<tr><td>Net HT après port (PR)</td><td style="text-align:right"><span class="tag tag-rentable">44.02€</span></td></tr>
+<tr><td>Marge nette %</td><td style="text-align:right">76.3%</td></tr>
+</table>
+</div><div class="card">
+<h3>🧘 Pack Récupération</h3>
+<p style="font-size:12px;color:var(--muted);margin-bottom:8px">Produits : VSCOLMN, VSLGLU, VSMAG, VSBCAAC</p>
+<table style="font-size:12px">
+<tr><td>Prix plein tarif TTC</td><td style="text-align:right">85.60€</td></tr>
+<tr><td>Prix abo TTC (-15%)</td><td style="text-align:right;font-weight:600;color:var(--orange)">72.76€</td></tr>
+<tr><td>COGS total HT</td><td style="text-align:right;color:var(--muted)">23.36€</td></tr>
+<tr><td>Marge HT après remise</td><td style="text-align:right;font-weight:600">37.27€</td></tr>
+<tr><td>Net HT après port (PR)</td><td style="text-align:right"><span class="tag tag-rentable">34.02€</span></td></tr>
+<tr><td>Marge nette %</td><td style="text-align:right">61.5%</td></tr>
+</table>
+</div><div class="card">
+<h3>🦴 Pack Os & Articulations</h3>
+<p style="font-size:12px;color:var(--muted);margin-bottom:8px">Produits : VSCOLBN, VSCUR, VSVITD</p>
+<table style="font-size:12px">
+<tr><td>Prix plein tarif TTC</td><td style="text-align:right">57.70€</td></tr>
+<tr><td>Prix abo TTC (-15%)</td><td style="text-align:right;font-weight:600;color:var(--orange)">49.04€</td></tr>
+<tr><td>COGS total HT</td><td style="text-align:right;color:var(--muted)">12.20€</td></tr>
+<tr><td>Marge HT après remise</td><td style="text-align:right;font-weight:600">28.67€</td></tr>
+<tr><td>Net HT après port (PR)</td><td style="text-align:right"><span class="tag tag-rentable">25.42€</span></td></tr>
+<tr><td>Marge nette %</td><td style="text-align:right">70.1%</td></tr>
+</table>
+</div><div class="card">
+<h3>😴 Pack Sommeil & Fatigue</h3>
+<p style="font-size:12px;color:var(--muted);margin-bottom:8px">Produits : VSSOM, VSMAG, VSGLY</p>
+<table style="font-size:12px">
+<tr><td>Prix plein tarif TTC</td><td style="text-align:right">45.70€</td></tr>
+<tr><td>Prix abo TTC (-15%)</td><td style="text-align:right;font-weight:600;color:var(--orange)">38.84€</td></tr>
+<tr><td>COGS total HT</td><td style="text-align:right;color:var(--muted)">7.64€</td></tr>
+<tr><td>Marge HT après remise</td><td style="text-align:right;font-weight:600">24.73€</td></tr>
+<tr><td>Net HT après port (PR)</td><td style="text-align:right"><span class="tag tag-rentable">21.48€</span></td></tr>
+<tr><td>Marge nette %</td><td style="text-align:right">76.4%</td></tr>
+</table>
+</div></div></section>
+<section id="basket">
+<h2>🛒 Optimisation du Panier Minimum</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Analyse du seuil de panier minimum pour activer la livraison offerte en abonnement.</p>
+<div class="card">
+<table>
+<thead>
+<tr>
+    <th>Seuil panier</th>
+    <th style="text-align:center">Produits unitaires éligibles</th>
+    <th style="text-align:center">Combos 2 produits possibles</th>
+    <th>Recommandation</th>
+</tr>
+</thead>
+<tbody><tr>
+    <td style="font-weight:600">15€</td>
+    <td style="text-align:center">16</td>
+    <td style="text-align:center">153</td>
+    <td></td>
+</tr><tr>
+    <td style="font-weight:600">20€</td>
+    <td style="text-align:center">11</td>
+    <td style="text-align:center">153</td>
+    <td></td>
+</tr><tr style="background:#f0fdf4;font-weight:600">
+    <td style="font-weight:600">25€</td>
+    <td style="text-align:center">7</td>
+    <td style="text-align:center">153</td>
+    <td>✅ Recommandé</td>
+</tr><tr style="background:#f0fdf4;font-weight:600">
+    <td style="font-weight:600">30€</td>
+    <td style="text-align:center">5</td>
+    <td style="text-align:center">148</td>
+    <td>✅ Recommandé</td>
+</tr><tr>
+    <td style="font-weight:600">35€</td>
+    <td style="text-align:center">4</td>
+    <td style="text-align:center">137</td>
+    <td></td>
+</tr><tr>
+    <td style="font-weight:600">40€</td>
+    <td style="text-align:center">0</td>
+    <td style="text-align:center">113</td>
+    <td></td>
+</tr><tr>
+    <td style="font-weight:600">50€</td>
+    <td style="text-align:center">0</td>
+    <td style="text-align:center">68</td>
+    <td></td>
+</tr></tbody></table></div></section>
+<section id="cannibalization">
+<h2>⚠️ Cannibalisation vs valeur incrémentale (modèle 3-voies)</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Chaque nouvel abonné n'est pas un "ancien client qu'on remise de 15%". C'est un mix de <strong>trois cohortes comportementales</strong> : nouveaux clients (100% incrémentaux), clients existants qu'on sauve d'un churn naturel (retention), et clients loyaux qui auraient racheté plein tarif (vraie cannibalisation). Chaque scénario de programme a un mix différent selon la qualité d'acquisition.</p>
+<div class="scenario-grid">
+<div class="scenario-card">
+    <h3>🚀 Lean MVP</h3>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:12px">Pessimiste : acquisition essentiellement via email list interne</p>
+    <div class="scenario-kpi"><span>🟢 Nouveaux clients</span><strong>20%</strong></div>
+    <div class="scenario-kpi"><span>🟡 Retention save</span><strong>30%</strong></div>
+    <div class="scenario-kpi"><span>🔴 Loyalistes</span><strong>50%</strong></div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px">
+        <div style="padding:4px 0;color:var(--green)">+ 24€/an gain new</div>
+        <div style="padding:4px 0;color:#3b82f6">+ 10€/an gain retention</div>
+        <div style="padding:4px 0;color:var(--red)">− 9€/an perte loyaliste</div>
+    </div>
+    <div class="scenario-kpi big"><span>Net / abo / an</span><span class="value" style="color:var(--green)">+25€</span></div>
+</div>
+<div class="scenario-card standard">
+    <h3>⚖️ Standard DTC</h3>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:12px">Mix paid + organic + email list (benchmark Recharge DTC 2024)</p>
+    <div class="scenario-kpi"><span>🟢 Nouveaux clients</span><strong>25%</strong></div>
+    <div class="scenario-kpi"><span>🟡 Retention save</span><strong>35%</strong></div>
+    <div class="scenario-kpi"><span>🔴 Loyalistes</span><strong>40%</strong></div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px">
+        <div style="padding:4px 0;color:var(--green)">+ 23€/an gain new</div>
+        <div style="padding:4px 0;color:#3b82f6">+ 12€/an gain retention</div>
+        <div style="padding:4px 0;color:var(--red)">− 7€/an perte loyaliste</div>
+    </div>
+    <div class="scenario-kpi big"><span>Net / abo / an</span><span class="value" style="color:var(--green)">+28€</span></div>
+</div>
+<div class="scenario-card">
+    <h3>🏎️ Full retention</h3>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:12px">Acquisition agressive paid ads + partenariats, qualité lead moyenne</p>
+    <div class="scenario-kpi"><span>🟢 Nouveaux clients</span><strong>35%</strong></div>
+    <div class="scenario-kpi"><span>🟡 Retention save</span><strong>40%</strong></div>
+    <div class="scenario-kpi"><span>🔴 Loyalistes</span><strong>25%</strong></div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px">
+        <div style="padding:4px 0;color:var(--green)">+ 23€/an gain new</div>
+        <div style="padding:4px 0;color:#3b82f6">+ 14€/an gain retention</div>
+        <div style="padding:4px 0;color:var(--red)">− 5€/an perte loyaliste</div>
+    </div>
+    <div class="scenario-kpi big"><span>Net / abo / an</span><span class="value" style="color:var(--green)">+32€</span></div>
+</div>
+</div>
+
+<div class="edu-panel">
+<h4>🎓 Pourquoi l'abonnement est net-positif malgré la remise</h4>
+<p>L'intuition naïve : "si je remise 15%, je perds 15% de marge". Mauvaise analyse. La réalité c'est que chaque nouvel abonné fait partie d'un mix :</p>
+<ul style="margin:8px 0;padding-left:20px">
+<li><strong>Nouveaux clients</strong> (20-35% du mix selon le scénario) — auraient jamais acheté sans l'abo → <strong>100% incrémental</strong>, gain = leur LTV complète</li>
+<li><strong>Retention saves</strong> (30-40%) — anciens clients marginaux qui auraient churné après 2 commandes → on capture un <strong>uplift de 4 mois de contribution supplémentaire</strong></li>
+<li><strong>Loyalistes</strong> (25-50%) — auraient racheté plein tarif → perte = 15% × 6 commandes/an du prix moyen</li>
+</ul>
+<div class="formula">Net_annual_per_sub = (%new × LTV) + (%retention × contrib × uplift) − (%loyalist × prix × remise × 6)</div>
+<div class="example">
+<strong>Exemple scénario standard :</strong> avg_contribution_mensuelle = 8.59€ HT, durée de vie = 10.8 mois, uplift retention = 4 mois, prix moyen GO = 20.56€ HT, 6 commandes/an par loyaliste<br>
+• Gain new : 0.25 × 8.59 × 10.8 = <strong>23€</strong><br>
+• Gain retention : 0.35 × 8.59 × 4 = <strong>12€</strong><br>
+• Perte loyaliste : 0.40 × 20.56 × 0.15 × 6 = <strong>7€</strong><br>
+• <strong>Net = +28€/abo/an</strong> (2.32€/mois)
+</div>
+<div class="takeaway">👉 Le programme est <strong>net-positif dès le premier abonné</strong> dans les 3 scénarios, contrairement à ce que suggère l'analyse naïve "remise × subs". Le levier principal c'est la <strong>qualité du mix d'acquisition</strong> : plus tu attires de nouveaux clients (paid ads, partenariats) vs cannibalisant ta liste email, plus le programme est rentable.</div>
+</div>
+
+<h3 style="margin-top:24px">💡 Cannibalisation par produit <span class="badge-illustrative">ILLUSTRATIF</span></h3>
+<p style="font-size:12px;color:var(--muted);margin-bottom:8px">Projection basée sur l'hypothèse illustrative de <strong>50 commandes/mois/produit</strong>. Ces chiffres sont des ordres de grandeur, pas des prédictions — ne pas les utiliser pour dimensionner un budget. Pour des projections absolues fiables, il faut un export Shopify 90 jours.</p>
+<div class="card" style="overflow-x:auto">
+<table>
+<thead>
+<tr>
+    <th>Produit</th>
+    <th style="text-align:center" colspan="2">10% conversion</th>
+    <th style="text-align:center" colspan="2">20% conversion</th>
+</tr>
+<tr>
+    <th></th>
+    <th style="text-align:right;font-size:10px">Perte HT €/mois</th>
+    <th style="text-align:right;font-size:10px">Perte %</th>
+    <th style="text-align:right;font-size:10px">Perte HT €/mois</th>
+    <th style="text-align:right;font-size:10px">Perte %</th>
+</tr>
+</thead>
+<tbody><tr>
+    <td style="font-size:12px">Multivitamines</td>
+    <td style="text-align:right;color:var(--red)">11.81€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">23.62€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Sommeil +</td>
+    <td style="text-align:right;color:var(--red)">11.81€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">23.62€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Fer Bisglycinate</td>
+    <td style="text-align:right;color:var(--red)">10.56€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">21.12€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Vitamine C</td>
+    <td style="text-align:right;color:var(--red)">8.06€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">16.12€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Spiruline Biologique</td>
+    <td style="text-align:right;color:var(--red)">8.06€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">16.12€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Pré-Probiotiques</td>
+    <td style="text-align:right;color:var(--red)">14.31€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">28.62€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Curcumine</td>
+    <td style="text-align:right;color:var(--red)">12.43€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">24.87€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Magnésium Bisglycinate</td>
+    <td style="text-align:right;color:var(--red)">9.94€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">19.88€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">BCAA 2.1.1 pêche</td>
+    <td style="text-align:right;color:var(--red)">14.31€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">28.62€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Peptides collagène Peptan® cacao</td>
+    <td style="text-align:right;color:var(--red)">16.19€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">32.37€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Peptides collagène Peptan® exotique</td>
+    <td style="text-align:right;color:var(--red)">16.19€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">32.37€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Collagène marin Peptan® cacao</td>
+    <td style="text-align:right;color:var(--red)">23.06€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">46.12€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Collagène marin Peptan® exotique</td>
+    <td style="text-align:right;color:var(--red)">23.06€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">46.12€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Preworkout citron</td>
+    <td style="text-align:right;color:var(--red)">23.69€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">47.37€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Omega 3 EPAX®</td>
+    <td style="text-align:right;color:var(--red)">14.94€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">29.88€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Whey Recovery vanille</td>
+    <td style="text-align:right;color:var(--red)">24.94€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">49.88€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Collagène marin Peptan® nature</td>
+    <td style="text-align:right;color:var(--red)">20.56€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">41.13€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr>
+    <td style="font-size:12px">Peptides collagène Peptan® nature</td>
+    <td style="text-align:right;color:var(--red)">13.69€</td>
+    <td style="text-align:right;color:var(--muted)">1.5%</td>
+    <td style="text-align:right;color:var(--red);font-weight:600">27.38€</td>
+    <td style="text-align:right;color:var(--muted)">3.0%</td>
+</tr><tr style="font-weight:700;border-top:2px solid var(--marine)">
+    <td>TOTAL</td>
+    <td style="text-align:right;color:var(--red)">277.61€</td>
+    <td></td>
+    <td style="text-align:right;color:var(--red)">555.21€</td>
+    <td></td>
+</tr></tbody></table>
+<p style="font-size:12px;color:var(--muted);margin-top:8px">⚠️ Cette projection est une <strong>vue unitaire</strong> (combien d'euros bruts sont décalés par produit). Pour comprendre l'impact net réel du programme, voir l'analyse comportementale au-dessus qui intègre les gains incrémentaux.</p>
+</div></section>
+<section id="breakeven">
+<h2>💰 Seuil de Rentabilité — 3 scénarios de programme</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Selon la stack technique choisie (Lean MVP / Standard DTC / Full retention), les coûts et le break-even varient fortement. Le scénario <strong>Standard</strong> est le cas de référence présenté par défaut.</p>
+<div class="scenario-grid">
+<div class="scenario-card">
+    <h3>🚀 Lean MVP</h3>
+    <div class="scenario-desc">Test rapide du marché avec infrastructure minimale. Objectif : prouver le concept en 3-6 mois avec 50-100 abonnés avant d'investir dans du tooling custom.</div>
+    <div class="scenario-kpi"><span>Setup HT</span><strong>1500€</strong></div>
+    <div class="scenario-kpi"><span>App HT / mois</span><strong>20€</strong></div>
+    <div class="scenario-kpi"><span>Durée de vie moy.</span><strong>13.8 mois</strong></div>
+    <div class="scenario-kpi"><span>Contrib. lifetime / abo</span><strong>118€ HT</strong></div>
+    <div class="scenario-kpi big"><span>Abonnés actifs requis</span><span class="value">3</span></div>
+    <div class="scenario-kpi big"><span>Nouveaux abos setup</span><span class="value">13</span></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.4">💡 Loop Subscriptions / Appstle ($9-19/mois + 1% fees)</div>
+</div>
+<div class="scenario-card standard">
+    <h3>⚖️ Standard DTC</h3>
+    <div class="scenario-desc">Launch propre avec stack standard DTC compléments. Ce qu'on présenterait au COMEX comme business case crédible. Cible : 100-500 abonnés en 12 mois.</div>
+    <div class="scenario-kpi"><span>Setup HT</span><strong>4000€</strong></div>
+    <div class="scenario-kpi"><span>App HT / mois</span><strong>120€</strong></div>
+    <div class="scenario-kpi"><span>Durée de vie moy.</span><strong>10.8 mois</strong></div>
+    <div class="scenario-kpi"><span>Contrib. lifetime / abo</span><strong>93€ HT</strong></div>
+    <div class="scenario-kpi big"><span>Abonnés actifs requis</span><span class="value">14</span></div>
+    <div class="scenario-kpi big"><span>Nouveaux abos setup</span><span class="value">44</span></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.4">💡 Recharge Pro ($99/mois + 1% du revenu sub ≈ 120€ HT effectif)</div>
+</div>
+<div class="scenario-card">
+    <h3>🏎️ Full retention</h3>
+    <div class="scenario-desc">Stack complète avec retention tooling. Pour scaler au-delà de 500 abonnés, avec cohort analytics, dunning avancé, email lifecycle. Rentable à partir de ~300 abonnés actifs.</div>
+    <div class="scenario-kpi"><span>Setup HT</span><strong>7000€</strong></div>
+    <div class="scenario-kpi"><span>App HT / mois</span><strong>350€</strong></div>
+    <div class="scenario-kpi"><span>Durée de vie moy.</span><strong>7.6 mois</strong></div>
+    <div class="scenario-kpi"><span>Contrib. lifetime / abo</span><strong>66€ HT</strong></div>
+    <div class="scenario-kpi big"><span>Abonnés actifs requis</span><span class="value">41</span></div>
+    <div class="scenario-kpi big"><span>Nouveaux abos setup</span><span class="value">107</span></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.4">💡 Recharge Pro Plus ($499/mois) + Klaviyo Sub + Yotpo retention</div>
+</div>
+</div>
+
+<div class="edu-panel">
+<h4>🎓 Comprendre le calcul du break-even</h4>
+<p>On calcule deux choses distinctes :</p>
+<div class="formula">running_break_even = coût mensuel de l'app / contribution nette mensuelle par abo</div>
+<div class="formula">setup_break_even = coût setup / (contribution mensuelle × durée de vie moyenne)</div>
+<div class="example">
+<strong>Exemple (Standard, contribution moyenne 8.59€ HT/mois) :</strong><br>
+• Running : 120€ / 8.59€ = <strong>14 abonnés actifs</strong> pour couvrir l'app chaque mois<br>
+• Setup : chaque nouvel abo contribue 8.59€ × 10.8 mois = 93€ sur sa vie → il faut 44 nouveaux abos pour amortir les 4000€ de setup
+</div>
+<div class="takeaway">👉 Le running break-even est indépendant du churn. Le setup break-even dépend du churn parce qu'il faut que les abonnés vivent assez longtemps pour amortir l'investissement initial. C'est pourquoi le Full scénario (churn pessimiste) demande bien plus de nouveaux abonnés malgré une contribution unitaire identique.</div>
+</div>
+</section>
+<section id="competitors">
+<h2>🏁 Positionnement Prix vs Concurrents</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Comparaison des prix retail Impulse (et prix abonné -15%) avec les concurrents du benchmark.</p>
+<div class="card">
+<p style="font-size:12px;color:var(--muted)">Données concurrents issues du benchmark 8 marques (master_data.json). Les prix concurrents sont les prix one-shot — les prix abonnés concurrents sont généralement 5 à 20% inférieurs.</p>
+<div class="grid-2" style="margin-top:16px"><div style="padding:12px;border:1px solid var(--border);border-radius:8px">
+    <div style="font-weight:600;margin-bottom:4px">Nutri&Co</div>
+    <div style="font-size:12px;color:var(--muted)">
+        Remise abo : <strong>15%</strong><br>
+        Livraison offerte : 49€<br>
+        Tech : Shopify + Recharge
+    </div>
+</div><div style="padding:12px;border:1px solid var(--border);border-radius:8px">
+    <div style="font-weight:600;margin-bottom:4px">Nutrimuscle</div>
+    <div style="font-size:12px;color:var(--muted)">
+        Remise abo : <strong>5→15%</strong><br>
+        Livraison offerte : Offerte<br>
+        Tech : Custom
+    </div>
+</div><div style="padding:12px;border:1px solid var(--border);border-radius:8px">
+    <div style="font-weight:600;margin-bottom:4px">Novoma</div>
+    <div style="font-size:12px;color:var(--muted)">
+        Remise abo : <strong>10%</strong><br>
+        Livraison offerte : Avantages abo<br>
+        Tech : Shopify
+    </div>
+</div><div style="padding:12px;border:1px solid var(--border);border-radius:8px">
+    <div style="font-weight:600;margin-bottom:4px">Cuure</div>
+    <div style="font-size:12px;color:var(--muted)">
+        Remise abo : <strong>~10%</strong><br>
+        Livraison offerte : Incluse<br>
+        Tech : Custom
+    </div>
+</div><div style="padding:12px;border:1px solid var(--border);border-radius:8px">
+    <div style="font-weight:600;margin-bottom:4px">MyProtein</div>
+    <div style="font-size:12px;color:var(--muted)">
+        Remise abo : <strong>30-45%</strong><br>
+        Livraison offerte : Offerte<br>
+        Tech : Custom
+    </div>
+</div><div style="padding:12px;border:1px solid var(--border);border-radius:8px">
+    <div style="font-weight:600;margin-bottom:4px">Decathlon</div>
+    <div style="font-size:12px;color:var(--muted)">
+        Remise abo : <strong>10-15%</strong><br>
+        Livraison offerte : Variable<br>
+        Tech : Custom
+    </div>
+</div><div style="padding:12px;border:1px solid var(--border);border-radius:8px">
+    <div style="font-weight:600;margin-bottom:4px">Aqeelab</div>
+    <div style="font-size:12px;color:var(--muted)">
+        Remise abo : <strong>20%</strong><br>
+        Livraison offerte : 49€<br>
+        Tech : Shopify
+    </div>
+</div><div style="padding:12px;border:1px solid var(--border);border-radius:8px">
+    <div style="font-weight:600;margin-bottom:4px">Nutripure</div>
+    <div style="font-size:12px;color:var(--muted)">
+        Remise abo : <strong>❌ Pas d'abo</strong><br>
+        Livraison offerte : 49€<br>
+        Tech : PrestaShop
+    </div>
+</div></div>
+<div style="margin-top:16px;padding:16px;background:#f8fafc;border-radius:8px;border-left:4px solid var(--orange)">
+    <strong>Positionnement Impulse recommandé :</strong> 15% de remise place Impulse dans la fourchette haute FR (entre Nutri&Co à 15% et Aqeelab à 20%), 
+    tout en restant réaliste sur les marges. MyProtein (30-45%) est un outlier international non reproductible pour un pure player FR premium.
+</div>
+</div>
+</section>
+<section id="reco">
+<h2>✅ Recommandation Finale</h2>
+
+<div class="recommendation">
+<h3>🎯 Modèle Commercial Recommandé</h3>
+<div class="grid-3" style="margin-top:16px">
+    <div class="highlight-box">
+        <div style="font-size:12px;opacity:0.7">REMISE</div>
+        <div style="font-size:28px;font-weight:800">-15%</div>
+        <div style="font-size:12px;opacity:0.7">sur tous les produits éligibles</div>
+    </div>
+    <div class="highlight-box">
+        <div style="font-size:12px;opacity:0.7">FRÉQUENCES</div>
+        <div style="font-size:28px;font-weight:800">1 / 2 / 3 mois</div>
+        <div style="font-size:12px;opacity:0.7">flexibilité maximale</div>
+    </div>
+    <div class="highlight-box">
+        <div style="font-size:12px;opacity:0.7">ENGAGEMENT</div>
+        <div style="font-size:28px;font-weight:800">Sans</div>
+        <div style="font-size:12px;opacity:0.7">annulation libre</div>
+    </div>
+</div>
+<div class="grid-2" style="margin-top:16px">
+    <div class="highlight-box">
+        <div style="font-size:12px;opacity:0.7">LIVRAISON OFFERTE</div>
+        <div style="font-size:24px;font-weight:800">≥ 25€ en Point Relais</div>
+        <div style="font-size:12px;opacity:0.7">domicile : standard (5.90€) sauf ≥ 49€</div>
+    </div>
+    <div class="highlight-box">
+        <div style="font-size:12px;opacity:0.7">WORDING SUGGÉRÉ</div>
+        <div style="font-size:20px;font-weight:700">"S'abonner & économiser 15%"</div>
+        <div style="font-size:12px;opacity:0.7">CTA : "Livraison offerte en Point Relais"</div>
+    </div>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="card">
+    <h3 style="color:var(--green)">✅ Produits GO (18)</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px">Score ≥ 75/100 — À lancer dès le démarrage</p>
+    <table style="font-size:12px">
+    <tr><th>Produit</th><th style="text-align:right">Score</th><th style="text-align:right">Net PR</th></tr><tr><td>Multivitamines</td><td style="text-align:right">89</td><td style="text-align:right;font-weight:600">8.92€</td></tr><tr><td>Sommeil +</td><td style="text-align:right">86</td><td style="text-align:right;font-weight:600">8.77€</td></tr><tr><td>Pré-Probiotiques</td><td style="text-align:right">83</td><td style="text-align:right;font-weight:600">9.84€</td></tr><tr><td>Omega 3 EPAX®</td><td style="text-align:right">81</td><td style="text-align:right;font-weight:600">6.97€</td></tr><tr><td>Vitamine C</td><td style="text-align:right">79</td><td style="text-align:right;font-weight:600">4.43€</td></tr><tr><td>Magnésium Bisglycinate</td><td style="text-align:right">79</td><td style="text-align:right;font-weight:600">4.85€</td></tr><tr><td>Peptides collagène Peptan® cac</td><td style="text-align:right">79</td><td style="text-align:right;font-weight:600">8.25€</td></tr><tr><td>Peptides collagène Peptan® exo</td><td style="text-align:right">79</td><td style="text-align:right;font-weight:600">8.22€</td></tr><tr><td>Collagène marin Peptan® cacao</td><td style="text-align:right">79</td><td style="text-align:right;font-weight:600">13.08€</td></tr><tr><td>Collagène marin Peptan® exotiq</td><td style="text-align:right">79</td><td style="text-align:right;font-weight:600">13.07€</td></tr><tr><td>Curcumine</td><td style="text-align:right">78</td><td style="text-align:right;font-weight:600">7.74€</td></tr><tr><td>Preworkout citron</td><td style="text-align:right">78</td><td style="text-align:right;font-weight:600">13.23€</td></tr><tr><td>Fer Bisglycinate</td><td style="text-align:right">76</td><td style="text-align:right;font-weight:600">7.12€</td></tr><tr><td>Collagène marin Peptan® nature</td><td style="text-align:right">76</td><td style="text-align:right;font-weight:600">10.03€</td></tr><tr><td>Peptides collagène Peptan® nat</td><td style="text-align:right">74</td><td style="text-align:right;font-weight:600">5.32€</td></tr><tr><td>BCAA 2.1.1 pêche</td><td style="text-align:right">72</td><td style="text-align:right;font-weight:600">7.39€</td></tr><tr><td>Whey Recovery vanille</td><td style="text-align:right">71</td><td style="text-align:right;font-weight:600">12.96€</td></tr><tr><td>Spiruline Biologique</td><td style="text-align:right">70</td><td style="text-align:right;font-weight:600">4.35€</td></tr></table>
+</div>
+<div class="card">
+    <h3 style="color:var(--amber)">⚠️ Produits MAYBE (18)</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px">Score 55-74 — Phase 2 ou avec conditions</p>
+    <table style="font-size:12px">
+    <tr><th>Produit</th><th style="text-align:right">Score</th><th style="text-align:right">Net PR</th></tr><tr><td>BCAA 2.1.1 citron</td><td style="text-align:right">69</td><td style="text-align:right;font-weight:600">7.39€</td></tr><tr><td>Créatine Creapure®</td><td style="text-align:right">68</td><td style="text-align:right;font-weight:600">2.23€</td></tr><tr><td>Whey Recovery chocolat</td><td style="text-align:right">68</td><td style="text-align:right;font-weight:600">12.96€</td></tr><tr><td>Électrolytes poudre pêche</td><td style="text-align:right">64</td><td style="text-align:right;font-weight:600">4.15€</td></tr><tr><td>Boisson effort menthe</td><td style="text-align:right">63</td><td style="text-align:right;font-weight:600">6.69€</td></tr><tr><td>Boisson effort fruits rouges</td><td style="text-align:right">63</td><td style="text-align:right;font-weight:600">6.68€</td></tr><tr><td>Électrolytes poudre citron</td><td style="text-align:right">61</td><td style="text-align:right;font-weight:600">4.55€</td></tr><tr><td>L-Glutamine Kyowa®</td><td style="text-align:right">61</td><td style="text-align:right;font-weight:600">2.00€</td></tr><tr><td>Glycine cristallisée</td><td style="text-align:right">60</td><td style="text-align:right;font-weight:600">1.36€</td></tr><tr><td>Maltodextrine</td><td style="text-align:right">58</td><td style="text-align:right;font-weight:600">1.62€</td></tr><tr><td>Whey Isolate chocolat</td><td style="text-align:right">58</td><td style="text-align:right;font-weight:600">0.55€</td></tr><tr><td>Vitamine D3</td><td style="text-align:right">56</td><td style="text-align:right;font-weight:600">5.85€</td></tr><tr><td>Whey Isolate chocolat - portio</td><td style="text-align:right">56</td><td style="text-align:right;font-weight:600">-2.36€</td></tr><tr><td>Whey Isolate vanille - portion</td><td style="text-align:right">56</td><td style="text-align:right;font-weight:600">-2.36€</td></tr><tr><td>Électrolytes efferv. cerise</td><td style="text-align:right">54</td><td style="text-align:right;font-weight:600">2.26€</td></tr><tr><td>Électrolytes efferv. citron</td><td style="text-align:right">54</td><td style="text-align:right;font-weight:600">2.26€</td></tr><tr><td>Électrolytes efferv. pêche</td><td style="text-align:right">54</td><td style="text-align:right;font-weight:600">2.26€</td></tr><tr><td>Whey Isolate vanille</td><td style="text-align:right">50</td><td style="text-align:right;font-weight:600">-0.72€</td></tr></table>
+</div>
+</div>
+</section>
+<section id="methodology">
+<h2>📋 Méthodologie & Sources</h2>
+
+<div class="methodology">
+<h4>Sources de données</h4>
+<ul>
+    <li><strong>Prix retail vitrine (TTC)</strong> — Shopify MCP API, 96 produits extraits le 10/04/2026. Convertis en HT via /1.20 pour les calculs de marge.</li>
+    <li><strong>COGS HT (Prix de Cession 2026)</strong> — Document interne HCS fourni par Antoine (image), 42 SKUs. Hypothèse : valeurs HT (prix de gros fournisseur, TVA récupérable). À confirmer avec la compta HCS.</li>
+    <li><strong>Coûts logistiques</strong> — Tarifs réels Impulse Nutrition en TTC : Point Relais 3.90€, Domicile 5.90€, Express 10.90€ — convertis en HT (3.25€ / 4.92€ / 9.08€) pour les calculs.</li>
+    <li><strong>Benchmark concurrents</strong> — Web scraping + analyse manuelle, 8 marques, données collectées avril 2026 (prix affichés TTC, perception client).</li>
+    <li><strong>Données marché</strong> — Xerfi, Euromonitor, Grand View Research, PwC France (via recherches web).</li>
+    <li><strong>Courbes de churn DTC compléments</strong> — Courbes multi-phases avec cliff M1, décroissance M2-M3, plateau M4-M12, long-tail M13+. 3 scénarios (optimiste / baseline / pessimiste). Sources : benchmarks publics Harry's, Dollar Shave Club, Ritual ; podcasts Cuure/Nutri&Co ; rapports Recurly DTC.</li>
+</ul>
+</div>
+
+<div class="methodology" style="margin-top:16px">
+<h4>🔑 Convention HT / TTC</h4>
+<p style="margin-bottom:8px"><strong>Règle d'or : tous les calculs de rentabilité sont en HT.</strong> Taux de TVA appliqué : <strong>20%</strong> (taux standard France sur compléments alimentaires).</p>
+<ul>
+    <li><strong>Prix retail HT</strong> = Prix TTC / 1.20. Exemple : Multivit 18.90€ TTC → 15.75€ HT.</li>
+    <li><strong>COGS</strong> sont déjà en HT dans l'image source (prix de cession fournisseur, TVA récupérable).</li>
+    <li><strong>Coûts logistiques HT</strong> = Facture transporteur TTC / 1.20. La TVA est récupérable donc le coût réel pour l'entreprise est le HT.</li>
+    <li><strong>Prix affichés au client</strong> (tableau produits, comparaison concurrents, seuils panier) restent en TTC — c'est la perception vitrine.</li>
+</ul>
+</div>
+
+<div class="methodology" style="margin-top:16px">
+<h4>Formules de calcul (HT)</h4>
+<ul>
+    <li><strong>Marge brute HT</strong> = Prix retail HT − COGS HT</li>
+    <li><strong>Marge brute % HT</strong> = Marge brute HT / Prix retail HT × 100</li>
+    <li><strong>Marge HT après remise</strong> = Prix retail HT × (1 − remise) − COGS HT</li>
+    <li><strong>Contribution nette HT</strong> = Marge HT après remise − Frais de port HT</li>
+    <li><strong>LTV HT</strong> = Panier HT × (1 − remise) × durée de vie moyenne. La durée de vie moyenne est calculée à partir d'une courbe de churn mensuelle multi-phases (expected_months = somme sur l'horizon de la probabilité d'être encore actif chaque mois).</li>
+    <li><strong>Score abonnement</strong> = Récurrence (/30) + Marge viable (/25) + Complexité SKU (/15) + Concurrents (/15) + Demande (/10) + Catégorie (/5)</li>
+    <li><strong>Cannibalisation</strong> = perte de recettes HT due à la remise, avant effet de rétention</li>
+</ul>
+</div>
+
+<div class="methodology" style="margin-top:16px">
+<h4>Hypothèses & limites</h4>
+<ul>
+    <li>Taux de TVA uniforme à 20% — à valider : certaines boissons d'effort à reconstituer pourraient être à 5.5% selon la qualification fiscale HCS.</li>
+    <li>Les COGS des électrolytes effervescents sont estimés à 1.50€ HT (absent de l'image COGS, produit récent) — à confirmer fournisseur.</li>
+    <li>L'hypothèse de 50 commandes/mois/produit est purement <strong>illustrative</strong> (badge visible sur les sections concernées). Elle n'affecte pas les décisions stratégiques (scoring, ranking, break-even unitaires) mais sert à projeter des valeurs absolues pour donner une intuition de l'ordre de grandeur.</li>
+    <li>Les courbes de churn (optimiste 15/8/6/4/2 — baseline 25/12/8/5/3 — pessimiste 35/18/12/7/5) sont des benchmarks DTC compléments, pas des données Impulse. À remesurer 6 mois après lancement pour recalibrer le modèle.</li>
+    <li>La cannibalisation suppose que les clients convertis auraient acheté au plein tarif — en réalité, certains auraient churné.</li>
+    <li>Les coûts de setup (4000€ HT) et d'app (120€ HT/mois) sont des <strong>bornes basses</strong> — Recharge/Loop/PayWhirl peuvent facturer jusqu'à 200€/mois selon le volume. Devis à obtenir.</li>
+</ul>
+</div>
+<div class="methodology" style="margin-top:16px">
+<h4>Poids du scoring abonnement</h4>
+<table style="font-size:12px;width:auto">
+<tr><td style="padding:4px 12px">Récurrence naturelle</td><td style="padding:4px 12px;font-weight:600">30%</td><td style="padding:4px 12px;color:var(--muted)">Consommation quotidienne vs occasionnelle</td></tr>
+<tr><td style="padding:4px 12px">Marge viable</td><td style="padding:4px 12px;font-weight:600">25%</td><td style="padding:4px 12px;color:var(--muted)">Contribution nette ≥ 3€ après remise 15% + PR</td></tr>
+<tr><td style="padding:4px 12px">Complexité SKU</td><td style="padding:4px 12px;font-weight:600">15%</td><td style="padding:4px 12px;color:var(--muted)">1 variante = 15pts, 2 = 10pts, 3+ = 5pts</td></tr>
+<tr><td style="padding:4px 12px">Présence concurrents</td><td style="padding:4px 12px;font-weight:600">15%</td><td style="padding:4px 12px;color:var(--muted)">Validation marché (produit en abo chez les concurrents)</td></tr>
+<tr><td style="padding:4px 12px">Signal demande</td><td style="padding:4px 12px;font-weight:600">10%</td><td style="padding:4px 12px;color:var(--muted)">Stock ≥ 500 = 10pts (proxy demande)</td></tr>
+<tr><td style="padding:4px 12px">Catégorie</td><td style="padding:4px 12px;font-weight:600">5%</td><td style="padding:4px 12px;color:var(--muted)">Santé quotidien > Sport > Accessoire</td></tr>
+</table>
+</div>
+</section>
+
+<footer style="text-align:center;padding:32px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:48px">
+    <strong>Impulse Nutrition</strong> — Analyse rentabilité abonnement — Document interne confidentiel<br>
+    Généré automatiquement à partir des données Shopify + COGS 2026 + Benchmark 8 marques<br>
+    © HAVEA Commercial Services — Avril 2026
+</footer>
+
+</div>
+
+<script>
+// Simple sort on tables
+document.querySelectorAll('th').forEach(th => {
+    th.style.cursor = 'pointer';
+    th.addEventListener('click', function() {
+        const table = this.closest('table');
+        const tbody = table.querySelector('tbody');
+        if (!tbody) return;
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const idx = Array.from(this.parentNode.children).indexOf(this);
+        const asc = this.dataset.sort !== 'asc';
+        this.dataset.sort = asc ? 'asc' : 'desc';
+        rows.sort((a, b) => {
+            let va = a.children[idx]?.textContent?.trim() || '';
+            let vb = b.children[idx]?.textContent?.trim() || '';
+            const na = parseFloat(va.replace(/[^0-9.-]/g, ''));
+            const nb = parseFloat(vb.replace(/[^0-9.-]/g, ''));
+            if (!isNaN(na) && !isNaN(nb)) return asc ? na - nb : nb - na;
+            return asc ? va.localeCompare(vb) : vb.localeCompare(va);
+        });
+        rows.forEach(r => tbody.appendChild(r));
+    });
+});
+</script>
+</body>
+</html>

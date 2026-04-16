@@ -12,8 +12,8 @@ Pipeline pour la mission KolSquare (avril 2026) :
 
 Usage :
     python filter_kolsquare.py \\
-        --input "../KolSquare/09-04-2026_IMPULSE - 09_04_26_Casting_fr-FR.csv" \\
-        --output "../KolSquare/filtered_prospects_042026.csv"
+        --input "../tools/veille_kolsquare/09-04-2026_IMPULSE - 09_04_26_Casting_fr-FR.csv" \\
+        --output "../tools/veille_kolsquare/filtered_prospects_042026.csv"
 
     # Filtrage + dédoublonnage uniquement (pas de check MCP)
     python filter_kolsquare.py --input ... --output ... --no-mcp

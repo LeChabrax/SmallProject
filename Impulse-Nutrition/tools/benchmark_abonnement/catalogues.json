@@ -1,0 +1,625 @@
+{
+  "meta": {
+    "phase": 1,
+    "description": "Catalogues produits & pricing par marque",
+    "last_updated": "2026-04-07"
+  },
+  "brands": {
+    "nutriandco": {
+      "name": "Nutri&Co",
+      "url": "https://nutriandco.com",
+      "has_subscription": true,
+      "subscription_discount_pct": 15,
+      "subscription_model": "Subscribe & save sur chaque produit",
+      "frequencies_available": [
+        "1 mois",
+        "2 mois",
+        "3 mois"
+      ],
+      "flexibility": {
+        "pause": true,
+        "modify": true,
+        "cancel_anytime": true,
+        "minimum_commitment": "Aucun"
+      },
+      "products": [
+        {
+          "name": "Collagène Marin",
+          "category": "Santé articulaire",
+          "price_oneshot": 29.9,
+          "price_sub": 25.42,
+          "discount_pct": 15,
+          "weight": "200g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Magnésium Bisglycinate",
+          "category": "Minéraux",
+          "price_oneshot": 19.9,
+          "price_sub": 16.92,
+          "discount_pct": 15,
+          "weight": "90 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Oméga-3 Epax",
+          "category": "Acides gras",
+          "price_oneshot": 22.9,
+          "price_sub": 19.47,
+          "discount_pct": 15,
+          "weight": "60 capsules",
+          "format": "Capsules"
+        },
+        {
+          "name": "Multivitamines",
+          "category": "Vitamines",
+          "price_oneshot": 26.9,
+          "price_sub": 22.87,
+          "discount_pct": 15,
+          "weight": "60 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Zinc Bisglycinate",
+          "category": "Minéraux",
+          "price_oneshot": 12.9,
+          "price_sub": 10.97,
+          "discount_pct": 15,
+          "weight": "60 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Probiotiques",
+          "category": "Digestion",
+          "price_oneshot": 24.9,
+          "price_sub": 21.17,
+          "discount_pct": 15,
+          "weight": "60 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Vitamine D3 + K2",
+          "category": "Vitamines",
+          "price_oneshot": 14.9,
+          "price_sub": 12.67,
+          "discount_pct": 15,
+          "weight": "60 gélules",
+          "format": "Gélules"
+        }
+      ],
+      "subscription_scope": "Tous les produits éligibles",
+      "estimated_avg_basket_sub": 35
+    },
+    "nutrimuscle": {
+      "name": "Nutrimuscle",
+      "url": "https://www.nutrimuscle.com",
+      "has_subscription": true,
+      "subscription_discount_pct": "5% 1ère livraison, 15% à partir de la 2ème",
+      "subscription_model": "Abonnement progressif (5% → 15%)",
+      "frequencies_available": [
+        "1 mois",
+        "2 mois",
+        "3 mois",
+        "4 mois",
+        "5 mois",
+        "6 mois"
+      ],
+      "flexibility": {
+        "pause": true,
+        "modify": true,
+        "cancel_anytime": true,
+        "minimum_commitment": "Aucun"
+      },
+      "products": [
+        {
+          "name": "Créatine Creapure",
+          "category": "Performance",
+          "price_oneshot": 16.95,
+          "price_sub": 14.41,
+          "discount_pct": 15,
+          "weight": "350g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Whey Native Biologique",
+          "category": "Protéines",
+          "price_oneshot": 19.95,
+          "price_sub": 16.96,
+          "discount_pct": 15,
+          "weight": "500g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Oméga-3 Epax",
+          "category": "Acides gras",
+          "price_oneshot": 19.95,
+          "price_sub": 16.96,
+          "discount_pct": 15,
+          "weight": "120 capsules",
+          "format": "Capsules"
+        },
+        {
+          "name": "Collagène Peptan",
+          "category": "Santé articulaire",
+          "price_oneshot": 14.95,
+          "price_sub": 12.71,
+          "discount_pct": 15,
+          "weight": "200g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Multivitamines",
+          "category": "Vitamines",
+          "price_oneshot": 12.95,
+          "price_sub": 11.01,
+          "discount_pct": 15,
+          "weight": "120 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Magnésium",
+          "category": "Minéraux",
+          "price_oneshot": 9.95,
+          "price_sub": 8.46,
+          "discount_pct": 15,
+          "weight": "120 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "BCAA 2.1.1",
+          "category": "Acides aminés",
+          "price_oneshot": 21.95,
+          "price_sub": 18.66,
+          "discount_pct": 15,
+          "weight": "500g",
+          "format": "Poudre"
+        }
+      ],
+      "subscription_scope": "Quasi tous les produits (250+ références)",
+      "estimated_avg_basket_sub": 45,
+      "note": "Catalogue très large, 250+ produits. Première livraison -5%, puis -15% ensuite."
+    },
+    "novoma": {
+      "name": "Novoma",
+      "url": "https://novoma.com",
+      "has_subscription": true,
+      "subscription_discount_pct": 10,
+      "subscription_model": "Abonnement -10% + avantages livraison",
+      "frequencies_available": [
+        "1 mois",
+        "2 mois",
+        "3 mois"
+      ],
+      "flexibility": {
+        "pause": true,
+        "modify": true,
+        "cancel_anytime": true,
+        "minimum_commitment": "Aucun"
+      },
+      "products": [
+        {
+          "name": "Collagène Marin Peptan",
+          "category": "Santé articulaire",
+          "price_oneshot": 31.9,
+          "price_sub": 28.71,
+          "discount_pct": 10,
+          "weight": "300g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Magnésium Bisglycinate",
+          "category": "Minéraux",
+          "price_oneshot": 14.9,
+          "price_sub": 13.41,
+          "discount_pct": 10,
+          "weight": "90 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Vitamine C Liposomale",
+          "category": "Vitamines",
+          "price_oneshot": 27.9,
+          "price_sub": 25.11,
+          "discount_pct": 10,
+          "weight": "60 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Multivitamines",
+          "category": "Vitamines",
+          "price_oneshot": 25.9,
+          "price_sub": 23.31,
+          "discount_pct": 10,
+          "weight": "60 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Probiotiques Lacto",
+          "category": "Digestion",
+          "price_oneshot": 21.9,
+          "price_sub": 19.71,
+          "discount_pct": 10,
+          "weight": "60 gélules",
+          "format": "Gélules"
+        }
+      ],
+      "subscription_scope": "Tous les produits du catalogue",
+      "estimated_avg_basket_sub": 30,
+      "subscription_shipping_advantage": "Domicile 3.50€ au lieu de 4.90€, gratuit dès 50€ (vs 90€ standard)"
+    },
+    "nutripure": {
+      "name": "Nutripure",
+      "url": "https://www.nutripure.fr",
+      "has_subscription": false,
+      "subscription_model": "Aucun — achat one-shot uniquement",
+      "products": [
+        {
+          "name": "Whey Isolate Native",
+          "category": "Protéines",
+          "price_oneshot": 46.9,
+          "weight": "750g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Whey Isolate Native 1.5kg",
+          "category": "Protéines",
+          "price_oneshot": 84.9,
+          "weight": "1.5kg",
+          "format": "Poudre"
+        },
+        {
+          "name": "Créatine Creapure",
+          "category": "Performance",
+          "price_oneshot": 25.9,
+          "weight": "300g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Oméga-3 Epax (3 mois)",
+          "category": "Acides gras",
+          "price_oneshot": 69.9,
+          "weight": "180 capsules",
+          "format": "Capsules"
+        },
+        {
+          "name": "Oméga-3 Epax (1 mois)",
+          "category": "Acides gras",
+          "price_oneshot": 27.9,
+          "weight": "60 capsules",
+          "format": "Capsules"
+        },
+        {
+          "name": "Magnésium Bisglycinate (3 mois)",
+          "category": "Minéraux",
+          "price_oneshot": 39.9,
+          "weight": "180 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Magnésium Bisglycinate (1 mois)",
+          "category": "Minéraux",
+          "price_oneshot": 18.9,
+          "weight": "60 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Multivitamines",
+          "category": "Vitamines",
+          "price_oneshot": 24.9,
+          "weight": "60 gélules",
+          "format": "Gélules"
+        }
+      ],
+      "subscription_scope": "N/A",
+      "estimated_avg_basket": 55,
+      "why_no_subscription": "Positionnement ultra-premium, vente par lots (1 mois / 3 mois), stratégie de fidélisation par la qualité plutôt que par le lock-in. Formats 3 mois encouragent implicitement la récurrence."
+    },
+    "cuure": {
+      "name": "Cuure",
+      "url": "https://cuure.com",
+      "has_subscription": true,
+      "subscription_discount_pct": "~10% vs achat individuel",
+      "subscription_model": "Box personnalisée mensuelle (questionnaire → sélection auto)",
+      "frequencies_available": [
+        "1 mois",
+        "2 mois",
+        "3 mois"
+      ],
+      "flexibility": {
+        "pause": true,
+        "modify": true,
+        "cancel_anytime": true,
+        "minimum_commitment": "Aucun"
+      },
+      "products": [
+        {
+          "name": "Box personnalisée (3-8 compléments)",
+          "category": "Multi",
+          "price_range": "24-40€/mois",
+          "format": "30 sachets quotidiens"
+        },
+        {
+          "name": "Probiotiques",
+          "category": "Digestion",
+          "note": "4.4/5, 2063 avis"
+        },
+        {
+          "name": "Magnésium",
+          "category": "Minéraux",
+          "note": "4.5/5, 3348 avis"
+        },
+        {
+          "name": "Oméga-3",
+          "category": "Acides gras"
+        },
+        {
+          "name": "Vitamine D",
+          "category": "Vitamines"
+        },
+        {
+          "name": "Fer",
+          "category": "Minéraux"
+        },
+        {
+          "name": "Zinc",
+          "category": "Minéraux"
+        }
+      ],
+      "subscription_scope": "50+ ingrédients, 2M+ combinaisons possibles",
+      "estimated_avg_basket_sub": 35,
+      "unique_selling_point": "Personnalisation via questionnaire, sachets quotidiens pré-dosés, comité scientifique"
+    },
+    "decathlon": {
+      "name": "Decathlon (Abonnement Nutrition)",
+      "url": "https://abonnement.decathlon.fr",
+      "has_subscription": true,
+      "subscription_discount_pct": "10-15%",
+      "subscription_model": "Abonnement par produit, 1 produit = 1 abonnement",
+      "frequencies_available": [
+        "1 mois",
+        "2 mois",
+        "3 mois"
+      ],
+      "flexibility": {
+        "pause": true,
+        "modify": false,
+        "cancel_anytime": true,
+        "minimum_commitment": "Aucun",
+        "modify_note": "Pour modifier → résilier et recréer"
+      },
+      "products": [
+        {
+          "name": "Whey Isolate 2kg",
+          "category": "Protéines",
+          "price_oneshot": 79.99,
+          "price_sub": 71.99,
+          "discount_pct": 10,
+          "weight": "2kg",
+          "format": "Poudre"
+        },
+        {
+          "name": "Whey 1.5kg",
+          "category": "Protéines",
+          "price_oneshot": 44.99,
+          "price_sub": 39.99,
+          "discount_pct": 11,
+          "weight": "1.5kg",
+          "format": "Poudre"
+        },
+        {
+          "name": "Whey 900g",
+          "category": "Protéines",
+          "price_oneshot": 28.99,
+          "price_sub": 25.99,
+          "discount_pct": 10,
+          "weight": "900g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Créatine monohydrate 300g",
+          "category": "Performance",
+          "price_oneshot": 14.99,
+          "price_sub": 12.74,
+          "discount_pct": 15,
+          "weight": "300g",
+          "format": "Poudre"
+        }
+      ],
+      "subscription_scope": "Sélection limitée : whey, créatine, quelques compléments, croquettes",
+      "estimated_avg_basket_sub": 40,
+      "loyalty_program": "10 points fidélité par euro dépensé en abonnement"
+    },
+    "aqeelab": {
+      "name": "Aqeelab Nutrition",
+      "url": "https://www.aqeelab-nutrition.fr",
+      "has_subscription": true,
+      "subscription_discount_pct": 20,
+      "subscription_model": "Subscribe & save -20% sur chaque produit",
+      "frequencies_available": [
+        "1 mois",
+        "2 mois",
+        "3 mois"
+      ],
+      "flexibility": {
+        "pause": true,
+        "modify": true,
+        "cancel_anytime": true,
+        "minimum_commitment": "Aucun"
+      },
+      "products": [
+        {
+          "name": "Better Protein (Whey)",
+          "category": "Protéines",
+          "price_oneshot": 45.95,
+          "price_sub": 36.76,
+          "discount_pct": 20,
+          "weight": "750g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Créatine Monohydrate Poudre",
+          "category": "Performance",
+          "price_oneshot": 36.95,
+          "price_sub": 29.56,
+          "discount_pct": 20,
+          "weight": "500g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Créatine Gélules",
+          "category": "Performance",
+          "price_oneshot": 24.95,
+          "price_sub": 19.96,
+          "discount_pct": 20,
+          "weight": "180 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Oméga-3 Wild",
+          "category": "Acides gras",
+          "price_oneshot": 49.95,
+          "price_sub": 39.96,
+          "discount_pct": 20,
+          "weight": "120 capsules",
+          "format": "Capsules"
+        },
+        {
+          "name": "Ashwagandha KSM-66",
+          "category": "Adaptogènes",
+          "price_oneshot": 28.95,
+          "price_sub": 23.16,
+          "discount_pct": 20,
+          "weight": "90 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "BCAA 8.1.1",
+          "category": "Acides aminés",
+          "price_oneshot": 29.95,
+          "price_sub": 23.96,
+          "discount_pct": 20,
+          "weight": "300g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Magnésium Bisglycinate",
+          "category": "Minéraux",
+          "price_oneshot": 19.95,
+          "price_sub": 15.96,
+          "discount_pct": 20,
+          "weight": "90 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Multivitamines",
+          "category": "Vitamines",
+          "price_oneshot": 24.95,
+          "price_sub": 19.96,
+          "discount_pct": 20,
+          "weight": "60 gélules",
+          "format": "Gélules"
+        },
+        {
+          "name": "Collagène Marin Peptan",
+          "category": "Santé articulaire",
+          "price_oneshot": 28.95,
+          "price_sub": 23.16,
+          "discount_pct": 20,
+          "weight": "200g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Pre-Workout",
+          "category": "Performance",
+          "price_oneshot": 34.95,
+          "price_sub": 27.96,
+          "discount_pct": 20,
+          "weight": "300g",
+          "format": "Poudre"
+        }
+      ],
+      "subscription_scope": "Tous les 23 produits du catalogue",
+      "estimated_avg_basket_sub": 45,
+      "note": "Plus haute remise abo du marché FR (20%). Catalogue petit mais ultra-ciblé."
+    },
+    "myprotein": {
+      "name": "MyProtein",
+      "url": "https://fr.myprotein.com",
+      "has_subscription": true,
+      "subscription_discount_pct": "30% (jusqu'à 45% en promo)",
+      "subscription_model": "Subscribe & Save, remise très agressive",
+      "frequencies_available": [
+        "1 mois",
+        "2 mois",
+        "3 mois",
+        "4 mois",
+        "5 mois"
+      ],
+      "flexibility": {
+        "pause": true,
+        "modify": true,
+        "cancel_anytime": true,
+        "minimum_commitment": "Aucun"
+      },
+      "products": [
+        {
+          "name": "Impact Whey Protein 1kg",
+          "category": "Protéines",
+          "price_oneshot": 30.49,
+          "price_sub": 21.34,
+          "discount_pct": 30,
+          "weight": "1kg",
+          "format": "Poudre"
+        },
+        {
+          "name": "Impact Whey Protein 2.5kg",
+          "category": "Protéines",
+          "price_oneshot": 59.99,
+          "price_sub": 41.99,
+          "discount_pct": 30,
+          "weight": "2.5kg",
+          "format": "Poudre"
+        },
+        {
+          "name": "Creatine Monohydrate 250g",
+          "category": "Performance",
+          "price_oneshot": 7.99,
+          "price_sub": 5.59,
+          "discount_pct": 30,
+          "weight": "250g",
+          "format": "Poudre"
+        },
+        {
+          "name": "Omega 3 90 capsules",
+          "category": "Acides gras",
+          "price_oneshot": 8.9,
+          "price_sub": 6.23,
+          "discount_pct": 30,
+          "weight": "90 capsules",
+          "format": "Capsules"
+        },
+        {
+          "name": "Multivitamines Alpha Men",
+          "category": "Vitamines",
+          "price_oneshot": 14.99,
+          "price_sub": 10.49,
+          "discount_pct": 30,
+          "weight": "120 comprimés",
+          "format": "Comprimés"
+        },
+        {
+          "name": "BCAA 250g",
+          "category": "Acides aminés",
+          "price_oneshot": 12.99,
+          "price_sub": 9.09,
+          "discount_pct": 30,
+          "weight": "250g",
+          "format": "Poudre"
+        }
+      ],
+      "subscription_scope": "Quasi tous les produits (1000+ références)",
+      "estimated_avg_basket_sub": 35,
+      "note": "Remise la plus agressive du marché (30% standard, jusqu'à 45% en promo). Modèle volume international."
+    }
+  }
+}

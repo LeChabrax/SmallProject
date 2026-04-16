@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Recommandation Impulse — Modèle d'abonnement</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0f1e;
+    --cream: #f5f1e8;
+    --cream-2: #ebe6d8;
+    --ink-2: #1e2433;
+    --amber: #c96e1f;
+    --amber-hi: #e8871a;
+    --muted: #6b6558;
+    --rule: #c7bfa9;
+    --hi: #0d6e3d;
+    --mid: #c96e1f;
+    --lo: #8b2a1b;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--cream); color: var(--ink); }
+  body {
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
+    font-size: 13.5px;
+    line-height: 1.55;
+    padding: 48px 40px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin: 0 0 12px;
+    line-height: 0.95;
+  }
+  h1 em {
+    color: var(--amber);
+    font-style: normal;
+  }
+  .sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 32px;
+    max-width: 720px;
+  }
+  .verdict {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 32px 36px;
+    margin: 32px 0 48px;
+    border-left: 4px solid var(--amber);
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .verdict .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber-hi);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .verdict strong { color: var(--amber-hi); font-weight: 600; }
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 56px 0 6px;
+    letter-spacing: -0.015em;
+    padding-bottom: 8px;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  h2 .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--amber);
+    margin-right: 10px;
+    font-weight: 600;
+  }
+  h2 + .caption {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0 0 20px;
+  }
+  h3 {
+    font-size: 15px;
+    margin: 28px 0 8px;
+    letter-spacing: -0.005em;
+  }
+  h3.tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-top: 32px;
+  }
+  p { margin: 6px 0 12px; }
+  ul { margin: 8px 0 16px; padding-left: 20px; }
+  li { margin: 3px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin: 12px 0 20px;
+  }
+  th {
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 10px 10px 0;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  td {
+    padding: 11px 10px 11px 0;
+    border-bottom: 0.5px solid var(--rule);
+    vertical-align: top;
+  }
+  td.num {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+  }
+  td.b { font-weight: 600; }
+  .pnl { background: rgba(201, 110, 31, 0.04); padding: 20px 24px; margin: 12px 0; border-left: 3px solid var(--amber); }
+  .pnl .pnl-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .pnl table { margin: 0; font-size: 12.5px; }
+  .pnl td { border-bottom: 0.5px dotted var(--rule); padding: 6px 10px 6px 0; }
+  .pnl tr:last-child td { border-bottom: 1.5px solid var(--ink); font-weight: 700; }
+  .verdict-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--amber);
+  }
+  .phase {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .phase:last-child { border-bottom: none; }
+  .phase-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 600;
+    padding-top: 2px;
+  }
+  .phase-label .n {
+    display: block;
+    font-size: 28px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-top: 4px;
+  }
+  .phase-body { font-size: 12.5px; }
+  .phase-body h4 { margin: 0 0 6px; font-size: 14px; font-weight: 600; }
+  .phase-body ul { margin-top: 6px; }
+  .footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 0.5px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .check { color: var(--hi); font-weight: 600; }
+  .warn { color: var(--mid); font-weight: 600; }
+  .no { color: var(--lo); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="kicker">Section 6 · Deck mission abonnement · 2026-04-15</div>
+<h1>Recommandation<br><em>Impulse Nutrition</em></h1>
+<p class="sub">Modèle d'abonnement distillé à partir du benchmark de 8 marques concurrentes (verified_live) et du catalogue Impulse (43 SKUs). Livrable interne comité projet.</p>
+
+<div class="verdict">
+<span class="label">Verdict — une phrase</span>
+Lancer un <strong>Subscribe &amp; Save à −15% flat</strong> sur <strong>6 SKUs</strong> à consommation naturellement récurrente, <strong>sans engagement</strong>, avec <strong>livraison domicile offerte dès 35€</strong>, intégré en toggle sur chaque fiche produit, avec email anti-churn 48h avant chaque renouvellement.
+</div>
+
+<h2><span class="num">01 /</span>Produits éligibles</h2>
+<p class="caption">Sélection curée sur le critère de récurrence naturelle et de simplicité produit (pas de variantes de goût complexes).</p>
+
+<h3 class="tag">✅ MVP Phase 1 · 6 SKUs</h3>
+<table>
+<thead><tr><th>SKU</th><th>Catégorie</th><th>Pourquoi abonner</th></tr></thead>
+<tbody>
+<tr><td class="b">Magnésium Bisglycinate</td><td>Santé · Minéraux</td><td>Consommation quotidienne, 1-2 mois/pot, récurrence garantie</td></tr>
+<tr><td class="b">Oméga-3 EPAX®</td><td>Santé · Acides gras</td><td>Quotidien, 1-2 mois, SKU phare Impulse</td></tr>
+<tr><td class="b">Multivitamines</td><td>Santé · Vitamines</td><td>Quotidien, 1-2 mois, panier d'entrée naturel</td></tr>
+<tr><td class="b">Pré-Probiotiques</td><td>Santé · Digestion</td><td>Quotidien, cure 2-3 mois, récurrence naturelle</td></tr>
+<tr><td class="b">Sommeil +</td><td>Santé · Adaptogènes</td><td>Quotidien le soir, récurrence totale</td></tr>
+<tr><td class="b">Créatine Monohydrate</td><td>Sport · Performance</td><td>5 g/jour, 1-2 mois, SKU d'acquisition sportive</td></tr>
+</tbody>
+</table>
+
+<h3 class="tag">⚠️ Phase 2 — avec précaution</h3>
+<p><span class="b">Whey</span> (variantes de goût) : figer le goût à la souscription, bouton "changer de goût" dans l'espace abonné. <span class="b">Collagène Marin</span> selon format/goût.</p>
+
+<h3 class="tag">❌ Exclus du lancement</h3>
+<ul>
+<li>Packs / coffrets / bundles (composition figée — pattern universel du panel)</li>
+<li>Accessoires (shakers, doseurs, textile) — pas de récurrence</li>
+<li>Snacks (barres, boissons) — consommation irrégulière / saisonnière</li>
+<li>Électrolytes effervescents (événementiel, COGS encore estimé)</li>
+<li>Produits en rupture de formule ou saisonniers</li>
+</ul>
+
+<h2><span class="num">02 /</span>Modèle commercial recommandé</h2>
+
+<h3 class="tag">Remise · <span style="color:var(--ink)">−15% flat</span></h3>
+<p>Aligné Nutri&amp;Co et Nutrimuscle (référence marché FR premium). Sous Aqeelab (−20%) mais compensé par <span class="check">zéro engagement</span> — plus éthique et conforme Loi Chatel. Au-dessus de Novoma (−10%) → plus attractif sur le CTA. Soutenable selon les marges brutes Impulse (40-65% HT).</p>
+
+<h3 class="tag">Fréquences · <span style="color:var(--ink)">1 mois / 2 mois / 3 mois</span></h3>
+<p><span class="b">1 mois</span> pour les hauts volumes (créatine, whey). <span class="b">2 mois</span> = sweet spot pour les pots de 60 gélules (magnésium, multivit) — absent chez Nutri&amp;Co, point de différenciation. <span class="b">3 mois</span> pour les gros formats. Pas de 4/5/6 mois au lancement — différenciation marginale qui alourdit l'onboarding.</p>
+
+<h3 class="tag">Livraison abo · <span style="color:var(--ink)">offerte domicile dès 35€</span></h3>
+<p>Modèle hybride entre Nutri&amp;Co (flat sans seuil) et Novoma (stepped 50€). <span class="b">35€</span> = seuil réaliste pour un panier 2 SKUs (~20€ chacun). Protège la marge sur les mono-produits à bas ticket, incite à l'upsell 2→3 produits, améliore le LTV.</p>
+
+<h3 class="tag">Engagement · <span style="color:var(--ink)">aucun, résiliation 1 clic</span></h3>
+<p>Conformité Loi Chatel sans effort. <span class="b">Leçon Aqeelab</span> : engagement 2 mois = friction d'entrée qui tue la conversion. <span class="b">Leçon Cuure</span> : "suspension self-serve vs résiliation par email" = anti-pattern documenté (verbatims "surprise par la reconduction"). Résiliation définitive doit être en <span class="check">1 clic depuis l'espace abonné</span>.</p>
+
+<h3 class="tag">Stacking codes · <span style="color:var(--ink)">partiel sélectif</span></h3>
+<table>
+<thead><tr><th>Type de code</th><th>Cumul abo ?</th><th>Raison</th></tr></thead>
+<tbody>
+<tr><td class="b">Welcome first order</td><td><span class="check">✅ Oui (1ère commande)</span></td><td>Réduire la friction conversion</td></tr>
+<tr><td class="b">Codes promo génériques</td><td><span class="no">❌ Non</span></td><td>Protéger la marge sur renouvellements</td></tr>
+<tr><td class="b">Codes ambassadeurs / influenceurs</td><td><span class="check">✅ Oui</span></td><td>Booster l'acquisition via le réseau</td></tr>
+<tr><td class="b">Parrainage</td><td><span class="no">❌ Non</span></td><td>Programme distinct</td></tr>
+</tbody>
+</table>
+
+<h2><span class="num">03 /</span>UX · Positionnement</h2>
+
+<h3 class="tag">Wording CTA · "S'abonner &amp; économiser" (inspiré Aqeelab)</h3>
+<p>Pas le basique "S'abonner" (Nutri&amp;Co, Nutrimuscle, Novoma, Decathlon, MyProtein). Le mot <span class="b">"économiser"</span> est un déclencheur psychologique qui rend le bénéfice tangible sur le CTA lui-même.</p>
+
+<h3 class="tag">Affichage montant économisé en euros (inspiré Aqeelab)</h3>
+<div class="pnl">
+<div class="pnl-title">Exemple fiche produit</div>
+<table>
+<tr><td>Prix one-shot</td><td class="num">29,90 €</td></tr>
+<tr><td>Prix abonné</td><td class="num b">25,42 €</td></tr>
+<tr><td>Vous économisez</td><td class="num b" style="color:var(--amber)">4,48 €</td></tr>
+</table>
+</div>
+<p style="margin-top:0;font-size:11.5px;color:var(--muted)">C'est le pattern le plus persuasif observé dans le panel. Beaucoup plus tangible que "−15%" abstrait. Aqeelab est le seul à le faire aujourd'hui.</p>
+
+<h3 class="tag">Placement · toggle radio sur fiche produit</h3>
+<p>Au-dessus du bouton "Ajouter au panier", intégré au sélecteur de prix/format. Pattern universel validé par Nutri&amp;Co, Nutrimuscle, Aqeelab, Novoma.</p>
+
+<h3 class="tag">Page dédiée <code>/pages/abonnement</code> (inspirée Novoma)</h3>
+<ul>
+<li><span class="b">Hero pitch éditorial</span> : <em>"Les compléments agissent sur la durée. L'abonnement, c'est pour laisser le temps à vos résultats."</em> — justification santé, pas juste promotion</li>
+<li><span class="b">Processus en 3 étapes illustré</span> : SKU → fréquence → paiement</li>
+<li><span class="b">5 avantages chiffrés</span> : −15% à vie, livraison offerte dès 35€, fenêtre modif 48h, sans engagement, espace abonné</li>
+<li><span class="b">FAQ complète</span> (6-8 questions sensibles)</li>
+<li><span class="b">Lien vers espace abonné</span></li>
+</ul>
+
+<h3 class="tag">Visibilité (inspirée Nutrimuscle)</h3>
+<ul>
+<li><span class="check">✅</span> Bannière homepage avec CTA direct</li>
+<li><span class="check">✅</span> Mention navigation principale (lien explicite)</li>
+<li><span class="check">✅</span> Mention dans les emails (welcome + post-purchase + newsletter mensuelle)</li>
+<li><span class="check">✅</span> Lien footer</li>
+</ul>
+
+<h3 class="tag">Email pré-expédition 48h (inspiré Nutri&amp;Co)</h3>
+<p>Anti-pattern churn éprouvé. Envoyé 48h avant chaque prélèvement, avec boutons directs : "Modifier ma prochaine commande", "Reporter d'une semaine", "Suspendre mon abonnement". Seul mécanisme du panel qui réduit documentairement les plaintes "surprise par le renouvellement".</p>
+
+<h2><span class="num">04 /</span>Seuil de rentabilité</h2>
+<p class="caption">Modélisation simplifiée. Détail complet dans la section 5 du deck.</p>
+
+<div class="pnl">
+<div class="pnl-title">Mono-produit · Magnésium Bisglycinate 19,90 €</div>
+<table>
+<tr><td>Prix retail TTC</td><td class="num">19,90 €</td></tr>
+<tr><td>Prix retail HT</td><td class="num">16,58 €</td></tr>
+<tr><td>Remise abo −15%</td><td class="num">−2,49 €</td></tr>
+<tr><td>PVM net HT</td><td class="num b">14,09 €</td></tr>
+<tr><td>COGS HT estimé</td><td class="num">−5,00 €</td></tr>
+<tr><td>Marge brute avant log</td><td class="num">9,09 €</td></tr>
+<tr><td>Coût log HT (domicile offerte)</td><td class="num">−4,92 €</td></tr>
+<tr><td><span class="b">Contribution nette HT</span></td><td class="num verdict-num">4,17 €</td></tr>
+</table>
+</div>
+<p style="font-size:11.5px;color:var(--muted);margin-top:4px">Rentable en mono-produit <span class="b">sous condition</span> que la marge brute soit ≥ 55%. Tendu pour les SKUs à marge 40%.</p>
+
+<div class="pnl">
+<div class="pnl-title">Panier 2 SKUs · Magnésium + Oméga-3 — 42 € TTC</div>
+<table>
+<tr><td>Panier TTC</td><td class="num">42,00 €</td></tr>
+<tr><td>Panier HT</td><td class="num">35,00 €</td></tr>
+<tr><td>Remise abo −15%</td><td class="num">−5,25 €</td></tr>
+<tr><td>PVM net HT</td><td class="num b">29,75 €</td></tr>
+<tr><td>COGS cumulé HT</td><td class="num">−11,00 €</td></tr>
+<tr><td>Marge brute avant log</td><td class="num">18,75 €</td></tr>
+<tr><td>Coût log HT (domicile offerte)</td><td class="num">−4,92 €</td></tr>
+<tr><td><span class="b">Contribution nette HT</span></td><td class="num verdict-num">13,83 €</td></tr>
+</table>
+</div>
+<p style="font-size:11.5px;color:var(--muted);margin-top:4px">Très rentable dès que le panier dépasse 35 € HT. <span class="b">C'est la justification du seuil de livraison offerte à 35€</span> — plancher prudent qui garantit la rentabilité même sur les SKUs à marge 40-50%.</p>
+
+<h2><span class="num">05 /</span>Risques · anti-patterns à éviter</h2>
+<table>
+<thead><tr><th>Risque</th><th>Leçon source</th><th>Contre-mesure Impulse</th></tr></thead>
+<tbody>
+<tr><td class="b">Sous-domaine séparé = friction</td><td>Decathlon</td><td>Intégrer nativement dans impulse-nutrition.fr</td></tr>
+<tr><td class="b">"1 produit = 1 abo"</td><td>Decathlon</td><td>Panier multi-produits dans une commande abo</td></tr>
+<tr><td class="b">Modification = résiliation + recréation</td><td>Decathlon</td><td>Pause / skip / modif SKU dans l'espace abonné</td></tr>
+<tr><td class="b">Résiliation en 2 temps</td><td>Cuure</td><td>Résiliation définitive self-serve 1 clic</td></tr>
+<tr><td class="b">Engagement minimum forcé</td><td>Aqeelab</td><td>Zéro engagement, Loi Chatel de bout en bout</td></tr>
+<tr><td class="b">Prix de base instables</td><td>MyProtein</td><td>Prix one-shot stables, remise abo claire</td></tr>
+<tr><td class="b">Page dédiée invisible</td><td>Nutri&amp;Co</td><td>Mention homepage + nav + email</td></tr>
+<tr><td class="b">Friction reconduction auto</td><td>Cuure</td><td>Email pré-expédition 48h avec fenêtre modif</td></tr>
+<tr><td class="b">Opacité programme fidélité</td><td>Aqeelab RePoints</td><td>Communication transparente dès la homepage</td></tr>
+</tbody>
+</table>
+
+<h2><span class="num">06 /</span>Roadmap déploiement</h2>
+
+<div class="phase">
+<div class="phase-label">Phase 1<span class="n">MVP</span>0–3 mois</div>
+<div class="phase-body">
+<h4>6 SKUs · fondations</h4>
+<ul>
+<li>Les 6 SKUs du Top GO scoring rentabilité (Magnésium, Oméga-3, Multivit, Pré-Probiotiques, Sommeil +, Créatine)</li>
+<li>Toggle fiche produit + page dédiée + mention homepage</li>
+<li>Engagement zéro, −15% flat, livraison offerte dès 35€</li>
+<li>Email pré-expédition 48h actif dès le 1er renouvellement</li>
+<li><span class="b">Objectif</span> : 50-100 abonnements actifs, mesurer churn 30/60/90 jours</li>
+<li><span class="b">KPIs</span> : taux de conversion fiche → abo, churn, panier moyen abo vs one-shot</li>
+</ul>
+</div>
+</div>
+
+<div class="phase">
+<div class="phase-label">Phase 2<span class="n">OPT</span>3–6 mois</div>
+<div class="phase-body">
+<h4>Optimisation · élargissement</h4>
+<ul>
+<li>Ajout du Whey avec lock goût à la souscription (bouton "changer de goût" dans l'espace abonné)</li>
+<li>Test A/B : wording "S'abonner" vs "S'abonner &amp; économiser"</li>
+<li>Programme de fidélité cumulable (points abo dépensables sur one-shot → upsell)</li>
+<li>Analyse cohortes churn par SKU → correction remise ou fréquence par catégorie</li>
+<li>Élargissement fréquences si demande client (4-6 mois sur gros formats uniquement)</li>
+</ul>
+</div>
+</div>
+
+<div class="phase">
+<div class="phase-label">Phase 3<span class="n">SCA</span>6–12 mois</div>
+<div class="phase-body">
+<h4>Scale · différenciation</h4>
+<ul>
+<li>Élargir à tous les SKUs éligibles (hors packs / accessoires / snacks)</li>
+<li>Programme de parrainage abo cross-canal (inspiré Decat'Club)</li>
+<li>Quiz d'onboarding léger (inspiré Cuure, sans adopter le modèle 100% abo) comme outil d'acquisition</li>
+<li>Optimisation algorithme recommandation : upsell 2→3 produits dans le flow souscription</li>
+<li>Intégration programme ambassadeurs : codes influenceurs cumulables abo, tracking cross-canal</li>
+</ul>
+</div>
+</div>
+
+<h2><span class="num">07 /</span>Prochaines étapes immédiates</h2>
+<ol>
+<li><span class="b">Validation comité projet</span> du modèle commercial (remise, fréquences, engagement, livraison, stacking)</li>
+<li><span class="b">Audit Loi Chatel</span> : valider la compatibilité avec un juriste avant GA <em>(1-2 jours)</em></li>
+<li><span class="b">Choix tech</span> : Recharge vs Shopify Native Subscriptions vs Bold — devis et benchmark fonctionnel <em>(1 semaine)</em></li>
+<li><span class="b">Mesure baseline</span> : export Shopify 90 jours pour estimer le potentiel d'abonnés par SKU</li>
+<li><span class="b">Design / maquettes</span> : fiche produit + page abo + email pré-expédition <em>(1-2 semaines)</em></li>
+<li><span class="b">Mise en place technique</span> : intégration app + configuration SKUs + workflow email <em>(2-3 semaines)</em></li>
+<li><span class="b">Lancement soft</span> : 6 SKUs, communication limitée, mesure baseline <em>(1 mois)</em></li>
+<li><span class="b">Lancement officiel</span> : après ajustements UX</li>
+</ol>
+
+<p class="footer">
+benchmark/recommendation_impulse.html · Section 6 deck mission · distillée depuis 8 marques/<brand>/notes.md + impulse_products.json · 2026-04-15
+</p>
+
+</body>
+</html>

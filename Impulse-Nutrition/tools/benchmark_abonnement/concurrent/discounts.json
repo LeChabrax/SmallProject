@@ -1,0 +1,352 @@
+{
+  "meta": {
+    "description": "Politique de discount par marque — première commande, codes influenceurs typiques, fréquence promo. Sourcé via Dealabs / influenceur.promo / kotag / pages officielles marques.",
+    "last_updated": "2026-04-14",
+    "methodology": "Pour chaque marque : recherche codes actifs sur Dealabs/Reddit/pages promo officielles/blogs influenceurs (influenceur.promo, kotag.co, edp-nutrition.fr, lesavisdemilie.fr). Seuls les codes avec source URL vérifiée sont documentés.",
+    "tiering": {
+      "promo_heavy_prix_catalogue_fictif": ["myprotein", "bulk", "esn", "eafit", "eric_favre"],
+      "promo_modere_structure": ["foodspring", "biotechusa", "prozis", "impulse_nutrition", "nutriandco", "aqeelab"],
+      "anti_promo_volontaire": ["nutripure", "nutrimuscle", "decathlon"]
+    }
+  },
+  "discounts": {
+    "impulse_nutrition": {
+      "first_order_code_pct": 10,
+      "first_order_code_example": "IMPULSE10",
+      "influencer_code_typical_pct": 15,
+      "influencer_code_examples": [
+        {"code": "LORENA", "influencer": "@lorena", "pct": 15, "source_url": "https://fr.hotdeals.com/code-promo/impulse-nutrition", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "ponctuel",
+      "stacking_rules": "10% première commande ne stacke pas avec code ambassadeur; parrainage 15% sur 1ère commande + 10% parrain",
+      "source_urls": [
+        "https://impulse-nutrition.fr",
+        "https://impulse-nutrition.fr/pages/refer",
+        "https://fr.hotdeals.com/code-promo/impulse-nutrition"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Politique -10% bienvenue homepage; codes ambassadeurs typiquement 15%. Pas de promo quasi-permanente publique."
+    },
+    "nutrimuscle": {
+      "first_order_code_pct": null,
+      "first_order_code_example": null,
+      "influencer_code_typical_pct": 10,
+      "influencer_code_examples": [
+        {"code": "NME_NABFIT", "influencer": "@nabfit", "pct": 5, "source_url": "https://nabfit.fr/complements-alimentaires-musculation/pas-chers/codes-promo/nutrimuscle/", "seen_at": "2026-04-14"},
+        {"code": "NMA_HYBRIDX5", "influencer": "@valentingenest", "pct": 10, "source_url": "https://valentingenest.com/code-promo-10-nutrimuscle-nma_hybridx5/", "seen_at": "2026-04-14"},
+        {"code": "NME_NUTRITION5", "influencer": "générique", "pct": 5, "source_url": "https://www.edp-nutrition.fr/code-promo-nutrimuscle/", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "ponctuel",
+      "stacking_rules": "Codes 5-10% cumulables avec packs réduits; ventes -20% saisonnières",
+      "source_urls": [
+        "https://www.dealabs.com/codes-promo/nutrimuscle.com",
+        "https://eu.nutrimuscle.com/pages/nos-offres",
+        "https://www.influenceur.promo/marques/nutrimuscle/"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Politique codes influenceurs très modérés (5-10%, rarement 15%). Promos -20% uniquement en périodes soldes/Black Friday."
+    },
+    "nutripure": {
+      "first_order_code_pct": 10,
+      "first_order_code_example": "parrainage (pas de code public)",
+      "influencer_code_typical_pct": null,
+      "influencer_code_examples": [],
+      "permanent_promo_frequency": "aucun",
+      "stacking_rules": "Pas de cumul; 10% fidélité + 10% packs intégré",
+      "source_urls": [
+        "https://www.nutripure.fr/fr/info/29-code-promo-nutripure",
+        "https://www.edp-nutrition.fr/code-promo-nutripure-influenceur/"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Politique anti-promo délibérée. Pas de Black Friday, pas de codes influenceurs >10%. Seuls le parrainage (10%) et les packs (10-25% intégrés) existent. Le prix catalogue est le vrai prix."
+    },
+    "decathlon": {
+      "first_order_code_pct": null,
+      "first_order_code_example": null,
+      "influencer_code_typical_pct": null,
+      "influencer_code_examples": [],
+      "permanent_promo_frequency": "ponctuel",
+      "stacking_rules": null,
+      "source_urls": [
+        "https://www.decathlon.fr/nutrition-sante/whey-proteines",
+        "https://www.lareduction.fr/s/decathlon.fr"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Corength / Aptonia sans programme d'affiliation influenceur structuré. Prix catalogue stables, promos seulement lors soldes Decathlon globales."
+    },
+    "eric_favre": {
+      "first_order_code_pct": 10,
+      "first_order_code_example": "newsletter 10%",
+      "influencer_code_typical_pct": 10,
+      "influencer_code_pct_p10": 10,
+      "influencer_code_pct_p50": 10,
+      "influencer_code_pct_p90": 15,
+      "influencer_code_pct_max": 20,
+      "effective_price_pct": 85,
+      "influencer_code_examples": [
+        {"code": "EFNFC10", "influencer": "@essan_nfc", "pct": 10, "source_url": "https://www.influenceur.promo/marques/eric-favre/", "seen_at": "2026-04-14"},
+        {"code": "FAVRE10", "influencer": "code site générique", "pct": 10, "source_url": "https://fr.hotdeals.com/store/code-promo-eric-favre", "seen_at": "2026-04-14"},
+        {"code": "BODY15", "influencer": "code partenaire", "pct": 15, "source_url": "https://fr.hotdeals.com/store/code-promo-eric-favre", "seen_at": "2026-04-14"},
+        {"code": "EFLIONEL10", "influencer": "@lionelpourlesport", "pct": 10, "source_url": "https://fr.hotdeals.com/store/code-promo-eric-favre", "seen_at": "2026-04-14"},
+        {"code": "SUPER20", "influencer": "code site (>=120€)", "pct": 20, "source_url": "https://fr.coupert.com/codes-promo/eric-favre", "seen_at": "2026-04-14"},
+        {"code": "NPNG20", "influencer": "code événementiel", "pct": 20, "source_url": "https://fr.hotdeals.com/store/code-promo-eric-favre", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "quasi-permanent",
+      "stacking_rules": "Programme influenceur limité (~5 ambassadeurs identifiés). Codes site 10% no-min, 20% SUPER20 avec min 120€. Pas de cumul.",
+      "source_urls": [
+        "https://www.ericfavre.com/fr_fr/reductions-codes-promo",
+        "https://www.influenceur.promo/marques/eric-favre/",
+        "https://fr.hotdeals.com/store/code-promo-eric-favre"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Programme ambassadeur très modeste — Eric Favre est positionné plus pharmacie/pro-sport que fitness mass-market. Essan NFC est le seul vrai ambassadeur agrégé avec 1087 utilisations. P50=10%, P90=15%. Client averti paye ~85% du catalogue."
+    },
+    "eafit": {
+      "first_order_code_pct": 30,
+      "first_order_code_example": "newsletter 30%",
+      "influencer_code_typical_pct": 32,
+      "influencer_code_pct_p10": 20,
+      "influencer_code_pct_p50": 32,
+      "influencer_code_pct_p90": 32,
+      "influencer_code_pct_max": 35,
+      "effective_price_pct": 68,
+      "influencer_code_examples": [
+        {"code": "CPS32", "influencer": "@tamara.awada", "pct": 32, "source_url": "https://www.influenceur.promo/marques/ea-fit/", "seen_at": "2026-04-14"},
+        {"code": "MARION32", "influencer": "@mrsmariont", "pct": 32, "source_url": "https://www.influenceur.promo/marques/ea-fit/", "seen_at": "2026-04-14"},
+        {"code": "MATHILDE32", "influencer": "@mathildegros", "pct": 32, "source_url": "https://www.influenceur.promo/marques/ea-fit/", "seen_at": "2026-04-14"},
+        {"code": "TATIANA32", "influencer": "@tatianamembre", "pct": 32, "source_url": "https://www.influenceur.promo/marques/ea-fit/", "seen_at": "2026-04-14"},
+        {"code": "ILONA32", "influencer": "@ilonafrigout", "pct": 32, "source_url": "https://www.influenceur.promo/marques/ea-fit/", "seen_at": "2026-04-14"},
+        {"code": "LAETITIA32", "influencer": "@laetitiaremyfitness", "pct": 32, "source_url": "https://www.influenceur.promo/marques/ea-fit/", "seen_at": "2026-04-14"},
+        {"code": "MANGA32", "influencer": "@nawelmanga", "pct": 32, "source_url": "https://www.influenceur.promo/marques/ea-fit/", "seen_at": "2026-04-14"},
+        {"code": "MIKE32", "influencer": "@mikereymond", "pct": 32, "source_url": "https://www.influenceur.promo/marques/ea-fit/", "seen_at": "2026-04-14"},
+        {"code": "EMILIE20", "influencer": "@lesavisdemilie", "pct": 20, "source_url": "https://www.lesavisdemilie.fr/code-promo-eafit/", "seen_at": "2026-04-14"},
+        {"code": "FIT25", "influencer": "site code permanent (>=60€)", "pct": 25, "source_url": "https://www.eafit.com/deals-du-moment.html", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "quasi-permanent",
+      "stacking_rules": "Programme français standardisé à 32% (suffixe *32 sur 8+ codes récents). Ancien programme 20% résiduel (EMILIE20). Code site FIT25=25% + pack offert dès 60€. Pas de cumul code influenceur + FIT25.",
+      "source_urls": [
+        "https://www.eafit.com/deals-du-moment.html",
+        "https://www.influenceur.promo/marques/ea-fit/",
+        "https://www.lesavisdemilie.fr/code-promo-eafit/"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Programme ambassadeur UPGRADÉ à 32% (vs 20% historique). Client averti paye ~68% du catalogue via code CPS32/MARION32. Plus agressif qu'attendu pour une marque française."
+    },
+    "aqeelab": {
+      "first_order_code_pct": 15,
+      "first_order_code_example": "JEAN15",
+      "influencer_code_typical_pct": 12,
+      "influencer_code_examples": [
+        {"code": "CREATINATOR", "influencer": "@creatinator", "pct": 10, "source_url": "https://go-muscu.com/code-promo/aqeelab-nutrition/", "seen_at": "2026-04-14"},
+        {"code": "TRISTAN15", "influencer": "@tristan", "pct": 15, "source_url": "https://www.aqeelab-nutrition.fr/pages/des-conseils-des-infos-et-des-reductions", "seen_at": "2026-04-14"},
+        {"code": "LEVAND", "influencer": "@alex.levand", "pct": 20, "source_url": "https://www.tiktok.com/@alex.levand/video/7248653855582407963", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "quasi-permanent",
+      "stacking_rules": "Codes sans minimum, sans date d'expiration, année entière",
+      "source_urls": [
+        "https://www.aqeelab-nutrition.fr/pages/des-conseils-des-infos-et-des-reductions",
+        "https://nabfit.fr/complements-alimentaires-musculation/pas-chers/codes-promo/aqeelab-nutrition/"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Page officielle liste tous les codes (-5/-10/-15%/-25€). Politique transparente, codes stables toute l'année."
+    },
+    "nutriandco": {
+      "first_order_code_pct": 10,
+      "first_order_code_example": "LESAVISDEMILIE10",
+      "influencer_code_typical_pct": 10,
+      "influencer_code_examples": [
+        {"code": "LESAVISDEMILIE10", "influencer": "@lesavisdemilie", "pct": 10, "source_url": "https://www.lesavisdemilie.fr/code-promo-nutri-and-co/", "seen_at": "2026-04-14"},
+        {"code": "FITBYALEXIA", "influencer": "@fitbyalexia", "pct": 10, "source_url": "https://www.edp-nutrition.fr/code-promo-nutri-and-co-influenceur/", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "ponctuel",
+      "stacking_rules": "Codes plafonnés à 10%, durée limitée",
+      "source_urls": [
+        "https://www.influenceur.promo/marques/nutrico/",
+        "https://www.edp-nutrition.fr/code-promo-nutri-and-co-influenceur/"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Politique codes influenceurs plafonnée à 10%. Positionnement santé/premium, promos modérées."
+    },
+    "bulk": {
+      "first_order_code_pct": 15,
+      "first_order_code_example": "NEW15 / newsletter",
+      "influencer_code_typical_pct": 45,
+      "influencer_code_pct_p10": 25,
+      "influencer_code_pct_p50": 45,
+      "influencer_code_pct_p90": 45,
+      "influencer_code_pct_max": 45,
+      "effective_price_pct": 55,
+      "influencer_code_examples": [
+        {"code": "BUDDY45", "influencer": "@tristandefeuilletvang", "pct": 45, "source_url": "https://www.influenceur.promo/marques/bulk-powders/", "seen_at": "2026-04-14"},
+        {"code": "TWINS", "influencer": "@twinsb_fit", "pct": 45, "source_url": "https://www.influenceur.promo/marques/bulk-powders/", "seen_at": "2026-04-14"},
+        {"code": "ARTHUR", "influencer": "@arthurbenedetti", "pct": 45, "source_url": "https://www.influenceur.promo/marques/bulk-powders/", "seen_at": "2026-04-14"},
+        {"code": "LIFTIT", "influencer": "@hugophilip", "pct": 45, "source_url": "https://www.influenceur.promo/marques/bulk-powders/", "seen_at": "2026-04-14"},
+        {"code": "ALIX", "influencer": "@alixmhd", "pct": 45, "source_url": "https://www.influenceur.promo/marques/bulk-powders/", "seen_at": "2026-04-14"},
+        {"code": "JADDEFR", "influencer": "@jadde", "pct": 45, "source_url": "https://www.influenceur.promo/marques/bulk-powders/", "seen_at": "2026-04-14"},
+        {"code": "TARZAN", "influencer": "@imtarzan", "pct": 45, "source_url": "https://www.influenceur.promo/marques/bulk-powders/", "seen_at": "2026-04-14"},
+        {"code": "JOSEPHINE", "influencer": "@agjosephine", "pct": 45, "source_url": "https://www.influenceur.promo/marques/bulk-powders/", "seen_at": "2026-04-14"},
+        {"code": "PIPOUNE45", "influencer": "@alinedessine", "pct": 45, "source_url": "https://www.influenceur.promo/marques/bulk-powders/", "seen_at": "2026-04-14"},
+        {"code": "AURELIEN45", "influencer": "@aurelienroy", "pct": 45, "source_url": "https://www.influenceur.promo/marques/bulk-powders/", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "quasi-permanent",
+      "stacking_rules": "Distribution quasi monolithique à 45% (codes récents 2024-2026) + reliquat 20-25% (codes anciens). Site affiche 'jusqu'à -75%' en homepage (cumul produit-promo + code). Flash sales 'Bulk Week' -50/-70% ponctuelles. Code influenceur ne stacke pas avec flash sale.",
+      "source_urls": [
+        "https://www.influenceur.promo/marques/bulk-powders/",
+        "https://www.lesavisdemilie.fr/code-promo-bulk/",
+        "https://www.savoo.fr/marques/codes-promo-bulk"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Programme ULTRA-STANDARDISÉ : 20+ ambassadeurs au même code 45%. Tes 30% initiaux étaient largement sous-estimés — P50 réel = 45%. Site-wide banner '-75%' atteint via cumul. Client averti paye ~55% du catalogue."
+    },
+    "myprotein": {
+      "first_order_code_pct": 40,
+      "first_order_code_example": "NEWOFFER / IMPACTFR",
+      "influencer_code_typical_pct": 50,
+      "influencer_code_pct_p10": 20,
+      "influencer_code_pct_p50": 42,
+      "influencer_code_pct_p90": 50,
+      "influencer_code_pct_max": 55,
+      "effective_price_pct": 52,
+      "influencer_code_examples": [
+        {"code": "MELISSAT", "influencer": "@melissathiebaut", "pct": 55, "source_url": "https://kotag.co/marques/codes-promo-myprotein/", "seen_at": "2026-04-14"},
+        {"code": "BUDDY", "influencer": "@tristandefeuilletvang", "pct": 50, "source_url": "https://www.influenceur.promo/marques/myprotein/", "seen_at": "2026-04-14"},
+        {"code": "PAUL", "influencer": "@pauldenisnavero", "pct": 50, "source_url": "https://kotag.co/marques/codes-promo-myprotein/", "seen_at": "2026-04-14"},
+        {"code": "TURBOTIFF", "influencer": "@tiffanychapon", "pct": 50, "source_url": "https://www.influenceur.promo/marques/myprotein/", "seen_at": "2026-04-14"},
+        {"code": "TDYPARKER", "influencer": "@tdyparker", "pct": 50, "source_url": "https://kotag.co/marques/codes-promo-myprotein/", "seen_at": "2026-04-14"},
+        {"code": "ERICFLAG", "influencer": "@ericflag", "pct": 50, "source_url": "https://kotag.co/codes-promo-influenceurs/code-promo-myprotein-eric-flag/", "seen_at": "2026-04-14"},
+        {"code": "TIBO", "influencer": "@tibohertz", "pct": 50, "source_url": "https://www.codes-promo-influenceurs.fr/marques/myprotein", "seen_at": "2026-04-14"},
+        {"code": "SALOME", "influencer": "@salome.glbd", "pct": 47, "source_url": "https://www.influenceur.promo/marques/myprotein/", "seen_at": "2026-04-14"},
+        {"code": "KIBIKII", "influencer": "@kiibiki", "pct": 45, "source_url": "https://www.influenceur.promo/marques/myprotein/", "seen_at": "2026-04-14"},
+        {"code": "MANGA", "influencer": "@mangaworkout", "pct": 44, "source_url": "https://www.influenceur.promo/marques/myprotein/", "seen_at": "2026-04-14"},
+        {"code": "IBRA", "influencer": "@ibratv", "pct": 42, "source_url": "https://www.influenceur.promo/marques/myprotein/", "seen_at": "2026-04-14"},
+        {"code": "JUSTINEG", "influencer": "@justinegallice", "pct": 35, "source_url": "https://www.influenceur.promo/marques/myprotein/", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "quasi-permanent",
+      "stacking_rules": "Site affiche en permanence 'up to 55% off' en bandeau homepage. Codes influenceurs NE se cumulent PAS avec flash sale site — le plus élevé s'applique, typiquement code influenceur 42-50% remplace promo 30-40% base.",
+      "source_urls": [
+        "https://www.influenceur.promo/marques/myprotein/",
+        "https://kotag.co/marques/codes-promo-myprotein/",
+        "https://www.codes-promo-influenceurs.fr/marques/myprotein",
+        "https://fr.myprotein.com/c/nouveaux-clients/"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "PRIX CATALOGUE TOTALEMENT FICTIF. Promo permanente 30-55% en bandeau site. P50 codes influenceurs = 42%, P90 = 50%, max = 55%. Le client averti applique systématiquement un code 50% → paye ~50% du catalogue. Les 35% initiaux étaient largement sous-estimés (~P25)."
+    },
+    "prozis": {
+      "first_order_code_pct": 10,
+      "first_order_code_example": "newsletter 10%",
+      "influencer_code_typical_pct": 10,
+      "influencer_code_pct_p10": 10,
+      "influencer_code_pct_p50": 10,
+      "influencer_code_pct_p90": 20,
+      "influencer_code_pct_max": 50,
+      "effective_price_pct": 65,
+      "influencer_code_examples": [
+        {"code": "KEONII", "influencer": "@keonii", "pct": 10, "source_url": "https://www.influenceur.promo/marques/prozis/", "seen_at": "2026-04-14"},
+        {"code": "LAURAPETARD", "influencer": "@laurapetard", "pct": 10, "source_url": "https://www.influenceur.promo/marques/prozis/", "seen_at": "2026-04-14"},
+        {"code": "QFITLIFE", "influencer": "@quentin-fitlife", "pct": 10, "source_url": "https://quentin-fitlife.fr/code-promo/code-promo-prozis-influenceur/", "seen_at": "2026-04-14"},
+        {"code": "JULIEB", "influencer": "@juliebertin", "pct": 10, "source_url": "https://www.influenceur.promo/marques/prozis/", "seen_at": "2026-04-14"},
+        {"code": "PRISCILLA", "influencer": "@priscillacatala", "pct": 10, "source_url": "https://www.influenceur.promo/marques/prozis/", "seen_at": "2026-04-14"},
+        {"code": "MCHEALTHY", "influencer": "@paulinebourvis", "pct": 10, "source_url": "https://www.influenceur.promo/marques/prozis/", "seen_at": "2026-04-14"},
+        {"code": "STEPHANE", "influencer": "@stephanerodrigues", "pct": 10, "source_url": "https://www.influenceur.promo/marques/prozis/", "seen_at": "2026-04-14"},
+        {"code": "ELODIE10", "influencer": "@elodiemumfoods", "pct": 10, "source_url": "https://www.influenceur.promo/marques/prozis/", "seen_at": "2026-04-14"},
+        {"code": "19YEARS", "influencer": "flash sale anniversaire", "pct": 50, "source_url": "https://www.influenceur.promo/marques/prozis/", "seen_at": "2026-04-14"},
+        {"code": "MADNESS", "influencer": "flash sale site", "pct": 40, "source_url": "https://www.influenceur.promo/marques/prozis/", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "quasi-permanent",
+      "stacking_rules": "Codes influenceurs standardisés à 10% — cumul PARTIEL avec promos produit (pack, outlet) mais PAS avec flash sales (MADNESS, 19YEARS, BLACKWEEK à 40-50%). Site en permanence avec produits -30 à -50% en outlet.",
+      "source_urls": [
+        "https://www.influenceur.promo/marques/prozis/",
+        "https://fr.promocodie.com/code/code-promo-prozis-influenceur"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Très modéré côté influenceurs (10% dominant) mais les flash sales saisonnières (MADNESS, 19YEARS) vont jusqu'à 50%. Client averti attend une flash sale pour commander. P50 codes quotidiens = 10%, P90 = 20% (outlet), max = 50% (flash sale)."
+    },
+    "foodspring": {
+      "first_order_code_pct": 10,
+      "first_order_code_example": "newsletter 10%",
+      "influencer_code_typical_pct": 15,
+      "influencer_code_pct_p10": 15,
+      "influencer_code_pct_p50": 15,
+      "influencer_code_pct_p90": 20,
+      "influencer_code_pct_max": 30,
+      "effective_price_pct": 85,
+      "influencer_code_examples": [
+        {"code": "JESSICA15", "influencer": "@jessicathivenin", "pct": 15, "source_url": "https://www.influenceur.promo/marques/foodspring/", "seen_at": "2026-04-14"},
+        {"code": "YAMINAFSG", "influencer": "@yamina_niya", "pct": 15, "source_url": "https://www.influenceur.promo/marques/foodspring/", "seen_at": "2026-04-14"},
+        {"code": "CARTERFSG", "influencer": "@maevacarter", "pct": 15, "source_url": "https://www.influenceur.promo/marques/foodspring/", "seen_at": "2026-04-14"},
+        {"code": "SISSY", "influencer": "@sissymua", "pct": 15, "source_url": "https://www.influenceur.promo/marques/foodspring/", "seen_at": "2026-04-14"},
+        {"code": "BLOODYFSG", "influencer": "@bloodymarie", "pct": 15, "source_url": "https://www.influenceur.promo/marques/foodspring/", "seen_at": "2026-04-14"},
+        {"code": "PAREDESFSG", "influencer": "@juliaparedes", "pct": 15, "source_url": "https://www.influenceur.promo/marques/foodspring/", "seen_at": "2026-04-14"},
+        {"code": "FS20SALE", "influencer": "@yamina_niya", "pct": 20, "source_url": "https://www.influenceur.promo/marques/foodspring/", "seen_at": "2026-04-14"},
+        {"code": "ALIZOUFSG", "influencer": "@alizeeandreani", "pct": 20, "source_url": "https://www.influenceur.promo/marques/foodspring/", "seen_at": "2026-04-14"},
+        {"code": "JUJUFSG", "influencer": "@juliecfs", "pct": 20, "source_url": "https://www.influenceur.promo/marques/foodspring/", "seen_at": "2026-04-14"},
+        {"code": "FOODSPRING30", "influencer": "site code évènementiel", "pct": 30, "source_url": "https://www.influenceur.promo/marques/foodspring/", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "quasi-permanent",
+      "stacking_rules": "Programme ultra-standardisé à 15% (60+ codes suffixe *FSG). Remontées ponctuelles à 20% (Black Week, SummerSale). Code site FOODSPRING30 = 30% évènementiel. Pas de cumul entre code influenceur et flash sale.",
+      "source_urls": [
+        "https://www.influenceur.promo/marques/foodspring/",
+        "https://vivremoinscher.fr/stores/foodspring-coupons/"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Très conservateur (15% dominant, ~85% des codes). Stratégie Foodspring = premium, moins de guerre des prix que MyProtein/Bulk. P50 = 15% fiable, P90 = 20%. Client averti paye ~85% du catalogue."
+    },
+    "esn": {
+      "first_order_code_pct": 10,
+      "first_order_code_example": "newsletter 10%",
+      "influencer_code_typical_pct": 20,
+      "influencer_code_pct_p10": 15,
+      "influencer_code_pct_p50": 20,
+      "influencer_code_pct_p90": 25,
+      "influencer_code_pct_max": 30,
+      "effective_price_pct": 80,
+      "influencer_code_examples": [
+        {"code": "ELENA", "influencer": "@elena.ntns", "pct": 20, "source_url": "https://www.influencercodes.de/marken/esn/", "seen_at": "2026-04-14"},
+        {"code": "KIMMIE", "influencer": "@kimmieous", "pct": 20, "source_url": "https://www.influencercodes.de/marken/esn/", "seen_at": "2026-04-14"},
+        {"code": "LEON", "influencer": "@leonidas_arkona", "pct": 20, "source_url": "https://suppwiser.de/rabattcodes/esn-rabattcode/", "seen_at": "2026-04-14"},
+        {"code": "LARA", "influencer": "@laraemilia", "pct": 20, "source_url": "https://suppwiser.de/rabattcodes/esn-rabattcode/", "seen_at": "2026-04-14"},
+        {"code": "KEVIN", "influencer": "@wolterkevin", "pct": 20, "source_url": "https://suppwiser.de/rabattcodes/esn-rabattcode/", "seen_at": "2026-04-14"},
+        {"code": "TOBI", "influencer": "@tobi_ti", "pct": 20, "source_url": "https://suppwiser.de/rabattcodes/esn-rabattcode/", "seen_at": "2026-04-14"},
+        {"code": "SUPPLIGATOR", "influencer": "@suppligator", "pct": 20, "source_url": "https://www.influencercodes.de/marken/esn/", "seen_at": "2026-04-14"},
+        {"code": "JULIALNI", "influencer": "@julialni", "pct": 20, "source_url": "https://suppwiser.de/rabattcodes/esn-rabattcode/", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "quasi-permanent",
+      "stacking_rules": "Programme allemand standardisé à 20%. 'Performance Week' et flash sales site jusqu'à 40-50%, pas de cumul. Discounts site ciblés par catégorie (10% outlet, 20% selected, 50% certains variants).",
+      "source_urls": [
+        "https://www.influencercodes.de/marken/esn/",
+        "https://suppwiser.de/rabattcodes/esn-rabattcode/",
+        "https://fr.coupert.com/codes-promo/esn-com"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Distribution très uniforme à 20% (tous ambassadeurs). Max 25% sur promos saisonales. Moins agressif que MyProtein/Bulk. Client paye ~80% du catalogue."
+    },
+    "biotechusa": {
+      "first_order_code_pct": 10,
+      "first_order_code_example": "newsletter 10%",
+      "influencer_code_typical_pct": 15,
+      "influencer_code_pct_p10": 15,
+      "influencer_code_pct_p50": 15,
+      "influencer_code_pct_p90": 20,
+      "influencer_code_pct_max": 30,
+      "effective_price_pct": 82,
+      "influencer_code_examples": [
+        {"code": "JENZO15", "influencer": "@jeanneetenzo", "pct": 15, "source_url": "https://kotag.co/marques/codes-promo-biotechusa/", "seen_at": "2026-04-14"},
+        {"code": "ANA15", "influencer": "@anastasiyabury", "pct": 15, "source_url": "https://kotag.co/marques/codes-promo-biotechusa/", "seen_at": "2026-04-14"},
+        {"code": "REMI15", "influencer": "@remi_ragnar", "pct": 15, "source_url": "https://kotag.co/marques/codes-promo-biotechusa/", "seen_at": "2026-04-14"},
+        {"code": "NAJ15", "influencer": "@najbfit", "pct": 15, "source_url": "https://kotag.co/marques/codes-promo-biotechusa/", "seen_at": "2026-04-14"},
+        {"code": "GYM33", "influencer": "@gym33", "pct": 20, "source_url": "https://fr.hotdeals.com/reductions/code-promo-biotechusa-influenceur", "seen_at": "2026-04-14"},
+        {"code": "SUPER1225", "influencer": "site code évènementiel", "pct": 30, "source_url": "https://fr.coupert.com/codes-promo/shop-biotechusa-fr", "seen_at": "2026-04-14"}
+      ],
+      "permanent_promo_frequency": "quasi-permanent",
+      "stacking_rules": "Programme ambassadeurs à 15% fixe (TRND + partenariats directs). Codes site évènementiels jusqu'à 30-40%. Programme de fidélité cumulable avec code influenceur selon ambassadeur.",
+      "source_urls": [
+        "https://shop.biotechusa.fr/collections/promotion-mensuelle-automatique",
+        "https://shop.biotechusa.fr/pages/loyalty-program",
+        "https://kotag.co/marques/codes-promo-biotechusa/"
+      ],
+      "snapshot_date": "2026-04-14",
+      "note": "Programme modeste : 15% standard, rarement au-delà de 20%. BiotechUSA = marque hongroise low-cost de base. P50 = 15% très fiable. Client paye ~82% du catalogue."
+    }
+  }
+}

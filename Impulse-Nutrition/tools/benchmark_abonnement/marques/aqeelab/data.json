@@ -1,0 +1,226 @@
+{
+  "brand": "Aqeelab Nutrition",
+  "slug": "aqeelab",
+  "url": "https://www.aqeelab-nutrition.fr",
+  "has_subscription": true,
+  "modele_commercial": {
+    "remise_pct": 20,
+    "remise_note": "-20% flat à vie sur chaque commande en abonnement (confirmé 2026-04-15 sur /collections/abonnement : '20% A VIE' et '-20% TOUS LES MOIS'). C'est la remise la plus agressive du panel (vs -15% Nutri&Co/Nutrimuscle, -10% Novoma). Codes promo NON cumulables avec l'abo : un seul code par commande.",
+    "frequencies": [
+      "1 mois",
+      "2 mois",
+      "3 mois"
+    ],
+    "flexibility": {
+      "pause": true,
+      "modify": true,
+      "cancel_anytime": "après 2 mois minimum"
+    },
+    "engagement_min": "2 mois minimum requis pour débuter un abonnement (correction 2026-04-15 — le master_data disait à tort 'Aucun'). C'est une friction d'entrée documentée sur la page abo officielle. Le client ne peut pas résilier dès la 1ère commande pour bénéficier ponctuellement du -20% — il doit maintenir l'abo au moins 2 cycles. Point à surveiller pour la conformité Loi Chatel.",
+    "livraison_abo": {
+      "offerte": null,
+      "seuil_eur": null,
+      "note": "Mentionné par sources secondaires comme 'reduced delivery shipping' pour les abonnés, mais la page /collections/abonnement officielle n'explicite pas de conditions spécifiques. Seuils standard : relais gratuit dès 69€, domicile gratuit dès 100€. À confirmer par navigation parcours abonné live."
+    }
+  },
+  "perimetre_produit": {
+    "scope": "Tous les 23 produits du catalogue",
+    "exclusions": [],
+    "produits_sample": [
+      {
+        "name": "Better Protein (Whey)",
+        "category": "Protéines",
+        "price_oneshot": 45.95,
+        "price_sub": 36.76,
+        "discount_pct": 20,
+        "weight": "750g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Créatine Monohydrate Poudre",
+        "category": "Performance",
+        "price_oneshot": 36.95,
+        "price_sub": 29.56,
+        "discount_pct": 20,
+        "weight": "500g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Créatine Gélules",
+        "category": "Performance",
+        "price_oneshot": 24.95,
+        "price_sub": 19.96,
+        "discount_pct": 20,
+        "weight": "180 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "Oméga-3 Wild",
+        "category": "Acides gras",
+        "price_oneshot": 49.95,
+        "price_sub": 39.96,
+        "discount_pct": 20,
+        "weight": "120 capsules",
+        "format": "Capsules"
+      },
+      {
+        "name": "Ashwagandha KSM-66",
+        "category": "Adaptogènes",
+        "price_oneshot": 28.95,
+        "price_sub": 23.16,
+        "discount_pct": 20,
+        "weight": "90 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "BCAA 8.1.1",
+        "category": "Acides aminés",
+        "price_oneshot": 29.95,
+        "price_sub": 23.96,
+        "discount_pct": 20,
+        "weight": "300g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Magnésium Bisglycinate",
+        "category": "Minéraux",
+        "price_oneshot": 19.95,
+        "price_sub": 15.96,
+        "discount_pct": 20,
+        "weight": "90 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "Multivitamines",
+        "category": "Vitamines",
+        "price_oneshot": 24.95,
+        "price_sub": 19.96,
+        "discount_pct": 20,
+        "weight": "60 gélules",
+        "format": "Gélules"
+      },
+      {
+        "name": "Collagène Marin Peptan",
+        "category": "Santé articulaire",
+        "price_oneshot": 28.95,
+        "price_sub": 23.16,
+        "discount_pct": 20,
+        "weight": "200g",
+        "format": "Poudre"
+      },
+      {
+        "name": "Pre-Workout",
+        "category": "Performance",
+        "price_oneshot": 34.95,
+        "price_sub": 27.96,
+        "discount_pct": 20,
+        "weight": "300g",
+        "format": "Poudre"
+      }
+    ],
+    "ticket_moyen_estime_eur": 45
+  },
+  "ux_page_produit": {
+    "wording_cta": "S'abonner & économiser",
+    "wording_pitch": "Économisez 20% en vous abonnant",
+    "placement_module": "Toggle Achat unique / Abonnement, directement sur la fiche produit au-dessus du CTA",
+    "toggle_style": "Radio buttons avec économie affichée (€ économisés)",
+    "frequency_selector": "Dropdown (1, 2, 3 mois)",
+    "price_display": "Prix barré + prix abonné + montant économisé en clair",
+    "dedicated_page": true,
+    "dedicated_page_url": "https://www.aqeelab-nutrition.fr/collections/abonnement",
+    "homepage_mention": true,
+    "navigation_mention": true,
+    "email_mention": null,
+    "screenshots_files": [
+      "homepage.png",
+      "product_sub.png",
+      "collection.png"
+    ]
+  },
+  "evaluation": {
+    "strengths": [
+      "Remise -20% flat à vie : la plus haute du panel FR (vs -15% Nutri&Co/Nutrimuscle, -10% Novoma) — argument massue sur le CTA",
+      "Wording puissant et explicite : CTA 'S'abonner & économiser' + badge '20% A VIE 🔥' sur la page dédiée",
+      "Affichage du montant économisé en euros sur la fiche produit = pattern UX très persuasif (tangible vs abstraction du %)",
+      "Toggle clair et intégré directement sur la fiche produit au-dessus du CTA principal",
+      "Tous les produits éligibles (23/23) — catalogue petit mais 100% abonnable, cohérent et simple à communiquer",
+      "Page dédiée /collections/abonnement avec pitch éditorial '20% A VIE' + liste catalogue éligible",
+      "Fabrication et expédition depuis Bordeaux, livraison 24-48h (la plus rapide du panel)",
+      "Programme de fidélité RePoints / Club AqeeLab (détails partiels non accessibles)",
+      "Trustpilot 4.9 / 5 (sur 200 avis — volume faible mais meilleur score % du panel)",
+      "Positionnement premium cohérent : prix one-shot élevés (ex Whey 45,95€, Oméga-3 49,95€) = marge suffisante pour soutenir le -20%"
+    ],
+    "weaknesses": [
+      "Engagement minimum de 2 mois requis pour débuter l'abonnement — friction d'entrée importante (point vigilance Loi Chatel)",
+      "Codes promo et programmes de fidélité NON cumulables entre eux ni avec l'abonnement — un seul code par commande",
+      "Livraison offerte ou non sur l'abo : non explicité officiellement, signal de communication faible",
+      "Marque jeune (~200 avis Trustpilot) = notoriété limitée malgré un score de 4.9",
+      "Programme RePoints mentionné mais détails des conditions non accessibles publiquement = opacité"
+    ],
+    "score_ux": 4.5,
+    "score_offre_commerciale": 4.5,
+    "score_pertinence_vs_impulse": 4.5,
+    "score_global": 4.5,
+    "note": "Scores calibrés en fin de revue pass 1 (2026-04-15) après vérif live homogène des 8 marques. Grille : UX / Offre / Pertinence vs Impulse + Global = moyenne arithmétique.",
+    "rationale": {
+      "ux": "Toggle clair + **montant économisé affiché en euros** (pattern persuasif unique dans le panel) + CTA explicite 'S'abonner & économiser' + page dédiée '20% A VIE' + mention homepage + mention navigation + affichage prix barré + prix abonné. Presque parfait, pénalisé uniquement par l'absence d'email pré-expédition documenté.",
+      "offre": "Remise −20% flat à vie = la plus haute du panel pour les marques avec abo classique. Pénalisé par l'engagement 2 mois minimum (friction d'entrée + point vigilance Loi Chatel), l'ambiguïté sur la livraison abo, et le zéro stacking codes. L'offre massue est tempérée par les frictions.",
+      "pertinence": "Même tech Shopify, même positionnement FR premium pur, taille catalogue comparable (23 SKUs = ordre de grandeur Impulse), prix premium cohérents, expédition Bordeaux 24-48h, éco-responsable. C'est LE miroir le plus ambitieux pour Impulse."
+    }
+  },
+  "logistique": {
+    "transporteurs": [
+      "Mondial Relay",
+      "DPD",
+      "Chronopost"
+    ],
+    "frais_relais": "3.95-6.95€",
+    "seuil_gratuit_relais": 69,
+    "frais_domicile": 6.45,
+    "seuil_gratuit_domicile": 100,
+    "delai_standard": "1-3 jours ouvrés",
+    "note": "Expédition depuis Bordeaux, sous 24-48h"
+  },
+  "tech": {
+    "platform": "Shopify",
+    "confidence": "confirmed",
+    "source": "BuiltWith.com + StoresData.com — aqeelab-nutrition.fr = Shopify",
+    "subscription_app": "Probablement Recharge ou Shopify Native",
+    "psp": "Shopify Payments (Stripe)"
+  },
+  "avis": {
+    "trustpilot_score": 4.9,
+    "trustpilot_nb_avis": 200,
+    "trustpilot_url": "https://fr.trustpilot.com/review/aqeelab-nutrition.fr",
+    "site_propre_score": 4.85,
+    "site_propre_nb_avis": "Plusieurs milliers",
+    "points_forts": [
+      "Qualité exceptionnelle",
+      "Transparence ingrédients",
+      "Livraison ultra-rapide (24-48h)",
+      "SAV français réactif",
+      "Éco-responsable"
+    ],
+    "points_faibles": [
+      "Peu d'avis Trustpilot (marque jeune)",
+      "Quelques écarts emballage/site"
+    ],
+    "verbatims_abo": []
+  },
+  "_extras": {
+    "catalogue": {
+      "note": "Plus haute remise abo du marché FR (20%). Catalogue petit mais ultra-ciblé."
+    },
+    "ux_deep": {},
+    "subscription_ux": {
+      "savings_display": "Montant économisé en euros affiché dynamiquement"
+    },
+    "flexibility": {}
+  },
+  "_meta": {
+    "last_updated": "2026-04-15",
+    "audit_status": "verified_live",
+    "source_format": "split from master_data.json + vérif live 2026-04-15 via /collections/abonnement (WebFetch direct) + /pages/des-conseils-des-infos-et-des-reductions + /pages/club-aqeelab"
+  }
+}

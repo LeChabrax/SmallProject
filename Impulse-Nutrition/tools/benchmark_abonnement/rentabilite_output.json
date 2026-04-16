@@ -1,0 +1,457 @@
+{
+  "convention": "Toutes les valeurs sont en HT (TVA récupérable côté entreprise).",
+  "tva_rate": 0.2,
+  "discount_rate": 0.15,
+  "logistics_ht": {
+    "point_relais": 3.25,
+    "domicile": 4.92,
+    "express": 9.08
+  },
+  "logistics_ttc_source": {
+    "point_relais": 3.9,
+    "domicile": 5.9,
+    "express": 10.9
+  },
+  "recommended_threshold_ht": 5.46,
+  "recommended_threshold_ttc": 6.55,
+  "recommended_threshold_rounded_ttc": 25,
+  "full_matrix": [
+    {
+      "price_ht": 12,
+      "price_ttc_equiv": 14.4,
+      "m60_pr": {
+        "price_ht": 12,
+        "price_ttc_equiv": 14.4,
+        "discount_pct": 15.0,
+        "net_price_ht": 10.2,
+        "gross_margin_ht": 6.12,
+        "logistics_cost_ht": 3.25,
+        "contribution_nette_ht": 2.87,
+        "is_profitable": false,
+        "margin_rate_on_original": 51.0
+      },
+      "m70_dom": {
+        "price_ht": 12,
+        "price_ttc_equiv": 14.4,
+        "discount_pct": 15.0,
+        "net_price_ht": 10.2,
+        "gross_margin_ht": 7.14,
+        "logistics_cost_ht": 4.92,
+        "contribution_nette_ht": 2.22,
+        "is_profitable": false,
+        "margin_rate_on_original": 59.5
+      },
+      "m80_exp": {
+        "price_ht": 12,
+        "price_ttc_equiv": 14.4,
+        "discount_pct": 15.0,
+        "net_price_ht": 10.2,
+        "gross_margin_ht": 8.16,
+        "logistics_cost_ht": 9.08,
+        "contribution_nette_ht": -0.92,
+        "is_profitable": false,
+        "margin_rate_on_original": 68.0
+      }
+    },
+    {
+      "price_ht": 15,
+      "price_ttc_equiv": 18.0,
+      "m60_pr": {
+        "price_ht": 15,
+        "price_ttc_equiv": 18.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 12.75,
+        "gross_margin_ht": 7.65,
+        "logistics_cost_ht": 3.25,
+        "contribution_nette_ht": 4.4,
+        "is_profitable": true,
+        "margin_rate_on_original": 51.0
+      },
+      "m70_dom": {
+        "price_ht": 15,
+        "price_ttc_equiv": 18.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 12.75,
+        "gross_margin_ht": 8.92,
+        "logistics_cost_ht": 4.92,
+        "contribution_nette_ht": 4.0,
+        "is_profitable": true,
+        "margin_rate_on_original": 59.5
+      },
+      "m80_exp": {
+        "price_ht": 15,
+        "price_ttc_equiv": 18.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 12.75,
+        "gross_margin_ht": 10.2,
+        "logistics_cost_ht": 9.08,
+        "contribution_nette_ht": 1.12,
+        "is_profitable": false,
+        "margin_rate_on_original": 68.0
+      }
+    },
+    {
+      "price_ht": 20,
+      "price_ttc_equiv": 24.0,
+      "m60_pr": {
+        "price_ht": 20,
+        "price_ttc_equiv": 24.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 17.0,
+        "gross_margin_ht": 10.2,
+        "logistics_cost_ht": 3.25,
+        "contribution_nette_ht": 6.95,
+        "is_profitable": true,
+        "margin_rate_on_original": 51.0
+      },
+      "m70_dom": {
+        "price_ht": 20,
+        "price_ttc_equiv": 24.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 17.0,
+        "gross_margin_ht": 11.9,
+        "logistics_cost_ht": 4.92,
+        "contribution_nette_ht": 6.98,
+        "is_profitable": true,
+        "margin_rate_on_original": 59.5
+      },
+      "m80_exp": {
+        "price_ht": 20,
+        "price_ttc_equiv": 24.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 17.0,
+        "gross_margin_ht": 13.6,
+        "logistics_cost_ht": 9.08,
+        "contribution_nette_ht": 4.52,
+        "is_profitable": true,
+        "margin_rate_on_original": 68.0
+      }
+    },
+    {
+      "price_ht": 25,
+      "price_ttc_equiv": 30.0,
+      "m60_pr": {
+        "price_ht": 25,
+        "price_ttc_equiv": 30.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 21.25,
+        "gross_margin_ht": 12.75,
+        "logistics_cost_ht": 3.25,
+        "contribution_nette_ht": 9.5,
+        "is_profitable": true,
+        "margin_rate_on_original": 51.0
+      },
+      "m70_dom": {
+        "price_ht": 25,
+        "price_ttc_equiv": 30.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 21.25,
+        "gross_margin_ht": 14.87,
+        "logistics_cost_ht": 4.92,
+        "contribution_nette_ht": 9.95,
+        "is_profitable": true,
+        "margin_rate_on_original": 59.5
+      },
+      "m80_exp": {
+        "price_ht": 25,
+        "price_ttc_equiv": 30.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 21.25,
+        "gross_margin_ht": 17.0,
+        "logistics_cost_ht": 9.08,
+        "contribution_nette_ht": 7.92,
+        "is_profitable": true,
+        "margin_rate_on_original": 68.0
+      }
+    },
+    {
+      "price_ht": 30,
+      "price_ttc_equiv": 36.0,
+      "m60_pr": {
+        "price_ht": 30,
+        "price_ttc_equiv": 36.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 25.5,
+        "gross_margin_ht": 15.3,
+        "logistics_cost_ht": 3.25,
+        "contribution_nette_ht": 12.05,
+        "is_profitable": true,
+        "margin_rate_on_original": 51.0
+      },
+      "m70_dom": {
+        "price_ht": 30,
+        "price_ttc_equiv": 36.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 25.5,
+        "gross_margin_ht": 17.85,
+        "logistics_cost_ht": 4.92,
+        "contribution_nette_ht": 12.93,
+        "is_profitable": true,
+        "margin_rate_on_original": 59.5
+      },
+      "m80_exp": {
+        "price_ht": 30,
+        "price_ttc_equiv": 36.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 25.5,
+        "gross_margin_ht": 20.4,
+        "logistics_cost_ht": 9.08,
+        "contribution_nette_ht": 11.32,
+        "is_profitable": true,
+        "margin_rate_on_original": 68.0
+      }
+    },
+    {
+      "price_ht": 35,
+      "price_ttc_equiv": 42.0,
+      "m60_pr": {
+        "price_ht": 35,
+        "price_ttc_equiv": 42.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 29.75,
+        "gross_margin_ht": 17.85,
+        "logistics_cost_ht": 3.25,
+        "contribution_nette_ht": 14.6,
+        "is_profitable": true,
+        "margin_rate_on_original": 51.0
+      },
+      "m70_dom": {
+        "price_ht": 35,
+        "price_ttc_equiv": 42.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 29.75,
+        "gross_margin_ht": 20.82,
+        "logistics_cost_ht": 4.92,
+        "contribution_nette_ht": 15.9,
+        "is_profitable": true,
+        "margin_rate_on_original": 59.5
+      },
+      "m80_exp": {
+        "price_ht": 35,
+        "price_ttc_equiv": 42.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 29.75,
+        "gross_margin_ht": 23.8,
+        "logistics_cost_ht": 9.08,
+        "contribution_nette_ht": 14.72,
+        "is_profitable": true,
+        "margin_rate_on_original": 68.0
+      }
+    },
+    {
+      "price_ht": 40,
+      "price_ttc_equiv": 48.0,
+      "m60_pr": {
+        "price_ht": 40,
+        "price_ttc_equiv": 48.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 34.0,
+        "gross_margin_ht": 20.4,
+        "logistics_cost_ht": 3.25,
+        "contribution_nette_ht": 17.15,
+        "is_profitable": true,
+        "margin_rate_on_original": 51.0
+      },
+      "m70_dom": {
+        "price_ht": 40,
+        "price_ttc_equiv": 48.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 34.0,
+        "gross_margin_ht": 23.8,
+        "logistics_cost_ht": 4.92,
+        "contribution_nette_ht": 18.88,
+        "is_profitable": true,
+        "margin_rate_on_original": 59.5
+      },
+      "m80_exp": {
+        "price_ht": 40,
+        "price_ttc_equiv": 48.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 34.0,
+        "gross_margin_ht": 27.2,
+        "logistics_cost_ht": 9.08,
+        "contribution_nette_ht": 18.12,
+        "is_profitable": true,
+        "margin_rate_on_original": 68.0
+      }
+    },
+    {
+      "price_ht": 50,
+      "price_ttc_equiv": 60.0,
+      "m60_pr": {
+        "price_ht": 50,
+        "price_ttc_equiv": 60.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 42.5,
+        "gross_margin_ht": 25.5,
+        "logistics_cost_ht": 3.25,
+        "contribution_nette_ht": 22.25,
+        "is_profitable": true,
+        "margin_rate_on_original": 51.0
+      },
+      "m70_dom": {
+        "price_ht": 50,
+        "price_ttc_equiv": 60.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 42.5,
+        "gross_margin_ht": 29.75,
+        "logistics_cost_ht": 4.92,
+        "contribution_nette_ht": 24.83,
+        "is_profitable": true,
+        "margin_rate_on_original": 59.5
+      },
+      "m80_exp": {
+        "price_ht": 50,
+        "price_ttc_equiv": 60.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 42.5,
+        "gross_margin_ht": 34.0,
+        "logistics_cost_ht": 9.08,
+        "contribution_nette_ht": 24.92,
+        "is_profitable": true,
+        "margin_rate_on_original": 68.0
+      }
+    },
+    {
+      "price_ht": 60,
+      "price_ttc_equiv": 72.0,
+      "m60_pr": {
+        "price_ht": 60,
+        "price_ttc_equiv": 72.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 51.0,
+        "gross_margin_ht": 30.6,
+        "logistics_cost_ht": 3.25,
+        "contribution_nette_ht": 27.35,
+        "is_profitable": true,
+        "margin_rate_on_original": 51.0
+      },
+      "m70_dom": {
+        "price_ht": 60,
+        "price_ttc_equiv": 72.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 51.0,
+        "gross_margin_ht": 35.7,
+        "logistics_cost_ht": 4.92,
+        "contribution_nette_ht": 30.78,
+        "is_profitable": true,
+        "margin_rate_on_original": 59.5
+      },
+      "m80_exp": {
+        "price_ht": 60,
+        "price_ttc_equiv": 72.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 51.0,
+        "gross_margin_ht": 40.8,
+        "logistics_cost_ht": 9.08,
+        "contribution_nette_ht": 31.72,
+        "is_profitable": true,
+        "margin_rate_on_original": 68.0
+      }
+    },
+    {
+      "price_ht": 75,
+      "price_ttc_equiv": 90.0,
+      "m60_pr": {
+        "price_ht": 75,
+        "price_ttc_equiv": 90.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 63.75,
+        "gross_margin_ht": 38.25,
+        "logistics_cost_ht": 3.25,
+        "contribution_nette_ht": 35.0,
+        "is_profitable": true,
+        "margin_rate_on_original": 51.0
+      },
+      "m70_dom": {
+        "price_ht": 75,
+        "price_ttc_equiv": 90.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 63.75,
+        "gross_margin_ht": 44.62,
+        "logistics_cost_ht": 4.92,
+        "contribution_nette_ht": 39.7,
+        "is_profitable": true,
+        "margin_rate_on_original": 59.5
+      },
+      "m80_exp": {
+        "price_ht": 75,
+        "price_ttc_equiv": 90.0,
+        "discount_pct": 15.0,
+        "net_price_ht": 63.75,
+        "gross_margin_ht": 51.0,
+        "logistics_cost_ht": 9.08,
+        "contribution_nette_ht": 41.92,
+        "is_profitable": true,
+        "margin_rate_on_original": 68.0
+      }
+    }
+  ],
+  "narrative_scenarios": [
+    {
+      "price_ht": 12,
+      "price_ttc_equiv": 14.4,
+      "discount_pct": 15.0,
+      "net_price_ht": 10.2,
+      "gross_margin_ht": 7.14,
+      "logistics_cost_ht": 3.25,
+      "contribution_nette_ht": 3.89,
+      "is_profitable": true,
+      "margin_rate_on_original": 59.5,
+      "label": "Produit solo basse gamme (ex: créatine)"
+    },
+    {
+      "price_ht": 20,
+      "price_ttc_equiv": 24.0,
+      "discount_pct": 15.0,
+      "net_price_ht": 17.0,
+      "gross_margin_ht": 11.9,
+      "logistics_cost_ht": 3.25,
+      "contribution_nette_ht": 8.65,
+      "is_profitable": true,
+      "margin_rate_on_original": 59.5,
+      "label": "Produit solo mid-range (ex: oméga-3)"
+    },
+    {
+      "price_ht": 35,
+      "price_ttc_equiv": 42.0,
+      "discount_pct": 15.0,
+      "net_price_ht": 29.75,
+      "gross_margin_ht": 20.82,
+      "logistics_cost_ht": 3.25,
+      "contribution_nette_ht": 17.57,
+      "is_profitable": true,
+      "margin_rate_on_original": 59.5,
+      "label": "Pack 2 produits"
+    },
+    {
+      "price_ht": 55,
+      "price_ttc_equiv": 66.0,
+      "discount_pct": 15.0,
+      "net_price_ht": 46.75,
+      "gross_margin_ht": 32.73,
+      "logistics_cost_ht": 3.25,
+      "contribution_nette_ht": 29.48,
+      "is_profitable": true,
+      "margin_rate_on_original": 59.5,
+      "label": "Pack 3 produits premium"
+    }
+  ],
+  "thresholds_ht": {
+    "m60": {
+      "pr_3.25": 6.37,
+      "dom_4.92": 9.65,
+      "exp_9.08": 17.8
+    },
+    "m70": {
+      "pr_3.25": 5.46,
+      "dom_4.92": 8.27,
+      "exp_9.08": 15.26
+    },
+    "m80": {
+      "pr_3.25": 4.78,
+      "dom_4.92": 7.24,
+      "exp_9.08": 13.35
+    }
+  }
+}

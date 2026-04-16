@@ -1,0 +1,20 @@
+{
+  "_doc": "Matrice de co-occurrence des SKUs dans les paniers Shopify. Peut servir à : (1) valider ou remettre en cause les profils H2 custom box, (2) suggérer des bundles cross-sell basés sur les vraies habitudes clients, (3) identifier des clusters de SKUs fréquemment achetés ensemble.",
+  "_format": "Dict de dicts : { 'VSMVIT': { 'VSOME': 0.73, 'VSMAG': 0.61, ... } } où 0.73 signifie 'dans 73% des commandes contenant VSMVIT, le client a aussi acheté VSOME'.",
+  "_source_recommandee": "Export Shopify 12 mois → pour chaque paire (sku_A, sku_B), calculer count(orders contenant A ET B) / count(orders contenant A). Seuil minimum recommandé : 10 commandes contenant A pour avoir un ratio statistiquement significatif.",
+  "_exemple_remplissage": {
+    "VSMVIT": {
+      "VSOME":  0.73,
+      "VSMAG":  0.61,
+      "VSVITD": 0.45,
+      "VSPBIOT": 0.38
+    },
+    "VSWHEYC": {
+      "VSCREAC": 0.54,
+      "VSBCAAP": 0.41,
+      "VSSHAK450": 0.38
+    }
+  },
+  "_interpretation_profils": "Si VSMVIT + VSOME + VSMAG ont des co-occurrences > 0.5 entre eux, c'est une confirmation forte du profil Santé Quotidien. Si en revanche VSMVIT est plus souvent acheté avec VSFER qu'avec VSOME, ça suggère un profil Équilibre Femme plus pertinent. À plugger dans un futur clustering automatique des profils.",
+  "_note": "Ne pas éditer ce .template. Copier vers 'empirical_cart_cooccurrence.json' (sans .template) et remplir avec les vraies valeurs."
+}
