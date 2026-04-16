@@ -31,7 +31,7 @@ SLIDE_W  = Inches(13.33)
 SLIDE_H  = Inches(7.5)
 
 BASE_DIR = Path(".")
-LOGO_PATH     = BASE_DIR / "assets/logo_impulse.jpeg"
+LOGO_PATH     = BASE_DIR / "knowledge/assets/logo_impulse.jpeg"
 SCREENSHOTS   = BASE_DIR / "assets/screenshots/benchmark"
 DATA_PATH     = BASE_DIR / "benchmark/data.json"
 RENTA_PATH    = BASE_DIR / "benchmark/rentabilite_output.json"

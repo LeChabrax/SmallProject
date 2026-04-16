@@ -2,10 +2,10 @@
 
 **Spreadsheet ID** : `1cKuWT2yhtVgg7RGrkHJW0pOF9bENoK2xU0SQ81u06y4`
 **Audit date** : 2026-04-13
-**Source of truth (code)** : [`common/google_sheets.py`](../common/google_sheets.py)
+**Source of truth (code)** : [`infra/common/google_sheets.py`](../infra/common/google_sheets.py)
 
 This doc describes every tab and every column we read or write. If the
-sheet changes, update `common/google_sheets.py` and this doc together — the
+sheet changes, update `infra/common/google_sheets.py` and this doc together — the
 scripts import the constants, so they stay in sync by construction.
 
 > **Row layout for `Suivi_Amb`, `Suivi_Dot`, `Suivi_Paid`**:
@@ -95,7 +95,7 @@ Before the 2026-04-13 refactor, several scripts hardcoded incorrect indices:
 | `veille_concurrents.py` | `row[19]` as `sponsor` | `row[23]` (`SUIVI_AMB_COLS["sponsor"]`) |
 | `update_priorities.py` | `row[32]` as `id_influ` | `row[35]` |
 
-Scripts rewired in Phase 1.5 now import from `common/google_sheets.py`, so
+Scripts rewired in Phase 1.5 now import from `infra/common/google_sheets.py`, so
 there is only one place to update if the sheet changes.
 
 ---
@@ -193,7 +193,7 @@ there is only one place to update if the sheet changes.
 
 27 columns. Header row 1, data row 2+.
 
-See `VEILLE_COLS` in `common/google_sheets.py`. Key columns used by
+See `VEILLE_COLS` in `infra/common/google_sheets.py`. Key columns used by
 `veille_concurrents.py`:
 
 | Col | Idx | Key |

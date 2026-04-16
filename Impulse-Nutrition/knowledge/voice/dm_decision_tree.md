@@ -7,10 +7,10 @@ Instagram en respectant le ton d'Antoine.
 
 > Sources combinées :
 > - Onglet `Message_type` du Sheet (templates curés à la main par Antoine)
-> - Corpus de conversations téléchargé 2026-04-13 dans `data/conversations/*.json`
+> - Corpus de conversations téléchargé 2026-04-13 dans `infra/data/conversations/*.json`
 > - Ancien `knowledge/archive/templates_dm_legacy/dm_response_guide.md` (mergé ici 2026-04-13, l'original est dans `knowledge/archive/`)
 >
-> À régénérer périodiquement avec `scripts/extract_response_templates.py`
+> À régénérer périodiquement avec `infra/scripts/extract_response_templates.py`
 > + revue manuelle pour fusionner avec les nouveaux templates Sheet.
 
 ---
@@ -33,7 +33,7 @@ Instagram en respectant le ton d'Antoine.
 - **Ne JAMAIS mentionner de dotation mensuelle sans validation d'Antoine**. Le parcours standard est : produits gratuits → code affilié → 20€ crédit par commande. Toute mention de dotation ou partenariat rémunéré doit être validée.
 
 Détails et stats : [`../instagram_dm_mcp/personality.md`](../instagram_dm_mcp/personality.md)
-(auto-régénéré par `scripts/extract_tone.py`).
+(auto-régénéré par `infra/scripts/extract_tone.py`).
 
 ---
 

@@ -30,9 +30,9 @@ Instagram est sensible au rate limit. Helper : `common.instagram_client.sleep_ra
 ### Personality (auto-régénérée)
 Tone guide d'Antoine dans `personality.md`. Régénération depuis le corpus :
 ```bash
-python3 ../scripts/extract_tone.py --dry-run    # voir les stats
-python3 ../scripts/extract_tone.py              # mode safe (sidecar .generated)
-python3 ../scripts/extract_tone.py --overwrite  # remplace + backup .bak.YYYY-MM-DD
+python3 ../infra/scripts/extract_tone.py --dry-run    # voir les stats
+python3 ../infra/scripts/extract_tone.py              # mode safe (sidecar .generated)
+python3 ../infra/scripts/extract_tone.py --overwrite  # remplace + backup .bak.YYYY-MM-DD
 ```
 
 ### Scripts CLI locaux

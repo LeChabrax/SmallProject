@@ -20,7 +20,7 @@ the tone guide used by `instagram_dm_mcp/personality.md`.
 
 - A CRM. Use `Suivi_Amb` / `Suivi_Dot` / `Suivi_Paid` for state.
 - A backup. Meta owns the DMs — we only cache them locally.
-- Shareable. `data/conversations/` is `.gitignore`'d. **Never commit**.
+- Shareable. `infra/data/conversations/` is `.gitignore`'d. **Never commit**.
 
 ---
 
@@ -30,22 +30,22 @@ the tone guide used by `instagram_dm_mcp/personality.md`.
 
 ```bash
 # Dry run — see which usernames would be downloaded
-python3 scripts/download_conversations.py --dry-run
+python3 infra/scripts/download_conversations.py --dry-run
 
 # Partial run — first 10 usernames, for testing
-python3 scripts/download_conversations.py --limit 10
+python3 infra/scripts/download_conversations.py --limit 10
 
 # Full run — all tracked ambassadors (skip Out, skip already DL'd)
-python3 scripts/download_conversations.py
+python3 infra/scripts/download_conversations.py
 
 # Force re-download of everything
-python3 scripts/download_conversations.py --force
+python3 infra/scripts/download_conversations.py --force
 ```
 
 **Output** :
 
 ```
-data/conversations/
+infra/data/conversations/
 ├── _index.json                        # index by username
 ├── _progress.json                     # resume-from state
 ├── <username_1>.json
@@ -82,13 +82,13 @@ Rate-limit defaults : `sleep_random(3, 8)` between threads, `sleep_random(15, 30
 
 ```bash
 # Dry run — print corpus stats without touching personality.md
-python3 scripts/extract_tone.py --dry-run
+python3 infra/scripts/extract_tone.py --dry-run
 
 # Write generated file (safe mode — doesn't overwrite existing)
-python3 scripts/extract_tone.py
+python3 infra/scripts/extract_tone.py
 
 # Overwrite personality.md (destructive — backs up the old one)
-python3 scripts/extract_tone.py --overwrite
+python3 infra/scripts/extract_tone.py --overwrite
 ```
 
 **Output** :
@@ -111,7 +111,7 @@ python3 scripts/extract_tone.py --overwrite
 ### 3.3 Response templates
 
 ```bash
-python3 scripts/extract_response_templates.py
+python3 infra/scripts/extract_response_templates.py
 ```
 
 **Output** : `knowledge/archive/templates_racine/real_response_examples.md` enriched with 5
@@ -147,15 +147,15 @@ rm instagram_dm_mcp/personality.md.generated
 
 ## 6. Privacy
 
-- `data/conversations/` is git-ignored.
+- `infra/data/conversations/` is git-ignored.
 - The generated `personality.md` is anonymized : real usernames → `{username}`, real first names → `{prenom}`.
-- If you share the repo, double-check `git status` does not include any `data/conversations/*` file.
+- If you share the repo, double-check `git status` does not include any `infra/data/conversations/*` file.
 
 ---
 
 ## 7. See also
 
-- `../common/instagram_client.py` — the shared IG client used by the scripts.
-- `../common/google_sheets.py` — the shared column constants for reading `Suivi_Amb` / `Suivi_Dot` / `Suivi_Paid`.
+- `../infra/common/instagram_client.py` — the shared IG client used by the scripts.
+- `../infra/common/google_sheets.py` — the shared column constants for reading `Suivi_Amb` / `Suivi_Dot` / `Suivi_Paid`.
 - `../instagram_dm_mcp/personality.md` — the current tone guide.
 - `archive/templates_dm_legacy/dm_response_guide.md` — the manual decision tree (kept in parallel).

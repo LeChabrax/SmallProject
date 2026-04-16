@@ -3,27 +3,27 @@
 
 Reads the usernames from `Suivi_Amb` (col I) and `Suivi_Paid` (col J =
 `@InstaName`), skips `statut = Out`, and downloads the full DM thread for
-each one into `data/conversations/<username>.json`.
+each one into `infra/data/conversations/<username>.json`.
 
 The resulting corpus is consumed by:
-    - scripts/extract_tone.py            → regenerates personality.md
-    - scripts/extract_response_templates.py → enriches real_response_examples.md
+    - infra/scripts/extract_tone.py            → regenerates personality.md
+    - infra/scripts/extract_response_templates.py → enriches real_response_examples.md
 
-The `data/conversations/` folder is gitignored (private DMs).
+The `infra/data/conversations/` folder is gitignored (private DMs).
 
 Usage
 -----
     # Dry run: print the list without downloading
-    python3 scripts/download_conversations.py --dry-run
+    python3 infra/scripts/download_conversations.py --dry-run
 
     # First N usernames (test)
-    python3 scripts/download_conversations.py --limit 10
+    python3 infra/scripts/download_conversations.py --limit 10
 
     # Full run, skip usernames already downloaded
-    python3 scripts/download_conversations.py
+    python3 infra/scripts/download_conversations.py
 
     # Force re-download of everything
-    python3 scripts/download_conversations.py --force
+    python3 infra/scripts/download_conversations.py --force
 """
 
 from __future__ import annotations
@@ -37,15 +37,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-# Allow `from common.*` imports (common/ is at repo root).
+# Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from common.google_sheets import (  # noqa: E402
+from infra.common.google_sheets import (  # noqa: E402
     SHEET_ID,
     SUIVI_AMB_COLS,
     SUIVI_PAID_COLS,
     get_worksheet,
 )
-from common.instagram_client import get_ig_client, sleep_random  # noqa: E402
+from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data" / "conversations"

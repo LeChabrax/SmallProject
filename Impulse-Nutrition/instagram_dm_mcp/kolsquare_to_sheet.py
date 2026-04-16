@@ -7,7 +7,7 @@ Impulse Nutrition tracking sheet, with the `KolSquare-042026` campaign tag
 in column M.
 
 Layout — Suivi_Amb has 3 header rows (lines 1-3), data from line 4.
-Canonical column indices come from `common/google_sheets.py:SUIVI_AMB_COLS`.
+Canonical column indices come from `infra/common/google_sheets.py:SUIVI_AMB_COLS`.
 
 Flaggés AGENCE (`has_agent=yes` in the CSV) are **never** inserted — they
 land in a separate text file so Antoine can handle them manually via the
@@ -36,7 +36,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from common.google_sheets import (  # noqa: E402
+from infra.common.google_sheets import (  # noqa: E402
     DATA_START_ROW,
     HEADER_ROW,
     SHEET_ID,

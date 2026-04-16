@@ -3,7 +3,7 @@
 Replaces the gspread / instagrapi boilerplate that was duplicated in every
 script under `instagram_dm_mcp/`. Scripts should do:
 
-    from common.instagram_client import get_ig_client, sleep_random
+    from infra.common.instagram_client import get_ig_client, sleep_random
     cl = get_ig_client("impulse")
 
 Sessions are persisted as JSON next to the instagram_dm_mcp module so the

@@ -5,7 +5,7 @@
 >
 > Références canoniques :
 > - 4 modèles de partenariat (Affiliation / Dotation négociée / Paid) → [`knowledge/business/contract_types.md`](./knowledge/business/contract_types.md)
-> - Colonnes Google Sheet (source de vérité, mirror de `common/google_sheets.py`) → [`knowledge/reference/sheet_schema.md`](./knowledge/reference/sheet_schema.md)
+> - Colonnes Google Sheet (source de vérité, mirror de `infra/common/google_sheets.py`) → [`knowledge/reference/sheet_schema.md`](./knowledge/reference/sheet_schema.md)
 > - 65+ tools MCP (BigBlue / Gorgias / Shopify / Instagram / TikTok) → [`knowledge/reference/mcps.md`](./knowledge/reference/mcps.md)
 > - Catalogue Shopify (96 produits, variant_id, SKU, prix) → [`knowledge/catalog/shopify_catalog.md`](./knowledge/catalog/shopify_catalog.md)
 > - SAV complet (Gorgias → Shopify → BigBlue, channels, persona) → [`knowledge/process/sav_unified.md`](./knowledge/process/sav_unified.md)
@@ -76,7 +76,7 @@ Après `complete_draft_order`, il faut manuellement régler le pickup point sur 
 ### Service account Google Drive
 - Path : `~/.config/google-service-account.json`
 - A read+write sur le folder `InfluenceContract` (`1dxT2gSAm6tcnd8Ck6hXxPDS5yieMuj4x`)
-- Utilisé par `common/google_sheets.py` (Sheets) et `common/google_drive.py` (Drive contracts)
+- Utilisé par `infra/common/google_sheets.py` (Sheets) et `infra/common/google_drive.py` (Drive contracts)
 
 ### Timestamps Instagram = microsecondes
 ```python

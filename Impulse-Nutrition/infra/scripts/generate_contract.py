@@ -10,7 +10,7 @@ from typing import Tuple
 
 from fpdf import FPDF
 
-# Allow `from common.*` imports (common/ is at repo root).
+# Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # ---------------------------------------------------------------------------
@@ -887,7 +887,7 @@ def upload_and_link(
     Returns the Drive metadata dict (`id`, `name`, `webViewLink`, …) plus
     `sheet_row` and `sheet_cell` if `update_sheet=True` and a row was found.
     """
-    from common.google_drive import (
+    from infra.common.google_drive import (
         upload_pdf_to_drive,
         update_sheet_with_contract_link,
     )

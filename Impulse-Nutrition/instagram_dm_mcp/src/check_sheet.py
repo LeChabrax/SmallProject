@@ -29,9 +29,9 @@ def main():
     gc = gspread.authorize(creds)
     
     spreadsheet_id = "138-N1nQInuH1_lH9X-fN0C0B0A0z0X0Y0Z0W0V0U0T" # Example, but wait, I should find the real ID
-    # Actually common/google_sheets.py has the ID.
+    # Actually infra/common/google_sheets.py has the ID.
     
-    from common.google_sheets import get_worksheet, SUIVI_AMB_ID
+    from infra.common.google_sheets import get_worksheet, SUIVI_AMB_ID
     
     print(f"Searching for '{query}' in Suivi_Amb...")
     wks = get_worksheet(SUIVI_AMB_ID, "Suivi_Amb")

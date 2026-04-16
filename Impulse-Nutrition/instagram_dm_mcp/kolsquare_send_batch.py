@@ -21,7 +21,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from common.google_sheets import (  # noqa: E402
+from infra.common.google_sheets import (  # noqa: E402
     HEADER_ROW,
     SHEET_ID,
     SUIVI_AMB_COLS,

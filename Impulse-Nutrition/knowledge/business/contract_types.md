@@ -240,7 +240,7 @@ Workflow signature manuelle (v1) :
 3. Tu déposes la version signée dans Drive (même nom de fichier) → le lien
    Sheet pointe automatiquement sur la nouvelle version (même `file_id`)
 
-Voir `common/google_drive.py` pour les helpers techniques (`upload_pdf_to_drive`,
+Voir `infra/common/google_drive.py` pour les helpers techniques (`upload_pdf_to_drive`,
 `update_sheet_with_contract_link`).
 
 ---

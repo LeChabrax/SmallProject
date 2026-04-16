@@ -64,7 +64,7 @@ Sheet manuellement, NE PAS créer de code.
 ### 3.1 Validation des données
 
 ```python
-from common.google_sheets import SUIVI_AMB_COLS, get_worksheet, DATA_START_ROW
+from infra.common.google_sheets import SUIVI_AMB_COLS, get_worksheet, DATA_START_ROW
 
 ws = get_worksheet("Suivi_Amb")
 rows = ws.get_all_values()[DATA_START_ROW - 1:]

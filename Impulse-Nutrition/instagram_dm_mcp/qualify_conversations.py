@@ -30,9 +30,9 @@ SESSION_FILE = Path(__file__).parent / f"{USERNAME}_session.json"
 QUALIFY_RESULTS_FILE = Path(__file__).parent / "qualify_results.json"
 DELAY = 2  # secondes entre comptes (lecture seule)
 
-# Allow `from common.*` imports (common/ is at repo root).
+# Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
+from infra.common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
 
 
 # ──────────────────────────────────────────

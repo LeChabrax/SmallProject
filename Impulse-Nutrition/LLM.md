@@ -20,30 +20,14 @@ Impulse-Nutrition/
 ├── .mcp.json                           # MCP server registry (committed, shared creds)
 ├── .env.example                        # env var template
 │
-├── common/                             # shared Python library (imported by MCPs + pipelines)
-│   ├── google_sheets.py                #   SUIVI_AMB_COLS / SUIVI_DOT_COLS / SUIVI_PAID_COLS / VEILLE_COLS
-│   ├── google_drive.py                 #   Drive client for contract sync
-│   ├── instagram_client.py             #   get_ig_client() + sleep_random()
-│   ├── dm_classifier.py                #   QUESTION_SIGNALS / OK_SIGNALS / classify_last_message
-│   └── http_mcp.py                     #   MCPHttpClient base + error_payload() + safe_call()
-│
-├── scripts/                            # one-shot transverses
-│   ├── download_conversations.py       #   bulk DL tracked ambassador DMs → data/conversations/
-│   ├── extract_tone.py                 #   regen instagram_dm_mcp/personality.md from corpus
-│   ├── extract_response_templates.py   #   regen knowledge/archive/templates_racine/real_response_examples.md
-│   └── generate_contract.py            #   PDF contract generator (fpdf2) — reads knowledge/business/contract_types.md
-│
-├── data/
-│   └── conversations/                  # gitignored — private DMs
-│
 ├── bigblue_mcp/src/mcp_server.py       # BigBlue fulfillment MCP (gRPC-Web) — 12 tools
 ├── gorgias_mcp/src/mcp_server.py       # Gorgias support MCP (REST) — 12 tools
 ├── shopify_mcp/src/mcp_server.py       # Shopify admin MCP (REST + GraphQL) — 15 tools
 ├── instagram_dm_mcp/                   # Instagram DM MCP + ambassador pipeline scripts — 26 MCP tools
 │   ├── src/mcp_server.py
-│   ├── personality.md                  #   auto-regen by scripts/extract_tone.py
-│   ├── audit_ambassadors.py            #   pipeline audit, uses common/google_sheets
-│   ├── qualify_conversations.py        #   uses common/dm_classifier
+│   ├── personality.md                  #   auto-regen by infra/scripts/extract_tone.py
+│   ├── audit_ambassadors.py            #   uses infra/common/google_sheets
+│   ├── qualify_conversations.py        #   uses infra/common/dm_classifier
 │   ├── qualify_influencer.py           #   GO/MAYBE/NO-GO scoring
 │   ├── run_campaign.py                 #   DM send campaign
 │   ├── filter_kolsquare.py             #   KolSquare CSV → scored prospects (uses tools/veille_kolsquare/)
@@ -58,61 +42,36 @@ Impulse-Nutrition/
 │
 ├── tiktok_sav/                         # TikTok Shop SAV pipeline (sav.py + T0-T9 templates)
 │
+├── infra/                              # plumbing — shared library, scripts, private data
+│   ├── common/                         #   Python package imported via `from infra.common.*`
+│   │   ├── google_sheets.py            #     SUIVI_AMB_COLS / SUIVI_DOT_COLS / SUIVI_PAID_COLS / VEILLE_COLS
+│   │   ├── google_drive.py             #     Drive client for contract sync
+│   │   ├── instagram_client.py         #     get_ig_client() + sleep_random()
+│   │   ├── dm_classifier.py            #     QUESTION_SIGNALS / OK_SIGNALS / classify_last_message
+│   │   └── http_mcp.py                 #     MCPHttpClient base + error_payload() + safe_call()
+│   ├── scripts/                        #   one-shot transverses (gitignored outputs go to infra/data)
+│   │   ├── download_conversations.py   #     bulk DL tracked ambassador DMs → infra/data/conversations/
+│   │   ├── extract_tone.py             #     regen instagram_dm_mcp/personality.md from corpus
+│   │   ├── extract_response_templates.py
+│   │   └── generate_contract.py        #     PDF contract generator (fpdf2)
+│   ├── contracts/                      #   gitignored — PDFs signés + Drive sync (PII)
+│   └── data/
+│       └── conversations/              #   gitignored — private DM archive
+│
 ├── knowledge/                          # "c'est quoi Impulse" — static business reference
-│   ├── INDEX.md                        #   top-level navigation (absorbed ex-docs/INDEX.md)
-│   ├── business/
-│   │   └── contract_types.md           #   4 partnership models (Affiliation / Dot / Paid)
-│   ├── catalog/
-│   │   ├── produits.md
-│   │   └── shopify_catalog.md          #   96 products, variant_id, SKU, prix
-│   ├── voice/
-│   │   ├── templates.yaml              #   20 DM templates, 3 modes (source of truth)
-│   │   └── dm_decision_tree.md         #   human-readable DM routing
-│   ├── process/
-│   │   ├── sav_unified.md              #   Gorgias → Shopify → BigBlue SAV workflow
-│   │   ├── create_codes.md             #   4 Shopify discount-code patterns
-│   │   ├── create_orders.md            #   Draft order recipes + CA impact tags
-│   │   ├── calculate_credits.md        #   (O−Q)×20€ credit formula
-│   │   ├── dm_check_and_onboarding.md
-│   │   └── conversation_archive.md
-│   ├── reference/
-│   │   ├── mcps.md                     #   65-tool cheat-sheet across MCPs
-│   │   ├── sheet_schema.md             #   SOURCE OF TRUTH for every column
-│   │   ├── skills_usage.md
-│   │   └── setup_onboarding.md
-│   └── archive/                        #   historic / legacy docs, kept for reference
-│       ├── templates_racine/           #   pre-templates.yaml raw DM templates
-│       ├── templates_dm_legacy/        #   old dm_response_guide, merged into dm_decision_tree.md
-│       ├── deck_formation_ia_impulse.md
-│       ├── case_sav_nouika_tiktok_20260415.md
-│       └── session_sav_2026-04-13.md
+│   ├── INDEX.md                        #   top-level navigation
+│   ├── business/contract_types.md
+│   ├── catalog/                        #   produits.md, shopify_catalog.md
+│   ├── voice/                          #   templates.yaml (source of truth DM), dm_decision_tree.md
+│   ├── process/                        #   sav_unified, create_codes, create_orders, calculate_credits, ...
+│   ├── reference/                      #   mcps, sheet_schema, skills_usage, setup_onboarding
+│   ├── archive/                        #   legacy templates + historic case studies
+│   └── assets/                         #   images (logo, visuels, screenshots benchmark/bigblue)
 │
-├── tools/                              # workshop : one-off projects and veille
-│   ├── benchmark_abonnement/           #   market analysis + decks v1..v5 + rentability
-│   │   ├── generate_deck.py / generate_deck_v2.py
-│   │   ├── rentabilite.py
-│   │   ├── marques/                    #   per-competitor JSON + screenshots
-│   │   ├── deck/                       #   HTML deck builds
-│   │   │   ├── v2/
-│   │   │   └── pptx_archive/
-│   │   └── *.json
-│   └── veille_kolsquare/               #   KolSquare CSV exports + filtering rules
-│       ├── filtering_rules.md
-│       ├── plan_filtrage.md
-│       └── *.csv
-│
-├── assets/                             # binaries
-│   ├── logo_impulse.jpeg
-│   ├── visuels/                        #   ex-Visuel/
-│   └── screenshots/
-│       ├── benchmark/                  #   slide13/14 heatmaps, competitor captures
-│       └── bigblue/                    #   UI YAML snapshots
-│
-├── contracts/                          # gitignored — PDFs signés + Drive sync (PII)
-│
-└── shaker-450ml-gratuit/               # standalone Shopify app: free shaker gift
-    ├── shopify.app.toml
-    └── extensions/free-shaker-450ml/src/*.ts
+└── tools/                              # workshop : one-off projects
+    ├── benchmark_abonnement/           #   ex benchmark/ — decks v1..v5, rentability, marques
+    ├── veille_kolsquare/               #   KolSquare CSV + filtering rules
+    └── shaker_450ml/                   #   standalone Shopify app: free shaker gift (gitignored)
 ```
 
 ---
@@ -166,9 +125,9 @@ Bare `except:` on line 476 replaced with a logged `except Exception`. Other 27 `
 ### Conversation archive (new in `scripts/`)
 | Script | Purpose | Writes |
 |---|---|---|
-| `scripts/download_conversations.py` | Bulk DL DMs for every tracked ambassador | `data/conversations/<user>.json` + `_index.json` + `_progress.json` |
-| `scripts/extract_tone.py` | Stat analysis → tone guide | `instagram_dm_mcp/personality.md.generated` (safe) or `personality.md` (--overwrite) |
-| `scripts/extract_response_templates.py` | Curated anonymized examples | `knowledge/archive/templates_racine/real_response_examples.md` |
+| `infra/scripts/download_conversations.py` | Bulk DL DMs for every tracked ambassador | `infra/data/conversations/<user>.json` + `_index.json` + `_progress.json` |
+| `infra/scripts/extract_tone.py` | Stat analysis → tone guide | `instagram_dm_mcp/personality.md.generated` (safe) or `personality.md` (--overwrite) |
+| `infra/scripts/extract_response_templates.py` | Curated anonymized examples | `knowledge/archive/templates_racine/real_response_examples.md` |
 
 Flags : `--dry-run` on all three, `--limit N` on download, `--force` on download, `--overwrite` on extract_tone.
 
@@ -183,10 +142,10 @@ Unchanged. `shaker-450ml-gratuit/` : two Shopify Functions + a cloud function we
 ## Architecture Notes
 
 - **No single app** — `bigblue_mcp`, `gorgias_mcp`, `shopify_mcp`, `instagram_dm_mcp` each have their own `pyproject.toml` with hatch build. Scripts at root use a bootstrapped `sys.path` to import from `common/`.
-- **Google Sheets is the system of record**. Column semantics live in `common/google_sheets.py` and are documented in `knowledge/reference/sheet_schema.md` — update both together.
+- **Google Sheets is the system of record**. Column semantics live in `infra/common/google_sheets.py` and are documented in `knowledge/reference/sheet_schema.md` — update both together.
 - **Four partnership models** (Affiliation, Dotation S/M/L, Paid) — see `knowledge/business/contract_types.md`. Each routes to a different Sheet tab.
 - **SAV draft order flow** : `knowledge/process/sav_unified.md` is the canonical runbook. Mandatory defaults on every replacement : `applied_discount` 100 % + `shipping_line` gratuit + `tags: Service client`.
-- **Conversation archive is private** : `data/conversations/` is gitignored. Scripts anonymize before writing anything to `personality.md` or `real_response_examples.md`.
+- **Conversation archive is private** : `infra/data/conversations/` is gitignored. Scripts anonymize before writing anything to `personality.md` or `real_response_examples.md`.
 
 ---
 
@@ -208,7 +167,7 @@ Unchanged. `shaker-450ml-gratuit/` : two Shopify Functions + a cloud function we
 
 - `knowledge/INDEX.md` — navigation entry point
 - `knowledge/business/contract_types.md` — Affiliation / Dotation S/M/L / Paid models
-- `knowledge/reference/sheet_schema.md` — canonical column map (mirrors `common/google_sheets.py`)
+- `knowledge/reference/sheet_schema.md` — canonical column map (mirrors `infra/common/google_sheets.py`)
 - `knowledge/reference/mcps.md` — 65-tool cheat-sheet
 - `knowledge/process/sav_unified.md` — SAV workflow
 - `knowledge/process/conversation_archive.md` — archive + tone extraction runbook

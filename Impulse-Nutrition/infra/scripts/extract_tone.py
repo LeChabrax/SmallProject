@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Regenerate `instagram_dm_mcp/personality.md` from the local DM archive.
 
-Reads every `data/conversations/*.json` produced by
-`scripts/download_conversations.py`, keeps only Antoine's own messages
+Reads every `infra/data/conversations/*.json` produced by
+`infra/scripts/download_conversations.py`, keeps only Antoine's own messages
 (`is_sent_by_viewer == true`), and emits a fresh tone guide with real
 statistics and anonymized examples.
 
@@ -14,9 +14,9 @@ so you can diff and merge manually. Pass `--overwrite` to replace
 
 Usage
 -----
-    python3 scripts/extract_tone.py --dry-run   # stats only, no file write
-    python3 scripts/extract_tone.py              # writes .generated sidecar
-    python3 scripts/extract_tone.py --overwrite  # replace personality.md
+    python3 infra/scripts/extract_tone.py --dry-run   # stats only, no file write
+    python3 infra/scripts/extract_tone.py              # writes .generated sidecar
+    python3 infra/scripts/extract_tone.py --overwrite  # replace personality.md
 """
 
 from __future__ import annotations
@@ -67,7 +67,7 @@ _METADATA_FILES = {"_index.json", "_progress.json"}
 
 
 def _load_corpus() -> List[Dict[str, Any]]:
-    """Return every `data/conversations/*.json` as a list of dicts.
+    """Return every `infra/data/conversations/*.json` as a list of dicts.
 
     Skips only the metadata sidecars (`_index.json`, `_progress.json`).
     Underscore-prefixed usernames (e.g. `_adeloise`) are valid and kept.
@@ -307,8 +307,8 @@ def _format_report(
     lines.append(f"# Instagram DM — Personnalité d'Antoine ({now})")
     lines.append("")
     lines.append(
-        "> Auto-généré par `scripts/extract_tone.py` à partir de "
-        f"`data/conversations/*.json`. Dernière régénération : {now}."
+        "> Auto-généré par `infra/scripts/extract_tone.py` à partir de "
+        f"`infra/data/conversations/*.json`. Dernière régénération : {now}."
     )
     lines.append(
         "> Pour toute modification manuelle, éditer directement ce fichier et "
@@ -414,7 +414,7 @@ def main() -> int:
     if not corpus:
         print(
             f"No conversations found in {DATA_DIR}. Run "
-            "`scripts/download_conversations.py` first.",
+            "`infra/scripts/download_conversations.py` first.",
             file=sys.stderr,
         )
         return 1

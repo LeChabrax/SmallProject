@@ -57,9 +57,9 @@ from datetime import datetime, timedelta
 from instagrapi import Client
 from dotenv import load_dotenv
 
-# Allow `from common.*` imports (common/ is at repo root).
+# Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from common.google_sheets import SUIVI_AMB_COLS, VEILLE_COLS  # noqa: E402
+from infra.common.google_sheets import SUIVI_AMB_COLS, VEILLE_COLS  # noqa: E402
 
 load_dotenv()
 

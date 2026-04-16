@@ -24,10 +24,10 @@ from datetime import datetime
 from instagrapi import Client
 from dotenv import load_dotenv
 
-# Allow `from common.*` imports (common/ is at repo root).
+# Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
-from common.google_sheets import SUIVI_AMB_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
+from infra.common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
+from infra.common.google_sheets import SUIVI_AMB_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
 
 load_dotenv()
 

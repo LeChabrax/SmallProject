@@ -33,9 +33,9 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
-# `from common.*` imports — common/ is at repo root.
+# `from infra.common.*` imports — infra/common — added to sys.path below.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from common.google_sheets import (  # noqa: E402
+from infra.common.google_sheets import (  # noqa: E402
     HEADER_ROW,
     SHEET_ID,
     SUIVI_AMB_COLS,
@@ -43,7 +43,7 @@ from common.google_sheets import (  # noqa: E402
     SUIVI_PAID_COLS,
     get_worksheet,
 )
-from common.instagram_client import sleep_random  # noqa: E402
+from infra.common.instagram_client import sleep_random  # noqa: E402
 
 # Reuse the scoring logic already battle-tested in qualify_influencer.py
 from qualify_influencer import (  # noqa: E402
@@ -434,7 +434,7 @@ def mcp_qualify_all(
 
     # Use the same login pattern as qualify_influencer.py — it has a hardcoded
     # password fallback and a working session file for antman.lass, so we don't
-    # need common/instagram_client.py's stricter env-var handling.
+    # need infra/common/instagram_client.py's stricter env-var handling.
     from instagrapi import Client
     ig_client = Client()
     ig_client.request_timeout = 5
