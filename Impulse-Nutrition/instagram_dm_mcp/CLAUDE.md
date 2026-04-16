@@ -2,7 +2,7 @@
 
 > **Source de vérité pour TOUT travail DM** (check, draft, relance, onboarding, catégorisation, templates) : **skill `/instagram-dm`** (niveau user). Protocole 9 étapes bloquant. Triggers : `/instagram-dm`, "check les DMs", "draft pour {user}", "relance {user}", etc.
 >
-> Référence humaine (templates complets) : [`../knowledge/voice/dm_decision_tree.md`](../knowledge/voice/dm_decision_tree.md).
+> Référence humaine (templates complets, voice, red flags) : [`../knowledge/impulse.md#6-voice--persona-split`](../knowledge/impulse.md#6-voice--persona-split). Source machine-readable des templates : [`../knowledge/voice/templates.yaml`](../knowledge/voice/templates.yaml).
 >
 > ⚠️ **Ne jamais rédiger un DM sans invoquer le skill.** Les règles éparpillées dans les feedback memory files ont toutes été absorbées dans le SKILL.md.
 
@@ -14,10 +14,10 @@
 - 2 comptes :
   - `impulse_nutrition_fr` — principal (DMs ambassadeurs, campaigns)
   - `antman.lass` — veille (lecture concurrents, dormant)
-- Helper unique : `common.instagram_client.get_ig_client(account="impulse"|"veille")`
+- Helper unique : `infra.common.instagram_client.get_ig_client(account="impulse"|"veille")`
 
 ### Rate limiting
-Instagram est sensible au rate limit. Helper : `common.instagram_client.sleep_random(min, max)`.
+Instagram est sensible au rate limit. Helper : `infra.common.instagram_client.sleep_random(min, max)`.
 - Reads inter-thread : `sleep_random(3, 8)`
 - Cooldown tous les 10 reads : `sleep_random(15, 30)`
 - Sends : `sleep_random(5, 10)`
@@ -36,4 +36,4 @@ python3 ../infra/scripts/extract_tone.py --overwrite  # remplace + backup .bak.Y
 ```
 
 ### Scripts CLI locaux
-Liste à jour dans [`../knowledge/INDEX.md`](../knowledge/INDEX.md) §5 (Scripts CLI). Tous importent depuis `../common/` (gspread + IG client + dm_classifier shared).
+13 scripts CLI one-shot dans ce dossier (audit_ambassadors, qualify_*, filter_kolsquare, kolsquare_*, refresh_analyses, resolve_usernames, update_priorities, veille_concurrents, run_campaign). Tous importent depuis `../infra/common/` (gspread + IG client + dm_classifier shared).

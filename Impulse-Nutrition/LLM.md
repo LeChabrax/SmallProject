@@ -1,3 +1,4 @@
+> ⚠️  STALE — key files changed since last index. Run /codebase-index to refresh.
 # LLM Context — Impulse Nutrition
 
 > Refreshed 2026-04-16 (repo reorg: `tools/` + `knowledge/`).
@@ -58,14 +59,10 @@ Impulse-Nutrition/
 │   └── data/
 │       └── conversations/              #   gitignored — private DM archive
 │
-├── knowledge/                          # "c'est quoi Impulse" — static business reference
-│   ├── INDEX.md                        #   top-level navigation
-│   ├── business/contract_types.md
-│   ├── catalog/                        #   produits.md, shopify_catalog.md
-│   ├── voice/                          #   templates.yaml (source of truth DM), dm_decision_tree.md
-│   ├── process/                        #   sav_unified, create_codes, create_orders, calculate_credits, ...
-│   ├── reference/                      #   mcps, sheet_schema, skills_usage, setup_onboarding
-│   ├── archive/                        #   legacy templates + historic case studies
+├── knowledge/                          # "c'est quoi Impulse" — source unique consolidée
+│   ├── impulse.md                      #   LE doc métier : identité, programme, catalog, SAV, voice, runbooks, glossaire, quirks
+│   ├── voice/
+│   │   └── templates.yaml              #   20 DM templates (source of truth, chargé par skill /instagram-dm)
 │   └── assets/                         #   images (logo, visuels, screenshots benchmark/bigblue)
 │
 └── tools/                              # workshop : one-off projects

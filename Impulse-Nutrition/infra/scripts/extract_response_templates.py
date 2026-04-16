@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate `knowledge/archive/templates_racine/real_response_examples.md` from the DM archive.
+"""Regenerate `infra/data/response_examples.md` from the DM archive.
 
 Same input as `extract_tone.py` (the local `infra/data/conversations/*.json`
 corpus) but the output is a curated set of anonymized *examples* per
@@ -24,7 +24,7 @@ from typing import Any, Dict, List
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data" / "conversations"
-OUT_PATH = ROOT / "templates" / "real_response_examples.md"
+OUT_PATH = ROOT / "data" / "response_examples.md"
 
 # Same classifier logic as extract_tone.py (kept local on purpose — small).
 CATEGORIES = {
