@@ -6,7 +6,7 @@ point fixes in BigBlue, discount codes for goodwill gestures.
 
 > Supersedes : the SAV section in `CLAUDE.md`, `process_sav_shaker_manquant.md`
 > (still useful for the discount-code recipe), and the recent session notes
-> `docs/archive/session_sav_2026-04-13.md`.
+> `knowledge/archive/session_sav_2026-04-13.md`.
 
 ---
 

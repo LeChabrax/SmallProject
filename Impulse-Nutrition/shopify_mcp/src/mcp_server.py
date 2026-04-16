@@ -293,7 +293,7 @@ def create_draft_order(
     """Create a draft order (SAV replacement, dotation envoi, gift).
 
     This is the entry point of the canonical SAV replacement flow documented
-    in `docs/process_sav_unified.md`. After creating the draft, call
+    in `knowledge/process/sav_unified.md`. After creating the draft, call
     `update_draft_order` to apply the mandatory SAV defaults
     (discount 100 %, shipping gratuit, tag `Service client`), then
     `complete_draft_order` to convert it to a real order.
@@ -674,7 +674,7 @@ def create_affiliate_code(name: str) -> Dict[str, Any]:
     Canonical Impulse Nutrition ambassador code: -15% percentage, unlimited uses,
     once_per_customer=true, starts now, no end date, combinesWith order=false /
     product=true / shipping=true. This is THE pattern for every Suivi_Amb
-    ambassador — see docs/process_create_codes.md §1.
+    ambassador — see knowledge/process/create_codes.md §1.
 
     Args:
         name: The code name (will be uppercased — e.g. "florine" -> "FLORINE").
@@ -687,7 +687,7 @@ def create_paid_affiliate_code(name: str, percent: float = -20.0) -> Dict[str, A
     """Create a paid-contract affiliate discount code (clone of LRA20 pattern).
 
     Same as create_affiliate_code but with a configurable percentage (default
-    -20%) for paid partnership contracts. See docs/process_create_codes.md §1
+    -20%) for paid partnership contracts. See knowledge/process/create_codes.md §1
     table §6.
 
     Args:

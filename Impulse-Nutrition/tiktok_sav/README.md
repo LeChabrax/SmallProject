@@ -43,7 +43,7 @@ Dans le terminal Claude, simplement interrompre la session ou dire « stop ».
 - Jamais de tutoiement
 - Emojis interdits côté service client
 
-Cf `docs/process_sav_unified.md` §0 pour la référence complète.
+Cf `knowledge/process/sav_unified.md` §0 pour la référence complète.
 
 ## Traiter la file d'attente
 

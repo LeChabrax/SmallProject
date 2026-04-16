@@ -3,7 +3,7 @@
 # =============================================================================
 #
 # Source unique machine-readable des messages a envoyer aux ambassadeurs.
-# Reference humaine : docs/dm_decision_tree.md
+# Reference humaine : knowledge/voice/dm_decision_tree.md
 #
 # MODES :
 #   verbatim         → Claude copie-colle le body, remplace les {vars} uniquement
@@ -15,7 +15,7 @@
 # =============================================================================
 
 version: 1
-generated_from: "docs/dm_decision_tree.md"
+generated_from: "knowledge/voice/dm_decision_tree.md"
 last_updated: "2026-04-16"
 
 # -----------------------------------------------------------------------------
@@ -249,6 +249,41 @@ templates:
 
       Sportivement,
       Antoine
+
+  # ---------------------------------------------------------------------------
+  # G1 — Refus Gorgias (candidature email, canal SC, vouvoiement)
+  # ---------------------------------------------------------------------------
+  g1_refus_candidature_email:
+    id: "g1"
+    section: "G1"
+    name: "Refus candidature ambassadeur (email Gorgias, pas de communaute etablie)"
+    category: "candidature_email_refus"
+    mode: "verbatim"
+    needs_signature: true
+    variables: [prenom, accroche]
+    note: "Canal email/Gorgias uniquement. Vouvoiement. Signer Le service client Impulse Nutrition. accroche = 1 phrase valorisant le projet/sport du candidat."
+    body: |
+      Bonjour {prenom},
+
+      Merci pour votre message et pour l'intérêt que vous portez à Impulse Nutrition. {accroche}
+
+      Nous ne sommes actuellement pas en recherche de nouvelles collaborations ambassadeur et ne pouvons donc pas donner suite à votre candidature.
+
+      En revanche, nous souhaitons vous offrir un code de réduction exceptionnel, ACHAB25, pour que vous puissiez découvrir l'ensemble de notre gamme avec -25% sur votre première commande.
+
+      Sportivement,
+      Le service client Impulse Nutrition
+    example_filled: |
+      Bonjour Jérémie,
+
+      Merci pour votre message et pour l'intérêt que vous portez à Impulse Nutrition. Votre parcours en trail running et votre préparation pour la 20K UTMB de Corte sont vraiment impressionnants !
+
+      Nous ne sommes actuellement pas en recherche de nouvelles collaborations ambassadeur et ne pouvons donc pas donner suite à votre candidature.
+
+      En revanche, nous souhaitons vous offrir un code de réduction exceptionnel, ACHAB25, pour que vous puissiez découvrir l'ensemble de notre gamme avec -25% sur votre première commande.
+
+      Sportivement,
+      Le service client Impulse Nutrition
 
   # ---------------------------------------------------------------------------
   # S4 — Presentation detaillee du programme

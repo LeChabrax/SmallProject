@@ -2,7 +2,7 @@
 
 > **Source de vérité pour TOUT travail DM** (check, draft, relance, onboarding, catégorisation, templates) : **skill `/instagram-dm`** (niveau user). Protocole 9 étapes bloquant. Triggers : `/instagram-dm`, "check les DMs", "draft pour {user}", "relance {user}", etc.
 >
-> Référence humaine (templates complets) : [`../docs/dm_decision_tree.md`](../docs/dm_decision_tree.md).
+> Référence humaine (templates complets) : [`../knowledge/voice/dm_decision_tree.md`](../knowledge/voice/dm_decision_tree.md).
 >
 > ⚠️ **Ne jamais rédiger un DM sans invoquer le skill.** Les règles éparpillées dans les feedback memory files ont toutes été absorbées dans le SKILL.md.
 
@@ -36,4 +36,4 @@ python3 ../scripts/extract_tone.py --overwrite  # remplace + backup .bak.YYYY-MM
 ```
 
 ### Scripts CLI locaux
-Liste à jour dans [`../docs/INDEX.md`](../docs/INDEX.md) §5 (Scripts CLI). Tous importent depuis `../common/` (gspread + IG client + dm_classifier shared).
+Liste à jour dans [`../knowledge/INDEX.md`](../knowledge/INDEX.md) §5 (Scripts CLI). Tous importent depuis `../common/` (gspread + IG client + dm_classifier shared).

@@ -293,7 +293,7 @@
 6. Rédige et envoie la **réponse client** en vouvoiement formel, avec excuses si retard.
 
 **Notes orateur** :
-> Ce workflow est en prod quotidien depuis plusieurs mois. Il est entièrement documenté dans `docs/process_sav_unified.md`. Le gain n'est pas tant le temps que la **fiabilité** : plus d'oubli de tag, de remise, de pickup point. Le process est verrouillé par la mémoire de l'agent.
+> Ce workflow est en prod quotidien depuis plusieurs mois. Il est entièrement documenté dans `knowledge/process/sav_unified.md`. Le gain n'est pas tant le temps que la **fiabilité** : plus d'oubli de tag, de remise, de pickup point. Le process est verrouillé par la mémoire de l'agent.
 
 ---
 
@@ -463,7 +463,7 @@
 
 **Ressources** :
 - Repo : `github.com/[org]/Impulse-Nutrition` (privé, accès sur demande)
-- Doc d'entrée : [`CLAUDE.md`](../CLAUDE.md) + [`docs/INDEX.md`](./INDEX.md)
+- Doc d'entrée : [`CLAUDE.md`](../CLAUDE.md) + [`knowledge/INDEX.md`](./INDEX.md)
 - Pour démarrer : installer Claude Code ([claude.com/code](https://claude.com/code)), cloner le repo, lire `CLAUDE.md`.
 - Contact : Antoine Chabrat.
 
@@ -496,7 +496,7 @@
 ### Chiffres à vérifier avec Antoine avant la session
 
 - Nombre exact de MCPs branchés (le deck dit 10, à recompter).
-- Nombre exact de tools MCP (le deck dit 65+, à recompter via `docs/reference_mcps.md`).
+- Nombre exact de tools MCP (le deck dit 65+, à recompter via `knowledge/reference/mcps.md`).
 - Liste des comptes concurrents pour la veille (à définir précisément avant la session).
 - Liste des URLs produits à scraper (à définir pour le mockup slide 17).
 

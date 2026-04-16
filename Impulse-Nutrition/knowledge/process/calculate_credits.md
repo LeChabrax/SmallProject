@@ -182,7 +182,7 @@ col O > col Q et qu'il demande à redeem, on créer le code normalement.
 envoyer un message DM proposant le redeem.
 
 Pas de script automatique aujourd'hui — à ajouter dans le backlog (cf
-`docs/INDEX.md` § AdHoc).
+`knowledge/INDEX.md` § AdHoc).
 
 ---
 

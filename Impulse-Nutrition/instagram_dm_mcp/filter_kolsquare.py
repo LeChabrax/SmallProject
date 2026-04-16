@@ -3,7 +3,7 @@
 
 Pipeline pour la mission KolSquare (avril 2026) :
     1. Parse l'export KolSquare (semicolon-separated, UTF-8)
-    2. Filtre par métier (règles docs/kolsquare_filtering_rules.md)
+    2. Filtre par métier (règles tools/veille_kolsquare/filtering_rules.md)
     3. Applique des seuils de base sur followers / engagement KolSquare
     4. Dédoublonne contre Suivi_Amb, Suivi_Dot, Suivi_Paid
     5. Check MCP Instagram via compte veille antman.lass : bio, 5 derniers
@@ -89,7 +89,7 @@ BLOCK_ENGAGEMENT = 4
 
 
 # =========================================================================
-# Métier rules — derived from docs/kolsquare_filtering_rules.md
+# Métier rules — derived from tools/veille_kolsquare/filtering_rules.md
 # =========================================================================
 
 EXCLUDED_METIERS: Set[str] = {

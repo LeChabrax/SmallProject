@@ -8,7 +8,7 @@ inline and drifted from the real sheet as columns were added. The constants
 below are derived from the actual headers of the spreadsheet
 (audited 2026-04-13) — do not modify unless the sheet is re-designed.
 
-See `docs/reference_sheet_schema.md` for the human-readable version.
+See `knowledge/reference/sheet_schema.md` for the human-readable version.
 """
 
 from __future__ import annotations

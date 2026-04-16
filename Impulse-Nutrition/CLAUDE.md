@@ -1,20 +1,20 @@
 # Impulse Nutrition — Factory Workspace
 
 ## Navigation rapide
-> **[`docs/INDEX.md`](./docs/INDEX.md)** — point d'entrée unique pour tout (reference docs, process runbooks, templates, scripts).
+> **[`knowledge/INDEX.md`](./knowledge/INDEX.md)** — point d'entrée unique pour tout (reference docs, process runbooks, templates, scripts).
 >
 > Références canoniques :
-> - 4 modèles de partenariat (Affiliation / Dotation négociée / Paid) → [`docs/reference_contract_types.md`](./docs/reference_contract_types.md)
-> - Colonnes Google Sheet (source de vérité, mirror de `common/google_sheets.py`) → [`docs/reference_sheet_schema.md`](./docs/reference_sheet_schema.md)
-> - 65+ tools MCP (BigBlue / Gorgias / Shopify / Instagram / TikTok) → [`docs/reference_mcps.md`](./docs/reference_mcps.md)
-> - Catalogue Shopify (96 produits, variant_id, SKU, prix) → [`docs/reference_shopify_catalog.md`](./docs/reference_shopify_catalog.md)
-> - SAV complet (Gorgias → Shopify → BigBlue, channels, persona) → [`docs/process_sav_unified.md`](./docs/process_sav_unified.md)
-> - Création des codes Shopify (4 patterns) → [`docs/process_create_codes.md`](./docs/process_create_codes.md)
-> - Création des draft orders + tags (impact CA) → [`docs/process_create_orders.md`](./docs/process_create_orders.md)
-> - Calcul du crédit ambassadeur `(O−Q)×20€` → [`docs/process_calculate_credits.md`](./docs/process_calculate_credits.md)
+> - 4 modèles de partenariat (Affiliation / Dotation négociée / Paid) → [`knowledge/business/contract_types.md`](./knowledge/business/contract_types.md)
+> - Colonnes Google Sheet (source de vérité, mirror de `common/google_sheets.py`) → [`knowledge/reference/sheet_schema.md`](./knowledge/reference/sheet_schema.md)
+> - 65+ tools MCP (BigBlue / Gorgias / Shopify / Instagram / TikTok) → [`knowledge/reference/mcps.md`](./knowledge/reference/mcps.md)
+> - Catalogue Shopify (96 produits, variant_id, SKU, prix) → [`knowledge/catalog/shopify_catalog.md`](./knowledge/catalog/shopify_catalog.md)
+> - SAV complet (Gorgias → Shopify → BigBlue, channels, persona) → [`knowledge/process/sav_unified.md`](./knowledge/process/sav_unified.md)
+> - Création des codes Shopify (4 patterns) → [`knowledge/process/create_codes.md`](./knowledge/process/create_codes.md)
+> - Création des draft orders + tags (impact CA) → [`knowledge/process/create_orders.md`](./knowledge/process/create_orders.md)
+> - Calcul du crédit ambassadeur `(O−Q)×20€` → [`knowledge/process/calculate_credits.md`](./knowledge/process/calculate_credits.md)
 > - **Instagram DM workflow (protocole 9 etapes bloquant)** -> skill `/instagram-dm`
-> - **Bibliotheque de templates DM (YAML structure, 20 templates, 3 modes)** -> [`docs/templates.yaml`](./docs/templates.yaml)
-> - Decision tree DM Instagram (reference humaine) -> [`docs/dm_decision_tree.md`](./docs/dm_decision_tree.md)
+> - **Bibliotheque de templates DM (YAML structure, 20 templates, 3 modes)** -> [`knowledge/voice/templates.yaml`](./knowledge/voice/templates.yaml)
+> - Decision tree DM Instagram (reference humaine) -> [`knowledge/voice/dm_decision_tree.md`](./knowledge/voice/dm_decision_tree.md)
 > - Architecture / carte codebase → [`LLM.md`](./LLM.md)
 
 ## Qui sommes-nous
@@ -31,7 +31,7 @@
 | **Instagram DM** (ambassadeurs) | Antoine, humain, tutoiement | `Sportivement, Antoine` (sur messages ≥ 3 phrases) | "Hello {prenom}, je suis Antoine d'Impulse Nutrition…" |
 | **Gorgias / WAX (WhatsApp) / SC TikTok** (clients finaux) | Entité Impulse Nutrition, vouvoiement formel | `Le service client` ou `L'équipe Impulse Nutrition` | "Bonjour, votre commande IMPxxxx…" |
 
-→ **JAMAIS signer "Antoine" côté SC**, même si c'est lui qui rédige. Le client final achète à une marque, pas à une personne. Détails dans [`docs/process_sav_unified.md`](./docs/process_sav_unified.md) §0.
+→ **JAMAIS signer "Antoine" côté SC**, même si c'est lui qui rédige. Le client final achète à une marque, pas à une personne. Détails dans [`knowledge/process/sav_unified.md`](./knowledge/process/sav_unified.md) §0.
 
 ---
 
@@ -44,14 +44,14 @@ Trois skills au niveau user, chacun est une bulle étanche pour son domaine. Ils
 
 Absorbe tout ce qui était éparpillé : persona détaillé, pipeline ambassadeur, statuts, priorités, règles catégorisation voice_media/raven_media/club, pre-draft check welcome codes, format carte de décision, templates.
 
-Référence humaine : [`docs/dm_decision_tree.md`](./docs/dm_decision_tree.md). Corpus ton : [`instagram_dm_mcp/personality.md`](./instagram_dm_mcp/personality.md).
+Référence humaine : [`knowledge/voice/dm_decision_tree.md`](./knowledge/voice/dm_decision_tree.md). Corpus ton : [`instagram_dm_mcp/personality.md`](./instagram_dm_mcp/personality.md).
 
 ### Gorgias — service client (tous canaux)
 **Skill : `/gorgias`** (protocole 8 étapes bloquant, auto-trigger sur "check le SAV", "check les tickets", "passe SAV", "service client", "/gorgias", etc.).
 
 Bulle complète pour tous les tickets SAV (email / chat / contact_form / Instagram / Facebook / WhatsApp via WAX). Absorbe : pull protocol 100+, filtrage par channels/tags, persona entité Impulse Nutrition (vouvoiement formel), style emails (structure, formules interdites), cross-links Shopify draft replacement + BigBlue claims, recette draft SAV (discount 100% + shipping 0€ + tag `Service client`), red flags (jamais signer "Antoine", jamais de délai chiffré, jamais `update_draft_order` sur line_items, etc.). Cas particulier ambassadeur qui contacte le SAV géré dans le skill.
 
-Référence humaine : [`docs/process_sav_unified.md`](./docs/process_sav_unified.md). Persona : [`gorgias_mcp/personality.md`](./gorgias_mcp/personality.md).
+Référence humaine : [`knowledge/process/sav_unified.md`](./knowledge/process/sav_unified.md). Persona : [`gorgias_mcp/personality.md`](./gorgias_mcp/personality.md).
 
 ### TikTok Shop SAV
 **Skill : `/tiktok-sav`** (narrow, pipeline Python `tiktok_sav/sav.py` + ACK T0 auto + templates T1-T9 + queue.json pour cas complexes).
@@ -68,7 +68,7 @@ Reste intact comme aujourd'hui. Workflow SAV TikTok uniquement.
 Si une colonne est formatée "date" et qu'on y entre un nombre (ex: dotation `150`), Google Sheets l'affiche comme `29/05/1900` (serial 150). Fix : réécrire la valeur numérique correcte via `batch_update_cells`.
 
 ### Limitation `update_draft_order`
-Ne permet pas de modifier les `line_items` d'un draft Shopify. Si on doit ajouter/retirer un produit après création (ex : bidon en geste commercial), il faut **supprimer la draft et la recréer**. Détails dans [`docs/process_create_orders.md`](./docs/process_create_orders.md).
+Ne permet pas de modifier les `line_items` d'un draft Shopify. Si on doit ajouter/retirer un produit après création (ex : bidon en geste commercial), il faut **supprimer la draft et la recréer**. Détails dans [`knowledge/process/create_orders.md`](./knowledge/process/create_orders.md).
 
 ### Pickup point BigBlue pas reporté depuis Shopify draft
 Après `complete_draft_order`, il faut manuellement régler le pickup point sur l'UI BigBlue.

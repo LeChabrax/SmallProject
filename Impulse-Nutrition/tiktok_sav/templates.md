@@ -46,7 +46,7 @@ Le service client
 
 **Workflow humain suggéré** :
 1. Lire le message + check s'il y a une photo/vidéo jointe
-2. Suivre `docs/process_create_codes.md §4` pour créer un code `[PRENOM]-SAV`
+2. Suivre `knowledge/process/create_codes.md §4` pour créer un code `[PRENOM]-SAV`
 3. Utiliser le template SAV bidon/barre selon choix client
 
 ---

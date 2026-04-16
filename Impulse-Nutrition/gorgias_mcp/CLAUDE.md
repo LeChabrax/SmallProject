@@ -2,7 +2,7 @@
 
 > **Source de vérité pour TOUT travail service client** (tickets SAV email/chat/contact_form/Instagram/Facebook/WhatsApp-via-WAX) : **skill `/gorgias`** (niveau user). Protocole 8 étapes bloquant, loop-safe. Triggers : `/gorgias`, "check le SAV", "check les tickets", "SAV check", "passe SAV", etc.
 >
-> Référence humaine (scenarios détaillés, recette draft SAV, tags CA) : [`../docs/process_sav_unified.md`](../docs/process_sav_unified.md).
+> Référence humaine (scenarios détaillés, recette draft SAV, tags CA) : [`../knowledge/process/sav_unified.md`](../knowledge/process/sav_unified.md).
 >
 > Persona Antoine : [`personality.md`](./personality.md).
 >

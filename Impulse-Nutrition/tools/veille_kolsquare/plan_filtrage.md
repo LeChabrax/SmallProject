@@ -2,7 +2,7 @@
 
 ## Contexte
 Antoine a un export KolSquare de 969 profils. On veut :
-1. Filtrer par métier (règles dans `docs/kolsquare_filtering_rules.md`)
+1. Filtrer par métier (règles dans `tools/veille_kolsquare/filtering_rules.md`)
 2. Dédoublonner avec les profils déjà dans les sheets (Suivi_Amb, Suivi_Dot, Suivi_Paid)
 3. Sortir une liste propre de profils a checker ensuite via MCP Instagram
 
@@ -21,7 +21,7 @@ Le check MCP (5 derniers posts + bio) viendra dans un second temps.
 - Extraire : username Instagram (colonne `Pseudo 1`, index 11), followers (col `Taille de communauté 1`, index 13), engagement (col `Taux d'engagement 1`, index 14), métier (col `Métier(s)`, index 4), nom/pseudo, emails
 
 #### 2. Filtrer par métier
-- Appliquer les règles de `docs/kolsquare_filtering_rules.md`
+- Appliquer les règles de `tools/veille_kolsquare/filtering_rules.md`
 - Liste des métiers exclus codée en dur dans le script
 - Profils sans métier ("-") : gardés
 - Profils multi-métiers (séparés par virgule) : garder si au moins un métier est dans la liste d'inclusion

@@ -1,6 +1,6 @@
 # DM Decision Tree -- Bibliotheque procedurale Instagram
 
-> **Source machine-readable des templates** : [`docs/templates.yaml`](templates.yaml) -- 20 templates structures avec 3 modes (verbatim, pick_from_list, semi_structured). Le YAML est la source de verite pour le skill `/instagram-dm`. Ce fichier reste la reference humaine lisible.
+> **Source machine-readable des templates** : [`knowledge/voice/templates.yaml`](templates.yaml) -- 20 templates structures avec 3 modes (verbatim, pick_from_list, semi_structured). Le YAML est la source de verite pour le skill `/instagram-dm`. Ce fichier reste la reference humaine lisible.
 
 Decision tree + bibliotheque de templates **reels** pour repondre aux DMs
 Instagram en respectant le ton d'Antoine.
@@ -8,7 +8,7 @@ Instagram en respectant le ton d'Antoine.
 > Sources combinées :
 > - Onglet `Message_type` du Sheet (templates curés à la main par Antoine)
 > - Corpus de conversations téléchargé 2026-04-13 dans `data/conversations/*.json`
-> - Ancien `templates/dm_response_guide.md` (mergé ici 2026-04-13, l'original est dans `docs/archive/`)
+> - Ancien `knowledge/archive/templates_dm_legacy/dm_response_guide.md` (mergé ici 2026-04-13, l'original est dans `knowledge/archive/`)
 >
 > À régénérer périodiquement avec `scripts/extract_response_templates.py`
 > + revue manuelle pour fusionner avec les nouveaux templates Sheet.
@@ -409,7 +409,7 @@ Quand aucun template ne match exactement :
 
 ## 11. Routing détaillé par type de message reçu
 
-Table de routing exhaustive (source : ancien `templates/dm_response_guide.md`, mergé ici).
+Table de routing exhaustive (source : ancien `knowledge/archive/templates_dm_legacy/dm_response_guide.md`, mergé ici).
 
 | Message reçu | Statut (J) | Draft à rédiger |
 |---|---|---|
@@ -593,7 +593,7 @@ Adapter au cas par cas, mais respecter la structure :
 ## 17. See also
 
 - [`../instagram_dm_mcp/personality.md`](../instagram_dm_mcp/personality.md) — guide auto-généré, stats détaillées du corpus
-- [`../templates/real_response_examples.md`](../templates/real_response_examples.md) — exemples anonymisés auto-générés
+- [`archive/templates_racine/real_response_examples.md`](archive/templates_racine/real_response_examples.md) — exemples anonymisés auto-générés
 - [`process_calculate_credits.md`](process_calculate_credits.md) — calcul du solde crédit
 - Onglet Sheet `Message_type` — source primaire des templates ci-dessus
-- `archive/templates/dm_response_guide.md` — version manuelle historique (mergée ici)
+- `archive/templates_dm_legacy/dm_response_guide.md` — version manuelle historique (mergée ici)

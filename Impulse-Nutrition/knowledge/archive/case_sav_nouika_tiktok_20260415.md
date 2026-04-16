@@ -118,7 +118,7 @@ message final contenant le code.
 ## 3. Opération Shopify — Création du code `NOUIKA-SAV`
 
 Le code a été créé via l'API Shopify Admin REST + GraphQL en suivant le
-runbook interne `docs/process_create_codes.md` §4 (pattern canonique
+runbook interne `knowledge/process/create_codes.md` §4 (pattern canonique
 « Code SAV client » `[PRENOM]-SAV`).
 
 ### Configuration `price_rule`
@@ -198,9 +198,9 @@ mutation GraphQL `discountCodeBasicUpdate` a retourné `userErrors: []`
 
 Cette gestion respecte le process documenté dans :
 
-- [`docs/process_sav_unified.md`](./process_sav_unified.md) — Process
+- [`knowledge/process/sav_unified.md`](./process_sav_unified.md) — Process
   SAV unifié Gorgias / TikTok / Shopify / BigBlue
-- [`docs/process_create_codes.md`](./process_create_codes.md) §4 —
+- [`knowledge/process/create_codes.md`](./process_create_codes.md) §4 —
   Pattern canonique « Code SAV client `[PRENOM]-SAV` »
 - [`CLAUDE.md`](../CLAUDE.md) — Règle de persona (vouvoiement formel
   côté service client, signature « Le service client »)

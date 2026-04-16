@@ -91,7 +91,7 @@ Custom Python MCP. REST API to Gorgias.
 ### Known limitations
 - Native `/api/search` returns `405 Method Not Allowed`. `search_tickets`
   uses a customer-lookup + substring fallback (see
-  `docs/archive/session_sav_2026-04-13.md` §3.1).
+  `knowledge/archive/session_sav_2026-04-13.md` §3.1).
 - All reply text must be **vouvoiement formel** (see `gorgias_mcp/personality.md`).
 
 ---

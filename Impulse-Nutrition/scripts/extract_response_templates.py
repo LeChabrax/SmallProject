@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate `templates/real_response_examples.md` from the DM archive.
+"""Regenerate `knowledge/archive/templates_racine/real_response_examples.md` from the DM archive.
 
 Same input as `extract_tone.py` (the local `data/conversations/*.json`
 corpus) but the output is a curated set of anonymized *examples* per

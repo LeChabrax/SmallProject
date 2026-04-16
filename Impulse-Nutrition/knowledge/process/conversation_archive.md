@@ -114,7 +114,7 @@ python3 scripts/extract_tone.py --overwrite
 python3 scripts/extract_response_templates.py
 ```
 
-**Output** : `templates/real_response_examples.md` enriched with 5
+**Output** : `knowledge/archive/templates_racine/real_response_examples.md` enriched with 5
 anonymized examples per category. Old version backed up as
 `real_response_examples.md.bak.YYYY-MM-DD`.
 
@@ -158,4 +158,4 @@ rm instagram_dm_mcp/personality.md.generated
 - `../common/instagram_client.py` — the shared IG client used by the scripts.
 - `../common/google_sheets.py` — the shared column constants for reading `Suivi_Amb` / `Suivi_Dot` / `Suivi_Paid`.
 - `../instagram_dm_mcp/personality.md` — the current tone guide.
-- `../templates/dm_response_guide.md` — the manual decision tree (kept in parallel).
+- `archive/templates_dm_legacy/dm_response_guide.md` — the manual decision tree (kept in parallel).

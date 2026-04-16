@@ -208,7 +208,7 @@ def write_cell(
 # ---------------------------------------------------------------------------
 
 # Mapping (contract_type → tab, prenom_col, nom_col, link_col).
-# Updated 2026-04-13 against `docs/reference_sheet_schema.md`.
+# Updated 2026-04-13 against `knowledge/reference/sheet_schema.md`.
 SHEET_CONTRACT_ROUTING = {
     # No "ambassadeur" type yet in generate_contract.py — kept for future use.
     "ambassadeur": ("Suivi_Amb", "AE", "AD", "AK"),
