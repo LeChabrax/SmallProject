@@ -178,8 +178,13 @@ def test_reply_contact_form_uses_email_channel():
 
     out = tools.reply_to_ticket(ticket_id=7777, body_text="Hello")
     assert out["message_id"] == 999
-    assert captured["body"]["channel"] == "email"  # mapped from contact_form
-    assert captured["body"]["receiver"]["email"] == "jane@example.com"
+    body = captured["body"]
+    assert body["channel"] == "email"  # mapped from contact_form
+    assert body["receiver"]["email"] == "jane@example.com"
+    # source.from / source.to required by Gorgias V2 for email outbound
+    assert body["source"]["type"] == "email"
+    assert body["source"]["from"]["address"]  # SC_FROM_ADDRESS default
+    assert body["source"]["to"] == [{"name": "Jane", "address": "jane@example.com"}]
 
 
 @responses.activate

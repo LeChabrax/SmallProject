@@ -26,13 +26,15 @@ from .views import build_maps, resolve_view_id
 logger = logging.getLogger(__name__)
 
 DEFAULT_AGENT_EMAIL = os.getenv("GORGIAS_DEFAULT_AGENT", "achabrat@havea.com")
+SC_FROM_ADDRESS = os.getenv("GORGIAS_FROM_ADDRESS", "contact@impulse-nutrition.fr")
+SC_FROM_NAME = os.getenv("GORGIAS_FROM_NAME", "Contact Impulse-nutrition")
 STATS_PAGE_SIZE = 100
 STATS_MAX_PAGES = 5  # cap at 500 to keep get_ticket_stats fast
 
 # Inbound-only channels that can't be used as outbound reply channel in Gorgias V2.
 # When a ticket arrives via one of these, the agent reply must go out via email
-# (or the channel's own native outbound if supported). Mapping keeps the reply
-# flowing to the customer's verified email address.
+# (the only always-available outbound path). Mapping keeps the reply flowing to
+# the customer's verified email address.
 _INBOUND_ONLY_CHANNELS = {
     "contact_form": "email",
     "help_center": "email",
@@ -343,14 +345,24 @@ def reply_to_ticket(
 
     source_channel = ticket.get("channel") or "email"
     reply_channel = _INBOUND_ONLY_CHANNELS.get(source_channel, source_channel)
+    customer_name = customer.get("name") or to_address
+
+    # Gorgias V2 requires source.{from,to} for email-like outbound messages
+    # (chat accepts a simpler shape but email channels reject payloads without
+    # explicit from/to addresses). Keep the payload homogeneous: always send
+    # source for every channel — extra fields are ignored by chat.
     payload = {
         "channel": reply_channel,
         "via": "api",
         "from_agent": True,
-        "sender": {"id": None},
+        "source": {
+            "type": "email" if reply_channel == "email" else reply_channel,
+            "from": {"name": SC_FROM_NAME, "address": SC_FROM_ADDRESS},
+            "to": [{"name": customer_name, "address": to_address}],
+        },
         "receiver": {
             "id": customer.get("id"),
-            "name": customer.get("name") or to_address,
+            "name": customer_name,
             "email": to_address,
         },
         "subject": ticket.get("subject"),
