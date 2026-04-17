@@ -2,6 +2,10 @@
 
 Templates utilises par le skill `/tiktok-sav`. Persona : **service client Impulse Nutrition**, vouvoiement formel, signature "Le service client". **Jamais** de tutoiement. **Jamais** de tirets em dans les messages.
 
+**Regle ouverture** : si le buyer repond a un message qu'on a deja envoye dans la meme conversation (suivi, remerciement, confirmation...), ne pas ouvrir par "Bonjour," -- aller directement au contenu. Reserver "Bonjour," aux premiers contacts uniquement.
+
+**Push sheet `TTS BB Actions`** : depuis avril 2026, les categories qui necessitent une action BigBlue (T2 damaged, T4 missing, T5_A address, T10 expired, T11 lost, T14 cancel) declenchent un push automatique d'une ligne dans l'onglet `TTS BB Actions` du Google Sheet SAV en plus de l'entree `queue.json`. La ligne contient un `Message BigBlue` FR pre-redige pret a coller. Cycle retour automatique au prochain run du skill. Schema complet : `~/.claude/skills/tiktok-sav/reference/bigblue_actions.md`.
+
 ---
 
 ## T0 -- ACK first-touch (fallback)
@@ -294,6 +298,34 @@ Bonjour,
 Merci beaucoup pour votre retour, cela nous fait tres plaisir !
 
 Si vous avez un moment, un avis sur votre commande nous aiderait enormement. N'hesitez pas a revenir vers nous si vous avez la moindre question.
+
+Belle journee,
+Le service client
+```
+
+---
+
+## T9_FOLLOWUP -- Suivi positif apres T9 (auto-send)
+
+**Declencheur** : le buyer repond positivement a notre message T9 (ex : confirme avoir laisse un avis, dit merci en retour, reagit positivement a notre reponse). Pas un premier contact -- on est deja en conversation.
+
+**Regle ouverture** : pas de "Bonjour," -- on est deja en echange.
+
+### Variante A -- buyer confirme avoir laisse un avis
+
+```
+Super, merci beaucoup ! Cela nous aide vraiment et c'est tres apprecie.
+
+N'hesitez pas a revenir vers nous si vous avez la moindre question.
+
+Belle journee,
+Le service client
+```
+
+### Variante B -- buyer dit merci en retour / reagit positivement
+
+```
+Avec plaisir, c'est un vrai plaisir de pouvoir vous aider !
 
 Belle journee,
 Le service client

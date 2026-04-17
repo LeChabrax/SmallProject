@@ -49,6 +49,17 @@ Depuis le refacto MCP avril 2026, le filtrage par statut/canal passe par les vue
 
 > Note historique : avant le refacto, le filtrage était cassé (V2 rejetait `?status=` avec un 400). L'incident 2026-04-13 (Amandine Laurent #52032892 ratée sur pull 30) avait imposé la règle "100 minimum" — levée depuis que les vues fonctionnent.
 
+### Sheet SAV — onglets BigBlue
+
+Le Google Sheet `1O7zmLS8OTrYegIzZf7biKVisQo-knfPlR2xzeb1JnCE` (doc `SAV`) sert de hub partagé entre Gorgias et TikTok pour les claims/actions BigBlue (le MCP BigBlue helpdesk étant fragile, on log la ligne dans la sheet et un humain dépose manuellement le message dans l'UI BigBlue, puis colle la réponse dans la sheet pour que le skill enchaîne).
+
+| Onglet | Source | Skill responsable | Cycle retour |
+|---|---|---|---|
+| `BigBlue_Actions` | Gorgias (tickets SAV email/chat/contact_form/IG/FB/WAX) | `/gorgias` Étape 0 + Étape 8 | Lit `Statut BB = "Réponse reçue"` → reply Gorgias |
+| `TTS BB Actions` | TikTok Shop (conversations buyer) | `/tiktok-sav` Étape 0 + Étape 3 | Lit `Statut BB = "Réponse reçue"` → reply TikTok via `reply_to_conversation` |
+
+Les 2 onglets suivent le même protocole : push initial avec `Message BigBlue` FR pré-rédigé prêt à coller, statut `A faire` → humain traite côté BigBlue → met `Statut BB = "Réponse reçue"` + colle la réponse → au run suivant le skill responsable détecte, répond au client final, et passe la ligne en `Traité`.
+
 ### Recette draft SAV canonique
 
 **Defaults OBLIGATOIRES pour TOUTE commande gratuite** (SAV ou dotation, total 0€) :
@@ -79,7 +90,7 @@ Le `applied_discount.title` change selon contexte (`SAV`, `Dotation`, `Crédit a
 | Tag | Coût HCS | Utilisé pour |
 |---|---|---|
 | `Service client` | Coût SAV | Replacements, gestes commerciaux, codes `[PRENOM]-SAV` |
-| `Dotation influenceur` | Coût marketing | Envois mensuels ambassadeurs, codes dotation, codes crédit `[PRENOM]-CREDIT` |
+| `Dotation influenceur` | Coût marketing | Envois mensuels ambassadeurs, codes dotation, codes crédit `[CODE]DOTATION` |
 
 Toute autre commande = **vraie vente dans le CA**. **Mal tagger une commande fausse les rapports financiers HCS.** Non négociable.
 
@@ -92,7 +103,7 @@ Mapping par scénario :
 | Geste commercial post-bad-rating | `Service client` |
 | Commande client utilisant code `[PRENOM]-SAV` | `Service client` |
 | Envoi dotation mensuelle (Suivi_Dot / Suivi_Paid) | `Dotation influenceur` |
-| Commande utilisant code crédit `[PRENOM]-CREDIT` | `Dotation influenceur` |
+| Commande utilisant code crédit `[CODE]DOTATION` | `Dotation influenceur` |
 | Vente normale e-commerce | (aucun tag de cette liste) |
 
 ### Scénarios SAV typiques
@@ -271,52 +282,56 @@ if solde <= 0:
 credit_value = solde * 20
 ```
 
-**Pattern Shopify du code crédit** (convention `[PRENOM]-CREDIT`) :
+### Pattern code dotation `[CODE]DOTATION`
 
-```json
-{
-  "price_rule": {
-    "title": "FLORINE-CREDIT",
-    "value_type": "fixed_amount",
-    "value": "-140.0",
-    "customer_selection": "all",
-    "target_type": "line_item",
-    "target_selection": "all",
-    "allocation_method": "across",
-    "starts_at": "<now>",
-    "ends_at": null,
-    "usage_limit": 1,
-    "once_per_customer": true
-  }
-}
-```
+**Convention unique** (validée Antoine 17/04/2026) : tous les codes que l'ambassadeur utilise lui-même pour encaisser un crédit ou redeem sa dotation suivent le pattern `[CODE]DOTATION` où `[CODE]` = code affilié (col N de Suivi_Amb). L'ancien pattern `[PRENOM]-CREDIT` est abandonné.
 
-`combinesWith` GraphQL : `productDiscounts:true, shippingDiscounts:true, orderDiscounts:false`.
+⚠️ Ne pas confondre avec le code **affilié** (col N, utilisé par les followers pour acheter avec -15%). Le code dotation/crédit est utilisé par l'ambassadeur pour sa propre commande.
 
-**Mise à jour Sheet** :
-- Avant commande : col P (`code_credit`) ← `FLORINE-CREDIT`
-- Après commande : col Q (`nb_credit_used`) ← `Q + solde` (nouveau Q = O)
+**2 variantes selon le besoin** :
 
-**Tag de la commande générée** : `Dotation influenceur`.
+#### Variante A — One-shot (crédit ponctuel à redeem)
 
-**Audit mensuel** : pour tout ambassadeur avec `solde > 5` (≥100€) qui n'a pas redeem depuis ≥3 mois → DM proposant le redeem.
-
-### Pattern code dotation `[NOM]DOTATION`
-
-Utilisé par l'ambassadeur lui-même pour redeem sa dotation mensuelle (≠ code affilié utilisé par ses followers).
+Pour un crédit unique déblocable (ambassadeur qui redeem ses crédits accumulés, geste commercial ponctuel, etc.).
 
 ```
-title: TRAILEURSDOTATION
+title: FITBYSIMONDOTATION
 value_type: fixed_amount
-value: -200.0           ← montant mensuel
+value: -140.0          ← valeur du crédit (= solde × 20€ typiquement)
 customer_selection: all
 target_type: line_item
 target_selection: all
 allocation_method: across
-usage_limit: 6          ← nombre de mois (1 redemption/mois)
+usage_limit: 1         ← utilisation unique
+once_per_customer: true
+starts_at: <now>
+ends_at: null
+combinesWith: productDiscounts:true, shippingDiscounts:true, orderDiscounts:false
+```
+
+**Calcul crédit** : `solde = col_O − col_Q`, puis `value = -(solde × 20)`.
+
+**Mise à jour Sheet** :
+- Avant commande : col P (`code_credit`) ← `[CODE]DOTATION`
+- Après commande : col Q (`nb_credit_used`) ← `Q + solde` (nouveau Q = O)
+
+#### Variante B — Récurrent mensuel (contrat Dotation négocié)
+
+Pour un contrat Dotation structuré (ex : 4 mois × 120€/mois).
+
+```
+title: TRAILEURSDOTATION
+value_type: fixed_amount
+value: -200.0          ← montant mensuel
+customer_selection: all
+target_type: line_item
+target_selection: all
+allocation_method: across
+usage_limit: 6         ← nombre de mois (1 redemption/mois)
 once_per_customer: false
 starts_at: <début contrat>
 ends_at: <fin contrat>
+combinesWith: productDiscounts:true, shippingDiscounts:true, orderDiscounts:false
 ```
 
 Règle pour un contrat D mois × M €/mois :
@@ -324,7 +339,9 @@ Règle pour un contrat D mois × M €/mois :
 - `usage_limit = D`
 - `starts_at` = début contrat, `ends_at` = fin
 
-⚠️ Ne pas confondre avec les utilisations cibles du code **affilié** (mesuré dans col O de Suivi_Amb).
+**Tag de la commande générée** (variantes A et B) : `Dotation influenceur`.
+
+**Audit mensuel** : pour tout ambassadeur avec `solde > 5` (≥100€) qui n'a pas redeem depuis ≥3 mois → DM proposant le redeem.
 
 `combinesWith.orderDiscounts: false`.
 
@@ -449,12 +466,12 @@ Sans email client, Shopify confirmation + BigBlue tracking + Affiliatly mapping 
 
 ### Nommage codes Shopify
 
-Majuscules sans accents ni caractères spéciaux (sauf `-` pour SAV/CREDIT).
+Majuscules sans accents ni caractères spéciaux (sauf `-` pour les codes SAV `[PRENOM]-SAV`).
 
 | Type | Format | Exemple |
 |---|---|---|
 | Affilié ambassadeur | `<PRENOM>` ou `<HANDLE>` | `FLORINE`, `ALEXTV`, `DODO`, `JBTRI` |
 | Affilié Paid | variable | `LRA20` |
 | Dotation | `<HANDLE>DOTATION` | `TRAILEURSDOTATION` |
-| Crédit ambassadeur | `<PRENOM>-CREDIT` | `FLORINE-CREDIT` |
+| Crédit / Dotation ambassadeur | `<CODE>DOTATION` | `KIKISPORTIVEDOTATION`, `TRAILEURSDOTATION` |
 | SAV client | `<PRENOM>-SAV` | `MARTIN-SAV` |

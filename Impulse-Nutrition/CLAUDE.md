@@ -54,9 +54,9 @@ Bulle complète pour tous les tickets SAV (email / chat / contact_form / Instagr
 Référence humaine : [`knowledge/operations.md#sav--opérations-client`](./knowledge/operations.md#sav--opérations-client). Persona : [`gorgias_mcp/personality.md`](./gorgias_mcp/personality.md).
 
 ### TikTok Shop SAV
-**Skill : `/tiktok-sav`** (narrow, 100% skill-driven : pull via MCP → classification → envoi template → queue cas complexes).
+**Skill : `/tiktok-sav`** (narrow, 100% skill-driven : pull via MCP → classification → envoi template → queue cas complexes + push onglet `TTS BB Actions` du sheet SAV pour les claims BigBlue).
 
-Reste intact comme aujourd'hui. Workflow SAV TikTok uniquement.
+Cycle retour BigBlue auto via Étape 0 du skill (mirror du flow Gorgias `BigBlue_Actions`). Workflow SAV TikTok uniquement.
 
 ⚠️ Ne plus rédiger manuellement DM / ticket / message SAV. Toujours passer par le skill correspondant.
 
