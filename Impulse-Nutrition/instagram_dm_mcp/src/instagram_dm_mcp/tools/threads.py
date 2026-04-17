@@ -21,6 +21,7 @@ def register(mcp, client) -> None:
     def list_chats(
         amount: int = 20,
         selected_filter: str = "",
+        box: str = "",
         thread_message_limit: Optional[int] = None,
         full: bool = False,
         fields: Optional[List[str]] = None,
@@ -31,6 +32,7 @@ def register(mcp, client) -> None:
         Args:
             amount: Number of threads to fetch (default 20).
             selected_filter: Filter for threads ("", "flagged", or "unread").
+            box: Which inbox tab to pull. "" = default view (Primary + General mixed), "primary" = Primary tab only (active conversations), "general" = General tab only (lower priority, auto-sorted by Instagram). For message requests (Demandé), use list_pending_chats. For hidden requests (Spam), use list_spam_chats.
             thread_message_limit: Limit for messages per thread.
             full: If True, return the full thread object for each chat (default False).
             fields: If provided, return only these fields for each thread.
@@ -74,7 +76,7 @@ def register(mcp, client) -> None:
             return {field: t.get(field) for field in fields}
 
         try:
-            threads = client.direct_threads(amount=amount, selected_filter=selected_filter, thread_message_limit=thread_message_limit)
+            threads = client.direct_threads(amount=amount, selected_filter=selected_filter, box=box, thread_message_limit=thread_message_limit)
             if full and not compact:
                 return {"success": True, "threads": [t.dict() if hasattr(t, 'dict') else str(t) for t in threads]}
             elif full and compact:
@@ -173,7 +175,11 @@ def register(mcp, client) -> None:
 
     @mcp.tool()
     def list_pending_chats(amount: int = 20) -> Dict[str, Any]:
-        """Get Instagram Direct Message threads (chats) from the user's pending inbox.
+        """Get Instagram Direct Message threads from the 'Demandé' / Requests tab.
+
+        These are incoming DMs from users who aren't yet in the viewer's contacts
+        (typically from non-followers). Different from the Spam tab — use
+        list_spam_chats for hidden requests.
 
         Args:
             amount: Number of pending threads to fetch (default 20).
@@ -182,6 +188,35 @@ def register(mcp, client) -> None:
         """
         try:
             threads = client.direct_pending_inbox(amount)
+            result = []
+            for t in threads:
+                td = t.dict() if hasattr(t, 'dict') else t
+                if isinstance(td, dict):
+                    td["users"] = [_compact_user(u) for u in td.get("users", [])]
+                    td["messages"] = [_compact_message(m) for m in td.get("messages", [])]
+                    for key in ["inviter", "items", "last_permanent_item", "direct_story"]:
+                        td.pop(key, None)
+                result.append(td)
+            return {"success": True, "threads": result}
+        except Exception as e:
+            return {"success": False, "message": str(e)}
+
+    @mcp.tool()
+    def list_spam_chats(amount: int = 20) -> Dict[str, Any]:
+        """Get Instagram Direct Message threads from the 'Spam' / Hidden Requests tab.
+
+        Instagram auto-filters some incoming DMs here (new accounts, flagged
+        patterns, etc.). Important to check periodically because legit
+        ambassador outreach can land here — especially from fresh accounts or
+        when Instagram mis-classifies.
+
+        Args:
+            amount: Number of spam threads to fetch (default 20).
+        Returns:
+            A dictionary with success status and the list of spam threads.
+        """
+        try:
+            threads = client.direct_spam_inbox(amount)
             result = []
             for t in threads:
                 td = t.dict() if hasattr(t, 'dict') else t
