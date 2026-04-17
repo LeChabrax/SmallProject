@@ -10,15 +10,49 @@
 
 ## Spécifique à ce sous-projet
 
-### MCP Gorgias custom
-- Auth : variables d'env `GORGIAS_DOMAIN`, `GORGIAS_USERNAME`, `GORGIAS_API_KEY`
-- Base URL : `https://impulse-nutrition.gorgias.com/api`
-- `search_tickets` fonctionne via custom implementation (email lookup + substring fallback) — n'est **pas** un full-text search. Utiliser le pull protocol 100+ comme filet de sécurité.
+### MCP Gorgias custom (refacto avril 2026)
+- **Package modulaire** : `src/gorgias_mcp/` — entry point `python -m gorgias_mcp.server`
+- **Auth** : variables d'env `GORGIAS_DOMAIN`, `GORGIAS_EMAIL`, `GORGIAS_API_KEY`
+- **Base URL** : `https://{GORGIAS_DOMAIN}.gorgias.com/api`
+- **HTTP client partagé** : `infra.common.http_mcp.MCPHttpClient` (retry 5xx, timeout, basic auth)
+- **Tests** : `uv run pytest` (25 tests : views, slim, tools mockés via `responses`)
+- **`search_tickets`** = lookup en cascade (id numérique → customer email → fallback substring sur view Inbox), pas un full-text search
 
-### Pull protocol (appris à la dure 2026-04-13)
-Toujours `list_tickets(limit=100, order_by="updated_datetime:desc")` minimum. Un pull de 30 a raté Amandine Laurent #52032892. Jamais conclure "pas trouvé" sur un pull court.
+### Filtrage par vues Gorgias
+La V2 de l'API Gorgias **rejette `?status=` et `?channel=`** sur `/api/tickets` (400). Le filtrage natif passe par les vues serveur via `/api/views/{view_id}/items`.
 
-### Channels
+`list_tickets` accepte 3 filtres équivalents :
+- `status="open"|"closed"|"snoozed"|"unassigned"|"all"` → vue système (défaut : Inbox)
+- `channel="email"|"contact_form"|"chat"|"help_center"` → vue canal
+- `view_id=<int>` → override raw
+
+Maps complètes dans `src/gorgias_mcp/views.py` (`SYSTEM_VIEWS`, `CHANNEL_VIEWS`, `USER_VIEWS`). Tool `list_views` les expose au runtime.
+
+### Vues système principales
+| Alias | view_id | Sens |
+|---|---|---|
+| `open` | 33360 | Inbox (ouverts non-spam non-snoozed) |
+| `closed` | 33364 | Closed |
+| `snoozed` | 33363 | Snoozed |
+| `unassigned` | 33361 | Unassigned |
+| `all` | 33362 | All (historique complet) |
+
+### Vues canal
+| Alias | view_id |
+|---|---|
+| `email` | 44348 |
+| `contact_form` | 44386 |
+| `chat` | 45597 |
+| `help_center` | 44385 |
+
+### Pull protocol
+- Pass quotidien : `list_tickets(status="open", limit=50)` (Inbox).
+- Recherche historique : `status="all"` ou `search_tickets(query)`.
+- Jamais conclure "client pas trouvé" sans avoir essayé `search_tickets` puis `status="all"`.
+
+> Note historique : avant le refacto, le filtrage était cassé côté API et il fallait pull 100 puis filtrer côté client. Incident 2026-04-13 (Amandine Laurent #52032892 ratée sur pull 30) à l'origine de l'ancienne règle "100 minimum" — levée depuis que les vues fonctionnent.
+
+### Channels SAV (filtrage local après pull)
 Tous les canaux SC convergent vers Gorgias :
 - `email`, `chat`, `contact_form` (natifs)
 - `instagram`, `facebook` (natifs)

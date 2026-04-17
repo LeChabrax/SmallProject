@@ -1,7 +1,7 @@
 [project]
 name = "gorgias-mcp"
-version = "0.1.0"
-description = "MCP server for Gorgias customer support"
+version = "0.2.0"
+description = "MCP server for Gorgias customer support (view-based filtering)"
 requires-python = ">=3.10"
 dependencies = [
     "mcp>=1.9.0",
@@ -9,8 +9,21 @@ dependencies = [
     "python-dotenv>=1.0.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "responses>=0.24",
+]
+
+[project.scripts]
+gorgias-mcp = "gorgias_mcp.server:main"
+
 [tool.hatch.build.targets.wheel]
-packages = ["src"]
+packages = ["src/gorgias_mcp"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
 
 [build-system]
 requires = ["hatchling"]
