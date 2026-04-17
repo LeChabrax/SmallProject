@@ -3,8 +3,15 @@
 import sys
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).parent.parent.parent / "src"))
-sys.path.append(str(Path(__file__).parent.parent.parent.parent))
+# Bootstrap: anchor to project root via .mcp.json (see infra/common/paths.py).
+_here = Path(__file__).resolve()
+for _p in (_here, *_here.parents):
+    if (_p / ".mcp.json").exists():
+        sys.path.insert(0, str(_p))
+        break
+
+from infra.common.paths import PROJECT_ROOT  # noqa: E402
+sys.path.insert(0, str(PROJECT_ROOT / "instagram_dm_mcp" / "src"))
 
 from instagram_dm_mcp.compact import _sort_messages_newest_first  # noqa: E402
 from infra.common.instagram_client import get_ig_client  # noqa: E402

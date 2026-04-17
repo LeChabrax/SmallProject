@@ -27,7 +27,9 @@ firebase-debug.log
 # État runtime TikTok SAV (le skill les recrée au besoin).
 infra/data/tiktok_sav/
 
-# État runtime Instagram DM.
+# État runtime Instagram (logs, qualify_results, etc. écrits par les scripts infra/scripts/instagram/).
+infra/data/instagram/
+instagram_dm_mcp/data/
 instagram_dm_mcp/logs/
 instagram_dm_mcp/campaign_log.txt
 instagram_dm_mcp/send_promo_log.txt

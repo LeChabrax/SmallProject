@@ -3,7 +3,12 @@
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+# Bootstrap: anchor to project root via .mcp.json (see infra/common/paths.py).
+_here = Path(__file__).resolve()
+for _p in (_here, *_here.parents):
+    if (_p / ".mcp.json").exists():
+        sys.path.insert(0, str(_p))
+        break
 from infra.common.google_sheets import get_worksheet  # noqa: E402
 
 

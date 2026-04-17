@@ -18,7 +18,12 @@ from pathlib import Path
 from datetime import datetime
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
-sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+# Bootstrap: anchor to project root via .mcp.json (see infra/common/paths.py).
+_here = Path(__file__).resolve()
+for _p in (_here, *_here.parents):
+    if (_p / ".mcp.json").exists():
+        sys.path.insert(0, str(_p))
+        break
 from infra.common.google_sheets import SUIVI_AMB_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
 from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 

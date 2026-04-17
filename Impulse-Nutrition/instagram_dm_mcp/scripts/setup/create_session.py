@@ -1,15 +1,24 @@
 from instagrapi import Client
 from dotenv import load_dotenv
 import os
+import sys
 from pathlib import Path
+
+# Bootstrap: anchor to project root via .mcp.json (see infra/common/paths.py).
+_here = Path(__file__).resolve()
+for _p in (_here, *_here.parents):
+    if (_p / ".mcp.json").exists():
+        sys.path.insert(0, str(_p))
+        break
+
+from infra.common.paths import INSTAGRAM_SESSION_DIR  # noqa: E402
 
 load_dotenv()
 
 username = os.getenv("INSTAGRAM_USERNAME")
 password = os.getenv("INSTAGRAM_PASSWORD")
 
-SESSION_DIR = Path(__file__).parent.parent.parent / "data" / "sessions"
-SESSION_DIR.mkdir(parents=True, exist_ok=True)
+INSTAGRAM_SESSION_DIR.mkdir(parents=True, exist_ok=True)
 
 # Try with web API instead of mobile API
 cl = Client()
@@ -48,7 +57,7 @@ cl.challenge_code_handler = challenge_code_handler
 print(f"Logging in as {username}...")
 try:
     cl.login(username, password)
-    cl.dump_settings(str(SESSION_DIR / f"{username}_session.json"))
+    cl.dump_settings(str(INSTAGRAM_SESSION_DIR / f"{username}_session.json"))
     print("\nSession saved! MCP server should work now.")
 except Exception as e:
     print(f"\nFailed: {e}")

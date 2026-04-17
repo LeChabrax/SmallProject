@@ -17,10 +17,17 @@ import argparse
 from pathlib import Path
 from datetime import datetime
 
-QUALIFY_RESULTS_FILE = Path(__file__).parent.parent.parent / "qualify_results.json"
+QUALIFY_RESULTS_FILE = INSTAGRAM_DATA_DIR / "qualify_results.json"
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
-sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+# Bootstrap: anchor to project root via .mcp.json (see infra/common/paths.py).
+_here = Path(__file__).resolve()
+for _p in (_here, *_here.parents):
+    if (_p / ".mcp.json").exists():
+        sys.path.insert(0, str(_p))
+        break
+
+from infra.common.paths import INSTAGRAM_DATA_DIR  # noqa: E402
 from infra.common.dm_classifier import classify_last_message, QUESTION_SIGNALS, OK_SIGNALS  # noqa: E402
 from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 

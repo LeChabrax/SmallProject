@@ -53,12 +53,19 @@ from pathlib import Path
 from datetime import datetime, timedelta
 
 # Allow `from infra.common.*` imports (infra/common at repo root via sys.path).
-sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+# Bootstrap: anchor to project root via .mcp.json (see infra/common/paths.py).
+_here = Path(__file__).resolve()
+for _p in (_here, *_here.parents):
+    if (_p / ".mcp.json").exists():
+        sys.path.insert(0, str(_p))
+        break
+
+from infra.common.paths import INSTAGRAM_DATA_DIR  # noqa: E402
 from infra.common.google_sheets import SUIVI_AMB_COLS, VEILLE_COLS, SHEET_ID as SPREADSHEET_ID  # noqa: E402
 from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 from infra.common.logging_utils import get_logger  # noqa: E402
 
-LOG_DIR = Path(__file__).parent.parent.parent / "data" / "logs"
+LOG_DIR = INSTAGRAM_DATA_DIR / "logs"
 log = get_logger("veille", log_dir=LOG_DIR)
 log.info("=== veille_concurrents démarré ===")
 

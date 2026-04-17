@@ -34,7 +34,12 @@ from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
 # `from infra.common.*` imports — infra/common — added to sys.path below.
-sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+# Bootstrap: anchor to project root via .mcp.json (see infra/common/paths.py).
+_here = Path(__file__).resolve()
+for _p in (_here, *_here.parents):
+    if (_p / ".mcp.json").exists():
+        sys.path.insert(0, str(_p))
+        break
 from infra.common.google_sheets import (  # noqa: E402
     HEADER_ROW,
     SHEET_ID,
@@ -45,11 +50,15 @@ from infra.common.google_sheets import (  # noqa: E402
 )
 from infra.common.instagram_client import get_ig_client, sleep_random  # noqa: E402
 from infra.common.constants import COMPETITORS  # noqa: E402
+from infra.common.paths import PROJECT_ROOT  # noqa: E402
 
-# Reuse the scoring logic from the sibling script scripts/qualify/influencer.py.
+# Reuse the scoring logic from infra/scripts/instagram/qualify/influencer.py.
 # That script isn't a package, so we add its dir to sys.path and import by
 # filename.
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "qualify"))
+sys.path.insert(
+    0,
+    str(PROJECT_ROOT / "infra" / "scripts" / "instagram" / "qualify"),
+)
 from influencer import qualify_profile, format_followers_k  # noqa: E402
 
 logger = logging.getLogger("filter_kolsquare")

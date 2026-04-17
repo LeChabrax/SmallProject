@@ -18,7 +18,14 @@ from pathlib import Path
 
 import yaml
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+# Bootstrap: anchor to project root via .mcp.json (see infra/common/paths.py).
+_here = Path(__file__).resolve()
+for _p in (_here, *_here.parents):
+    if (_p / ".mcp.json").exists():
+        sys.path.insert(0, str(_p))
+        break
+
+from infra.common.paths import INSTAGRAM_DATA_DIR, PROJECT_ROOT  # noqa: E402
 from infra.common.google_sheets import (  # noqa: E402
     HEADER_ROW,
     SHEET_ID,
@@ -30,17 +37,20 @@ from infra.common.logging_utils import get_logger  # noqa: E402
 
 log = get_logger(
     "kolsquare_send",
-    log_dir=Path(__file__).resolve().parents[2] / "data" / "logs",
+    log_dir=INSTAGRAM_DATA_DIR / "logs",
 )
 
 # Reuse build_message() from the campaign runner script.
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "campaign"))
+sys.path.insert(
+    0,
+    str(PROJECT_ROOT / "infra" / "scripts" / "instagram" / "campaign"),
+)
 from run import build_message  # noqa: E402
 
 # Template source of truth: knowledge/voice/templates.yaml, key s2_pitch_standard.
 # The same template feeds the /instagram-dm skill — edit it once, it updates
 # both the interactive DM workflow and this batch script.
-TEMPLATES_YAML = Path(__file__).resolve().parents[3] / "knowledge" / "voice" / "templates.yaml"
+TEMPLATES_YAML = PROJECT_ROOT / "knowledge" / "voice" / "templates.yaml"
 PITCH_TEMPLATE_KEY = "s2_pitch_standard"
 
 
