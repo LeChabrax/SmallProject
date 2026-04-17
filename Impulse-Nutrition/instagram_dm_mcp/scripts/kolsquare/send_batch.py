@@ -16,6 +16,8 @@ import argparse
 import sys
 from pathlib import Path
 
+import yaml
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from infra.common.google_sheets import (  # noqa: E402
     HEADER_ROW,
@@ -35,6 +37,25 @@ log = get_logger(
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "campaign"))
 from run import build_message  # noqa: E402
 
+# Template source of truth: knowledge/voice/templates.yaml, key s2_pitch_standard.
+# The same template feeds the /instagram-dm skill — edit it once, it updates
+# both the interactive DM workflow and this batch script.
+TEMPLATES_YAML = Path(__file__).resolve().parents[3] / "knowledge" / "voice" / "templates.yaml"
+PITCH_TEMPLATE_KEY = "s2_pitch_standard"
+
+
+def load_pitch_template() -> str:
+    """Load the verbatim body of the cold-pitch template from templates.yaml."""
+    with TEMPLATES_YAML.open(encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+    templates = data.get("templates") or data  # tolerate either schema
+    tpl = templates.get(PITCH_TEMPLATE_KEY)
+    if not tpl or "body" not in tpl:
+        raise RuntimeError(
+            f"Template '{PITCH_TEMPLATE_KEY}' missing or malformed in {TEMPLATES_YAML}"
+        )
+    return tpl["body"]
+
 USERNAMES = [
     "isa_nutricoaching",
     "majin.junior",
@@ -48,7 +69,6 @@ USERNAMES = [
     "alexia__bailly",
 ]
 
-TEMPLATE_PATH = Path(__file__).resolve().parents[3] / "templates" / "pitch_initial_plain.txt"
 ACTION_K = "premier message sent"
 DELAY_BETWEEN_SENDS = 4  # seconds
 
@@ -58,7 +78,7 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="Lookup only, no send, no sheet update")
     args = parser.parse_args()
 
-    template = TEMPLATE_PATH.read_text(encoding="utf-8")
+    template = load_pitch_template()
 
     # -----------------------------------------------------------------
     # 1. Locate the 10 rows in Suivi_Amb
