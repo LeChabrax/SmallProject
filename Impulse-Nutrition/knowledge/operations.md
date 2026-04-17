@@ -28,22 +28,26 @@
 | Instagram (mention/DM cliente) | natif Gorgias | selon contenu |
 | Facebook | natif Gorgias | selon contenu |
 | BigBlue internal-note | alertes stock/livraison | selon contenu |
-| TikTok Shop | pipeline custom (`tiktok_sav/sav.py`) | — |
+| TikTok Shop | skill `/tiktok-sav` (templates dans `knowledge/tiktok_sav/`) | — |
 
 WAX pousse auto la réponse Gorgias sur WhatsApp. Tone SC vouvoiement formel identique.
 
-### Pull protocol strict (leçon 2026-04-13)
+### Pull protocol (filtrage natif via vues Gorgias)
 
-Un pull de 30 tickets a loupé `Amandine Laurent` (#52032892). Depuis :
+Depuis le refacto MCP avril 2026, le filtrage par statut/canal passe par les vues serveur Gorgias (`/api/views/{view_id}/items`). Plus besoin de tout pull pour filtrer ensuite.
 
-1. **`list_tickets(limit=100, order_by="updated_datetime:desc")` minimum.** Jamais moins.
-2. **Filtrer localement** :
+1. **Pass quotidien** : `list_tickets(status="open", limit=50)` → vue Inbox (33360), uniquement les ouverts non-spam non-snoozed.
+2. **Pass par canal** : `list_tickets(channel="email"|"contact_form"|"chat"|"help_center", limit=50)` → vue canal côté serveur.
+3. **Recherche historique** (ticket fermé / ancien) : `list_tickets(status="all", limit=100)` ou directement `search_tickets(query="email|nom|id_numérique")`.
+4. **Filtrer localement** ce qui reste :
    - Keep : channels `email`, `chat`, `contact_form`, `instagram`, `facebook`, `internal-note`
    - Prioriser tags : `urgent`, `statut_commande`, `retour commande`, `retour/echange`, `candidature`, `bigblue-bad-rating-no-comment`, `bigblue-bad-rating-with-comment`, `bigblue-action-required`, `WAX`
    - Ignorer : subjects `[SPAM POSSIBLE]`, `Réponse automatique`, `Automatic reply`, `closed` bounces
-3. Si rien ne flag → **deuxième pass** avec `order_by="created_datetime:desc"`
-4. **Ne jamais conclure "not found" sur une liste courte.** Étendre le pull d'abord.
-5. `search_tickets` (custom MCP) n'est pas full-text search — pull protocol = filet de sécurité.
+5. **Jamais conclure "not found"** sans avoir essayé `search_tickets` puis `status="all"`.
+
+`list_views()` expose les view_id complets. Maps source : `gorgias_mcp/src/gorgias_mcp/views.py`.
+
+> Note historique : avant le refacto, le filtrage était cassé (V2 rejetait `?status=` avec un 400). L'incident 2026-04-13 (Amandine Laurent #52032892 ratée sur pull 30) avait imposé la règle "100 minimum" — levée depuis que les vues fonctionnent.
 
 ### Recette draft SAV canonique
 
@@ -171,8 +175,9 @@ Si Antoine croise un ambassadeur qui contacte SC → **bulle SC** (vouvoiement) 
 - **Tutoiement systématique**. Si l'autre vouvoie → switcher vite au `tu`
 - **Double exclamation** sur micro-messages ("Merci !!" pas "Merci !")
 - **Pas de point final** sur micro-messages
-- **Emojis modérés** : 0 à 2 par message max. Favoris : 😉 🔥 😄 😊 😍 ☺️ 💪. **Éviter** 🙏 ✨ 💖 (mielleux)
-- **Pas de tirets em (`—`)**. Phrases courtes.
+- **Emojis modérés** : 0 à 2 par message max. Favoris : 😉 🔥 😄 😊 😍 ☺️ 💪. 
+- **Interdit** 🙏 ✨ 💖 (mielleux)
+- **Pas de tirets em (`—`)**.
 - **Pas de "Bonjour"** dans une conversation déjà ouverte. Réserver au premier contact
 - **Pas de jargon** : ROI, KPI, conversion, collab (préférer "partenariat"), reach
 - **Ne JAMAIS critiquer la concurrence**

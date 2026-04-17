@@ -54,7 +54,7 @@ Bulle complète pour tous les tickets SAV (email / chat / contact_form / Instagr
 Référence humaine : [`knowledge/operations.md#sav--opérations-client`](./knowledge/operations.md#sav--opérations-client). Persona : [`gorgias_mcp/personality.md`](./gorgias_mcp/personality.md).
 
 ### TikTok Shop SAV
-**Skill : `/tiktok-sav`** (narrow, pipeline Python `tiktok_sav/sav.py` + ACK T0 auto + templates T1-T9 + queue.json pour cas complexes).
+**Skill : `/tiktok-sav`** (narrow, 100% skill-driven : pull via MCP → classification → envoi template → queue cas complexes).
 
 Reste intact comme aujourd'hui. Workflow SAV TikTok uniquement.
 

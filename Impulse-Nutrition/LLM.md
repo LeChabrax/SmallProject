@@ -41,7 +41,7 @@ Impulse-Nutrition/
 │   ├── create_session.py               #   Instagram login + challenge handler
 │   └── CLAUDE.md
 │
-├── tiktok_sav/                         # TikTok Shop SAV pipeline (sav.py + T0-T9 templates)
+├── tiktokshop_mcp/                     # TikTok Shop MCP (TS) — orders/conversations/products + OAuth auto-refresh
 │
 ├── infra/                              # plumbing — shared library, scripts, private data
 │   ├── common/                         #   Python package imported via `from infra.common.*`

@@ -24,10 +24,8 @@ firebase-debug.log
 # Caches externes.
 **/.firecrawl/
 
-# État runtime TikTok SAV (pipeline sav.py les recrée au besoin).
-tiktok_sav/state.json
-tiktok_sav/pending.json
-tiktok_sav/queue.json
+# État runtime TikTok SAV (le skill les recrée au besoin).
+infra/data/tiktok_sav/
 
 # État runtime Instagram DM.
 instagram_dm_mcp/logs/
