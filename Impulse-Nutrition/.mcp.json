@@ -27,11 +27,23 @@
         "SHOPIFY_CLIENT_SECRET": "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"
       }
     },
+    "shopify": {
+      "command": "npx",
+      "args": [
+        "shopify-mcp",
+        "--clientId",
+        "2d5744b859ec46f37659860967fa5c85",
+        "--clientSecret",
+        "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",
+        "--domain",
+        "impulse-nutrition-vitavea.myshopify.com"
+      ]
+    },
     "google_sheets": {
       "command": "uvx",
       "args": ["mcp-google-sheets@latest"],
       "env": {
-        "SERVICE_ACCOUNT_PATH": "~/.config/google-service-account.json"
+        "SERVICE_ACCOUNT_PATH": "/Users/antoinechabrat/.config/google-service-account.json"
       }
     },
     "bigblue": {
@@ -43,15 +55,23 @@
     },
     "tiktokshop": {
       "command": "node",
-      "args": ["./tiktokshop_mcp/build/index.js"]
+      "args": ["./tiktokshop_mcp/build/index.js"],
+      "env": {
+        "TIKTOK_SHOP_APP_KEY": "6jg392kv2s7j7",
+        "TIKTOK_SHOP_APP_SECRET": "3036b38c478854f9260ffcfb49905af8712b3a43",
+        "TIKTOK_SHOP_ACCESS_TOKEN": "GCP_bAYABAAAAAAdkG5E1SVro62o-7buGmYwexYc5uu_7doXhs4W1trACvGJjb4wkGMBl1qogtMuh-l94XN51vhjkaNgtMLxA7xS4TH5EKGXJPk0IrE94sSuNL4cO0BouDwQu6z56kkzc4Omw-MKYSAIUlL0YrlPkAmMYBuRHYX7NcggSm3bq3JIbms6rnIbvybBOqe0CQ8rwXA",
+        "TIKTOK_SHOP_REFRESH_TOKEN": "GCP_UGCUkgAAAADbVkc9vFu3B5a-65aeUqHWtWIm8uC2vLncQ_GvrwTO4F4NYG_xmkxThp8SYnkUTls",
+        "TIKTOK_SHOP_SHOP_CIPHER": "GCP_Gk8uhwAAAAC2CxX0AMBN6sG3U3fncQGS"
+      }
     },
     "gorgias": {
       "command": "uv",
-      "args": ["run", "--directory", "./gorgias_mcp", "python", "src/mcp_server.py"],
+      "args": ["run", "--directory", "./gorgias_mcp", "python", "-m", "gorgias_mcp.server"],
       "env": {
-        "GORGIAS_DOMAIN": "impulse-nutrition",
-        "GORGIAS_EMAIL": "achabrat@impulse-nutrition.fr",
-        "GORGIAS_API_KEY": "c2dbb7bc29eb62b3d1a6b8fc5bab2f6b4f0e2e0f860e7db89e15f97f94c0b7ec"
+        "GORGIAS_DOMAIN": "impulse-nutrition-vitavea",
+        "GORGIAS_EMAIL": "achabrat@havea.com",
+        "GORGIAS_API_KEY": "fad0befb4d70ccb97a01c9ec98574ba0a9b754bf3289d6ce768ff0b0e3749384",
+        "PYTHONPATH": "src"
       }
     }
   }
