@@ -26,15 +26,18 @@ personality:
   signature_long: "Sportivement,\nAntoine"
   signature_medium: "Antoine"
   signature_alt: "Antoine - Impulse Nutrition"
-  signature_threshold: 3  # nb phrases minimum pour signer
+  signature_threshold: 3 # nb phrases minimum pour signer
   emoji_max: 2
-  emoji_favorites: ["😉", "🔥", "😄", "😊", "😍", "☺️"]
+  emoji_favorites: ["😉", "🔥", "😊", "😍"]
   emoji_banned: ["🙏", "✨", "💖"]
   no_em_dash: true
   no_final_period_micro: true
   double_exclamation_micro: true
   no_hello_active_conv: true
   banned_terms: ["ROI", "KPI", "reach", "conversion", "collab"]
+  banned_phrases:
+    - "Ca te parle"          # trop marketing, use "Qu'en penses-tu ?"
+    - "je te passe un coup de fil"  # pas naturel, use "on s'appelle" ou "je t'appelle"
   preferred_terms:
     collab: "partenariat"
 
@@ -74,7 +77,6 @@ variables:
 # TEMPLATES
 # =============================================================================
 templates:
-
   # ---------------------------------------------------------------------------
   # S2 — Premier message ambassadeur
   # ---------------------------------------------------------------------------
@@ -309,6 +311,45 @@ templates:
       Antoine
 
   # ---------------------------------------------------------------------------
+  # S4b — Contre-offre dotation structuree (prospect demande du remunere)
+  # ---------------------------------------------------------------------------
+  s4b_dotation_contre_offre:
+    id: "s4b"
+    section: "4"
+    name: "Contre-offre dotation structuree (prospect demande du paid)"
+    category: "in_hot_needs_paid_counter"
+    mode: "verbatim"
+    needs_signature: true
+    variables: [prenom, envelope_mensuelle, duree_mois, utilisations_min]
+    note: |
+      A utiliser quand un prospect repond positivement au s2 mais demande une dimension financiere
+      (typique : athletes pros, profils avec saison a financer). On ne promet JAMAIS de paid, on repositionne
+      sur une dotation structuree qui couvre ses besoins nutrition sur la duree, et on ouvre la porte a un call.
+      Termes standard : 120€/mois sur 4 mois avec 16 utilisations min du code sur la periode.
+    body: |
+      Merci pour ta reponse {prenom}, et pour ta transparence sur tes enjeux de saison, c'est vraiment appreciable 😊
+
+      On comprend tout a fait que tu cherches a structurer tes partenariats sur cette saison. Ce qu'on peut te proposer pour t'accompagner au mieux dans ta pratique, c'est une dotation sur {duree_mois} mois : {envelope_mensuelle} de produits offerts chaque mois (tu choisis librement selon tes besoins : boisson d'effort, gels, whey, electrolytes, ce que tu veux). En contrepartie, on te demande un objectif de {utilisations_min} utilisations de ton code affilie sur l'ensemble de la periode.
+
+      Concretement, ca te permet de couvrir tes besoins nutrition sur toute la saison sans rien avancer, et on peut faire un point ensemble a la fin pour voir comment on continue.
+
+      Qu'en penses-tu ? Et si tu preferes qu'on en parle de vive voix, dis-moi une date qui t'arrange la semaine prochaine, je m'adapte.
+
+      Sportivement,
+      Antoine
+    example_filled: |
+      Merci pour ta reponse Alexia, et pour ta transparence sur tes enjeux de saison, c'est vraiment appreciable 😊
+
+      On comprend tout a fait que tu cherches a structurer tes partenariats sur cette saison. Ce qu'on peut te proposer pour t'accompagner au mieux dans ta pratique, c'est une dotation sur 4 mois : 120€ de produits offerts chaque mois (tu choisis librement selon tes besoins : boisson d'effort, gels, whey, electrolytes, ce que tu veux). En contrepartie, on te demande un objectif de 16 utilisations de ton code affilie sur l'ensemble de la periode.
+
+      Concretement, ca te permet de couvrir tes besoins nutrition sur toute la saison sans rien avancer, et on peut faire un point ensemble a la fin pour voir comment on continue.
+
+      Qu'en penses-tu ? Et si tu preferes qu'on en parle de vive voix, dis-moi une date qui t'arrange la semaine prochaine, je m'adapte.
+
+      Sportivement,
+      Antoine
+
+  # ---------------------------------------------------------------------------
   # S5 — Acceptation : demande infos commande
   # ---------------------------------------------------------------------------
   s5_demande_infos:
@@ -527,7 +568,7 @@ templates:
     entries:
       comment_utiliser_credit:
         triggers: ["utiliser mon credit", "mes credits", "comment utiliser"]
-        body: "Tu m'envoies un message avec ce que tu veux commander, et je te fais un code du montant correspondant. Sinon on peut prevoir un call si tu preferes !"
+        body: "Tu m'envoies un message avec ce que tu veux commander, et je te fais un code du montant correspondant. Si tu préfères, je peux aussi te créer ta commande 😉. Dis moi ce que tu préfères !"
       combien_utilisations_code:
         triggers: ["combien de personnes", "utilise mon code", "stats du code"]
         body: "[N] utilisation(s) de ton code, bien joue !!"

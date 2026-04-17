@@ -187,7 +187,7 @@ Prospection → Scoring (GO/MAYBE/NO-GO) → Pitch DM → Onboarding
 5. **Draft order Shopify** avec tag `Dotation influenceur` + discount 100% + shipping 0€ (voir [`operations.md#créer-un-draft-order`](./operations.md#créer-un-draft-order))
 6. **Création code affilié** via `create_affiliate_code(name="prenom")` (clone ALEXTV)
 7. **Suivi utilisations** col O Suivi_Amb — sync manuel Affiliatly
-8. **Redeem crédit** : formule `(O − Q) × 20€`, code `[PRENOM]-CREDIT` (voir [`operations.md#calculer-et-redeem-le-crédit-ambassadeur`](./operations.md#calculer-et-redeem-le-crédit-ambassadeur))
+8. **Redeem crédit** : formule `(O − Q) × 20€`, code `[CODE]DOTATION` (voir [`operations.md#pattern-code-dotation-codedotation`](./operations.md#pattern-code-dotation-codedotation))
 9. **Relance long terme** : si silence > 2 semaines, DM contextualisé. Si traction → upgrade dotation. Si top-tier → Paid
 
 ### 3.2 Statuts Suivi_Amb (col J)
