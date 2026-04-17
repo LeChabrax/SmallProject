@@ -26,6 +26,7 @@ dependencies = [
     "markdown-it-py==3.0.0",
     "mcp==1.9.4",
     "mdurl==0.1.2",
+    "moviepy>=2.2.1",
     "openapi-pydantic==0.5.1",
     "pillow>=8.1.1",
     "pycparser==2.22",

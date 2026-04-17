@@ -20,6 +20,7 @@
 | Inbound <2500 followers                                     | [05-parquage-auto-under-2500](./workflows/05-parquage-auto-under-2500.md) | 5 parqués : Mickael, Aurélien, Charlotte, Thomas L, Maël |
 | Thread silencieux >10j, acceptation passée                  | [06-relance-long-silence](./workflows/06-relance-long-silence.md) | Donavan Grondin 28j, Pierre Berdat 7 mois |
 | Call à caler (timezone / soir / midi)                       | [07-call-cross-timezone](./workflows/07-call-cross-timezone.md) | Pablo Indonésie, Delphée, Sophia |
+| Annonce nouveauté à TOUS les ambassadeurs d'un segment      | [08-blast-mass-dm-personalise](./workflows/08-blast-mass-dm-personalise.md) | Avis depuis l'espace perso (137 cibles, 17/04) |
 
 ## Conventions
 
@@ -29,6 +30,7 @@
 ## Runbooks
 
 - [**shopify-draft-order-complete.md**](./runbooks/shopify-draft-order-complete.md) — recette draft order complète (create → customer patch → discount → shipping → complete)
+- [**blast-instagram-script.md**](./runbooks/blast-instagram-script.md) — script Python autonome `blast_avis.py` pour blast DM 100+ ambassadeurs (session reuse, prénom Sheet, resume-safe)
 
 ## Historique des évolutions du tooling (17/04/2026)
 
@@ -46,3 +48,13 @@ Cette session a consolidé plusieurs changements :
 - **7 codes créés** : FITBYSIMON, KIKISPORTIVEDOTATION, ALTIZ, ALTIZDOTATION, THOMASBNT, MAXIMEC, + affiliate pour Kléden (existant)
 - **3 customers Shopify** créés/patchés
 - **20+ lignes Sheet** Suivi_Amb/Suivi_Dot/Suivi_Paid/Archive modifiées
+
+## Mission annexe — Blast nouveauté "Avis espace perso" (17/04/2026)
+
+En parallèle de la session DM individuelle, une **mission de blast** a touché 137 ambassadeurs au statut `Produits envoyés` :
+- **126 DM Insta envoyés ✅** (1 ❌ compte supprimé `melissa_biarritz`)
+- **135 emails préparés** pour Outlook CCI (123 Sheet + 6 récup DM + 6 récup Shopify)
+- **12 emails ajoutés au Sheet** col AF (récupérés cross-canal)
+- **Script `blast_avis.py`** réutilisable pour les futures campagnes (voir runbook)
+
+Workflow complet : [`workflows/08-blast-mass-dm-personalise.md`](./workflows/08-blast-mass-dm-personalise.md)

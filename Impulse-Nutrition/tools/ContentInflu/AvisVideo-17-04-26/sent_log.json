@@ -1,0 +1,700 @@
+{
+  "batch_1": {
+    "date": "2026-04-17",
+    "sent": [
+      {
+        "handle": "justealextv",
+        "prenom": "Alex",
+        "msg_id": "32769628605126701416932344804147200"
+      },
+      {
+        "handle": "justine__bvr",
+        "prenom": "Justine",
+        "msg_id": "32769629047520022674008816473866240"
+      },
+      {
+        "handle": "paul_chardin",
+        "prenom": "Paul",
+        "msg_id": "32769629188015092565631410097881088"
+      },
+      {
+        "handle": "ribesquitterie",
+        "prenom": "Quitterie",
+        "msg_id": "32769629338979095547453795874111488"
+      },
+      {
+        "handle": "lucierose76",
+        "prenom": "Lucie",
+        "msg_id": "32769629485032132534996929980923904"
+      },
+      {
+        "handle": "runzoe_",
+        "prenom": "Zoé",
+        "msg_id": "32769629627384955575538738838634496"
+      },
+      {
+        "handle": "siana_life_",
+        "prenom": "Sïana",
+        "msg_id": "32769629760590130463648349597728768"
+      },
+      {
+        "handle": "anixlml",
+        "prenom": "Anissa",
+        "msg_id": "32769629901612629661826446721548288"
+      },
+      {
+        "handle": "gwendal_tpm",
+        "prenom": "Gwendal",
+        "msg_id": "32769630041025964034222638529249280"
+      },
+      {
+        "handle": "lolaa_fitt",
+        "prenom": "Lola",
+        "msg_id": "32769630194953971407064601349586944"
+      }
+    ]
+  },
+  "batch_2": {
+    "date": "2026-04-17",
+    "started": "19:15:30",
+    "sent": [
+      {
+        "handle": "robin.coach_trail_running",
+        "prenom": "Robin",
+        "msg_id": "32769647435045104179541017626673152"
+      },
+      {
+        "handle": "alicemauguin",
+        "prenom": "Alice",
+        "msg_id": "32769647775985926270489309086744576"
+      },
+      {
+        "handle": "kalista_cruz",
+        "prenom": "Kalista",
+        "msg_id": "32769648152282995538218192004448256"
+      },
+      {
+        "handle": "kleden_fvc",
+        "prenom": "Kléden",
+        "msg_id": "32769648525113681786824091949334528"
+      },
+      {
+        "handle": "laurine__br",
+        "prenom": "Laurine",
+        "msg_id": "32769651786842692984946006920527872"
+      },
+      {
+        "handle": "lorinerenlt",
+        "prenom": "Lorine",
+        "msg_id": "32769652174824852286166205309386752"
+      },
+      {
+        "handle": "maelys_cassan",
+        "prenom": "Maëlys",
+        "msg_id": "32769652562696681611081546870030336"
+      },
+      {
+        "handle": "margaux_running",
+        "prenom": "Margaux",
+        "msg_id": "32769652909487980818727191172874240"
+      },
+      {
+        "handle": "marierouviere",
+        "prenom": "Marie",
+        "msg_id": "32769653270178588091263729555996672"
+      },
+      {
+        "handle": "marylamalice",
+        "prenom": "Marianne",
+        "msg_id": "32769653652162973024358004332429312"
+      },
+      {
+        "handle": "matbriere",
+        "prenom": "Mathilde",
+        "msg_id": "32769654021122001286541522455494656"
+      },
+      {
+        "handle": "nate_lgll",
+        "prenom": "Nathan",
+        "msg_id": "32769654441474783789468347663384576"
+      },
+      {
+        "handle": "pauline.65",
+        "prenom": "Pauline",
+        "msg_id": "32769654811648087427047870731124736"
+      },
+      {
+        "handle": "petit_gouter",
+        "prenom": "Maud",
+        "msg_id": "32769655270832373009777724663791616"
+      },
+      {
+        "handle": "nicepositive",
+        "prenom": null,
+        "msg_id": "32769655597147823189093914091978752"
+      },
+      {
+        "handle": "vinc.efit",
+        "prenom": "Vincent",
+        "msg_id": "32769655993637381049435999461965824"
+      },
+      {
+        "handle": "adamsbaihii",
+        "prenom": "Adam",
+        "msg_id": "32769656403620197244118484262060032"
+      },
+      {
+        "handle": "_adeloise",
+        "prenom": "Adéloïse",
+        "msg_id": "32769656808045415277761902770388992"
+      },
+      {
+        "handle": "athena_fred__",
+        "prenom": "Athena",
+        "msg_id": "32769657157800737323171197826891776"
+      },
+      {
+        "handle": "agatouvv",
+        "prenom": "Agathe",
+        "msg_id": "32769657554930120501709898994679808"
+      },
+      {
+        "handle": "alixgd_",
+        "prenom": null,
+        "msg_id": "32769657910023930282050738288852992"
+      },
+      {
+        "handle": "allanrkt99",
+        "prenom": "Allan",
+        "msg_id": "32769658309439197092715379673792512"
+      },
+      {
+        "handle": "amaiasblt",
+        "prenom": "Amaia",
+        "msg_id": "32769658668525657053858061738835968"
+      },
+      {
+        "handle": "anaisrouxoff",
+        "prenom": "Anaïs",
+        "msg_id": "32769659002073503735409481359556608"
+      },
+      {
+        "handle": "andonimgrt",
+        "prenom": "Andoni",
+        "msg_id": "32769659407439597950532455548059648"
+      },
+      {
+        "handle": "ankle.__",
+        "prenom": "Ankle",
+        "msg_id": "32769659783399276269153190766706688"
+      },
+      {
+        "handle": "antoineclmtt",
+        "prenom": "Antoine",
+        "msg_id": "32769660122450321663470307211476992"
+      },
+      {
+        "handle": "antoinepmr",
+        "prenom": "Pompom",
+        "msg_id": "32769660539268486640945497815121920"
+      },
+      {
+        "handle": "banou_coach",
+        "prenom": null,
+        "msg_id": "32769660876156024103321663208161280"
+      },
+      {
+        "handle": "bao_antruong",
+        "prenom": null,
+        "msg_id": "32769661273853419425378028889309184"
+      },
+      {
+        "handle": "emi.mama_run",
+        "prenom": "Emilie",
+        "msg_id": "32769661627233821829176430191181824"
+      },
+      {
+        "handle": "cam.kl__",
+        "prenom": null,
+        "msg_id": "32769662007441287245882484989100032"
+      },
+      {
+        "handle": "cam.leleu",
+        "prenom": "Camille",
+        "msg_id": "32769662412242726624909209802637312"
+      },
+      {
+        "handle": "candiice_and_running",
+        "prenom": null,
+        "msg_id": "32769662816031476647777427651559424"
+      },
+      {
+        "handle": "cecile_altara",
+        "prenom": "Cécile",
+        "msg_id": "32769663214127432322290361904922624"
+      },
+      {
+        "handle": "cedric.dnj",
+        "prenom": "Cedric",
+        "msg_id": "32769663603431632877785176438996992"
+      },
+      {
+        "handle": "chloe.dthr",
+        "prenom": "Chloe",
+        "msg_id": "32769664004978476306399177641820160"
+      },
+      {
+        "handle": "chlo.gt",
+        "prenom": "Chlo",
+        "msg_id": "32769664411918262258450313678684160"
+      },
+      {
+        "handle": "c_claclou",
+        "prenom": "Clara",
+        "msg_id": "32769664821545646588320562838241280"
+      },
+      {
+        "handle": "movewithclo",
+        "prenom": "Chloé",
+        "msg_id": "32769665241087639348975632123953152"
+      },
+      {
+        "handle": "clohtdz",
+        "prenom": "Cloé",
+        "msg_id": "32769665585691726558545608601239552"
+      },
+      {
+        "handle": "coachju76",
+        "prenom": "Julien",
+        "msg_id": "32769665995198284714733060197711872"
+      },
+      {
+        "handle": "corentinfolliot",
+        "prenom": null,
+        "msg_id": "32769666393601046636679931713552384"
+      },
+      {
+        "handle": "muntagnolu_corsu",
+        "prenom": "Alexandre",
+        "msg_id": "32769666770926337419077385038331904"
+      },
+      {
+        "handle": "samcupping8",
+        "prenom": "Sam",
+        "msg_id": "32769667194220361030836829703634944"
+      },
+      {
+        "handle": "dannecol",
+        "prenom": null,
+        "msg_id": "32769667594552781510102236285370368"
+      },
+      {
+        "handle": "daniel__violette",
+        "prenom": "Daxtreme",
+        "msg_id": "32769667916022474935439737309102080"
+      },
+      {
+        "handle": "dedelfitfun",
+        "prenom": "Delphine",
+        "msg_id": "32769668249726620879527697960665088"
+      },
+      {
+        "handle": "del_margaux",
+        "prenom": "Margaux",
+        "msg_id": "32769668632257066330691922884034560"
+      },
+      {
+        "handle": "djebryn",
+        "prenom": "Djebryn",
+        "msg_id": "32769668997294076995131832109367296"
+      },
+      {
+        "handle": "en_haut_cest_plus_beau",
+        "prenom": "Yannick",
+        "msg_id": "32769669374929678906337227511431168"
+      },
+      {
+        "handle": "emilie.brd05",
+        "prenom": "Emilie",
+        "msg_id": "32769669789422650240065402843430912"
+      },
+      {
+        "handle": "emma.martineau",
+        "prenom": "Emma",
+        "msg_id": "32769670126764863050370361264701440"
+      },
+      {
+        "handle": "emmapetithuguenin",
+        "prenom": "Ems",
+        "msg_id": "32769670466509469128370809431130112"
+      },
+      {
+        "handle": "emma_scbr",
+        "prenom": "Emma",
+        "msg_id": "32769670876327795706148026159464448"
+      },
+      {
+        "handle": "estef_en_course",
+        "prenom": "Estef",
+        "msg_id": "32769671278870394379860868958519296"
+      },
+      {
+        "handle": "esther_denisart",
+        "prenom": null,
+        "msg_id": "32769671636040883267787708444966912"
+      },
+      {
+        "handle": "fitbychaton",
+        "prenom": "Charlotte",
+        "msg_id": "32769672026796104712120516309155840"
+      },
+      {
+        "handle": "ju_fitrun",
+        "prenom": "Ju",
+        "msg_id": "32769672393103376620220138968317952"
+      },
+      {
+        "handle": "fit.sharon",
+        "prenom": "Sha",
+        "msg_id": "32769672803567671281970516775141376"
+      },
+      {
+        "handle": "flow___coaching",
+        "prenom": "Florine",
+        "msg_id": "32769673175568364727723929154617344"
+      },
+      {
+        "handle": "aymericfondo",
+        "prenom": "Aymeric",
+        "msg_id": "32769673595308844454612113215717376"
+      },
+      {
+        "handle": "eli_fun_run",
+        "prenom": "Asics",
+        "msg_id": "32769673994275984511494128463249408"
+      },
+      {
+        "handle": "herathenaia",
+        "prenom": "Herathenaia",
+        "msg_id": "32769674351009119544177388190433280"
+      },
+      {
+        "handle": "hugomlt.fit",
+        "prenom": "Hugo",
+        "msg_id": "32769674741771775026371901003923456"
+      },
+      {
+        "handle": "hugorun_",
+        "prenom": "Hugorun",
+        "msg_id": "32769675141233859673495617230864384"
+      },
+      {
+        "handle": "elsa_jacobbad",
+        "prenom": "Elsa",
+        "msg_id": "32769675547424615582433776924360704"
+      },
+      {
+        "handle": "jessicadtrn",
+        "prenom": "Jessica",
+        "msg_id": "32769675909020736628060569777209344"
+      },
+      {
+        "handle": "jessica_luisa_sl",
+        "prenom": "Jessica",
+        "msg_id": "32769676298783172753090403282976768"
+      },
+      {
+        "handle": "jules_duthu",
+        "prenom": "Jules",
+        "msg_id": "32769676634198420230711588232888320"
+      },
+      {
+        "handle": "justine_fulla",
+        "prenom": "Justine",
+        "msg_id": "32769677042323243468801899575115776"
+      },
+      {
+        "handle": "justine.lemr",
+        "prenom": "Justine",
+        "msg_id": "32769677412090921650944623312371712"
+      },
+      {
+        "handle": "juuullyy",
+        "prenom": "Juju",
+        "msg_id": "32769677791487541985146701059457024"
+      },
+      {
+        "handle": "une.patissiere.sportive",
+        "prenom": "Kiki",
+        "msg_id": "32769678221178232358881964681330688"
+      },
+      {
+        "handle": "laetimou_",
+        "prenom": "Laëtitia",
+        "msg_id": "32769678612693551892771974619856896"
+      },
+      {
+        "handle": "lapuertaontheroad",
+        "prenom": "Alex",
+        "msg_id": "32769679025430356297194853218910208"
+      },
+      {
+        "handle": "gwladyslarzul",
+        "prenom": "Gwladys",
+        "msg_id": "32769679376427254899229243356479488"
+      },
+      {
+        "handle": "laupapn",
+        "prenom": "Laura",
+        "msg_id": "32769679772380676589813034318299136"
+      },
+      {
+        "handle": "leabyn_",
+        "prenom": "Léa",
+        "msg_id": "32769680140238508017772387048095744"
+      },
+      {
+        "handle": "fit.bylily",
+        "prenom": "Aurélie",
+        "msg_id": "32769680502785226679005580514820096"
+      },
+      {
+        "handle": "louanneguiton",
+        "prenom": "Lou-anne",
+        "msg_id": "32769680847915304349093311146885120"
+      },
+      {
+        "handle": "luciehorpin",
+        "prenom": "Lucie",
+        "msg_id": "32769681251863729388663558874595328"
+      },
+      {
+        "handle": "ludovico_coach",
+        "prenom": null,
+        "msg_id": "32769681612467415603124777850503168"
+      },
+      {
+        "handle": "lydie_rld",
+        "prenom": "Ly",
+        "msg_id": "32769682024916838181623335344930816"
+      },
+      {
+        "handle": "maeva_mgnn",
+        "prenom": null,
+        "msg_id": "32769682410258770343805706739646464"
+      },
+      {
+        "handle": "manalohaa",
+        "prenom": "Manon",
+        "msg_id": "32769682824352535689034733665124352"
+      },
+      {
+        "handle": "manon.dupont",
+        "prenom": "Manon",
+        "msg_id": "32769683189429760255555329712979968"
+      },
+      {
+        "handle": "manons.fit",
+        "prenom": null,
+        "msg_id": "32769683551758456848581349989154816"
+      },
+      {
+        "handle": "_marie_adam_",
+        "prenom": "Marie",
+        "msg_id": "32769683978284516042751371483545600"
+      },
+      {
+        "handle": "bourasmarine",
+        "prenom": "Marine",
+        "msg_id": "32769684347625889969350667482955776"
+      },
+      {
+        "handle": "marion.petitpas",
+        "prenom": "Marion",
+        "msg_id": "32769805065720763321836142908669952"
+      },
+      {
+        "handle": "max_sola",
+        "prenom": "Max",
+        "msg_id": "32769806479618409814972317325852672"
+      },
+      {
+        "handle": "maya_dsft",
+        "prenom": "Maya",
+        "msg_id": "32769807901459095179039308702023680"
+      },
+      {
+        "handle": "melissa_on_the_run",
+        "prenom": "Melissa",
+        "msg_id": "32769809985491443887701602441625600"
+      },
+      {
+        "handle": "melmrt__",
+        "prenom": "Mélanie",
+        "msg_id": "32769812483989001580261138638045184"
+      },
+      {
+        "handle": "melanie_lucas_coaching",
+        "prenom": "Mélanie",
+        "msg_id": "32769813884794587975916022663217152"
+      },
+      {
+        "handle": "nadiarunsparis",
+        "prenom": "Nadia",
+        "msg_id": "32769815267195544214581633978728448"
+      },
+      {
+        "handle": "ninho_run_yoga",
+        "prenom": "Ninho",
+        "msg_id": "32769816652299926137481601212219392"
+      },
+      {
+        "handle": "_noemie.blgr_",
+        "prenom": "Noémie",
+        "msg_id": "32769818097490739957723101248094208"
+      },
+      {
+        "handle": "oceanezaepfeloff",
+        "prenom": "Océane",
+        "msg_id": "32769819521576818350674240375619584"
+      },
+      {
+        "handle": "pao.llla",
+        "prenom": "Paola",
+        "msg_id": "32769820914076942694582135881203712"
+      },
+      {
+        "handle": "paulineminguy",
+        "prenom": "Pauline",
+        "msg_id": "32769822289244912135202158298529792"
+      },
+      {
+        "handle": "une_petitebbrune",
+        "prenom": "Mylène",
+        "msg_id": "32769823672695082283292221490855936"
+      },
+      {
+        "handle": "romane_blucheau",
+        "prenom": "Romane",
+        "msg_id": "32769825075156411533515127449976832"
+      },
+      {
+        "handle": "valentin_runner",
+        "prenom": "valentin",
+        "msg_id": "32769826435593475239657355490623488"
+      },
+      {
+        "handle": "runnewiam",
+        "prenom": "Maï",
+        "msg_id": "32769827780056912956564124081324032"
+      },
+      {
+        "handle": "running_withmathy",
+        "prenom": "Mathilde",
+        "msg_id": "32769829163505552024896069380866048"
+      },
+      {
+        "handle": "sandrahuon",
+        "prenom": "Sandra",
+        "msg_id": "32769830538983389872466264846237696"
+      },
+      {
+        "handle": "sonny_dcf_",
+        "prenom": "Sonny",
+        "msg_id": "32769831886763994895683779846733824"
+      },
+      {
+        "handle": "floriansrvs",
+        "prenom": "Florian",
+        "msg_id": "32769833232152831975792261803802624"
+      },
+      {
+        "handle": "pinau_steve_",
+        "prenom": "Steve",
+        "msg_id": "32769834618719063026301489874206720"
+      },
+      {
+        "handle": "teo_libretti",
+        "prenom": "Téo",
+        "msg_id": "32769835999841567666938660714971136"
+      },
+      {
+        "handle": "tery.bray",
+        "prenom": "Tery",
+        "msg_id": "32769837359375626357184658784911360"
+      },
+      {
+        "handle": "violaine.and",
+        "prenom": "Violaine",
+        "msg_id": "32769838703083190288927104788594688"
+      },
+      {
+        "handle": "_williamroth",
+        "prenom": "William",
+        "msg_id": "32769840072083140360364938141630464"
+      },
+      {
+        "handle": "yocorun7z",
+        "prenom": "Yoann",
+        "msg_id": "32769841432279713864018214757859328"
+      },
+      {
+        "handle": "chloe_prtg",
+        "prenom": "Chloé",
+        "msg_id": "32769842819775328774449077457780736"
+      },
+      {
+        "handle": "celia.esnault",
+        "prenom": "Celia",
+        "msg_id": "32769844213371060589126804362493952"
+      },
+      {
+        "handle": "Math_malyne",
+        "prenom": "Mathias",
+        "msg_id": "32769845569582436396584016866705408"
+      },
+      {
+        "handle": "alexx_adamo",
+        "prenom": "Alex",
+        "msg_id": "32769846909182722079850588945776640"
+      },
+      {
+        "handle": "Rchlcrdn",
+        "prenom": "Rachel",
+        "msg_id": "32769848304395144991892294663667712"
+      },
+      {
+        "handle": "lapetitesablaise",
+        "prenom": "Chloé",
+        "msg_id": "32769849721946150702082572068847616"
+      },
+      {
+        "handle": "meloeecms",
+        "prenom": null,
+        "msg_id": "32769873333719443235552401435918336"
+      },
+      {
+        "handle": "meluulv",
+        "prenom": "Meluv",
+        "msg_id": "32769878884649973288944154640908288"
+      },
+      {
+        "handle": "justine.rouux",
+        "prenom": "Justine",
+        "msg_id": "32769880302700074106792717674610688"
+      },
+      {
+        "handle": "dylan.coaching_",
+        "prenom": "Dylan",
+        "msg_id": "32769881682667757228183449455558656"
+      }
+    ],
+    "failed": [
+      {
+        "handle": "melissa_biarritz",
+        "error": "Target user not found: melissa_biarritz"
+      }
+    ],
+    "finished": "22:47:25"
+  }
+}
