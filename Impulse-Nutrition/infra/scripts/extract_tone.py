@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate `instagram_dm_mcp/personality.md` from the local DM archive.
+"""Regenerate `knowledge/voice/personality.md` from the local DM archive.
 
 Reads every `infra/data/conversations/*.json` produced by
 `infra/scripts/download_conversations.py`, keeps only Antoine's own messages
@@ -7,7 +7,7 @@ Reads every `infra/data/conversations/*.json` produced by
 statistics and anonymized examples.
 
 Safe mode (default) : writes the result to
-`instagram_dm_mcp/personality.md.generated`, leaving the existing file alone
+`knowledge/voice/personality.md.generated`, leaving the existing file alone
 so you can diff and merge manually. Pass `--overwrite` to replace
 `personality.md` in place (the old file is backed up as
 `personality.md.bak.YYYY-MM-DD`).
@@ -30,9 +30,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = ROOT / "data" / "conversations"
-PERSONALITY_PATH = ROOT / "instagram_dm_mcp" / "personality.md"
+INFRA_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = INFRA_ROOT.parent
+DATA_DIR = INFRA_ROOT / "data" / "conversations"
+PERSONALITY_PATH = REPO_ROOT / "knowledge" / "voice" / "personality.md"
 
 # Very common French stopwords — strip before vocab analysis.
 STOPWORDS_FR = {

@@ -21,7 +21,7 @@
 
 Propriétaire : **HAVEA COMMERCIAL SERVICES (HCS)**, SAS basée à Montaigu-Vendée (85).
 
-**Antoine Chabrat** est l'Influence Manager. Il gère le programme ambassadeur et les partenariats influenceurs. Sur Instagram DM il parle en son nom (tutoiement). Sur les canaux client final (SC) il ne signe jamais "Antoine" — la persona SC est l'entité Impulse Nutrition (voir [`operations.md#voice--persona-split`](./operations.md#voice--persona-split)).
+**Antoine Chabrat** est l'Influence Manager. Il gère le programme ambassadeur et les partenariats influenceurs. Sur Instagram DM il parle en son nom (tutoiement). Sur les canaux client final (SC) il ne signe jamais "Antoine" — la persona SC est l'entité Impulse Nutrition (voir [`voice/rules.md`](./voice/rules.md)).
 
 Positionnement : produits fabriqués en France, haute qualité, pensés par et pour les besoins réels des sportifs.
 
@@ -37,7 +37,7 @@ Impulse gère **trois modèles de partenariat** avec des contrats, obligations, 
 |---|---|---|---|---|---|
 | **Affiliation pure** | Non | Kit initial ~80-100 € | `Suivi_Amb` | `ambassadeur` | **Offre par défaut** — tous les prospects |
 | **Dotation négociée** | Non | Récurrent mensuel négocié | `Suivi_Dot` | `dotation` | Refus affiliation OU upgrade d'un affilié |
-| **Paid** | Oui (fixe HT + variable) | Inclus dans budget | `Suivi_Paid` | `paid` | Top-tier, SIREN requis |
+| **Paid** | Oui (fixe HT + variable) | Inclus dans budget | `Suivi_Paid` | `paid` | Top-tier, SIREN requis géré par son collègue Pierre |
 
 ### Routing rule
 
@@ -50,7 +50,7 @@ Prospect →  ❶ propose AFFILIATION pure d'abord  (20€/utilisation, no cash)
                                               (€/mois × durée ↔ utilisations cibles)
                                                       │
                                                       ├─ Accepte               →  Suivi_Dot
-                                                      └─ Veut cash + SIREN     →  Suivi_Paid
+                                                      └─ Veut cash + SIREN     →  Suivi_Paid (géré par Pierre)
 ```
 
 `Paid` est rare — uniquement top-tier qui veulent cash + SIREN, ou tripartite agence (Primelis, FraichTouch, Versacom, Puls, MyOpenComm).
@@ -87,8 +87,6 @@ Exemples :
 - **80 €/mois** × **4 mois** ↔ **12 utilisations**
 
 L'ambassadeur reçoit un **code dotation** type `[NOM]DOTATION` lui permettant de redeem son envoi mensuel (`N` utilisations = `N` mois de contrat). Pattern : clone `TRAILEURSDOTATION` (voir [`operations.md#pattern-code-dotation-nomdotation`](./operations.md#pattern-code-dotation-nomdotation)).
-
-> Les anciens tiers `S` (80€), `M` (100€), `L` (150€) du `StratAmba` tab sont **legacy**.
 
 - **Terme** : ATHLETE
 - **Art 3 — Dotation** : produits uniquement, valeur mensuelle négociée
@@ -216,7 +214,7 @@ Codes welcome actifs :
 | `ACHAB25` | Antoine Chabrat | **Code préféré DM Instagram** |
 | `PGAU25` | Pierre Gautier | Collègue HCS |
 
-Règle auto-parquage : **< 2000 followers = parquage auto avec ACHAB25 sans go ciblé** (traitement batch après les importants).
+Règle auto-parquage : **< 2500 followers = parquage auto avec ACHAB25 sans go ciblé** (traitement batch après les importants).
 
 Le routing de relance des parqués vit dans [`operations.md#relance-dun-prospect-parqué`](./operations.md#relance-dun-prospect-parqué).
 

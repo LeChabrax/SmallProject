@@ -22,7 +22,7 @@ Impulse-Nutrition/
 ├── .env.example                        # env var template
 │
 ├── bigblue_mcp/src/mcp_server.py       # BigBlue fulfillment MCP (gRPC-Web) — 12 tools
-├── gorgias_mcp/src/mcp_server.py       # Gorgias support MCP (REST) — 12 tools
+├── gorgias_mcp/src/gorgias_mcp/        # Gorgias support MCP (REST + view-based filtering) — 13 tools, modular package
 ├── shopify_mcp/src/mcp_server.py       # Shopify admin MCP (REST + GraphQL) — 15 tools
 ├── instagram_dm_mcp/                   # Instagram DM MCP + ambassador pipeline scripts — 26 MCP tools
 │   ├── src/mcp_server.py
@@ -52,7 +52,7 @@ Impulse-Nutrition/
 │   │   └── http_mcp.py                 #     MCPHttpClient base + error_payload() + safe_call()
 │   ├── scripts/                        #   one-shot transverses (gitignored outputs go to infra/data)
 │   │   ├── download_conversations.py   #     bulk DL tracked ambassador DMs → infra/data/conversations/
-│   │   ├── extract_tone.py             #     regen instagram_dm_mcp/personality.md from corpus
+│   │   ├── extract_tone.py             #     regen knowledge/voice/personality.md from corpus
 │   │   ├── extract_response_templates.py
 │   │   └── generate_contract.py        #     PDF contract generator (fpdf2)
 │   ├── contracts/                      #   gitignored — PDFs signés + Drive sync (PII)
@@ -96,8 +96,8 @@ gRPC-Web bridge. New since refactor:
 - 6 silent swallows replaced with `_err(...)` calls.
 - `BIGBLUE_EMAIL` and `AUTH0_CLIENT_ID` moved to env vars (with defaults).
 
-### `gorgias_mcp/src/mcp_server.py` — 12 tools
-Untouched in this refactor (the search_tickets fix from 2026-04-13 was preserved).
+### `gorgias_mcp/src/gorgias_mcp/` — 13 tools (full-stack refacto, avril 2026)
+Modular package built on `infra.common.http_mcp.MCPHttpClient` (retry + timeout). Filtering goes through Gorgias view IDs (`/api/views/{id}/items`) instead of the V2-broken `?status=` / `?channel=` query params. Modules: `client.py` (auth + base url), `views.py` (system/channel/user view maps + `resolve_view_id`), `slim.py` (ticket/message/customer reducers), `cache.py` (TTL cache for users/views), `tools.py` (the 13 `@mcp.tool` functions), `server.py` (FastMCP entry point). New tool `list_views` exposes the maps. `get_ticket_stats` paginates view items with cap. `assign_ticket` reuses cached users. Tests under `tests/` (pytest + responses, 25 tests).
 
 ### `shopify_mcp/src/mcp_server.py` — 15 tools
 `create_draft_order` docstring rewritten with the canonical SAV example (discount 100 % + shipping gratuit + tag `Service client`) and the `update_draft_order` line-item limitation noted. `search_orders` docstring clarified.
@@ -125,7 +125,7 @@ Bare `except:` on line 476 replaced with a logged `except Exception`. Other 27 `
 | Script | Purpose | Writes |
 |---|---|---|
 | `infra/scripts/download_conversations.py` | Bulk DL DMs for every tracked ambassador | `infra/data/conversations/<user>.json` + `_index.json` + `_progress.json` |
-| `infra/scripts/extract_tone.py` | Stat analysis → tone guide | `instagram_dm_mcp/personality.md.generated` (safe) or `personality.md` (--overwrite) |
+| `infra/scripts/extract_tone.py` | Stat analysis → tone guide | `knowledge/voice/personality.md.generated` (safe) or `personality.md` (--overwrite) |
 | `infra/scripts/extract_response_templates.py` | Curated anonymized examples | `knowledge/archive/templates_racine/real_response_examples.md` |
 
 Flags : `--dry-run` on all three, `--limit N` on download, `--force` on download, `--overwrite` on extract_tone.
@@ -171,4 +171,4 @@ Unchanged. `shaker-450ml-gratuit/` : two Shopify Functions + a cloud function we
 - `knowledge/process/sav_unified.md` — SAV workflow
 - `knowledge/process/conversation_archive.md` — archive + tone extraction runbook
 - `gorgias_mcp/personality.md` — Gorgias tone (vouvoiement formel)
-- `instagram_dm_mcp/personality.md` — Instagram tone (tutoiement, auto-regenerated)
+- `knowledge/voice/personality.md` — Instagram tone (tutoiement, auto-regenerated)

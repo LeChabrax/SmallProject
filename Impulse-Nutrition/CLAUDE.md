@@ -11,7 +11,7 @@
 >
 > Assets opérationnels :
 > - [`knowledge/voice/templates.yaml`](./knowledge/voice/templates.yaml) — 20 templates DM (chargé par le skill `/instagram-dm`)
-> - [`instagram_dm_mcp/personality.md`](./instagram_dm_mcp/personality.md) — tone guide Antoine (auto-régénéré)
+> - [`knowledge/voice/personality.md`](./knowledge/voice/personality.md) — tone guide Antoine (auto-régénéré)
 >
 > Refresh catalogue quand Shopify change : `python3 infra/scripts/refresh_catalog.py` (taxonomie dans `infra/scripts/catalog_taxonomy.yaml`).
 >
@@ -31,7 +31,7 @@
 | **Instagram DM** (ambassadeurs) | Antoine, humain, tutoiement | `Sportivement, Antoine` (sur messages ≥ 3 phrases) | "Hello {prenom}, je suis Antoine d'Impulse Nutrition…" |
 | **Gorgias / WAX (WhatsApp) / SC TikTok** (clients finaux) | Entité Impulse Nutrition, vouvoiement formel | `Le service client` ou `L'équipe Impulse Nutrition` | "Bonjour, votre commande IMPxxxx…" |
 
-→ **JAMAIS signer "Antoine" côté SC**, même si c'est lui qui rédige. Le client final achète à une marque, pas à une personne. Détails dans [`knowledge/operations.md#voice--persona-split`](./knowledge/operations.md#voice--persona-split).
+→ **JAMAIS signer "Antoine" côté SC**, même si c'est lui qui rédige. Le client final achète à une marque, pas à une personne. Détails dans [`knowledge/voice/rules.md`](./knowledge/voice/rules.md).
 
 ---
 
@@ -44,12 +44,12 @@ Trois skills au niveau user, chacun est une bulle étanche pour son domaine. Ils
 
 Absorbe tout ce qui était éparpillé : persona détaillé, pipeline ambassadeur, statuts, priorités, règles catégorisation voice_media/raven_media/club, pre-draft check welcome codes, format carte de décision, templates.
 
-Référence humaine : [`knowledge/operations.md#voice--persona-split`](./knowledge/operations.md#voice--persona-split). Corpus ton : [`instagram_dm_mcp/personality.md`](./instagram_dm_mcp/personality.md).
+Référence humaine : [`knowledge/voice/rules.md`](./knowledge/voice/rules.md). Corpus ton : [`knowledge/voice/personality.md`](./knowledge/voice/personality.md).
 
 ### Gorgias — service client (tous canaux)
 **Skill : `/gorgias`** (protocole 8 étapes bloquant, auto-trigger sur "check le SAV", "check les tickets", "passe SAV", "service client", "/gorgias", etc.).
 
-Bulle complète pour tous les tickets SAV (email / chat / contact_form / Instagram / Facebook / WhatsApp via WAX). Absorbe : pull protocol 100+, filtrage par channels/tags, persona entité Impulse Nutrition (vouvoiement formel), style emails (structure, formules interdites), cross-links Shopify draft replacement + BigBlue claims, recette draft SAV (discount 100% + shipping 0€ + tag `Service client`), red flags (jamais signer "Antoine", jamais de délai chiffré, jamais `update_draft_order` sur line_items, etc.). Cas particulier ambassadeur qui contacte le SAV géré dans le skill.
+Bulle complète pour tous les tickets SAV (email / chat / contact_form / Instagram / Facebook / WhatsApp via WAX). Absorbe : pull view-based (filtrage natif côté serveur via vues Gorgias, plus de pull-100-puis-filtre-client), filtrage par channels/tags, persona entité Impulse Nutrition (vouvoiement formel), style emails (structure, formules interdites), cross-links Shopify draft replacement + BigBlue claims, recette draft SAV (discount 100% + shipping 0€ + tag `Service client`), red flags (jamais signer "Antoine", jamais de délai chiffré, jamais `update_draft_order` sur line_items, etc.). Cas particulier ambassadeur qui contacte le SAV géré dans le skill.
 
 Référence humaine : [`knowledge/operations.md#sav--opérations-client`](./knowledge/operations.md#sav--opérations-client). Persona : [`gorgias_mcp/personality.md`](./gorgias_mcp/personality.md).
 

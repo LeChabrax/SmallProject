@@ -11,7 +11,8 @@ Fork interne du MCP `trypeggy/instagram_dm_mcp`, spécialisé pour la gestion de
 | `src/instagram_dm_mcp/` | Serveur FastMCP — 26 tools exposés à Claude (send, threads, users, posts, media, misc) |
 | `scripts/<domain>/` | Jobs CLI batch : `kolsquare/`, `qualify/`, `veille/`, `ambassadors/`, `campaign/`, `debug/`, `setup/` |
 | `data/` | Runtime (sessions, logs, progress, downloads, conversations) — gitignored |
-| `personality.md` | Tone guide Antoine, régénéré via `../infra/scripts/extract_tone.py` |
+
+> Tone guide Antoine : [`../knowledge/voice/personality.md`](../knowledge/voice/personality.md) (régénéré via `../infra/scripts/extract_tone.py`).
 
 ## Lancer
 
