@@ -1,0 +1,53 @@
+{
+  "name": "mcp-tiktokshop",
+  "version": "0.1.0",
+  "description": "MCP server for TikTok Shop - manage customer conversations and orders via Claude",
+  "type": "module",
+  "main": "./build/index.js",
+  "bin": {
+    "mcp-tiktokshop": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node build/index.js",
+    "auth": "tsx src/auth/setup.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "tiktok",
+    "tiktok-shop",
+    "claude",
+    "ai"
+  ],
+  "author": "Antoine Chabrat",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeChabrax/mcp-tiktokshop.git"
+  },
+  "homepage": "https://github.com/LeChabrax/mcp-tiktokshop#readme",
+  "bugs": {
+    "url": "https://github.com/LeChabrax/mcp-tiktokshop/issues"
+  },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "dotenv": "^17.4.2",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

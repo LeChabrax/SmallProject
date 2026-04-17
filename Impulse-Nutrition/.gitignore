@@ -4,6 +4,8 @@ infra/contracts/
 # .mcp.json is now committed (shared MCP config with credentials).
 # Veille Instagram password is masked — ask Antoine for it.
 .env
+# Exception : tokens TikTok de test, partagés avec l'équipe via le repo.
+!tiktokshop_mcp/.env
 *.pyc
 __pycache__/
 .claude/

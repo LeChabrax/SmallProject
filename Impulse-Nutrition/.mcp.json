@@ -43,13 +43,7 @@
     },
     "tiktokshop": {
       "command": "node",
-      "args": ["../Tiktok/MCP-TikTokShop/build/index.js"],
-      "env": {
-        "TIKTOK_SHOP_APP_KEY": "6jg392kv2s7j7",
-        "TIKTOK_SHOP_APP_SECRET": "3036b38c478854f9260ffcfb49905af8712b3a43",
-        "TIKTOK_SHOP_ACCESS_TOKEN": "GCP_NexnnwAAAAAdkG5E1SVro62o-7buGmYwexYc5uu_7doXhs4W1trACvGJjb4wkGMBl1qogtMuh-l94XN51vhjkaNgtMLxA7xS4TH5EKGXJPk0IrE94sSuNPvMsBWAOxlc8GRLsi3OiQJLXBJh0IVttgeFo30aM07ZmntY-D-9ShMHOc5pgU1oPPFQzsKyHVNa3OnjbLzsCrY",
-        "TIKTOK_SHOP_SHOP_CIPHER": "GCP_Gk8uhwAAAAC2CxX0AMBN6sG3U3fncQGS"
-      }
+      "args": ["./tiktokshop_mcp/build/index.js"]
     },
     "gorgias": {
       "command": "uv",
