@@ -151,7 +151,7 @@ Si aucune ligne "Réponse reçue" ni "A traiter" → passer directement à l'Ét
 - Recherche historique (ticket fermé / ancien) : `list_tickets(status="all", limit=100)` ou `mcp__gorgias__search_tickets(query="email|nom|id_numérique")`.
 - Ticket précis connu : `mcp__gorgias__get_ticket(id=...)` direct.
 
-Tags à prioriser, exclusions, sortie citée → **[reference/pull_protocol.md](reference/pull_protocol.md)**
+Tags à prioriser, exclusions, sortie citée → **[knowledge/gorgias/pull_protocol.md](knowledge/gorgias/pull_protocol.md)**
 
 **Loop-safe** : si en `/loop`, filtrer `updated_datetime > last_run_timestamp` via state minimal `~/.claude/skills/gorgias/last_run.txt`.
 
@@ -205,8 +205,8 @@ Si le ticket concerne une commande physique :
 
 ### Étape 5 — Classification + template
 Choisir UNE catégorie mutuellement exclusive (G0-G17) puis sélectionner la **variante** selon l'enrichissement Étape 3-4. Deux références obligatoires :
-- Table des 17 catégories + mapping action → **[reference/categorization.md](reference/categorization.md)**
-- Templates pré-rédigés par catégorie (fournissent le squelette du draft Étape 6) → **[reference/templates.md](reference/templates.md)**
+- Table des 17 catégories + mapping action → **[knowledge/gorgias/categorization.md](knowledge/gorgias/categorization.md)**
+- Templates pré-rédigés par catégorie (fournissent le squelette du draft Étape 6) → **[knowledge/gorgias/templates.md](knowledge/gorgias/templates.md)**
 
 Le draft à l'Étape 6 part **toujours** du template de la variante choisie (placeholders remplis avec contexte), puis adapté si besoin. **Règle intacte** : le template reste un brouillon, `reply_to_ticket` n'est envoyé qu'après `"go"` explicite (Étape 7).
 
@@ -253,7 +253,7 @@ Règle en memory auto. Seuls `"go"`, `"envoie"`, `"c'est bon envoie"`, `"yes go"
 
 ### Étape 8 — Execute + tag + close
 1. **Actions mécaniques préalables** (si listées Étape 6) :
-   - Draft replacement Shopify → **[reference/sav_recipe.md](reference/sav_recipe.md)** pour defaults (discount 100% SAV + shipping 0€ + tag `Service client` + customer_id numérique) et quirks (update_draft_order sur line_items impossible, pickup point BigBlue manuel)
+   - Draft replacement Shopify → **[knowledge/gorgias/sav_recipe.md](knowledge/gorgias/sav_recipe.md)** pour defaults (discount 100% SAV + shipping 0€ + tag `Service client` + customer_id numérique) et quirks (update_draft_order sur line_items impossible, pickup point BigBlue manuel)
    - BigBlue claim (MCP cassé → log sheet obligatoire) :
      1. Récupérer `bigblue_order_id` via `mcp__bigblue__get_order(reference=IMP####)` si pas déjà fait à l'Étape 4
      2. Rédiger le message FR complet (topic + description : produits, quantités, problème détaillé)
@@ -292,7 +292,7 @@ Règle en memory auto. Seuls `"go"`, `"envoie"`, `"c'est bon envoie"`, `"yes go"
 4. ❌ **Formules creuses** : "nous vous remercions de votre confiance", "votre satisfaction est notre priorité"
 5. ❌ **Promettre un remboursement** avant validation de faisabilité (Shopify refund manuel)
 
-Liste exhaustive (15+ items) → **[reference/red_flags.md](reference/red_flags.md)**
+Liste exhaustive (15+ items) → **[knowledge/gorgias/red_flags.md](knowledge/gorgias/red_flags.md)**
 
 ---
 
